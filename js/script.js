@@ -9,10 +9,18 @@ document.addEventListener("DOMContentLoaded", function () {
       navLinks.classList.toggle("active");
     });
 
+    // Tutup menu saat klik di luar menu dan hamburger
     document.addEventListener("click", (e) => {
       if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
         navLinks.classList.remove("active");
       }
+    });
+
+    // **Ini bagian penting: tutup menu saat klik salah satu link nav**
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+      });
     });
   }
 

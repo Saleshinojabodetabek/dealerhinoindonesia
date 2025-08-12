@@ -403,7 +403,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 0;
+  padding: 20px 15px;
 }
 
 .header-title {
@@ -727,4 +727,179 @@ header {
 #contact,
 #promo {
   scroll-margin-top: 130px; /* Sesuaikan dengan tinggi sticky header navbar kamu */
+}
+
+@media (max-width: 768px) {
+  /* Center-kan tombol/tulisan konsultasi dan kunjungi website */
+  .hero-buttons {
+    justify-content: center !important;
+    text-align: center;
+    flex-direction: column; /* kalau tombol berjajar vertikal */
+    gap: 15px;
+  }
+
+  .hero-buttons .btn {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /* agar tombol agak lebar dan rapi */
+  }
+
+  /* Sembunyikan gambar mobil truk Hino di bawah hero pada mobile */
+  /* Misal gambarnya ada di .hero-main-image atau class lain, ganti sesuai classnya */
+  .promo-main-image, /* contoh nama class gambarnya */
+  .hero-image,       /* tambahkan selector lain jika ada */
+  .truck-image-mobile-hide {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Center-kan tombol di .promo-buttons */
+  .promo-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Supaya tombol di tengah */
+    gap: 15px;
+  }
+
+  .promo-buttons a {
+    width: 80%; /* Biar tombol cukup lebar, tapi ada margin */
+    text-align: center; /* Text di tombol juga center */
+  }
+
+  /* Sembunyikan gambar Hino truk di bawah promo-buttons */
+  /* Misal gambarnya ada kelas .promo-main-image */
+  .promo-main-image {
+    display: none !important;
+  }
+}
+
+/* ===== Footer Styles ===== */
+footer {
+  background: #1a1a1a; /* warna gelap elegan */
+  color: #ddd;
+  padding: 50px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+  align-items: start;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-section h3 {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #ffcc00;
+  padding-bottom: 5px;
+}
+
+.footer-section p,
+.footer-section a {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #bbb;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  color: #ffcc00;
+}
+
+.footer-logo img {
+  max-width: 150px;
+  margin-bottom: 10px;
+}
+
+.publisher-link {
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #333;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.social-icons a:hover {
+  background: #ffcc00;
+}
+
+.social-icons svg {
+  width: 18px;
+  height: 18px;
+  stroke: #fff;
+}
+
+.footer-contact p svg,
+.footer-address p svg {
+  margin-right: 8px;
+  stroke: #ffcc00;
+  vertical-align: middle;
+}
+
+.footer-barcode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-barcode img {
+  max-width: 140px;
+  border: 2px solid #444;
+  border-radius: 8px;
+  background: #fff;
+  padding: 5px;
+}
+
+.footer-logo p {
+  text-align: left;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 20px 0 0px; /* atas 10px, bawah 5px */
+  font-size: 14px;
+  color: #aaa;
+  border-top: 1px solid #333;
+  margin-top: 15px;
+}
+
+.footer-bottom p {
+  margin: 0; /* hilangkan jarak bawaan paragraf */
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  footer {
+    text-align: center;
+  }
+  .footer-section {
+    align-items: center;
+  }
+  .social-icons {
+    justify-content: center;
+  }
 }

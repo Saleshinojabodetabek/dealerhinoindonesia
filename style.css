@@ -1,0 +1,507 @@
+/* === RESET & DASAR === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* === HEADER === */
+header {
+  width: 100vw;
+  height: 100vh;
+  background: url("images/hino1.jpg") no-repeat center center/cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 0 1rem;
+  overflow-x: hidden;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+header .content {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  padding: 0 1rem;
+}
+
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+header p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+header .button {
+  display: inline-block;
+  margin: 0.3rem 0.5rem;
+  padding: 15px 30px;
+  background: #25d366;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  transition: background 0.3s ease;
+}
+
+header .button.secondary {
+  background: #005ea2;
+}
+
+header .button:hover {
+  background: #1ebe5d;
+}
+
+header .button.secondary:hover {
+  background: #004975;
+}
+
+/* === MAIN === */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+main > section {
+  margin-bottom: 3rem;
+}
+
+/* === SECTION TITLE === */
+.section-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #d71920;
+}
+
+/* === PROMO SECTION ATAS === */
+.promo-section {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 3rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+}
+
+.promo-text {
+  flex: 1 1 450px;
+}
+
+.promo-text h2 {
+  color: #d71920;
+  margin-bottom: 1rem;
+}
+
+.promo-text ul {
+  list-style: disc inside;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.promo-text ul li {
+  margin-bottom: 0.5rem;
+}
+
+.promo-text p {
+  margin-bottom: 1.5rem;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.promo-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 12px 28px;
+  border-radius: 7px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: inline-block;
+  transition: background 0.3s ease;
+}
+
+.btn-primary {
+  background: #d71920;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #a01519;
+}
+
+.btn-secondary {
+  background: #f5f5f5;
+  color: #d71920;
+  border: 2px solid #d71920;
+}
+
+.btn-secondary:hover {
+  background: #d71920;
+  color: white;
+}
+
+/* Gambar utama promo */
+.promo-main-image {
+  flex: 1 1 450px;
+  max-width: 450px;
+  max-height: 280px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* === PRODUCTS === */
+.products {
+  display: flex;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 300px;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.product img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 3px solid #d71920;
+}
+
+.product h3 {
+  color: #d71920;
+  margin: 0.8rem 0 0.4rem;
+}
+
+.product p {
+  padding: 0 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* === FEATURES === */
+.features {
+  background: #f4f6f8;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.feature-list {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.feature {
+  flex: 1 1 250px;
+  background: white;
+  padding: 1.8rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.feature .icon {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.feature h3 {
+  margin-bottom: 0.5rem;
+  color: #d71920;
+}
+
+.feature p {
+  color: #555;
+}
+
+/* === CONTACT === */
+.contact {
+  background: #d71920;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  border-radius: 10px;
+}
+
+.contact h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.contact p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.whatsapp-link {
+  background: #25d366;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.2rem;
+  display: inline-block;
+  transition: background 0.3s ease;
+}
+
+.whatsapp-link:hover {
+  background: #1ebe5d;
+}
+
+/* === PROMO KARTU === */
+.promo-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.promo-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 320px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.promo-card img.promo-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.promo-content {
+  padding: 1rem 1.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.promo-content h3 {
+  color: #d71920;
+  margin-bottom: 0.6rem;
+}
+
+.promo-content p {
+  flex-grow: 1;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.read-more {
+  align-self: flex-start;
+  color: #d71920;
+  font-weight: 600;
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+/* === FOOTER === */
+footer {
+  background: #222;
+  color: #eee;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #d71920;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  .promo-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .promo-text,
+  .promo-main-image {
+    flex: unset;
+    max-width: 100%;
+  }
+
+  .products,
+  .feature-list,
+  .promo-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ================================
+   Section: Blog / Artikel Website
+   ================================ */
+
+/* Container Section */
+.content-section {
+  padding: 60px 20px;
+  background: linear-gradient(180deg, #f7f7f7 0%, #e8f5e9 100%);
+}
+
+/* Grid Layout */
+.blog-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card Artikel */
+.blog-post {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  min-height: 480px;
+  position: relative; /* diperlukan untuk full-link */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efek Hover */
+.blog-post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Gambar Artikel */
+.blog-post img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Judul Artikel */
+.blog-post h2 {
+  font-size: 18px;
+  color: #333;
+  margin: 20px 20px 10px 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  min-height: 56px;
+}
+
+.blog-post h2 a {
+  text-decoration: none;
+  color: #333;
+  position: relative;
+  z-index: 2;
+}
+
+.blog-post h2 a:hover {
+  color: #007bff;
+}
+
+/* Deskripsi Singkat */
+.blog-post p {
+  font-size: 14px;
+  color: #555;
+  margin: 0 20px 20px 20px;
+  line-height: 1.6;
+  flex-grow: 1;
+  min-height: 72px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Tombol Baca Selengkapnya */
+.blog-post .card-footer {
+  margin: auto 20px 20px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.blog-post .card-footer a {
+  font-size: 14px;
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.blog-post .card-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Artikel Isi */
+.artikel-isi {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+}
+
+/* Full clickable link */
+.blog-post a.full-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  text-indent: -9999px;
+  overflow: hidden;
+}

@@ -1,7 +1,3 @@
-<?php
-// Ambil data artikel dari API
-$artikelData = json_decode(file_get_contents("https://saleshinoindonesia.com/admin/api/get_artikel.php"), true);
-?>
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -9,50 +5,106 @@ $artikelData = json_decode(file_get_contents("https://saleshinoindonesia.com/adm
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Dealer resmi truk Hino Indonesia. Dapatkan Hino Dutro, Ranger, Profia. Hubungi kami via WhatsApp untuk penawaran terbaik!"
+      content="Dealer resmi truk Hino Indonesia. Dapatkan Hino Dutro, Ranger, Profia. Hubungi Nathan via WhatsApp untuk penawaran terbaik!"
     />
     <title>Dealer Truk Hino Indonesia - Landing Page</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="js/script.js"></script>
+    <!-- Font Google -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
-
   <body>
-    <!-- Header Hero -->
+    <!-- Header -->
     <header>
-      <div class="content">
-        <h1>Dealer Resmi Truk Hino Indonesia</h1>
-        <p>
-          Dapatkan Hino Dutro, Ranger, dan Profia untuk kebutuhan bisnis Anda
-        </p>
-        <a href="https://wa.me/6285975287684" class="button" target="_blank"
-          >Hubungi via WhatsApp</a
-        >
-        <a
-          href="https://saleshinoindonesia.com"
-          class="button secondary"
-          target="_blank"
-          >Kunjungi Website Utama</a
-        >
+      <div class="container header-content navbar">
+        <div class="header-title">
+          <a href="https://saleshinoindonesia.com">
+            <img src="images/logo3.png" alt="Logo Hino" style="height: 60px" />
+          </a>
+        </div>
+
+        <div class="hamburger-menu">&#9776;</div>
+
+        <nav class="nav links">
+          <a href="index.html">Home</a>
+          <a href="#products-section">Produk</a>
+          <a href="#features">Keunggulan Hino</a>
+          <a href="#contact">Contact</a>
+          <a href="https://saleshinoindonesia.com/artikel.php"
+            >Blog & Artikel</a
+          >
+        </nav>
       </div>
     </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="slider">
+        <img
+          src="images/Euro 4 Hino 300.jpeg"
+          class="slide active"
+          alt="Hino 300 Series"
+        />
+        <img
+          src="images/Euro 4 Hino 500.jpeg"
+          class="slide"
+          alt="Hino 500 Series"
+        />
+        <img
+          src="images/Euro 4 Hino Bus.jpeg"
+          class="slide"
+          alt="Hino Bus Series"
+        />
+      </div>
+      <div class="container">
+        <h2>Dealer Resmi Hino Indonesia – Pilihan Tepat untuk Bisnis Anda</h2>
+        <p>
+          Temukan berbagai pilihan truk dan bus Hino berkualitas dengan layanan
+          purna jual terbaik. Nathan siap membantu Anda mulai dari konsultasi
+          hingga pengiriman unit dengan cepat dan aman.
+        </p>
+        <div class="hero-buttons">
+          <a
+            href="https://wa.me/+6285975287684?text=Halo%20Saya%20Dapat%20Nomor%20Anda%20Dari%20Google"
+            class="btn btn-contact"
+          >
+            Hubungi Nathan Sekarang
+          </a>
+          <a
+            href="https://saleshinoindonesia.com"
+            class="btn btn-website"
+            target="_blank"
+          >
+            Kunjungi Website Utama
+          </a>
+        </div>
+      </div>
+    </section>
 
     <main>
       <!-- Section: Promo Utama -->
       <section class="promo-section">
         <div class="promo-text">
           <h2>
-            Harga Dan Penawaran Terbaik Dari Dealer Hino Pusat Di Jakarta.
+            Dapatkan Harga dan Penawaran Terbaik Langsung dari Dealer Resmi Hino
+            Indonesia
           </h2>
           <ul>
-            <li>Harga terbaik segala jenis Hino?</li>
-            <li>Bingung memilih kendaraan untuk bisnis?</li>
-            <li>Ingin pelayanan cepat dan profesional?</li>
-            <li>Hubungi kami sekarang juga!</li>
+            <li>Ingin harga terbaik untuk semua jenis truk Hino?</li>
+            <li>Bingung memilih kendaraan yang tepat untuk bisnis Anda?</li>
+            <li>Butuh pelayanan cepat, ramah, dan profesional?</li>
+            <li>
+              Hubungi Nathan Hino sekarang juga dan dapatkan solusi terbaik!
+            </li>
           </ul>
           <p>
-            Anda berada di website yang tepat. Kami siap bantu pembelian Hino
-            baru untuk seluruh Indonesia,
-            <strong>khususnya Jabodetabek dan Jawa Barat</strong>, dengan harga
-            dan pelayanan terbaik!
+            Anda berada di tempat yang tepat! Nathan Hino siap membantu Anda
+            mendapatkan truk Hino baru dengan harga kompetitif untuk seluruh
+            Indonesia, <strong>terutama di Jabodetabek dan Jawa Barat</strong>.
+            Pelayanan cepat, terpercaya, dan tanpa ribet menanti Anda!
           </p>
           <div class="promo-buttons">
             <a
@@ -65,7 +117,7 @@ $artikelData = json_decode(file_get_contents("https://saleshinoindonesia.com/adm
               href="https://saleshinoindonesia.com/pricelist"
               class="btn-secondary"
               target="_blank"
-              >Pricelist Hino Jakarta</a
+              >Kunjungi Website Utama</a
             >
           </div>
         </div>
@@ -77,31 +129,57 @@ $artikelData = json_decode(file_get_contents("https://saleshinoindonesia.com/adm
       </section>
 
       <!-- Produk -->
-      <section class="products-section">
+      <section id="products-section" class="products-section">
         <h2 class="section-title">Produk Truk Hino Unggulan</h2>
         <div class="products">
           <div class="product">
             <img src="images/Euro 4 Hino 300.jpeg" alt="Hino 300 Dutro" />
-            <h3>Hino 300 Series (Dutro)</h3>
+            <h3>
+              <a
+                href="https://saleshinoindonesia.com/hino300.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hino 300 Series (Dutro)
+              </a>
+            </h3>
             <p>
               Truk ringan dan tangguh, cocok untuk usaha kecil dan menengah.
             </p>
           </div>
+
           <div class="product">
             <img src="images/Euro 4 Hino 500.jpeg" alt="Hino 500 Ranger" />
-            <h3>Hino 500 Series (Ranger)</h3>
+            <h3>
+              <a
+                href="https://saleshinoindonesia.com/hino500.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hino 500 Series (Ranger)
+              </a>
+            </h3>
             <p>Performa handal untuk pengangkutan berat dan jarak jauh.</p>
           </div>
+
           <div class="product">
             <img src="images/Euro 4 Hino Bus.jpeg" alt="Hino Bus Series" />
-            <h3>Hino Bus Series</h3>
+            <h3>
+              <a
+                href="https://saleshinoindonesia.com/hinobus.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hino Bus Series
+              </a>
+            </h3>
             <p>Solusi transportasi penumpang dengan kenyamanan terbaik.</p>
           </div>
         </div>
       </section>
 
       <!-- Fitur -->
-      <section class="features">
+      <section id="features" class="features">
         <h2 class="section-title">Kenapa Pilih Hino?</h2>
         <div class="feature-list">
           <div class="feature">
@@ -129,10 +207,10 @@ $artikelData = json_decode(file_get_contents("https://saleshinoindonesia.com/adm
       </section>
 
       <!-- Kontak -->
-      <section class="contact">
+      <section id="contact" class="contact">
         <h2>Butuh Bantuan atau Info Harga?</h2>
         <p>
-          Hubungi kami langsung via WhatsApp. Tim kami siap membantu Anda
+          Hubungi Nathan langsung via WhatsApp. Nathan siap membantu Anda
           memilih truk terbaik.
         </p>
         <a
@@ -143,42 +221,77 @@ $artikelData = json_decode(file_get_contents("https://saleshinoindonesia.com/adm
         >
       </section>
 
-      <!-- Blog Section -->
-      <section class="blog-section">
-        <div class="container">
-          <h2>Blog & Artikel</h2>
-          <p>
-            Dapatkan informasi terbaru seputar Truk Hino, perawatan, dan promo
-            terbaik.
-          </p>
-          <div class="blog-grid">
-            <?php
-              if (is_array($artikelData)) {
-                $terbaru = array_slice($artikelData, 0, 3);
-                foreach ($terbaru as $artikel):
-            ?>
-            <div class="blog-card">
-              <img
-                src="<?= htmlspecialchars($artikel['gambar']) ?>"
-                alt="<?= htmlspecialchars($artikel['judul']) ?>"
-              />
-              <div class="blog-card-content">
-                <h3>
-                  <a href="detail_artikel.php?id=<?= $artikel['id'] ?>"
-                    ><?= htmlspecialchars($artikel['judul']) ?></a
-                  >
-                </h3>
-                <p><?= substr(strip_tags($artikel['isi']), 0, 100) ?>...</p>
+      <!-- Promo Cards -->
+      <section id="promo">
+        <h2 class="section-title">Promo Hino</h2>
+        <p class="section-desc">
+          Dapatkan informasi terbaru seputar Truk Hino, perawatan, dan promo
+          terbaik.
+        </p>
+        <div class="promo-container">
+          <div class="promo-card">
+            <img
+              src="images/promo1.jpeg"
+              alt="Promo Hino 300 Series"
+              class="promo-image"
+            />
+            <div class="promo-content">
+              <h3>
                 <a
-                  href="detail_artikel.php?id=<?= $artikel['id'] ?>"
-                  class="read-more"
-                  >Baca Selengkapnya</a
+                  href="https://saleshinoindonesia.com/detail_artikel.php?id=21"
+                  class="promo-title"
                 >
-              </div>
+                  SPESIAL AGUSTUS! PROMO MERDEKA HINO 300 SERIES!
+                </a>
+              </h3>
+              <p>Bulan kemerdekaan, saatnya bisnis kamu juga merdek...</p>
+              <a href="#" class="read-more">Baca Selengkapnya</a>
             </div>
-            <?php endforeach; } else { ?>
-            <p>Tidak ada artikel ditemukan.</p>
-            <?php } ?>
+          </div>
+
+          <div class="promo-card">
+            <img
+              src="images/promo2.png"
+              alt="Promo Euro4 Hino Series"
+              class="promo-image"
+            />
+            <div class="promo-content">
+              <h3>
+                <a
+                  href="https://saleshinoindonesia.com/detail_artikel.php?id=20"
+                  class="promo-title"
+                >
+                  SPESIAL PROMO BULAN KEMERDEKAAN BERSAMA HINO !!
+                </a>
+              </h3>
+              <p>
+                Rayakan Agustus Merdeka Bersama Hino Promo Hebat Untuk Anda!...
+              </p>
+              <a href="#" class="read-more">Baca Selengkapnya</a>
+            </div>
+          </div>
+
+          <div class="promo-card">
+            <img
+              src="images/promo3.jpg"
+              alt="Promo Hino Dump Series"
+              class="promo-image"
+            />
+            <div class="promo-content">
+              <h3>
+                <a
+                  href="https://saleshinoindonesia.com/detail_artikel.php?id=19"
+                  class="promo-title"
+                >
+                  SPECIAL PROMO HINO DUMP SERIES - HARGA TERBAIK, SIAP ANGKUT
+                  UNTUNG!!
+                </a>
+              </h3>
+              <p>
+                Saatnya punya truk dump tangguh dengan penawaran terbaik dari...
+              </p>
+              <a href="#" class="read-more">Baca Selengkapnya</a>
+            </div>
           </div>
         </div>
       </section>
@@ -188,7 +301,7 @@ $artikelData = json_decode(file_get_contents("https://saleshinoindonesia.com/adm
     <footer>
       <p>&copy; 2025 Dealer Truk Hino Indonesia.</p>
       <p>
-        Kunjungi website utama kami di
+        Kunjungi website utama Nathan di
         <a href="https://saleshinoindonesia.com" target="_blank"
           >saleshinoindonesia.com</a
         >

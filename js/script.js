@@ -1,22 +1,25 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // === HAMBURGER MENU ===
+document.addEventListener("DOMContentLoaded", () => {
+  // ==========================
+  // HAMBURGER MENU
+  // ==========================
   const hamburger = document.querySelector(".hamburger-menu");
   const navLinks = document.querySelector(".nav.links");
 
   if (hamburger && navLinks) {
+    // Toggle menu saat klik hamburger
     hamburger.addEventListener("click", (e) => {
       e.stopPropagation();
       navLinks.classList.toggle("active");
     });
 
-    // Tutup menu saat klik di luar menu dan hamburger
+    // Tutup menu saat klik di luar menu atau hamburger
     document.addEventListener("click", (e) => {
       if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
         navLinks.classList.remove("active");
       }
     });
 
-    // **Ini bagian penting: tutup menu saat klik salah satu link nav**
+    // Tutup menu saat klik salah satu link nav
     navLinks.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
         navLinks.classList.remove("active");
@@ -24,31 +27,34 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // === SLIDE BANNER ===
+  // ==========================
+  // SLIDE BANNER
+  // ==========================
   const slides = document.querySelectorAll(".slide");
   if (slides.length > 0) {
     let currentSlide = 0;
 
-    function showSlide(index) {
+    const showSlide = (index) => {
       slides.forEach((slide, i) => {
         slide.classList.toggle("active", i === index);
       });
-    }
+    };
 
-    function nextSlide() {
+    const nextSlide = () => {
       currentSlide = (currentSlide + 1) % slides.length;
       showSlide(currentSlide);
-    }
+    };
 
     setInterval(nextSlide, 4000);
   }
 
-  // === SMOOTH SCROLL ===
+  // ==========================
+  // SMOOTH SCROLL
+  // ==========================
   document.querySelectorAll('nav a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
+    anchor.addEventListener("click", (e) => {
       e.preventDefault();
-
-      const targetID = this.getAttribute("href").substring(1);
+      const targetID = anchor.getAttribute("href").substring(1);
       const target = document.getElementById(targetID);
 
       if (target) {
@@ -64,4 +70,24 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // ==========================
+  // FADE IN / FADE OUT ON SCROLL
+  // ==========================
+  const faders = document.querySelectorAll(".fade-element");
+  const observerOptions = {
+    threshold: 0.1, // minimal 10% terlihat
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      } else {
+        entry.target.classList.remove("visible");
+      }
+    });
+  }, observerOptions);
+
+  faders.forEach((el) => observer.observe(el));
 });

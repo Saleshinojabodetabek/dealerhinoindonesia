@@ -178,9 +178,32 @@ main > section {
 }
 
 .product p {
-  padding: 0 1rem;
+  font-size: 14px;
   color: #555;
-  margin-bottom: 1rem;
+  padding: 0 15px 15px;
+  line-height: 1.6;
+  flex-grow: 1; /* Biar deskripsi mengikuti isi */
+}
+
+/* Responsif Mobile */
+@media (max-width: 768px) {
+  .products {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product {
+    max-width: 90%;
+  }
+
+  .product h3 {
+    font-size: 16px;
+  }
+
+  .product p {
+    font-size: 13px;
+    padding: 0 10px 15px;
+  }
 }
 
 /* === FEATURES === */
@@ -1025,5 +1048,58 @@ footer {
   .promo-card {
     width: 100%;
     max-width: 380px;
+  }
+}
+
+/* Pastikan teks produk terbaca di mobile */
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 300px;
+  flex: 1 1 300px;
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+}
+
+.product h3 {
+  font-size: 18px;
+  margin: 10px;
+}
+
+.product p {
+  font-size: 14px;
+  color: #555;
+  padding: 0 15px 15px;
+  line-height: 1.6;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .products {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product {
+    max-width: 90%;
+  }
+
+  .product p {
+    font-size: 13px;
+    padding: 0 10px 15px;
   }
 }

@@ -5,7 +5,7 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 
-include "../koneksi.php"; // file koneksi database
+include "config.php"; // file koneksi database
 
 $result = $conn->query("SELECT * FROM contact_messages ORDER BY created_at DESC");
 ?>

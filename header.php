@@ -20,26 +20,38 @@
     <link rel="apple-touch-icon" href="images/favicon.png" />
     <link rel="canonical" href="https://www.dealerhinoindonesia.id/" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/header.css" />
     <script src="js/script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <!-- Header -->
-    <header>
-      <div class="container header-content navbar">
-        <div class="header-title">
-          <a href="https://dealerhinoindonesia.id">
-            <img src="images/logo3.png" alt="Logo Hino" loading="lazy" style="height: 60px"/>
-          </a>
+<!-- Header -->
+<header>
+  <div class="container header-content navbar">
+    <div class="header-title">
+      <a href="https://dealerhinoindonesia.id">
+        <img src="images/logo3.png" alt="Logo Hino" loading="lazy" style="height: 60px"/>
+      </a>
+    </div>
+    <div class="hamburger-menu">&#9776;</div>
+    <nav class="nav links">
+      <a href="index.php">Home</a>
+      <a href="#promo-utama">Penawaran Harga</a>
+      
+      <!-- Dropdown Produk -->
+      <div class="dropdown">
+        <a href="#products-section" class="dropbtn">Produk ▾</a>
+        <div class="dropdown-content">
+          <a href="hino300.php">Hino 300 Series (Dutro)</a>
+          <a href="hino500.php">Hino 500 Series (Ranger)</a>
+          <a href="hinobus.php">Hino Bus Series</a>
         </div>
-        <div class="hamburger-menu">&#9776;</div>
-        <nav class="nav links">
-          <a href="index.php">Home</a>
-          <a href="#promo-utama">Penawaran Harga</a>
-          <a href="#products-section">Produk</a>
-          <a href="#features">Keunggulan Hino</a>
-          <a href="#contact">Contact</a>
-          <a href="artikel.php">Blog & Artikel</a>
-        </nav>
       </div>
-    </header>
+      
+      <a href="#features">Keunggulan Hino</a>
+      <a href="#contact">Contact</a>
+      <a href="artikel.php">Blog & Artikel</a>
+    </nav>
+  </div>
+</header>
+

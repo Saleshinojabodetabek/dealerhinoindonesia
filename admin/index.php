@@ -71,8 +71,6 @@ if (!isset($_SESSION['admin'])) {
     <a href="index.php" class="active">Dashboard</a>
     <a href="artikel.php">Artikel</a>
     <a href="produk.php">Produk</a>
-    <a href="gallery.php">Gallery</a>
-    <a href="pengaturan.php">Pengaturan</a>
     <a href="logout.php">Logout</a>
   </div>
 

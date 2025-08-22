@@ -17,7 +17,7 @@ if (!isset($_SESSION['admin'])) {
     }
     .sidebar {
       height: 100vh;
-      background: #0d6efd;
+      background: #0d6efd; /* biru elegan utama */
       color: white;
       padding-top: 20px;
       position: fixed;
@@ -38,7 +38,7 @@ if (!isset($_SESSION['admin'])) {
       text-align: left;
     }
     .sidebar a:hover, .sidebar a.active {
-      background: #0b5ed7;
+      background: #0b5ed7; /* biru lebih gelap saat hover */
       border-radius: 6px;
     }
     .content {
@@ -48,7 +48,7 @@ if (!isset($_SESSION['admin'])) {
       min-height: 100vh;
     }
     .dashboard-header {
-      background: linear-gradient(90deg, #0d6efd, #0dcaf0);
+      background: linear-gradient(90deg, #0d6efd, #0b5ed7); /* gradasi biru elegan */
       color: white;
       padding: 25px;
       border-radius: 12px;
@@ -62,6 +62,16 @@ if (!isset($_SESSION['admin'])) {
     .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .card h5 {
+      color: #0d6efd; /* heading biru elegan */
+    }
+    .btn-primary {
+      background: #0d6efd;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #0b5ed7;
     }
   </style>
 </head>
@@ -87,16 +97,16 @@ if (!isset($_SESSION['admin'])) {
     <div class="row g-4">
       <div class="col-md-6">
         <div class="card shadow-sm p-4 text-center">
-          <h5 class="text-primary">📦 Kelola Produk</h5>
+          <h5>📦 Kelola Produk</h5>
           <p>Tambah, edit, hapus produk Hino dengan mudah.</p>
-          <a href="produk.php" class="btn btn-success">Lihat Produk</a>
+          <a href="produk.php" class="btn btn-primary">Lihat Produk</a>
         </div>
       </div>
       <div class="col-md-6">
         <div class="card shadow-sm p-4 text-center">
-          <h5 class="text-info">📰 Kelola Artikel</h5>
+          <h5>📰 Kelola Artikel</h5>
           <p>Tambah, edit, hapus artikel blog secara praktis.</p>
-          <a href="artikel.php" class="btn btn-info">Lihat Artikel</a>
+          <a href="artikel.php" class="btn btn-primary">Lihat Artikel</a>
         </div>
       </div>
     </div>

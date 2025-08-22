@@ -17,7 +17,7 @@ if (!isset($_SESSION['admin'])) {
     }
     .sidebar {
       height: 100vh;
-      background: #198754;
+      background: #0d6efd;
       color: white;
       padding-top: 20px;
       position: fixed;
@@ -25,7 +25,7 @@ if (!isset($_SESSION['admin'])) {
       text-align: center;
     }
     .sidebar img {
-      max-width: 160px;
+      max-width: 180px;
       margin-bottom: 20px;
     }
     .sidebar a {
@@ -38,7 +38,7 @@ if (!isset($_SESSION['admin'])) {
       text-align: left;
     }
     .sidebar a:hover, .sidebar a.active {
-      background: #157347;
+      background: #0b5ed7;
       border-radius: 6px;
     }
     .content {
@@ -48,7 +48,7 @@ if (!isset($_SESSION['admin'])) {
       min-height: 100vh;
     }
     .dashboard-header {
-      background: linear-gradient(90deg, #198754, #20c997);
+      background: linear-gradient(90deg, #0d6efd, #0dcaf0);
       color: white;
       padding: 25px;
       border-radius: 12px;

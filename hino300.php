@@ -1,27 +1,31 @@
-<?php
-include 'header.php';
-include 'config.php'; // koneksi ke DB
-
-// Ambil data produk
-$query = "SELECT * FROM produk ORDER BY created_at DESC";
-$result = mysqli_query($conn, $query);
-?>
+<?php include 'header.php'; ?>
 <main>
-  <section class="products-section fade-element">
-    <h2 class="section-title">Produk Truk Hino</h2>
-    <div class="products">
-      <?php while($row = mysqli_fetch_assoc($result)): ?>
-        <div class="product">
-          <img src="uploads/<?php echo $row['gambar']; ?>" alt="<?php echo $row['nama_produk']; ?>" loading="lazy"/>
-          <h3>
-            <a href="<?php echo $row['link_detail']; ?>" target="_blank">
-              <?php echo $row['nama_produk']; ?>
-            </a>
-          </h3>
-          <p><?php echo substr($row['deskripsi'], 0, 100); ?>...</p>
-        </div>
-      <?php endwhile; ?>
-    </div>
+  <section class="about-hero"
+    style="background-image: url('img/Euro 4 Hino 300.jpeg'); background-size:cover; background-position:center;">
   </section>
+
+  <div class="gallery-wrapper">
+    <div class="gallery">
+      <?php
+      include 'config.php';
+      $result = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
+      while ($row = mysqli_fetch_assoc($result)) {
+          echo "
+          <div class='gallery-item'>
+            <a href='{$row['link_wa']}'>
+              <img src='uploads/{$row['gambar']}' alt='{$row['nama']}'>
+              <p>{$row['nama']}</p>
+            </a>
+          </div>";
+      }
+      ?>
+    </div>
+  </div>
+
+  <div class="cta-full">
+    <h2>Tidak menemukan apa yang kamu cari?</h2>
+    <a href='https://wa.me/+6285975287684?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk' 
+       class='cta-full-button'>Hubungi Kami</a>
+  </div>
 </main>
 <?php include 'footer.php'; ?>

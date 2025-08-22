@@ -22,11 +22,11 @@ if (!isset($_SESSION['admin'])) {
       padding-top: 20px;
       position: fixed;
       width: 220px;
-    }
-    .sidebar h4 {
       text-align: center;
-      margin-bottom: 30px;
-      font-weight: bold;
+    }
+    .sidebar img {
+      max-width: 120px;
+      margin-bottom: 20px;
     }
     .sidebar a {
       display: block;
@@ -35,6 +35,7 @@ if (!isset($_SESSION['admin'])) {
       text-decoration: none;
       margin: 4px 0;
       transition: background 0.2s;
+      text-align: left;
     }
     .sidebar a:hover, .sidebar a.active {
       background: #0b5ed7;
@@ -67,7 +68,9 @@ if (!isset($_SESSION['admin'])) {
 <body>
   <!-- Sidebar -->
   <div class="sidebar">
-    <h4>Sales Hino<br><small style="font-size:14px;">Admin Panel</small></h4>
+    <div class="text-center mb-4">
+      <img src="images/logo3.png" alt="Logo Hino">
+    </div>
     <a href="index.php" class="active">Dashboard</a>
     <a href="artikel.php">Artikel</a>
     <a href="produk.php">Produk</a>

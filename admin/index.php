@@ -84,6 +84,7 @@ if (!isset($_SESSION['admin'])) {
     <a href="index.php" class="active">Dashboard</a>
     <a href="artikel.php">Artikel</a>
     <a href="produk.php">Produk</a>
+    <a href="pesan.php">Pesan Customer</a> <!-- Tambahan menu baru -->
     <a href="logout.php">Logout</a>
   </div>
 
@@ -91,22 +92,29 @@ if (!isset($_SESSION['admin'])) {
   <div class="content">
     <div class="dashboard-header">
       <h2>Selamat Datang, <?php echo $_SESSION['admin']; ?> 👋</h2>
-      <p>Kelola produk, artikel, dan konten website melalui dashboard ini.</p>
+      <p>Kelola produk, artikel, pesan customer, dan konten website melalui dashboard ini.</p>
     </div>
 
     <div class="row g-4">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="card shadow-sm p-4 text-center">
           <h5>📦 Kelola Produk</h5>
           <p>Tambah, edit, hapus produk Hino dengan mudah.</p>
           <a href="produk.php" class="btn btn-primary">Lihat Produk</a>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="card shadow-sm p-4 text-center">
           <h5>📰 Kelola Artikel</h5>
           <p>Tambah, edit, hapus artikel blog secara praktis.</p>
           <a href="artikel.php" class="btn btn-primary">Lihat Artikel</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm p-4 text-center">
+          <h5>📩 Pesan Customer</h5>
+          <p>Lihat pesan yang dikirim melalui form kontak website.</p>
+          <a href="pesan.php" class="btn btn-primary">Lihat Pesan</a>
         </div>
       </div>
     </div>

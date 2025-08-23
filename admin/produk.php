@@ -4,7 +4,7 @@ if (!isset($_SESSION['admin'])) {
     header("Location: login.php");
     exit();
 }
-include 'koneksi.php';
+include 'config.php';
 ?>
 
 <!DOCTYPE html>
@@ -30,30 +30,38 @@ include 'koneksi.php';
     </thead>
     <tbody>
       <?php
-      // coba tampilkan semua produk tanpa join dulu
       $sql = "SELECT * FROM produk ORDER BY id DESC";
       $result = $conn->query($sql);
 
       if ($result && $result->num_rows > 0) {
           while($row = $result->fetch_assoc()) {
-              // debug untuk cek kolom apa saja yg ada
-              echo "<pre style='background:#f8f9fa;border:1px solid #ccc;padding:5px;'>";
-              var_dump($row);
-              echo "</pre>";
+              echo "<tr>";
+              echo "<td>{$row['id']}</td>";
 
-              $gambar = !empty($row['gambar']) ? "<img src='../uploads/{$row['gambar']}' width='100'>" : "-";
+              // cek apakah kolom series_id ada
+              echo "<td>".(isset($row['series_id']) ? $row['series_id'] : "<span class='text-danger'>[series_id tidak ada]</span>")."</td>";
 
-              echo "<tr>
-                      <td>{$row['id']}</td>
-                      <td>".(isset($row['series_id']) ? $row['series_id'] : "-")."</td>
-                      <td>{$row['nama_produk']}</td>
-                      <td>{$gambar}</td>
-                      <td>
-                        <a href='edit_produk.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
-                        <a href='hapus_produk.php?id={$row['id']}' class='btn btn-danger btn-sm' onclick=\"return confirm('Yakin hapus produk ini?');\">Hapus</a>
-                        <a href='detail_produk.php?id={$row['id']}' class='btn btn-info btn-sm'>Detail</a>
-                      </td>
-                    </tr>";
+              // cek apakah kolom nama_produk ada
+              echo "<td>".(isset($row['nama_produk']) ? $row['nama_produk'] : "<span class='text-danger'>[nama_produk tidak ada]</span>")."</td>";
+
+              // cek apakah kolom gambar ada
+              if (isset($row['gambar']) && !empty($row['gambar'])) {
+                  $path = "uploads/{$row['gambar']}";
+                  if (file_exists($path)) {
+                      echo "<td><img src='$path' width='100'></td>";
+                  } else {
+                      echo "<td class='text-danger'>File tidak ditemukan: $path</td>";
+                  }
+              } else {
+                  echo "<td class='text-danger'>[gambar kosong]</td>";
+              }
+
+              echo "<td>
+                      <a href='edit_produk.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
+                      <a href='hapus_produk.php?id={$row['id']}' class='btn btn-danger btn-sm' onclick=\"return confirm('Yakin hapus produk ini?');\">Hapus</a>
+                      <a href='detail_produk.php?id={$row['id']}' class='btn btn-info btn-sm'>Detail</a>
+                    </td>";
+              echo "</tr>";
           }
       } else {
           echo "<tr><td colspan='5' class='text-center'>Belum ada produk</td></tr>";

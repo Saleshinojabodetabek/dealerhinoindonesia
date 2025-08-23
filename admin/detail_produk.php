@@ -1,75 +1,131 @@
 <?php
-include 'config.php';
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-if ($id <= 0) { echo "Produk tidak ditemukan"; exit(); }
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-$produk = $conn->query("SELECT p.*, s.nama_series 
-                        FROM produk p 
-                        LEFT JOIN series s ON p.series_id = s.id 
-                        WHERE p.id=$id")->fetch_assoc();
-if (!$produk) { echo "Produk tidak ditemukan"; exit(); }
-
-$spesifikasi = $conn->query("SELECT * FROM produk_spesifikasi WHERE produk_id=$id ORDER BY grup, sort_order");
-$spec_data = [];
-while ($r = $spesifikasi->fetch_assoc()) {
-    $spec_data[$r['grup']][] = $r;
+if (session_status() === PHP_SESSION_NONE) session_start();
+if (!isset($_SESSION['admin'])) {
+    header("Location: login.php");
+    exit();
 }
 
-$karoseri = $conn->query("SELECT k.* FROM produk_karoseri pk 
-                          JOIN karoseri k ON pk.karoseri_id=k.id 
-                          WHERE pk.produk_id=$id");
+include 'config.php';
+
+// Ambil ID produk
+$produk_id = (int)($_GET['id'] ?? 0);
+if ($produk_id <= 0) {
+    header("Location: produk.php");
+    exit();
+}
+
+// Ambil data produk
+$res = $conn->query("SELECT p.*, s.nama_series 
+                     FROM produk p
+                     LEFT JOIN series s ON p.series_id = s.id
+                     WHERE p.id = $produk_id");
+
+if (!$res || $res->num_rows == 0) {
+    header("Location: produk.php");
+    exit();
+}
+$produk = $res->fetch_assoc();
+
+// Ambil karoseri terkait
+$karoseriList = [];
+$res_kar = $conn->query("SELECT k.nama, k.slug 
+                         FROM produk_karoseri pk
+                         JOIN karoseri k ON pk.karoseri_id = k.id
+                         WHERE pk.produk_id = $produk_id");
+while ($row = $res_kar->fetch_assoc()) {
+    $karoseriList[] = $row;
+}
+
+// Ambil spesifikasi
+$specs = [];
+$res_spec = $conn->query("SELECT grup, label, nilai, sort_order FROM produk_spesifikasi WHERE produk_id=$produk_id ORDER BY grup, sort_order");
+while ($row = $res_spec->fetch_assoc()) {
+    $specs[$row['grup']][] = $row;
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Detail Produk</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Detail Produk</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+.table-spec { border-collapse: collapse; }
+.table-spec th, .table-spec td { border:2px solid #000; vertical-align:middle; padding:6px; }
+.group-title { font-weight:700; font-size:1.1rem; margin-top:20px; }
+.img-karoseri { width:60px; height:auto; object-fit:contain; margin-right:8px; border:1px solid #ccc; padding:2px; border-radius:4px;}
+</style>
 </head>
 <body class="bg-light">
 <div class="container my-5">
-  <div class="card shadow">
-    <div class="card-header bg-primary text-white">
-      <h4 class="mb-0"><?= htmlspecialchars($produk['nama_produk']); ?></h4>
-    </div>
-    <div class="card-body">
-      <div class="mb-3">
-        <?php if (!empty($produk['gambar'])): ?>
-          <img src="../uploads/produk/<?= htmlspecialchars($produk['gambar']); ?>" class="img-fluid mb-3" style="max-width:300px;">
-        <?php endif; ?>
-        <p><strong>Series:</strong> <?= htmlspecialchars($produk['nama_series']); ?></p>
-        <p><strong>Varian:</strong> <?= htmlspecialchars($produk['varian']); ?></p>
-        <p><?= nl2br(htmlspecialchars($produk['deskripsi'])); ?></p>
-      </div>
+<div class="card shadow">
+<div class="card-header bg-primary text-white">
+<h4 class="mb-0">Detail Produk</h4>
+</div>
+<div class="card-body">
 
-      <h5>Spesifikasi</h5>
-      <?php foreach ($spec_data as $group => $items): ?>
-        <h6 class="mt-3"><?= htmlspecialchars($group); ?></h6>
-        <table class="table table-sm table-bordered mb-3">
-          <tbody>
-            <?php foreach ($items as $row): ?>
-              <tr>
-                <td style="width:40%"><?= htmlspecialchars($row['label']); ?></td>
-                <td><?= htmlspecialchars($row['nilai']); ?></td>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
-      <?php endforeach; ?>
+<!-- Info dasar -->
+<h5>Informasi Produk</h5>
+<table class="table table-bordered">
+<tr><th>Nama Produk</th><td><?= htmlspecialchars($produk['nama_produk']) ?></td></tr>
+<tr><th>Series</th><td><?= htmlspecialchars($produk['nama_series']) ?></td></tr>
+<tr><th>Varian</th><td><?= htmlspecialchars($produk['varian']) ?></td></tr>
+<tr><th>Deskripsi</th><td><?= nl2br(htmlspecialchars($produk['deskripsi'])) ?></td></tr>
+<tr><th>Gambar</th>
+<td>
+<?php if($produk['gambar']): ?>
+<img src="../uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" width="180">
+<?php else: ?>
+- Tidak ada gambar -
+<?php endif; ?>
+</td>
+</tr>
+</table>
 
-      <h5 class="mt-4">Karoseri</h5>
-      <div class="row">
-        <?php while ($k = $karoseri->fetch_assoc()): ?>
-          <div class="col-md-3 col-6 mb-3 text-center">
-            <img src="../uploads/karoseri/<?= htmlspecialchars($k['slug']); ?>.png" class="img-fluid mb-2" style="max-height:80px;">
-            <div><?= htmlspecialchars($k['nama']); ?></div>
-          </div>
-        <?php endwhile; ?>
-      </div>
+<!-- Karoseri -->
+<h5 class="mt-4">Karoseri Terkait</h5>
+<?php if(count($karoseriList)>0): ?>
+<div class="d-flex flex-wrap">
+<?php foreach($karoseriList as $k): ?>
+<div class="d-flex align-items-center me-3 mb-2">
+<img src="../uploads/karoseri/<?= htmlspecialchars($k['slug']) ?>.png" class="img-karoseri" alt="<?= htmlspecialchars($k['nama']) ?>">
+<span><?= htmlspecialchars($k['nama']) ?></span>
+</div>
+<?php endforeach; ?>
+</div>
+<?php else: ?>
+<p>- Tidak ada karoseri terkait -</p>
+<?php endif; ?>
 
-      <a href="produk.php" class="btn btn-secondary mt-3">Kembali</a>
-    </div>
-  </div>
+<!-- Spesifikasi -->
+<h5 class="mt-4">Spesifikasi</h5>
+<?php if(count($specs)>0): ?>
+<?php foreach($specs as $grup => $rows): ?>
+<div class="group-title"><?= htmlspecialchars($grup) ?></div>
+<table class="table table-spec mb-3">
+<thead class="table-light"><tr><th>Parameter</th><th>Nilai</th></tr></thead>
+<tbody>
+<?php foreach($rows as $r): ?>
+<tr>
+<td><?= htmlspecialchars($r['label']) ?></td>
+<td><?= htmlspecialchars($r['nilai']) ?></td>
+</tr>
+<?php endforeach; ?>
+</tbody>
+</table>
+<?php endforeach; ?>
+<?php else: ?>
+<p>- Tidak ada spesifikasi -</p>
+<?php endif; ?>
+
+<a href="produk.php" class="btn btn-secondary mt-3">Kembali</a>
+
+</div>
+</div>
 </div>
 </body>
 </html>

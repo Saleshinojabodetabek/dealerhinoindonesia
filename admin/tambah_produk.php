@@ -162,25 +162,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <input type="file" name="gambar" class="form-control" accept="image/*" required>
         </div>
 
-        <!-- Karoseri (checkbox pilihan) -->
-        <div class="mb-4">
-          <label class="form-label">Pilih Karoseri</label>
-          <div class="row">
-            <?php
-            $karoseri = $conn->query("SELECT * FROM karoseri ORDER BY nama");
-            while ($kr = $karoseri->fetch_assoc()):
-            ?>
-              <div class="col-md-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="karoseri[]" value="<?= $kr['id'] ?>" id="karoseri<?= $kr['id'] ?>">
-                  <label class="form-check-label" for="karoseri<?= $kr['id'] ?>">
-                    <?= htmlspecialchars($kr['nama']); ?>
-                  </label>
-                </div>
-              </div>
-            <?php endwhile; ?>
+<!-- Pilih Karoseri -->
+<div class="mb-4">
+  <label class="form-label">Pilih Karoseri</label>
+
+  <?php
+  // Ambil semua karoseri terurut berdasarkan series dan nama
+  $seriesList = $conn->query("SELECT DISTINCT series FROM karoseri ORDER BY series ASC");
+  $selected_karoseri = $selected_karoseri ?? []; // pastikan variabel ada (misal saat edit produk)
+
+  while ($s = $seriesList->fetch_assoc()):
+    $seriesName = $s['series'];
+  ?>
+    <!-- Judul Series -->
+    <h6 class="mt-3"><?= htmlspecialchars($seriesName); ?></h6>
+    <div class="row">
+      <?php
+      $karoseri = $conn->query("SELECT * FROM karoseri WHERE series='$seriesName' ORDER BY nama ASC");
+      while ($kr = $karoseri->fetch_assoc()):
+        $checked = in_array($kr['id'], $selected_karoseri) ? 'checked' : '';
+      ?>
+        <div class="col-md-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="karoseri[]" 
+                   value="<?= $kr['id']; ?>" id="karoseri<?= $kr['id']; ?>" <?= $checked ?>>
+            <label class="form-check-label" for="karoseri<?= $kr['id']; ?>">
+              <?= htmlspecialchars($kr['nama']); ?>
+            </label>
           </div>
         </div>
+      <?php endwhile; ?>
+    </div>
+  <?php endwhile; ?>
+</div>
+
 
         <!-- Karoseri (gambar) -->
         <div class="mb-4">

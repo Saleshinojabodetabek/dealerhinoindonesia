@@ -12,79 +12,37 @@ include 'config.php';
 
 // Daftar grup spesifikasi dan default parameternya
 $spec_groups = [
-    'performa' => [
-        'label' => 'PERFORMA',
-        'defaults' => ['Kecepatan maksimum (km/h)', 'Daya tanjak']
-    ],
-    'model_mesin' => [
-        'label' => 'MODEL MESIN',
-        'defaults' => ['Model', 'Tipe', 'Tenaga maksimum', 'Torsi maksimum', 'Kapasitas']
-    ],
-    'kopling' => [
-        'label' => 'KOPLING',
-        'defaults' => ['Tipe']
-    ],
-    'transmisi' => [
-        'label' => 'TRANSMISI',
-        'defaults' => ['Tipe', 'Rasio']
-    ],
-    'kemudi' => [
-        'label' => 'KEMUDI',
-        'defaults' => ['Tipe']
-    ],
-    'sumbu' => [
-        'label' => 'SUMBU',
-        'defaults' => ['Depan', 'Belakang']
-    ],
-    'rem' => [
-        'label' => 'REM',
-        'defaults' => ['Utama', 'Parkir', 'Tambahan']
-    ],
-    'roda_ban' => [
-        'label' => 'RODA & BAN',
-        'defaults' => ['Ukuran Ban']
-    ],
-    'Sistim_Listrik_accu' => [
-        'label' => 'SISTIM LISTRIK ACCU',
-        'defaults' => ['Accu (V-Ah)']
-    ],
-    'Tangki_Solar' => [
-        'label' => 'TANGKI SOLAR',
-        'defaults' => ['Kapasitas']
-    ],
-    'Dimensi' => [
-        'label' => 'DIMENSI',
-        'defaults' => ['Dimensi']
-    ],
-    'Suspensi' => [
-        'label' => 'SUSPENSI',
-        'defaults' => ['Depan & Belakang']
-    ],
-    'Berat_Chasis' => [
-        'label' => 'BERAT CHASIS',
-        'defaults' => ['Depan & Belakang']
-    ],
+    'performa' => ['label'=>'PERFORMA','defaults'=>['Kecepatan maksimum (km/h)','Daya tanjak']],
+    'model_mesin' => ['label'=>'MODEL MESIN','defaults'=>['Model','Tipe','Tenaga maksimum','Torsi maksimum','Kapasitas']],
+    'kopling' => ['label'=>'KOPLING','defaults'=>['Tipe']],
+    'transmisi' => ['label'=>'TRANSMISI','defaults'=>['Tipe','Rasio']],
+    'kemudi' => ['label'=>'KEMUDI','defaults'=>['Tipe']],
+    'sumbu' => ['label'=>'SUMBU','defaults'=>['Depan','Belakang']],
+    'rem' => ['label'=>'REM','defaults'=>['Utama','Parkir','Tambahan']],
+    'roda_ban' => ['label'=>'RODA & BAN','defaults'=>['Ukuran Ban']],
+    'Sistim_Listrik_accu' => ['label'=>'SISTIM LISTRIK ACCU','defaults'=>['Accu (V-Ah)']],
+    'Tangki_Solar' => ['label'=>'TANGKI SOLAR','defaults'=>['Kapasitas']],
+    'Dimensi' => ['label'=>'DIMENSI','defaults'=>['Dimensi']],
+    'Suspensi' => ['label'=>'SUSPENSI','defaults'=>['Depan & Belakang']],
+    'Berat_Chasis' => ['label'=>'BERAT CHASIS','defaults'=>['Depan & Belakang']],
 ];
 
 // Proses simpan produk
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $series_id   = $conn->real_escape_string($_POST['series_id']);
-    $varian      = $conn->real_escape_string($_POST['varian']);
-    $nama_produk = $conn->real_escape_string($_POST['nama_produk']);
-    $deskripsi   = $conn->real_escape_string($_POST['deskripsi']);
+    $series_id   = $conn->real_escape_string($_POST['series_id'] ?? '');
+    $varian      = $conn->real_escape_string($_POST['varian'] ?? '');
+    $nama_produk = $conn->real_escape_string($_POST['nama_produk'] ?? '');
+    $deskripsi   = $conn->real_escape_string($_POST['deskripsi'] ?? '');
 
-    // Pastikan folder upload ada
     $upload_dir = "../uploads/produk/";
     if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
 
-    // Upload gambar
     $gambar = null;
     if (!empty($_FILES['gambar']['name'])) {
         $gambar = time() . "_" . preg_replace('/\s+/', '_', basename($_FILES['gambar']['name']));
         move_uploaded_file($_FILES['gambar']['tmp_name'], $upload_dir . $gambar);
     }
 
-    // Simpan data produk
     $sql = "INSERT INTO produk (series_id, varian, nama_produk, deskripsi, gambar)
             VALUES ('$series_id', '$varian', '$nama_produk', '$deskripsi', '$gambar')";
 
@@ -97,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($spec_groups as $slug => $meta) {
             $labels = $_POST['spec'][$slug]['label'] ?? [];
             $values = $_POST['spec'][$slug]['value'] ?? [];
+            $grup   = $conn->real_escape_string($meta['label']);
 
             for ($i = 0; $i < count($labels); $i++) {
                 $label = trim($labels[$i] ?? '');
@@ -106,19 +65,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $labelEsc = $conn->real_escape_string($label);
                 $nilaiEsc = $conn->real_escape_string($nilai);
                 $order    = $i + 1;
-                $grup     = $conn->real_escape_string($meta['label']);
 
-                $conn->query("INSERT INTO produk_spesifikasi (produk_id, grup, label, nilai, sort_order)
-                              VALUES ($produk_id, '$grup', '$labelEsc', '$nilaiEsc', $order)");
+                $conn->query("INSERT INTO produk_spesifikasi 
+                             (produk_id, grup, label, nilai, sort_order) 
+                             VALUES ($produk_id, '$grup', '$labelEsc', '$nilaiEsc', $order)");
             }
         }
 
         // Simpan relasi karoseri
-        if (!empty($_POST['karoseri'])) {
+        if (!empty($_POST['karoseri']) && is_array($_POST['karoseri'])) {
             foreach ($_POST['karoseri'] as $kid) {
                 $kid = (int)$kid;
-                $conn->query("INSERT INTO produk_karoseri (produk_id, karoseri_id)
-                              VALUES ($produk_id, $kid)");
+                $conn->query("INSERT INTO produk_karoseri (produk_id, karoseri_id) VALUES ($produk_id, $kid)");
             }
         }
 
@@ -127,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">

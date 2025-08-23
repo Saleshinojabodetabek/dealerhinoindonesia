@@ -134,24 +134,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8">
   <title>Tambah Produk</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .table-spec td { vertical-align: middle; }
-    .group-title { font-weight: 700; font-size: 1.05rem; }
-    .table-spec th, 
-    .table-spec td {
-      vertical-align: middle;
-      border: 2px solid #000; /* garis hitam tebal */
-    }
+    <style>
+      .table-spec {
+        border-collapse: collapse;
+      }
+      .table-spec th, 
+      .table-spec td {
+        vertical-align: middle;
+        border: 2px solid #000; /* Garis lebih tebal */
+      }
+      .group-title { 
+        font-weight: 700; 
+        font-size: 1.05rem; 
+      }
+      /* Untuk kotak input di dalam tabel */
+      .table-spec input.form-control {
+        border: 2px solid #000; /* garis tebal hitam */
+        height: 38px; /* sedikit lebih tinggi biar nyaman */
+        font-weight: 500; /* teks agak tebal */
+      }
 
-    .table-spec {
-      border-collapse: collapse;
-    }
-
-    .table-spec th {
-      background-color: #f8f9fa; /* biar sedikit beda warnanya */
-      font-weight: 600;
-    }
-  </style>
+      /* Kalau mau saat fokus lebih jelas */
+      .table-spec input.form-control:focus {
+        border-color: #198754; /* hijau bootstrap ketika klik */
+        box-shadow: 0 0 3px rgba(25,135,84,0.5); 
+      }
+    </style>
 </head>
 <body class="bg-light">
 <div class="container my-5">

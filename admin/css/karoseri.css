@@ -1,11 +1,12 @@
 .karoseri-icon {
   width: 80px;
   height: 80px;
-  background-image: url("admin/karoseri/karoseri.png");
+  background-image: url("../karoseri/karoseri.png");
   background-repeat: no-repeat;
   background-size: auto;
   display: inline-block;
 }
+
 
 /* === DUTRO === */
 .box-dutro {

@@ -30,19 +30,24 @@ include 'koneksi.php';
     </thead>
     <tbody>
       <?php
+      // gunakan LEFT JOIN agar produk tetap tampil meski series kosong
       $sql = "SELECT produk.id, produk.nama_produk, produk.gambar, series.nama_series 
               FROM produk 
-              JOIN series ON produk.series_id = series.id
+              LEFT JOIN series ON produk.series_id = series.id
               ORDER BY series.nama_series, produk.nama_produk";
       $result = $conn->query($sql);
 
-      if ($result->num_rows > 0) {
+      if ($result && $result->num_rows > 0) {
           while($row = $result->fetch_assoc()) {
+              // kalau series kosong, tampilkan tanda -
+              $series = !empty($row['nama_series']) ? $row['nama_series'] : "-";
+              $gambar = !empty($row['gambar']) ? "<img src='../uploads/{$row['gambar']}' width='100'>" : "-";
+
               echo "<tr>
                       <td>{$row['id']}</td>
-                      <td>{$row['nama_series']}</td>
+                      <td>{$series}</td>
                       <td>{$row['nama_produk']}</td>
-                      <td><img src='../uploads/{$row['gambar']}' width='100'></td>
+                      <td>{$gambar}</td>
                       <td>
                         <a href='edit_produk.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
                         <a href='hapus_produk.php?id={$row['id']}' class='btn btn-danger btn-sm' onclick=\"return confirm('Yakin hapus produk ini?');\">Hapus</a>

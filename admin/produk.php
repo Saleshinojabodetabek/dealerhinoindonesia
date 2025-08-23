@@ -46,7 +46,7 @@ include 'config.php';
 
               // cek apakah kolom gambar ada
               if (isset($row['gambar']) && !empty($row['gambar'])) {
-                  $path = "uploads/{$row['gambar']}";
+                  $path = "../uploads/{$row['gambar']}";
                   if (file_exists($path)) {
                       echo "<td><img src='$path' width='100'></td>";
                   } else {

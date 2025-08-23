@@ -12,22 +12,21 @@ if (!isset($_SESSION['admin'])) {
 
 include 'config.php';
 
-
 /** Daftar grup spesifikasi & default baris parameternya */
 $spec_groups = [
-  'performa'     => ['label' => 'PERFORMA',     'defaults' => ['Kecepatan maksimum (km/h)', 'Daya tanjak']],
-  'model_mesin'  => ['label' => 'MODEL MESIN',  'defaults' => ['Model', 'Tipe', 'Tenaga maksimum', 'Torsi maksimum', 'Kapasitas']],
-  'kopling'      => ['label' => 'KOPLING',      'defaults' => ['Tipe']],
-  'transmisi'    => ['label' => 'TRANSMISI',    'defaults' => ['Tipe', 'Rasio']],
-  'kemudi'       => ['label' => 'KEMUDI',       'defaults' => ['Tipe']],
-  'sumbu'        => ['label' => 'SUMBU',        'defaults' => ['Depan', 'Belakang']],
-  'rem'          => ['label' => 'REM',          'defaults' => ['Utama', 'Parkir', 'Tambahan']],
-  'roda_ban'     => ['label' => 'RODA & BAN',   'defaults' => ['Ukuran Ban']],
-  'Sistim_Listrik_accu' => ['label' => 'SISTIM LISTRIK ACCU', 'defaults' => ['Accu (V-Ah)']],
-  'Tangki_Solar' => ['label' => 'TANGKI SOLAR', 'defaults' => ['Kapasitas']],
-  'Dimensi'      => ['label' => 'DIMENSI',      'defaults' => ['Dimensi']],
-  'Suspensi'     => ['label' => 'SUSPENSI',     'defaults' => ['Depan & Belakang']],
-  'Berat_Chasis' => ['label' => 'BERAT CHASIS', 'defaults' => ['Depan & Belakang']],
+    'performa'     => ['label' => 'PERFORMA',     'defaults' => ['Kecepatan maksimum (km/h)', 'Daya tanjak']],
+    'model_mesin'  => ['label' => 'MODEL MESIN',  'defaults' => ['Model', 'Tipe', 'Tenaga maksimum', 'Torsi maksimum', 'Kapasitas']],
+    'kopling'      => ['label' => 'KOPLING',      'defaults' => ['Tipe']],
+    'transmisi'    => ['label' => 'TRANSMISI',    'defaults' => ['Tipe', 'Rasio']],
+    'kemudi'       => ['label' => 'KEMUDI',       'defaults' => ['Tipe']],
+    'sumbu'        => ['label' => 'SUMBU',        'defaults' => ['Depan', 'Belakang']],
+    'rem'          => ['label' => 'REM',          'defaults' => ['Utama', 'Parkir', 'Tambahan']],
+    'roda_ban'     => ['label' => 'RODA & BAN',   'defaults' => ['Ukuran Ban']],
+    'Sistim_Listrik_accu' => ['label' => 'SISTIM LISTRIK ACCU', 'defaults' => ['Accu (V-Ah)']],
+    'Tangki_Solar' => ['label' => 'TANGKI SOLAR', 'defaults' => ['Kapasitas']],
+    'Dimensi'      => ['label' => 'DIMENSI',      'defaults' => ['Dimensi']],
+    'Suspensi'     => ['label' => 'SUSPENSI',     'defaults' => ['Depan & Belakang']],
+    'Berat_Chasis' => ['label' => 'BERAT CHASIS', 'defaults' => ['Depan & Belakang']],
 ];
 
 // Simpan produk + spesifikasi
@@ -37,20 +36,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama_produk = $conn->real_escape_string($_POST['nama_produk']);
     $deskripsi   = $conn->real_escape_string($_POST['deskripsi']);
 
-    // Pastikan folder uploads ada
-    $upload_dir = "../uploads/";
+    // Pastikan folder uploads/produk ada
+    $upload_dir = "../uploads/produk/";
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0777, true);
     }
 
-    // Upload gambar utama
+    // Upload gambar utama produk
     $gambar = null;
     if (!empty($_FILES['gambar']['name'])) {
         $gambar = time() . "_" . preg_replace('/\s+/', '_', basename($_FILES['gambar']['name']));
         move_uploaded_file($_FILES['gambar']['tmp_name'], $upload_dir . $gambar);
     }
 
-    // Insert produk (tanpa karoseri_gambar)
+    // Insert produk
     $sql = "INSERT INTO produk (series_id, varian, nama_produk, deskripsi, gambar)
             VALUES ('$series_id', '$varian', '$nama_produk', '$deskripsi', '$gambar')";
     if (!$conn->query($sql)) {
@@ -62,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($spec_groups as $slug => $meta) {
             $labels = $_POST['spec'][$slug]['label'] ?? [];
             $values = $_POST['spec'][$slug]['value'] ?? [];
+
             for ($i = 0; $i < count($labels); $i++) {
                 $label = trim($labels[$i] ?? '');
                 $nilai = trim($values[$i] ?? '');
@@ -183,10 +183,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               value="<?= $kr['id']; ?>" 
               id="karoseri<?= $kr['id']; ?>" 
               <?= $checked ?>>
-            <label class="form-check-label d-flex align-items-center" for="karoseri<?= $kr['id']; ?>">
-              <span class="karoseri-icon <?= $kr['slug']; ?>"></span>
-              <span class="ms-2"><?= htmlspecialchars($kr['nama']); ?></span>
-            </label>
+              <label class="form-check-label d-flex align-items-center" for="karoseri<?= $kr['id']; ?>">
+                <img src="../uploads/karoseri/<?= htmlspecialchars($kr['slug']); ?>.png" 
+                    alt="<?= htmlspecialchars($kr['nama']); ?>" 
+                    style="width:50px;height:auto;object-fit:contain;" class="me-2 border rounded">
+                <span><?= htmlspecialchars($kr['nama']); ?></span>
+              </label>
           </div>
         </div>
       <?php endwhile; ?>

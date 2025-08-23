@@ -87,20 +87,20 @@ while($r=$resKar->fetch_assoc()) {
         </div>
       <?php endif; ?>
 
-<!-- Karoseri -->
 <?php if (!empty($selected_karoseri)): ?>
-  <div class="mb-3">
-    <strong>Karoseri Terpilih:</strong>
-    <div class="row row-cols-2 row-cols-md-3 g-4 mt-2">
-      <?php foreach ($selected_karoseri as $kr): ?>
-        <div class="col text-center">
-          <span class="karoseri-icon <?= $kr['slug'] ?> d-block mx-auto mb-2"></span>
-          <div class="fw-semibold"><?= htmlspecialchars($kr['nama']) ?></div>
-        </div>
-      <?php endforeach; ?>
-    </div>
+<div class="mb-4">
+  <h5 class="fw-bold mb-3">KAROSERI</h5>
+  <div class="row row-cols-2 row-cols-md-3 g-4">
+    <?php foreach ($selected_karoseri as $kr): ?>
+      <div class="col text-center">
+        <span class="karoseri-icon <?= $kr['slug'] ?> d-block mx-auto mb-2"></span>
+        <div class="fw-semibold"><?= htmlspecialchars($kr['nama']) ?></div>
+      </div>
+    <?php endforeach; ?>
   </div>
+</div>
 <?php endif; ?>
+
 
 
 

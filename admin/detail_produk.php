@@ -62,9 +62,9 @@ while($r=$resKar->fetch_assoc()) {
 <style>
   .table-spec td { vertical-align: middle; }
   .group-title { font-weight: 700; font-size: 1.05rem; }
-  .karoseri-icon { display:inline-block; width:24px; height:24px; background-size:contain; background-repeat:no-repeat; }
 </style>
 </head>
+
 <body class="bg-light">
 <div class="container my-5">
   <div class="card shadow">

@@ -45,27 +45,13 @@ while($r=$resSpec->fetch_assoc()) {
     $existing_spec[$r['grup']][] = $r;
 }
 
-if(!empty($selected_karoseri)): ?>
-  <div class="mb-3">
-    <strong>Karoseri Terpilih:</strong>
-    <div class="d-flex flex-wrap gap-4 mt-2">
-      <?php foreach($selected_karoseri as $kr): ?>
-        <?php
-        // Cek apakah file gambar karoseri ada
-        $karoseri_image = "admin/karoseri/karoseri.png" . $kr['slug'] . ".png";
-        ?>
-        <div class="text-center">
-          <?php if(file_exists($karoseri_image)): ?>
-            <img src="<?=$karoseri_image?>" alt="<?=htmlspecialchars($kr['nama'])?>" style="width:120px; display:block; margin-bottom:5px;">
-          <?php else: ?>
-            <span class="karoseri-icon <?=$kr['slug']?> mb-1" style="display:block; width:120px; height:80px;"></span>
-          <?php endif; ?>
-          <div><?=htmlspecialchars($kr['nama'])?></div>
-        </div>
-      <?php endforeach; ?>
-    </div>
-  </div>
-<?php endif; ?>
+// --- Ambil karoseri ---
+$selected_karoseri = [];
+$resKar = $conn->query("SELECT k.nama, k.slug FROM produk_karoseri pk JOIN karoseri k ON pk.karoseri_id=k.id WHERE pk.produk_id=$produk_id");
+while($r=$resKar->fetch_assoc()) {
+    $selected_karoseri[] = $r;
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>

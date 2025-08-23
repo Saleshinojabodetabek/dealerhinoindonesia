@@ -57,6 +57,7 @@ body { font-family:"Segoe UI",sans-serif; background:#f8f9fa; }
 </td></tr>
 <tr><th>Tanggal</th><td><?= $artikel['tanggal'] ?></td></tr>
 </table>
+
 <a href="artikel.php" class="btn btn-secondary mt-3">Kembali</a>
 </div>
 </div>

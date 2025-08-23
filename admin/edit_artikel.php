@@ -12,8 +12,9 @@ if(!$res || $res->num_rows==0) header("Location: artikel.php");
 $artikel = $res->fetch_assoc();
 
 // Ambil kategori
-$kategoriList = $conn->query("SELECT * FROM kategori_artikel ORDER BY nama");
+$kategoriList = $conn->query("SELECT * FROM kategori_artikel ORDER BY nama ASC");
 
+$error = '';
 if($_SERVER['REQUEST_METHOD']==='POST'){
     $judul = $conn->real_escape_string($_POST['judul'] ?? '');
     $kategori_id = (int)($_POST['kategori_id'] ?? 0);
@@ -45,6 +46,7 @@ body { font-family:"Segoe UI",sans-serif; background:#f8f9fa; }
 .sidebar a { display:block; padding:12px 20px; color:white; text-decoration:none; margin:4px 0; text-align:left; transition: background 0.2s; }
 .sidebar a:hover, .sidebar a.active { background:#0b5ed7; border-radius:6px; }
 .content { margin-left:220px; padding:20px; }
+.dashboard-header { background: linear-gradient(90deg, #0d6efd, #0b5ed7); color:white; padding:20px; border-radius:12px; margin-bottom:25px; }
 .card-header { background:#198754; color:white; }
 </style>
 </head>
@@ -61,15 +63,23 @@ body { font-family:"Segoe UI",sans-serif; background:#f8f9fa; }
 </div>
 
 <div class="content">
+<div class="dashboard-header">
+<h2>✏️ Edit Artikel</h2>
+<p>Perbarui data artikel Promo atau Berita di sini.</p>
+</div>
+
 <div class="card shadow">
 <div class="card-header"><h4>Edit Artikel</h4></div>
 <div class="card-body">
+
 <?php if(!empty($error)) echo "<div class='alert alert-danger'>$error</div>"; ?>
+
 <form method="post" enctype="multipart/form-data">
 <div class="mb-3">
 <label class="form-label">Judul</label>
 <input type="text" name="judul" class="form-control" required value="<?= htmlspecialchars($artikel['judul']) ?>">
 </div>
+
 <div class="mb-3">
 <label class="form-label">Kategori</label>
 <select name="kategori_id" class="form-select" required>
@@ -80,22 +90,26 @@ $selected = ($k['id']==$artikel['kategori_id'])?'selected':''; ?>
 <?php endwhile; ?>
 </select>
 </div>
+
 <div class="mb-3">
 <label class="form-label">Isi Artikel</label>
-<textarea name="isi" class="form-control" rows="5"><?= htmlspecialchars($artikel['isi']) ?></textarea>
+<textarea name="isi" class="form-control" rows="6"><?= htmlspecialchars($artikel['isi']) ?></textarea>
 </div>
+
 <div class="mb-3">
 <label class="form-label">Gambar</label>
-<?php if($artikel['gambar']): ?>
+<?php if($artikel['gambar'] && file_exists("../uploads/artikel/".$artikel['gambar'])): ?>
 <div class="mb-2"><img src="../uploads/artikel/<?= htmlspecialchars($artikel['gambar']) ?>" width="120"></div>
 <?php endif; ?>
 <input type="file" name="gambar" class="form-control" accept="image/*">
 </div>
+
 <div class="d-flex gap-2">
 <a href="artikel.php" class="btn btn-secondary">Batal</a>
 <button type="submit" class="btn btn-success">Update Artikel</button>
 </div>
 </form>
+
 </div>
 </div>
 </div>

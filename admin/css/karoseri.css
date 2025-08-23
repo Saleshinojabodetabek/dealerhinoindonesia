@@ -4,7 +4,7 @@
   height: 80px;
   background-image: url("../karoseri/karoseri.png");
   background-repeat: no-repeat;
-  background-size: 1280px auto; /* Sesuaikan agar sprite skala sesuai */
+  background-size: cover
   display: inline-block;
   background-position: 0 0;
 }

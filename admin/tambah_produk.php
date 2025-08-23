@@ -22,6 +22,11 @@ $spec_groups = [
   'sumbu'        => ['label' => 'SUMBU',        'defaults' => ['Depan', 'Belakang']],
   'rem'          => ['label' => 'REM',          'defaults' => ['Utama', 'Parkir', 'Tambahan']],
   'roda_ban'     => ['label' => 'RODA & BAN',   'defaults' => ['Ukuran Ban']],
+  'Sistim_Listrik_accu'     => ['label' => 'Sistim Listrik Accu',   'defaults' => ['Accu (V-Ah)']],
+  'Tangki_Solar'     => ['label' => 'Tangki Solar',   'defaults' => ['Kapasitas']],
+  'Dimensi'     => ['label' => 'Dimensi',   'defaults' => ['Dimensi']],
+  'Suspensi'     => ['label' => 'Suspensi',   'defaults' => ['Depan & Belakang']],
+  'Berat Chasis'     => ['label' => 'Berat Chasis',   'defaults' => ['Berat']],
 ];
 
 // Simpan produk + spesifikasi

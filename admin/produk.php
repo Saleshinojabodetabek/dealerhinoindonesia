@@ -30,22 +30,22 @@ include 'koneksi.php';
     </thead>
     <tbody>
       <?php
-      // gunakan LEFT JOIN agar produk tetap tampil meski series kosong
-      $sql = "SELECT produk.id, produk.nama_produk, produk.gambar, series.nama_series 
-              FROM produk 
-              LEFT JOIN series ON produk.series_id = series.id
-              ORDER BY series.nama_series, produk.nama_produk";
+      // coba tampilkan semua produk tanpa join dulu
+      $sql = "SELECT * FROM produk ORDER BY id DESC";
       $result = $conn->query($sql);
 
       if ($result && $result->num_rows > 0) {
           while($row = $result->fetch_assoc()) {
-              // kalau series kosong, tampilkan tanda -
-              $series = !empty($row['nama_series']) ? $row['nama_series'] : "-";
+              // debug untuk cek kolom apa saja yg ada
+              echo "<pre style='background:#f8f9fa;border:1px solid #ccc;padding:5px;'>";
+              var_dump($row);
+              echo "</pre>";
+
               $gambar = !empty($row['gambar']) ? "<img src='../uploads/{$row['gambar']}' width='100'>" : "-";
 
               echo "<tr>
                       <td>{$row['id']}</td>
-                      <td>{$series}</td>
+                      <td>".(isset($row['series_id']) ? $row['series_id'] : "-")."</td>
                       <td>{$row['nama_produk']}</td>
                       <td>{$gambar}</td>
                       <td>

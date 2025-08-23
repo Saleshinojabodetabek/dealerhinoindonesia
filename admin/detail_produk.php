@@ -45,7 +45,7 @@ while($r=$resSpec->fetch_assoc()) {
     $existing_spec[$r['grup']][] = $r;
 }
 
-<?php if(!empty($selected_karoseri)): ?>
+if(!empty($selected_karoseri)): ?>
   <div class="mb-3">
     <strong>Karoseri Terpilih:</strong>
     <div class="d-flex flex-wrap gap-4 mt-2">

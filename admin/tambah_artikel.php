@@ -22,17 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $isi         = $conn->real_escape_string($_POST['isi'] ?? '');
     $tanggal     = date("Y-m-d H:i:s");
 
-    // Validasi input
     if ($judul === '' || $kategori_id <= 0) {
         $error = "Judul dan kategori wajib diisi.";
     } else {
-        // Upload gambar
         $gambar = null;
         if (!empty($_FILES['gambar']['name'])) {
             $upload_dir = "../uploads/artikel/";
             if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
 
-            $ext = pathinfo($_FILES['gambar']['name'], PATHINFO_EXTENSION);
             $gambar = time() . "_" . preg_replace('/\s+/', '_', basename($_FILES['gambar']['name']));
             $gambar_path = $upload_dir . $gambar;
 
@@ -41,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Simpan ke database jika tidak ada error
         if (!$error) {
             $sql = "INSERT INTO artikel (judul, kategori_id, isi, gambar, tanggal)
                     VALUES ('$judul', $kategori_id, '$isi', ".($gambar ? "'$gambar'" : "NULL").", '$tanggal')";
@@ -62,55 +58,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8">
 <title>Tambah Artikel</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; }
+.sidebar { height: 100vh; background: #0d6efd; color: white; padding-top: 20px; position: fixed; width: 220px; text-align: center; }
+.sidebar img { max-width: 180px; margin-bottom: 20px; }
+.sidebar a { display: block; padding: 12px 20px; color: white; text-decoration: none; margin: 4px 0; transition: background 0.2s; text-align: left; }
+.sidebar a:hover, .sidebar a.active { background: #0b5ed7; border-radius: 6px; }
+.content { margin-left: 220px; padding: 20px; }
+.dashboard-header { background: linear-gradient(90deg, #0d6efd, #0b5ed7); color: white; padding: 20px; border-radius: 12px; margin-bottom: 25px; }
+</style>
 </head>
-<body class="bg-light">
-<div class="container my-5">
-<div class="card shadow">
-<div class="card-header bg-success text-white">
-<h4 class="mb-0">Tambah Artikel Baru</h4>
-</div>
-<div class="card-body">
+<body>
 
-<?php if ($error): ?>
-<div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-<?php endif; ?>
-
-<form method="post" enctype="multipart/form-data">
-<div class="mb-3">
-<label class="form-label">Judul Artikel</label>
-<input type="text" name="judul" class="form-control" required value="<?= htmlspecialchars($_POST['judul'] ?? '') ?>">
+<div class="sidebar">
+  <div class="text-center mb-4">
+    <img src="../images/logo3.png" alt="Logo Hino">
+  </div>
+  <a href="index.php">Dashboard</a>
+  <a href="artikel.php" class="active">Artikel</a>
+  <a href="produk.php">Produk</a>
+  <a href="pesan.php">Pesan Customer</a>
+  <a href="logout.php">Logout</a>
 </div>
 
-<div class="mb-3">
-<label class="form-label">Kategori</label>
-<select name="kategori_id" class="form-select" required>
-<option value="">-- Pilih Kategori --</option>
-<?php while ($k = $kategoriList->fetch_assoc()): 
-    $selected = (isset($_POST['kategori_id']) && $_POST['kategori_id'] == $k['id']) ? 'selected' : '';
-?>
-<option value="<?= $k['id'] ?>" <?= $selected ?>><?= htmlspecialchars($k['nama']) ?></option>
-<?php endwhile; ?>
-</select>
+<div class="content">
+  <div class="dashboard-header">
+    <h2>📝 Tambah Artikel Baru</h2>
+    <p>Isi semua data artikel melalui form ini.</p>
+  </div>
+
+  <div class="card shadow">
+    <div class="card-body">
+      <?php if ($error): ?>
+      <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+      <?php endif; ?>
+
+      <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label class="form-label">Judul Artikel</label>
+          <input type="text" name="judul" class="form-control" required value="<?= htmlspecialchars($_POST['judul'] ?? '') ?>">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Kategori</label>
+          <select name="kategori_id" class="form-select" required>
+            <option value="">-- Pilih Kategori --</option>
+            <?php while ($k = $kategoriList->fetch_assoc()): 
+                $selected = (isset($_POST['kategori_id']) && $_POST['kategori_id'] == $k['id']) ? 'selected' : '';
+            ?>
+            <option value="<?= $k['id'] ?>" <?= $selected ?>><?= htmlspecialchars($k['nama']) ?></option>
+            <?php endwhile; ?>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Isi Artikel</label>
+          <textarea name="isi" class="form-control" rows="6"><?= htmlspecialchars($_POST['isi'] ?? '') ?></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Gambar Artikel</label>
+          <input type="file" name="gambar" class="form-control" accept="image/*">
+        </div>
+
+        <div class="d-flex gap-2">
+          <a href="artikel.php" class="btn btn-secondary">Batal</a>
+          <button type="submit" class="btn btn-success">Simpan Artikel</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
 </div>
 
-<div class="mb-3">
-<label class="form-label">Isi Artikel</label>
-<textarea name="isi" class="form-control" rows="6"><?= htmlspecialchars($_POST['isi'] ?? '') ?></textarea>
-</div>
-
-<div class="mb-3">
-<label class="form-label">Gambar Artikel</label>
-<input type="file" name="gambar" class="form-control" accept="image/*">
-</div>
-
-<div class="d-flex gap-2">
-<a href="artikel.php" class="btn btn-secondary">Batal</a>
-<button type="submit" class="btn btn-success">Simpan Artikel</button>
-</div>
-</form>
-
-</div>
-</div>
-</div>
 </body>
 </html>

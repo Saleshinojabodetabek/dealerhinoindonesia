@@ -41,13 +41,20 @@ if (!$produk) {
 }
 
 // --- Ambil spesifikasi yang sudah tersimpan ---
-$existing_spec = []; // keyed by grup label UPPERCASE → array of rows [label, nilai]
+$existing_spec = [];
 $resSpec = $conn->query("SELECT grup, label, nilai, sort_order 
                          FROM produk_spesifikasi 
                          WHERE produk_id = $produk_id
                          ORDER BY grup, sort_order, id");
 while ($r = $resSpec->fetch_assoc()) {
     $existing_spec[$r['grup']][] = ['label' => $r['label'], 'nilai' => $r['nilai']];
+}
+
+// --- Ambil karoseri yang sudah terhubung ---
+$selected_karoseri = [];
+$resKar = $conn->query("SELECT karoseri_id FROM produk_karoseri WHERE produk_id = $produk_id");
+while ($r = $resKar->fetch_assoc()) {
+    $selected_karoseri[] = $r['karoseri_id'];
 }
 
 // --- Simpan update ---
@@ -57,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama_produk = $conn->real_escape_string($_POST['nama_produk']);
     $deskripsi   = $conn->real_escape_string($_POST['deskripsi']);
 
-    // Upload gambar utama (opsional)
+    // Upload gambar utama
     $upload_dir = "../uploads/";
     if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
 
@@ -65,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($_FILES['gambar']['name'])) {
         $newName = time() . "_" . preg_replace('/\s+/', '_', basename($_FILES['gambar']['name']));
         if (move_uploaded_file($_FILES['gambar']['tmp_name'], $upload_dir . $newName)) {
-            // hapus lama
             if (!empty($produk['gambar']) && file_exists($upload_dir . $produk['gambar'])) {
                 @unlink($upload_dir . $produk['gambar']);
             }
@@ -73,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Upload karoseri (opsional, single – sesuai struktur tabel saat ini)
+    // Upload karoseri (opsional, single)
     $karoseri_set = "";
     if (!empty($_FILES['karoseri_gambar']['name'])) {
         $newKar = "karoseri_" . time() . "_" . preg_replace('/\s+/', '_', basename($_FILES['karoseri_gambar']['name']));
@@ -85,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Simpan produk (termasuk cache JSON spesifikasi di kolom produk.spesifikasi agar tidak NULL)
+    // Simpan produk
     $spec_from_form = $_POST['spec'] ?? [];
     $spec_json = $conn->real_escape_string(json_encode($spec_from_form, JSON_UNESCAPED_UNICODE));
 
@@ -100,14 +106,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $karoseri_set
         WHERE id = $produk_id
     ";
-
     if (!$conn->query($sqlUpdate)) {
         die("Gagal update produk: " . $conn->error);
     }
 
     // Replace spesifikasi detail
     $conn->query("DELETE FROM produk_spesifikasi WHERE produk_id = $produk_id");
-
     foreach ($spec_groups as $slug => $meta) {
         $labels = $_POST['spec'][$slug]['label'] ?? [];
         $values = $_POST['spec'][$slug]['value'] ?? [];
@@ -115,14 +119,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $label = trim($labels[$i] ?? '');
             $nilai = trim($values[$i] ?? '');
             if ($label === '' && $nilai === '') continue;
-
             $labelEsc = $conn->real_escape_string($label);
             $nilaiEsc = $conn->real_escape_string($nilai);
             $order    = $i + 1;
-            $grup     = $conn->real_escape_string($meta['label']); // simpan nama grup (UPPERCASE)
-
+            $grup     = $conn->real_escape_string($meta['label']);
             $conn->query("INSERT INTO produk_spesifikasi (produk_id, grup, label, nilai, sort_order)
                           VALUES ($produk_id, '$grup', '$labelEsc', '$nilaiEsc', $order)");
+        }
+    }
+
+    // Replace relasi karoseri
+    $conn->query("DELETE FROM produk_karoseri WHERE produk_id = $produk_id");
+    if (!empty($_POST['karoseri'])) {
+        foreach ($_POST['karoseri'] as $kid) {
+            $kid = (int)$kid;
+            $conn->query("INSERT INTO produk_karoseri (produk_id, karoseri_id) VALUES ($produk_id, $kid)");
         }
     }
 
@@ -130,19 +141,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-// Helper: ambil baris untuk group tertentu (prioritaskan existing, jika kosong pakai defaults)
+// Helper ambil baris untuk group tertentu
 function rows_for_group($groupLabel, $meta, $existing_spec) {
     if (!empty($existing_spec[$groupLabel])) {
-        return $existing_spec[$groupLabel]; // array of ['label'=>..,'nilai'=>..]
+        return $existing_spec[$groupLabel];
     }
-    // fallback defaults → jadi array kosong nilai
     $rows = [];
     foreach ($meta['defaults'] as $d) {
         $rows[] = ['label' => $d, 'nilai' => ''];
     }
     return $rows;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -150,19 +159,13 @@ function rows_for_group($groupLabel, $meta, $existing_spec) {
   <meta charset="UTF-8" />
   <title>Edit Produk</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    .table-spec td { vertical-align: middle; }
-    .group-title { font-weight: 700; font-size: 1.05rem; }
-  </style>
+  <style>.table-spec td { vertical-align: middle; } .group-title { font-weight: 700; font-size: 1.05rem; }</style>
 </head>
 <body class="bg-light">
 <div class="container my-5">
   <div class="card shadow">
-    <div class="card-header bg-primary text-white">
-      <h4 class="mb-0">Edit Produk</h4>
-    </div>
+    <div class="card-header bg-primary text-white"><h4 class="mb-0">Edit Produk</h4></div>
     <div class="card-body">
-
       <form method="post" enctype="multipart/form-data">
 
         <!-- Series -->
@@ -211,21 +214,39 @@ function rows_for_group($groupLabel, $meta, $existing_spec) {
             <img src="../uploads/<?= $produk['gambar'] ?>" width="120" class="mb-2"><br>
           <?php endif; ?>
           <input type="file" name="gambar" class="form-control" accept="image/*">
-          <small class="text-muted">Biarkan kosong jika tidak diganti</small>
         </div>
 
-        <!-- Karoseri (satu gambar sesuai struktur saat ini) -->
-        <div class="mb-4">
-          <label class="form-label">Karoseri (Gambar) – opsional</label><br>
+        <!-- Karoseri gambar -->
+        <div class="mb-3">
+          <label class="form-label">Karoseri (Gambar, opsional)</label><br>
           <?php if (!empty($produk['karoseri_gambar']) && file_exists("../uploads/".$produk['karoseri_gambar'])): ?>
             <img src="../uploads/<?= $produk['karoseri_gambar'] ?>" width="120" class="mb-2"><br>
           <?php endif; ?>
           <input type="file" name="karoseri_gambar" class="form-control" accept="image/*">
-          <small class="text-muted">Biarkan kosong jika tidak diganti</small>
+        </div>
+
+        <!-- Pilih Karoseri (multi checkbox) -->
+        <div class="mb-4">
+          <label class="form-label">Pilih Karoseri</label>
+          <div class="row">
+            <?php
+            $karoseri = $conn->query("SELECT * FROM karoseri ORDER BY nama");
+            while ($kr = $karoseri->fetch_assoc()):
+              $checked = in_array($kr['id'], $selected_karoseri) ? 'checked' : '';
+            ?>
+              <div class="col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="karoseri[]" value="<?= $kr['id'] ?>" id="karoseri<?= $kr['id'] ?>" <?= $checked ?>>
+                  <label class="form-check-label" for="karoseri<?= $kr['id'] ?>">
+                    <?= htmlspecialchars($kr['nama']); ?>
+                  </label>
+                </div>
+              </div>
+            <?php endwhile; ?>
+          </div>
         </div>
 
         <h5 class="mb-3">Spesifikasi</h5>
-
         <?php foreach ($spec_groups as $slug => $meta): 
             $groupLabel = $meta['label']; 
             $rows = rows_for_group($groupLabel, $meta, $existing_spec);
@@ -235,16 +256,9 @@ function rows_for_group($groupLabel, $meta, $existing_spec) {
               <div class="group-title"><?= htmlspecialchars($groupLabel); ?></div>
               <button type="button" class="btn btn-sm btn-outline-primary" onclick="addRow('<?= $slug ?>')">+ Tambah Baris</button>
             </div>
-
             <div class="table-responsive">
               <table class="table table-bordered align-middle table-spec" id="table-<?= $slug ?>">
-                <thead class="table-light">
-                  <tr>
-                    <th style="width:40%">Parameter</th>
-                    <th>Nilai</th>
-                    <th style="width:80px">Aksi</th>
-                  </tr>
-                </thead>
+                <thead class="table-light"><tr><th>Parameter</th><th>Nilai</th><th>Aksi</th></tr></thead>
                 <tbody>
                   <?php foreach ($rows as $r): ?>
                     <tr>
@@ -264,7 +278,6 @@ function rows_for_group($groupLabel, $meta, $existing_spec) {
           <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
         </div>
       </form>
-
     </div>
   </div>
 </div>

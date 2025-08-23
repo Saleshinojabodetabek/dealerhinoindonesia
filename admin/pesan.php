@@ -67,8 +67,8 @@ $result = $conn->query("SELECT * FROM contact_messages ORDER BY created_at DESC"
       <img src="../images/logo3.png" alt="Logo Hino">
     </div>
     <a href="index.php">Dashboard</a>
-    <a href="produk.php">Produk</a>
     <a href="artikel.php">Artikel</a>
+    <a href="produk.php">Produk</a>
     <a href="pesan.php" class="active">Pesan Customer</a>
     <a href="logout.php">Logout</a>
   </div>

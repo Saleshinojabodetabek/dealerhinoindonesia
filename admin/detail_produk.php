@@ -94,7 +94,6 @@ while($r=$resKar->fetch_assoc()) {
     <div class="row row-cols-2 row-cols-md-3 g-4 mt-2">
       <?php foreach ($selected_karoseri as $kr): ?>
         <div class="col text-center">
-          <!-- Gunakan span dengan class slug -->
           <span class="karoseri-icon <?= $kr['slug'] ?> d-block mx-auto mb-2"></span>
           <div class="fw-semibold"><?= htmlspecialchars($kr['nama']) ?></div>
         </div>

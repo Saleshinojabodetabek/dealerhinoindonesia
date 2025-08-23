@@ -1,32 +1,34 @@
 <?php
 session_start();
-if (!isset($_SESSION['admin'])) header("Location: login.php");
+if(!isset($_SESSION['admin'])) header("Location: login.php");
 include 'config.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $judul = $conn->real_escape_string($_POST['judul'] ?? '');
-    $kategori_id = (int)($_POST['kategori_id'] ?? 0);
-    $isi = $conn->real_escape_string($_POST['isi'] ?? '');
-
-    $gambar = null;
-    $upload_dir = "../uploads/artikel/";
-    if (!is_dir($upload_dir)) mkdir($upload_dir,0777,true);
-
-    if (!empty($_FILES['gambar']['name'])) {
-        $gambar = time() . "_" . preg_replace('/\s+/', '_', basename($_FILES['gambar']['name']));
-        move_uploaded_file($_FILES['gambar']['tmp_name'], $upload_dir.$gambar);
-    }
-
-    $sql = "INSERT INTO artikel (judul, kategori_id, isi, gambar) 
-            VALUES ('$judul', $kategori_id, '$isi', '$gambar')";
-    if ($conn->query($sql)) header("Location: artikel.php?success=1");
-    else $error = "Gagal menyimpan artikel: ".$conn->error;
-}
 
 // Ambil kategori
 $kategoriList = $conn->query("SELECT * FROM kategori_artikel ORDER BY nama");
-?>
 
+// Proses simpan
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $judul = $conn->real_escape_string($_POST['judul'] ?? '');
+    $kategori_id = (int)($_POST['kategori_id'] ?? 0);
+    $isi = $conn->real_escape_string($_POST['isi'] ?? '');
+    $tanggal = date('Y-m-d H:i:s');
+
+    $gambar = null;
+    if(!empty($_FILES['gambar']['name'])){
+        $upload_dir = "../uploads/artikel/";
+        if(!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
+        $gambar = time().'_'.preg_replace('/\s+/', '_', basename($_FILES['gambar']['name']));
+        move_uploaded_file($_FILES['gambar']['tmp_name'], $upload_dir.$gambar);
+    }
+
+    $sql = "INSERT INTO artikel (judul, kategori_id, isi, gambar, tanggal) 
+            VALUES ('$judul', $kategori_id, '$isi', ".($gambar ? "'$gambar'" : "NULL").", '$tanggal')";
+    if($conn->query($sql)){
+        header("Location: artikel.php?success=1");
+        exit();
+    } else $error = "Gagal menyimpan artikel: ".$conn->error;
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -57,7 +59,7 @@ body { font-family:"Segoe UI",sans-serif; background:#f8f9fa; }
 
 <div class="content">
 <div class="card shadow">
-<div class="card-header"><h4>Tambah Artikel Baru</h4></div>
+<div class="card-header"><h4>Tambah Artikel</h4></div>
 <div class="card-body">
 <?php if(!empty($error)) echo "<div class='alert alert-danger'>$error</div>"; ?>
 <form method="post" enctype="multipart/form-data">
@@ -69,7 +71,7 @@ body { font-family:"Segoe UI",sans-serif; background:#f8f9fa; }
 <label class="form-label">Kategori</label>
 <select name="kategori_id" class="form-select" required>
 <option value="">-- Pilih Kategori --</option>
-<?php while($k = $kategoriList->fetch_assoc()): ?>
+<?php while($k=$kategoriList->fetch_assoc()): ?>
 <option value="<?= $k['id'] ?>"><?= htmlspecialchars($k['nama']) ?></option>
 <?php endwhile; ?>
 </select>

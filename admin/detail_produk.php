@@ -7,29 +7,47 @@ if (!isset($_SESSION['admin'])) {
 
 include 'config.php';
 
+// --- Definisi grup spesifikasi sama seperti edit_produk.php ---
+$spec_groups = [
+  'performa'     => ['label' => 'PERFORMA',     'defaults' => ['Kecepatan maksimum (km/h)', 'Daya tanjak']],
+  'model_mesin'  => ['label' => 'MODEL MESIN',  'defaults' => ['Model', 'Tipe', 'Tenaga maksimum', 'Torsi maksimum', 'Kapasitas']],
+  'kopling'      => ['label' => 'KOPLING',      'defaults' => ['Tipe']],
+  'transmisi'    => ['label' => 'TRANSMISI',    'defaults' => ['Tipe', 'Rasio']],
+  'kemudi'       => ['label' => 'KEMUDI',       'defaults' => ['Tipe']],
+  'sumbu'        => ['label' => 'SUMBU',        'defaults' => ['Depan', 'Belakang']],
+  'rem'          => ['label' => 'REM',          'defaults' => ['Utama', 'Parkir', 'Tambahan']],
+  'roda_ban'     => ['label' => 'RODA & BAN',   'defaults' => ['Ukuran Ban']],
+  'sistim_listrik_accu' => ['label' => 'SISTIM LISTRIK ACCU', 'defaults' => ['Accu (V-Ah)']],
+  'tangki_solar' => ['label' => 'TANGKI SOLAR', 'defaults' => ['Kapasitas']],
+  'dimensi'      => ['label' => 'DIMENSI',      'defaults' => ['Panjang', 'Lebar', 'Tinggi', 'Jarak Sumbu Roda']],
+  'suspensi'     => ['label' => 'SUSPENSI',     'defaults' => ['Depan', 'Belakang']],
+  'berat_chasis' => ['label' => 'BERAT CHASIS', 'defaults' => ['Depan', 'Belakang', 'Total']],
+];
+
 // --- Ambil ID produk ---
-if (!isset($_GET['id'])) {
-    die("ID produk tidak ditemukan.");
-}
+if (!isset($_GET['id'])) die("ID produk tidak ditemukan.");
 $produk_id = (int)$_GET['id'];
 
-// --- Ambil data produk ---
+// --- Ambil produk ---
 $produk = $conn->query("SELECT p.*, s.nama_series 
                         FROM produk p 
                         LEFT JOIN series s ON p.series_id = s.id 
                         WHERE p.id = $produk_id")->fetch_assoc();
-if (!$produk) {
-    die("Produk tidak ditemukan.");
-}
+if (!$produk) die("Produk tidak ditemukan.");
 
-// --- Ambil semua spesifikasi ---
-$specs = [];
+// --- Ambil spesifikasi yang sudah tersimpan ---
+$existing_spec = [];
 $resSpec = $conn->query("SELECT grup, label, nilai, sort_order 
                          FROM produk_spesifikasi 
                          WHERE produk_id = $produk_id
                          ORDER BY grup, sort_order, id");
 while ($r = $resSpec->fetch_assoc()) {
-    $specs[$r['grup']][] = ['label' => $r['label'], 'nilai' => $r['nilai']];
+    $existing_spec[$r['grup']][$r['label']] = $r['nilai'];
+}
+
+// --- Helper untuk urutkan baris sesuai spec_groups ---
+function value_for_label($grupLabel, $label, $existing_spec) {
+    return $existing_spec[$grupLabel][$label] ?? '';
 }
 ?>
 <!DOCTYPE html>
@@ -84,32 +102,30 @@ while ($r = $resSpec->fetch_assoc()) {
         <p><?= nl2br(htmlspecialchars($produk['deskripsi'])); ?></p>
       <?php endif; ?>
 
-      <?php if (!empty($specs)): ?>
-        <h5 class="mt-3">Spesifikasi Lengkap:</h5>
-        <?php foreach ($specs as $grup => $rows): ?>
-          <div class="group-title"><?= htmlspecialchars($grup); ?></div>
-          <div class="table-responsive mb-3">
-            <table class="table table-bordered spec-table">
-              <thead class="table-light">
+      <h5 class="mt-3">Spesifikasi Lengkap:</h5>
+      <?php foreach ($spec_groups as $slug => $meta): 
+          $groupLabel = $meta['label'];
+      ?>
+        <div class="group-title"><?= htmlspecialchars($groupLabel); ?></div>
+        <div class="table-responsive mb-3">
+          <table class="table table-bordered spec-table">
+            <thead class="table-light">
+              <tr>
+                <th style="width:40%">Parameter</th>
+                <th>Nilai</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($meta['defaults'] as $param): ?>
                 <tr>
-                  <th style="width:40%">Parameter</th>
-                  <th>Nilai</th>
+                  <td><?= htmlspecialchars($param); ?></td>
+                  <td><?= htmlspecialchars(value_for_label($groupLabel, $param, $existing_spec)); ?></td>
                 </tr>
-              </thead>
-              <tbody>
-                <?php foreach ($rows as $r): ?>
-                  <tr>
-                    <td><?= htmlspecialchars($r['label']); ?></td>
-                    <td><?= htmlspecialchars($r['nilai']); ?></td>
-                  </tr>
-                <?php endforeach; ?>
-              </tbody>
-            </table>
-          </div>
-        <?php endforeach; ?>
-      <?php else: ?>
-        <p class="text-muted">Spesifikasi belum tersedia.</p>
-      <?php endif; ?>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
+      <?php endforeach; ?>
 
       <a href="produk.php" class="btn btn-primary mt-3">Kembali ke Daftar Produk</a>
     </div>

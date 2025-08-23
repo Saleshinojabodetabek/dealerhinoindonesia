@@ -249,7 +249,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Spesifikasi -->
         <h5 class="mb-3">Spesifikasi</h5>
-        <?php foreach ($spec_groups as $slug => $meta): $slug_lower = strtolower($slug); ?>
+        <?php foreach ($spec_groups as $slug => $meta): $slug_lower = $slug;?>
           <div class="mb-4">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <div class="group-title"><?= htmlspecialchars($meta['label']); ?></div>

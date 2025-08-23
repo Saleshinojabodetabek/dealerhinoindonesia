@@ -42,8 +42,10 @@ $resSpec = $conn->query("SELECT grup,label,nilai
                          WHERE produk_id=$id 
                          ORDER BY grup,sort_order,id");
 while ($r = $resSpec->fetch_assoc()) {
-    $existing_spec[$r['grup']][] = $r;
+    $groupKey = strtolower(str_replace(' ', '_', $r['grup']));
+    $existing_spec[$groupKey][] = $r;
 }
+
 
 // --- Ambil karoseri (urut sesuai input) ---
 $selected_karoseri = [];

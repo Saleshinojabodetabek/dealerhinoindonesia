@@ -133,11 +133,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>Tambah Produk</title>
-  <link rel="stylesheet" href="admin/css/karoseri.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     .table-spec td { vertical-align: middle; }
     .group-title { font-weight: 700; font-size: 1.05rem; }
+    .table-spec th, 
+    .table-spec td {
+      vertical-align: middle;
+      border: 2px solid #000; /* garis hitam tebal */
+    }
+
+    .table-spec {
+      border-collapse: collapse;
+    }
+
+    .table-spec th {
+      background-color: #f8f9fa; /* biar sedikit beda warnanya */
+      font-weight: 600;
+    }
   </style>
 </head>
 <body class="bg-light">

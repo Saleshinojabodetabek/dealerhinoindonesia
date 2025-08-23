@@ -62,10 +62,15 @@ while($r=$resKar->fetch_assoc()) {
 <style>
   .table-spec td { vertical-align: middle; }
   .group-title { font-weight: 700; font-size: 1.05rem; }
+  .karoseri-icon { width: 80px; height: 80px; }
 </style>
 </head>
 
 <body class="bg-light">
+
+<!-- Sprite SVG wajib di-body supaya <use> bisa mengenali -->
+<?php include 'admin/karoseri/karoseri-sprite.svg'; ?>
+
 <div class="container my-5">
   <div class="card shadow">
     <div class="card-header bg-info text-white">
@@ -87,26 +92,22 @@ while($r=$resKar->fetch_assoc()) {
         </div>
       <?php endif; ?>
 
-<!-- Karoseri -->
-<!-- Karoseri -->
-<?php if (!empty($selected_karoseri)): ?>
-  <div class="mb-3">
-    <strong>Karoseri Terpilih:</strong>
-    <div class="row row-cols-2 row-cols-md-3 g-4 mt-2">
-      <?php foreach ($selected_karoseri as $kr): ?>
-        <div class="col text-center">
-          <svg class="karoseri-icon d-block mx-auto mb-2">
-            <use xlink:href="#<?= htmlspecialchars($kr['slug']) ?>"></use>
-          </svg>
-          <div class="fw-semibold"><?= htmlspecialchars($kr['nama']) ?></div>
+      <!-- Karoseri -->
+      <?php if (!empty($selected_karoseri)): ?>
+        <div class="mb-3">
+          <strong>Karoseri Terpilih:</strong>
+          <div class="row row-cols-2 row-cols-md-3 g-4 mt-2">
+            <?php foreach ($selected_karoseri as $kr): ?>
+              <div class="col text-center">
+                <svg class="karoseri-icon d-block mx-auto mb-2">
+                  <use xlink:href="#<?= htmlspecialchars($kr['slug']) ?>"></use>
+                </svg>
+                <div class="fw-semibold"><?= htmlspecialchars($kr['nama']) ?></div>
+              </div>
+            <?php endforeach; ?>
+          </div>
         </div>
-      <?php endforeach; ?>
-    </div>
-  </div>
-<?php endif; ?>
-
-
-
+      <?php endif; ?>
 
       <!-- Spesifikasi -->
       <h5 class="mt-4">Spesifikasi</h5>
@@ -136,8 +137,6 @@ while($r=$resKar->fetch_assoc()) {
     </div>
   </div>
 </div>
-
-<?php include 'admin/karoseri/karoseri-sprite.svg'; ?>
 
 </body>
 </html>

@@ -29,23 +29,29 @@ if (!$produk) die("Produk tidak ditemukan.");
 
 // Ambil spesifikasi dari DB
 $existing_spec = [];
-$resSpec = $conn->query("SELECT grup,label,nilai FROM produk_spesifikasi WHERE produk_id=$produk_id ORDER BY grup,sort_order,id");
+$resSpec = $conn->query("SELECT grup,label,nilai FROM produk_spesifikasi WHERE produk_id=$produk_id ORDER BY sort_order,id");
 while($r = $resSpec->fetch_assoc()) {
-    $existing_spec[$r['grup']][] = ['label'=>$r['label'], 'nilai'=>$r['nilai']];
+    if(trim($r['nilai'])!=='') $existing_spec[$r['grup']][] = ['label'=>$r['label'], 'nilai'=>$r['nilai']];
 }
 
-// --- Helper: urutkan sesuai $spec_groups, hapus baris kosong ---
+// Helper: gabungkan urutan default + parameter tambahan dari DB
 function get_spec_rows($groupLabel, $order, $existing_spec) {
     $rows = [];
-    if (!empty($existing_spec[$groupLabel])) {
-        // Buat map label → nilai
+    if(!empty($existing_spec[$groupLabel])){
         $map = [];
         foreach($existing_spec[$groupLabel] as $r){
-            if(trim($r['nilai']) !== '') $map[$r['label']] = $r['nilai'];
+            $map[$r['label']] = $r['nilai'];
         }
-        // Tampilkan sesuai urutan $order
+        // Tampilkan urutan default dulu
         foreach($order as $label){
-            if(isset($map[$label])) $rows[] = ['label'=>$label,'nilai'=>$map[$label]];
+            if(isset($map[$label])){
+                $rows[] = ['label'=>$label,'nilai'=>$map[$label]];
+                unset($map[$label]);
+            }
+        }
+        // Tampilkan sisa label tambahan dari DB
+        foreach($map as $label=>$nilai){
+            $rows[] = ['label'=>$label,'nilai'=>$nilai];
         }
     }
     return $rows;
@@ -104,7 +110,7 @@ body{font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;background:#f8f9fa;
 <?php foreach($spec_groups as $slug=>$meta):
     $groupLabel = $meta['label'];
     $rows = get_spec_rows($groupLabel,$meta['order'],$existing_spec);
-    if(empty($rows)) continue; // skip jika kosong
+    if(empty($rows)) continue;
 ?>
 <div class="group-title"><?= htmlspecialchars($groupLabel); ?></div>
 <div class="table-responsive mb-3">

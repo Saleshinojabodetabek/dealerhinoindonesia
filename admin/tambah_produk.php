@@ -15,7 +15,7 @@ if (!isset($_SESSION['admin'])) {
 }
 
 // Koneksi database (karena file ini ada di folder admin, maka naik 1 level)
-include '../koneksi.php';
+include 'config.php';
 
 // Proses simpan produk
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

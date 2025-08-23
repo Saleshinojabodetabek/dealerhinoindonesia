@@ -24,8 +24,9 @@ $produk = $result->fetch_assoc();
 
 // Proses update data
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nama_produk = $_POST['nama_produk'];
-    $series_id   = $_POST['series_id'];
+    $nama_produk  = $_POST['nama_produk'];
+    $series_id    = $_POST['series_id'];
+    $spesifikasi  = $_POST['spesifikasi'];
 
     // cek jika upload gambar baru
     if (!empty($_FILES['gambar']['name'])) {
@@ -38,12 +39,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (!empty($produk['gambar']) && file_exists("../uploads/" . $produk['gambar'])) {
                 unlink("../uploads/" . $produk['gambar']);
             }
-            $sql_update = "UPDATE produk SET nama_produk='$nama_produk', series_id='$series_id', gambar='$gambar' WHERE id=$id";
+            $sql_update = "UPDATE produk 
+                           SET nama_produk='$nama_produk', 
+                               series_id='$series_id', 
+                               spesifikasi='$spesifikasi', 
+                               gambar='$gambar' 
+                           WHERE id=$id";
         } else {
             echo "<div class='alert alert-danger'>Upload gambar gagal.</div>";
         }
     } else {
-        $sql_update = "UPDATE produk SET nama_produk='$nama_produk', series_id='$series_id' WHERE id=$id";
+        $sql_update = "UPDATE produk 
+                       SET nama_produk='$nama_produk', 
+                           series_id='$series_id', 
+                           spesifikasi='$spesifikasi' 
+                       WHERE id=$id";
     }
 
     if (isset($sql_update) && $conn->query($sql_update)) {
@@ -69,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <label class="form-label">Nama Produk</label>
       <input type="text" name="nama_produk" class="form-control" value="<?= htmlspecialchars($produk['nama_produk']) ?>" required>
     </div>
+
     <div class="mb-3">
       <label class="form-label">Series</label>
       <select name="series_id" class="form-select" required>
@@ -83,6 +94,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ?>
       </select>
     </div>
+
+    <div class="mb-3">
+      <label class="form-label">Spesifikasi Produk</label>
+      <textarea name="spesifikasi" class="form-control" rows="6" required><?= htmlspecialchars($produk['spesifikasi']) ?></textarea>
+    </div>
+
     <div class="mb-3">
       <label class="form-label">Gambar Produk</label><br>
       <?php if (!empty($produk['gambar']) && file_exists("../uploads/" . $produk['gambar'])): ?>
@@ -91,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <input type="file" name="gambar" class="form-control">
       <small class="text-muted">Kosongkan jika tidak ingin mengganti gambar</small>
     </div>
+
     <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
     <a href="kelola_produk.php" class="btn btn-secondary">Batal</a>
   </form>

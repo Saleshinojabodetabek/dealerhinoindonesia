@@ -5,7 +5,7 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 
-include '../config.php';
+include 'config.php';
 
 // Ambil Series dari database
 $seriesResult = $conn->query("SELECT id, nama FROM series");

@@ -4,7 +4,7 @@ if (!isset($_SESSION['admin'])) {
     header("Location: login.php");
     exit();
 }
-include '../config.php';
+include 'config.php';
 
 // Ambil daftar series dari DB
 $series_result = $conn->query("SELECT * FROM series ORDER BY nama_series");

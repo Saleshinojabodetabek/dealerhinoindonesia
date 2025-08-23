@@ -10,7 +10,7 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 
-include '../config.php';
+include 'config.php';
 
 /** Daftar grup spesifikasi & default baris parameternya (boleh Anda ubah/tambah) */
 $spec_groups = [

@@ -157,36 +157,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <input type="file" name="gambar" class="form-control" accept="image/*" required>
         </div>
 
-        <!-- Pilih Karoseri -->
-        <div class="mb-4">
-          <label class="form-label">Pilih Karoseri</label>
-          <?php
-          $seriesList = $conn->query("SELECT DISTINCT series FROM karoseri ORDER BY series ASC");
-          $selected_karoseri = $selected_karoseri ?? [];
+<!-- Pilih Karoseri -->
+<div class="mb-4">
+  <label class="form-label">Pilih Karoseri</label>
+  <?php
+  $seriesList = $conn->query("SELECT DISTINCT series FROM karoseri ORDER BY series ASC");
+  $selected_karoseri = $selected_karoseri ?? [];
 
-          while ($s = $seriesList->fetch_assoc()):
-            $seriesName = $s['series'];
-          ?>
-            <h6 class="mt-3"><?= htmlspecialchars($seriesName); ?></h6>
-            <div class="row">
-              <?php
-              $karoseri = $conn->query("SELECT * FROM karoseri WHERE series='$seriesName' ORDER BY nama ASC");
-              while ($kr = $karoseri->fetch_assoc()):
-                $checked = in_array($kr['id'], $selected_karoseri) ? 'checked' : '';
-              ?>
-                <div class="col-md-4">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="karoseri[]" 
-                           value="<?= $kr['id']; ?>" id="karoseri<?= $kr['id']; ?>" <?= $checked ?>>
-                    <label class="form-check-label" for="karoseri<?= $kr['id']; ?>">
-                      <?= htmlspecialchars($kr['nama']); ?>
-                    </label>
-                  </div>
-                </div>
-              <?php endwhile; ?>
-            </div>
-          <?php endwhile; ?>
+  while ($s = $seriesList->fetch_assoc()):
+    $seriesName = $s['series'];
+  ?>
+    <h6 class="mt-3"><?= htmlspecialchars($seriesName); ?></h6>
+    <div class="row">
+      <?php
+      $karoseri = $conn->query("SELECT * FROM karoseri WHERE series='$seriesName' ORDER BY nama ASC");
+      while ($kr = $karoseri->fetch_assoc()):
+        $checked = in_array($kr['id'], $selected_karoseri) ? 'checked' : '';
+      ?>
+        <div class="col-md-4 mb-2">
+          <div class="form-check d-flex align-items-center">
+            <input 
+              class="form-check-input me-2" 
+              type="checkbox" 
+              name="karoseri[]" 
+              value="<?= $kr['id']; ?>" 
+              id="karoseri<?= $kr['id']; ?>" 
+              <?= $checked ?>>
+            <label class="form-check-label d-flex align-items-center" for="karoseri<?= $kr['id']; ?>">
+              <span class="karoseri-icon <?= $kr['slug']; ?>"></span>
+              <span class="ms-2"><?= htmlspecialchars($kr['nama']); ?></span>
+            </label>
+          </div>
         </div>
+      <?php endwhile; ?>
+    </div>
+  <?php endwhile; ?>
+</div>
+
 
         <h5 class="mb-3">Spesifikasi</h5>
         <?php foreach ($spec_groups as $slug => $meta): ?>

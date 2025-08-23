@@ -4,123 +4,50 @@
   height: 80px;
   background-image: url("../karoseri/karoseri.png");
   background-repeat: no-repeat;
-  background-size: cover
+  background-size: auto; /* atau total lebar/tinggi sprite */
   display: inline-block;
-  background-position: 0 0;
 }
 
 /* === DUTRO === */
-.box-dutro {
-  background-position: 0 0;
-}
-.bak-terbuka-dutro {
-  background-position: -80px 0;
-}
-.tangki-dutro {
-  background-position: -160px 0;
-}
-.dump-dutro {
-  background-position: -240px 0;
-}
-.los-bak-dutro {
-  background-position: -320px 0;
-}
-.box-berpendingin-dutro {
-  background-position: -400px 0;
-}
-.truk-logging-dutro {
-  background-position: -480px 0;
-}
-.truk-crane-dutro {
-  background-position: -560px 0;
-}
-.damkar-dutro {
-  background-position: -640px 0;
-}
-.truk-sampah-dutro {
-  background-position: -720px 0;
-}
-.truk-molen-dutro {
-  background-position: -800px 0;
-}
-.mikro-bus {
-  background-position: -880px 0;
-}
-.ambulans {
-  background-position: -960px 0;
-}
-.truk-arm-roll {
-  background-position: -1040px 0;
-}
+.box-dutro { background-position: 0 0; }
+.bak-terbuka-dutro { background-position: -80px 0; }
+.tangki-dutro { background-position: -160px 0; }
+.dump-dutro { background-position: -240px 0; }
+.los-bak-dutro { background-position: -320px 0; }
+.box-berpendingin-dutro { background-position: -400px 0; }
+.truk-logging-dutro { background-position: -480px 0; }
+.truk-crane-dutro { background-position: -560px 0; }
+.damkar-dutro { background-position: -640px 0; }
+.truk-sampah-dutro { background-position: -720px 0; }
+.truk-molen-dutro { background-position: -800px 0; }
+.mikro-bus { background-position: -880px 0; }
+.ambulans { background-position: -960px 0; }
+.truk-arm-roll { background-position: -1040px 0; }
 
 /* === RANGER === */
-.box-ranger {
-  background-position: 0 -80px;
-}
-.bak-terbuka-ranger {
-  background-position: -80px -80px;
-}
-.tangki-ranger {
-  background-position: -160px -80px;
-}
-.dump-ranger {
-  background-position: -240px -80px;
-}
-.los-bak-ranger {
-  background-position: -320px -80px;
-}
-.box-berpendingin-ranger {
-  background-position: -400px -80px;
-}
-.truk-logging-ranger {
-  background-position: -480px -80px;
-}
-.truk-crane-ranger {
-  background-position: -560px -80px;
-}
-.damkar-ranger {
-  background-position: -640px -80px;
-}
-.truk-carrier-ranger {
-  background-position: -720px -80px;
-}
-.truk-molen-ranger {
-  background-position: -800px -80px;
-}
-.truk-sampah-ranger {
-  background-position: -880px -80px;
-}
-.truk-arm-roll-ranger {
-  background-position: -960px -80px;
-}
+.box-ranger { background-position: 0 -80px; }
+.bak-terbuka-ranger { background-position: -80px -80px; }
+.tangki-ranger { background-position: -160px -80px; }
+.dump-ranger { background-position: -240px -80px; }
+.los-bak-ranger { background-position: -320px -80px; }
+.box-berpendingin-ranger { background-position: -400px -80px; }
+.truk-logging-ranger { background-position: -480px -80px; }
+.truk-crane-ranger { background-position: -560px -80px; }
+.damkar-ranger { background-position: -640px -80px; }
+.truk-carrier-ranger { background-position: -720px -80px; }
+.truk-molen-ranger { background-position: -800px -80px; }
+.truk-sampah-ranger { background-position: -880px -80px; }
+.truk-arm-roll-ranger { background-position: -960px -80px; }
 
 /* === PROFIA === */
-.dump-coal-body {
-  background-position: 0 -160px;
-}
-.dump-scow-end {
-  background-position: -80px -160px;
-}
-.dump-trailer {
-  background-position: -160px -160px;
-}
+.dump-coal-body { background-position: 0 -160px; }
+.dump-scow-end { background-position: -80px -160px; }
+.dump-trailer { background-position: -160px -160px; }
 
 /* === TRACTOR HEAD === */
-.tangki-tractor-head {
-  background-position: 0 -240px;
-}
-.tangki-gas-tractor-head {
-  background-position: -80px -240px;
-}
-.low-bed {
-  background-position: -160px -240px;
-}
-.carrier-tractor-head {
-  background-position: -240px -240px;
-}
-.container-20ft {
-  background-position: -320px -240px;
-}
-.container-40ft {
-  background-position: -400px -240px;
-}
+.tangki-tractor-head { background-position: 0 -240px; }
+.tangki-gas-tractor-head { background-position: -80px -240px; }
+.low-bed { background-position: -160px -240px; }
+.carrier-tractor-head { background-position: -240px -240px; }
+.container-20ft { background-position: -320px -240px; }
+.container-40ft { background-position: -400px -240px; }

@@ -49,16 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($_FILES['gambar']['tmp_name'], $upload_dir . $gambar);
     }
 
-    // Upload gambar karoseri
-    $karoseri_gambar = null;
-    if (!empty($_FILES['karoseri_gambar']['name'])) {
-        $karoseri_gambar = "karoseri_" . time() . "_" . preg_replace('/\s+/', '_', basename($_FILES['karoseri_gambar']['name']));
-        move_uploaded_file($_FILES['karoseri_gambar']['tmp_name'], $upload_dir . $karoseri_gambar);
-    }
-
-    // Insert produk
-    $sql = "INSERT INTO produk (series_id, varian, nama_produk, deskripsi, gambar, karoseri_gambar)
-            VALUES ('$series_id', '$varian', '$nama_produk', '$deskripsi', '$gambar', '$karoseri_gambar')";
+    // Insert produk (tanpa karoseri_gambar)
+    $sql = "INSERT INTO produk (series_id, varian, nama_produk, deskripsi, gambar)
+            VALUES ('$series_id', '$varian', '$nama_produk', '$deskripsi', '$gambar')";
     if (!$conn->query($sql)) {
         $error = "Gagal menyimpan produk: " . $conn->error;
     } else {
@@ -162,56 +155,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <input type="file" name="gambar" class="form-control" accept="image/*" required>
         </div>
 
-<!-- Pilih Karoseri -->
-<div class="mb-4">
-  <label class="form-label">Pilih Karoseri</label>
-
-  <?php
-  // Ambil semua karoseri terurut berdasarkan series dan nama
-  $seriesList = $conn->query("SELECT DISTINCT series FROM karoseri ORDER BY series ASC");
-  $selected_karoseri = $selected_karoseri ?? []; // pastikan variabel ada (misal saat edit produk)
-
-  while ($s = $seriesList->fetch_assoc()):
-    $seriesName = $s['series'];
-  ?>
-    <!-- Judul Series -->
-    <h6 class="mt-3"><?= htmlspecialchars($seriesName); ?></h6>
-    <div class="row">
-      <?php
-      $karoseri = $conn->query("SELECT * FROM karoseri WHERE series='$seriesName' ORDER BY nama ASC");
-      while ($kr = $karoseri->fetch_assoc()):
-        $checked = in_array($kr['id'], $selected_karoseri) ? 'checked' : '';
-      ?>
-        <div class="col-md-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="karoseri[]" 
-                   value="<?= $kr['id']; ?>" id="karoseri<?= $kr['id']; ?>" <?= $checked ?>>
-            <label class="form-check-label" for="karoseri<?= $kr['id']; ?>">
-              <?= htmlspecialchars($kr['nama']); ?>
-            </label>
-          </div>
-        </div>
-      <?php endwhile; ?>
-    </div>
-  <?php endwhile; ?>
-</div>
-
-
-        <!-- Karoseri (gambar) -->
+        <!-- Pilih Karoseri -->
         <div class="mb-4">
-          <label class="form-label">Karoseri (Gambar)</label>
-          <input type="file" name="karoseri_gambar" class="form-control" accept="image/*">
+          <label class="form-label">Pilih Karoseri</label>
+          <?php
+          $seriesList = $conn->query("SELECT DISTINCT series FROM karoseri ORDER BY series ASC");
+          $selected_karoseri = $selected_karoseri ?? [];
+
+          while ($s = $seriesList->fetch_assoc()):
+            $seriesName = $s['series'];
+          ?>
+            <h6 class="mt-3"><?= htmlspecialchars($seriesName); ?></h6>
+            <div class="row">
+              <?php
+              $karoseri = $conn->query("SELECT * FROM karoseri WHERE series='$seriesName' ORDER BY nama ASC");
+              while ($kr = $karoseri->fetch_assoc()):
+                $checked = in_array($kr['id'], $selected_karoseri) ? 'checked' : '';
+              ?>
+                <div class="col-md-4">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="karoseri[]" 
+                           value="<?= $kr['id']; ?>" id="karoseri<?= $kr['id']; ?>" <?= $checked ?>>
+                    <label class="form-check-label" for="karoseri<?= $kr['id']; ?>">
+                      <?= htmlspecialchars($kr['nama']); ?>
+                    </label>
+                  </div>
+                </div>
+              <?php endwhile; ?>
+            </div>
+          <?php endwhile; ?>
         </div>
 
         <h5 class="mb-3">Spesifikasi</h5>
-
         <?php foreach ($spec_groups as $slug => $meta): ?>
           <div class="mb-4">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <div class="group-title"><?= htmlspecialchars($meta['label']); ?></div>
               <button type="button" class="btn btn-sm btn-outline-primary" onclick="addRow('<?= $slug ?>')">+ Tambah Baris</button>
             </div>
-
             <div class="table-responsive">
               <table class="table table-bordered align-middle table-spec" id="table-<?= $slug ?>">
                 <thead class="table-light">

@@ -114,7 +114,7 @@ include 'config.php'; // <- pastikan ini benar
                 $namaSeries  = $row['nama_series'] ?? '-';
                 $namaProduk  = htmlspecialchars($row['nama_produk'] ?? '-', ENT_QUOTES, 'UTF-8');
                 $gambarFile  = $row['gambar'] ?? '';
-                $imgPath     = "../uploads/" . $gambarFile;
+                $imgPath     = "../uploads/produk" . $gambarFile;
 
                 echo "<tr>";
                 echo "<td>{$id}</td>";

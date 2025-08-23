@@ -95,7 +95,7 @@ while($r=$resKar->fetch_assoc()) {
             <?php foreach($selected_karoseri as $kr): ?>
               <div class="col text-center">
                 <div class="karoseri-img mb-2">
-                  <img src="admin/img/karoseri/<?=$kr['slug']?>.png"
+                  <img src="admin/karoseri/karoseri/<?=$kr['slug']?>.png"
                       alt="<?=htmlspecialchars($kr['nama'])?>"
                       class="img-fluid" style="max-height:120px;">
                 </div>

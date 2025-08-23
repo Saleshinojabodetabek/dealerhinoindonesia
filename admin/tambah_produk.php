@@ -10,7 +10,6 @@ if (!isset($_SESSION['admin'])) {
 
 include 'config.php';
 
-// Daftar grup spesifikasi dan default parameternya
 $spec_groups = [
     'performa' => ['label'=>'PERFORMA','defaults'=>['Kecepatan maksimum (km/h)','Daya tanjak']],
     'model_mesin' => ['label'=>'MODEL MESIN','defaults'=>['Model','Tipe','Tenaga maksimum','Torsi maksimum','Kapasitas']],
@@ -27,7 +26,7 @@ $spec_groups = [
     'Berat_Chasis' => ['label'=>'BERAT CHASIS','defaults'=>['Depan & Belakang']],
 ];
 
-// Proses simpan produk
+// Proses simpan produk sama seperti sebelumnya
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $series_id   = $conn->real_escape_string($_POST['series_id'] ?? '');
     $varian      = $conn->real_escape_string($_POST['varian'] ?? '');
@@ -51,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $produk_id = $conn->insert_id;
 
-        // Simpan spesifikasi
         foreach ($spec_groups as $slug => $meta) {
             $labels = $_POST['spec'][$slug]['label'] ?? [];
             $values = $_POST['spec'][$slug]['value'] ?? [];
@@ -72,7 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Simpan relasi karoseri
         if (!empty($_POST['karoseri']) && is_array($_POST['karoseri'])) {
             foreach ($_POST['karoseri'] as $kid) {
                 $kid = (int)$kid;
@@ -86,53 +83,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <title>Tambah Produk</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-      .table-spec {
-        border-collapse: collapse;
-      }
-      .table-spec th, 
-      .table-spec td {
-        vertical-align: middle;
-        border: 2px solid #000; /* Garis lebih tebal */
-      }
-      .group-title { 
-        font-weight: 700; 
-        font-size: 1.05rem; 
-      }
-      /* Untuk kotak input di dalam tabel */
-      .table-spec input.form-control {
-        border: 2px solid #000; /* garis tebal hitam */
-        height: 38px; /* sedikit lebih tinggi biar nyaman */
-        font-weight: 500; /* teks agak tebal */
-      }
-
-      /* Kalau mau saat fokus lebih jelas */
-      .table-spec input.form-control:focus {
-        border-color: #198754; /* hijau bootstrap ketika klik */
-        box-shadow: 0 0 3px rgba(25,135,84,0.5); 
-      }
-    </style>
+  <style>
+    body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; }
+    .sidebar { height: 100vh; background: #0d6efd; color: white; padding-top: 20px; position: fixed; width: 220px; text-align: center; }
+    .sidebar img { max-width: 180px; margin-bottom: 20px; }
+    .sidebar a { display: block; padding: 12px 20px; color: white; text-decoration: none; margin: 4px 0; transition: background 0.2s; text-align: left; }
+    .sidebar a:hover, .sidebar a.active { background: #0b5ed7; border-radius: 6px; }
+    .content { margin-left: 220px; padding: 20px; }
+    .dashboard-header { background: linear-gradient(90deg, #0d6efd, #0b5ed7); color: white; padding: 20px; border-radius: 12px; margin-bottom: 25px; }
+    .btn-primary { background: #0d6efd; border: none; }
+    .btn-primary:hover { background: #0b5ed7; }
+    .table-spec { border-collapse: collapse; }
+    .table-spec th, .table-spec td { vertical-align: middle; border: 2px solid #000; }
+    .group-title { font-weight: 700; font-size: 1.05rem; }
+    .table-spec input.form-control { border: 2px solid #000; height: 38px; font-weight: 500; }
+    .table-spec input.form-control:focus { border-color: #198754; box-shadow: 0 0 3px rgba(25,135,84,0.5); }
+  </style>
 </head>
-<body class="bg-light">
-<div class="container my-5">
+<body>
+<div class="sidebar">
+  <div class="text-center mb-4">
+    <img src="../images/logo3.png" alt="Logo Hino">
+  </div>
+  <a href="index.php">Dashboard</a>
+  <a href="artikel.php">Artikel</a>
+  <a href="produk.php" class="active">Produk</a>
+  <a href="pesan.php">Pesan Customer</a>
+  <a href="logout.php">Logout</a>
+</div>
+
+<div class="content">
+  <div class="dashboard-header">
+    <h2>📦 Tambah Produk Baru</h2>
+    <p>Isi semua data produk Hino melalui form ini.</p>
+  </div>
+
   <div class="card shadow">
-    <div class="card-header bg-success text-white">
-      <h4 class="mb-0">Tambah Produk Baru</h4>
-    </div>
     <div class="card-body">
       <?php if (!empty($error)): ?>
         <div class="alert alert-danger"><?= $error ?></div>
       <?php endif; ?>
 
       <form method="post" enctype="multipart/form-data">
-
         <!-- Series -->
         <div class="mb-3">
           <label class="form-label">Series</label>
@@ -146,7 +144,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ?>
           </select>
         </div>
-
         <!-- Varian -->
         <div class="mb-3">
           <label class="form-label">Varian</label>
@@ -158,7 +155,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="Mixer">Mixer</option>
           </select>
         </div>
-
         <!-- Nama & Deskripsi -->
         <div class="mb-3">
           <label class="form-label">Nama Produk</label>
@@ -168,13 +164,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label class="form-label">Deskripsi</label>
           <textarea name="deskripsi" class="form-control" rows="3"></textarea>
         </div>
-
         <!-- Gambar -->
         <div class="mb-3">
           <label class="form-label">Gambar Produk</label>
           <input type="file" name="gambar" class="form-control" accept="image/*" required>
         </div>
-
         <!-- Pilih Karoseri -->
         <div class="mb-4">
           <label class="form-label">Pilih Karoseri</label>
@@ -208,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Spesifikasi -->
         <h5 class="mb-3">Spesifikasi</h5>
-        <?php foreach ($spec_groups as $slug => $meta): $slug_lower = $slug;?>
+        <?php foreach ($spec_groups as $slug => $meta): $slug_lower = $slug; ?>
           <div class="mb-4">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <div class="group-title"><?= htmlspecialchars($meta['label']); ?></div>

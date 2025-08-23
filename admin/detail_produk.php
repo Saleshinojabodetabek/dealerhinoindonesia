@@ -87,24 +87,22 @@ while($r=$resKar->fetch_assoc()) {
         </div>
       <?php endif; ?>
 
-      <!-- Karoseri -->
-      <?php if(!empty($selected_karoseri)): ?>
-        <div class="mb-3">
-          <strong>Karoseri Terpilih:</strong>
-          <div class="row row-cols-2 row-cols-md-3 g-4 mt-2">
-            <?php foreach($selected_karoseri as $kr): ?>
-              <div class="col text-center">
-                <div class="karoseri-img mb-2">
-                  <img src="admin/karoseri/karoseri/<?=$kr['slug']?>.png"
-                      alt="<?=htmlspecialchars($kr['nama'])?>"
-                      class="img-fluid" style="max-height:120px;">
-                </div>
-                <div class="fw-semibold"><?=htmlspecialchars($kr['nama'])?></div>
-              </div>
-            <?php endforeach; ?>
-          </div>
+<!-- Karoseri -->
+<?php if (!empty($selected_karoseri)): ?>
+  <div class="mb-3">
+    <strong>Karoseri Terpilih:</strong>
+    <div class="row row-cols-2 row-cols-md-3 g-4 mt-2">
+      <?php foreach ($selected_karoseri as $kr): ?>
+        <div class="col text-center">
+          <!-- Gunakan span dengan class slug -->
+          <span class="karoseri-icon <?= $kr['slug'] ?> d-block mx-auto mb-2"></span>
+          <div class="fw-semibold"><?= htmlspecialchars($kr['nama']) ?></div>
         </div>
-      <?php endif; ?>
+      <?php endforeach; ?>
+    </div>
+  </div>
+<?php endif; ?>
+
 
 
       <!-- Spesifikasi -->

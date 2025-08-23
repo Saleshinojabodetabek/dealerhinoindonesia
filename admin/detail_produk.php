@@ -22,7 +22,6 @@ $res = $conn->query("SELECT p.*, s.nama_series
                      FROM produk p
                      LEFT JOIN series s ON p.series_id = s.id
                      WHERE p.id = $produk_id");
-
 if (!$res || $res->num_rows == 0) {
     header("Location: produk.php");
     exit();
@@ -39,9 +38,26 @@ while ($row = $res_kar->fetch_assoc()) {
     $karoseriList[] = $row;
 }
 
-// Ambil spesifikasi
+// Daftar grup spesifikasi (untuk urutan)
+$spec_groups = [
+    'performa' => ['label'=>'PERFORMA'],
+    'model_mesin' => ['label'=>'MODEL MESIN'],
+    'kopling' => ['label'=>'KOPLING'],
+    'transmisi' => ['label'=>'TRANSMISI'],
+    'kemudi' => ['label'=>'KEMUDI'],
+    'sumbu' => ['label'=>'SUMBU'],
+    'rem' => ['label'=>'REM'],
+    'roda_ban' => ['label'=>'RODA & BAN'],
+    'Sistim_Listrik_accu' => ['label'=>'SISTIM LISTRIK ACCU'],
+    'Tangki_Solar' => ['label'=>'TANGKI SOLAR'],
+    'Dimensi' => ['label'=>'DIMENSI'],
+    'Suspensi' => ['label'=>'SUSPENSI'],
+    'Berat_Chasis' => ['label'=>'BERAT CHASIS'],
+];
+
+// Ambil spesifikasi dan simpan berdasarkan grup dan sort_order
 $specs = [];
-$res_spec = $conn->query("SELECT grup, label, nilai, sort_order FROM produk_spesifikasi WHERE produk_id=$produk_id ORDER BY grup, sort_order");
+$res_spec = $conn->query("SELECT grup, label, nilai, sort_order FROM produk_spesifikasi WHERE produk_id=$produk_id ORDER BY sort_order ASC");
 while ($row = $res_spec->fetch_assoc()) {
     $specs[$row['grup']][] = $row;
 }
@@ -93,6 +109,7 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
 
   <div class="card shadow">
     <div class="card-body">
+
       <!-- Info dasar -->
       <h5>Informasi Produk</h5>
       <table class="table table-bordered">
@@ -128,26 +145,26 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
 
       <!-- Spesifikasi -->
       <h5 class="mt-4">Spesifikasi</h5>
-      <?php if(count($specs)>0): ?>
-        <?php foreach($specs as $grup => $rows): ?>
-          <div class="group-title"><?= htmlspecialchars($grup) ?></div>
-          <table class="table table-spec mb-3">
-            <thead class="table-light"><tr><th>Parameter</th><th>Nilai</th></tr></thead>
-            <tbody>
-              <?php foreach($rows as $r): ?>
-              <tr>
-                <td><?= htmlspecialchars($r['label']) ?></td>
-                <td><?= htmlspecialchars($r['nilai']) ?></td>
-              </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
-        <?php endforeach; ?>
-      <?php else: ?>
-        <p>- Tidak ada spesifikasi -</p>
-      <?php endif; ?>
+      <?php foreach ($spec_groups as $slug => $meta):
+          $grupName = $meta['label'];
+          if (!empty($specs[$grupName])):
+      ?>
+      <div class="group-title"><?= htmlspecialchars($grupName) ?></div>
+      <table class="table table-spec mb-3">
+        <thead class="table-light"><tr><th>Parameter</th><th>Nilai</th></tr></thead>
+        <tbody>
+          <?php foreach ($specs[$grupName] as $r): ?>
+          <tr>
+            <td><?= htmlspecialchars($r['label']) ?></td>
+            <td><?= htmlspecialchars($r['nilai']) ?></td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+      <?php endif; endforeach; ?>
 
       <a href="produk.php" class="btn btn-secondary mt-3">Kembali</a>
+
     </div>
   </div>
 </div>

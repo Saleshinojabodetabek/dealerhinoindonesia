@@ -47,6 +47,13 @@ include 'config.php'; // <- pastikan ini benar
       margin-left: 220px;
       padding: 20px;
     }
+    .dashboard-header {
+      background: linear-gradient(90deg, #0d6efd, #0b5ed7);
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+    }
     .btn-primary {
       background: #0d6efd;
       border: none;
@@ -71,11 +78,18 @@ include 'config.php'; // <- pastikan ini benar
 
   <!-- Content -->
   <div class="content">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2>Kelola Produk</h2>
+    <!-- Header -->
+    <div class="dashboard-header">
+      <h2>📦 Kelola Produk</h2>
+      <p>Tambah, edit, hapus, dan kelola semua produk Hino melalui halaman ini.</p>
+    </div>
+
+    <!-- Tombol tambah produk -->
+    <div class="d-flex justify-content-end mb-3">
       <a href="tambah_produk.php" class="btn btn-success">+ Tambah Produk</a>
     </div>
 
+    <!-- Tabel produk -->
     <table class="table table-bordered table-striped">
       <thead class="table-primary">
         <tr>

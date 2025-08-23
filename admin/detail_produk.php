@@ -91,16 +91,21 @@ while($r=$resKar->fetch_assoc()) {
       <?php if(!empty($selected_karoseri)): ?>
         <div class="mb-3">
           <strong>Karoseri Terpilih:</strong>
-          <div class="d-flex flex-wrap gap-3 mt-2">
+          <div class="row row-cols-2 row-cols-md-3 g-4 mt-2">
             <?php foreach($selected_karoseri as $kr): ?>
-              <div class="d-flex align-items-center">
-                <span class="karoseri-icon <?=$kr['slug']?> me-2"></span>
-                <span><?=htmlspecialchars($kr['nama'])?></span>
+              <div class="col text-center">
+                <div class="karoseri-img mb-2">
+                  <img src="admin/img/karoseri/<?=$kr['slug']?>.png"
+                      alt="<?=htmlspecialchars($kr['nama'])?>"
+                      class="img-fluid" style="max-height:120px;">
+                </div>
+                <div class="fw-semibold"><?=htmlspecialchars($kr['nama'])?></div>
               </div>
             <?php endforeach; ?>
           </div>
         </div>
       <?php endif; ?>
+
 
       <!-- Spesifikasi -->
       <h5 class="mt-4">Spesifikasi</h5>

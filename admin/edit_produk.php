@@ -4,39 +4,52 @@ if (!isset($_SESSION['admin'])) {
     header("Location: login.php");
     exit();
 }
-include 'koneksi.php';
+include 'config.php';
 
-$id = $_GET['id'];
-$produk = $conn->query("SELECT * FROM produk WHERE id=$id")->fetch_assoc();
+// Ambil ID produk dari URL
+if (!isset($_GET['id'])) {
+    die("ID produk tidak ditemukan.");
+}
+$id = intval($_GET['id']);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $series_id = $_POST['series_id'];
+// Ambil data produk berdasarkan ID
+$sql = "SELECT * FROM produk WHERE id = $id";
+$result = $conn->query($sql);
+
+if ($result->num_rows == 0) {
+    die("Produk tidak ditemukan.");
+}
+
+$produk = $result->fetch_assoc();
+
+// Proses update data
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama_produk = $_POST['nama_produk'];
-    $deskripsi = $_POST['deskripsi'];
-    $spesifikasi = $_POST['spesifikasi'];
+    $series_id   = $_POST['series_id'];
 
-    // update gambar jika diupload
+    // cek jika upload gambar baru
     if (!empty($_FILES['gambar']['name'])) {
-        $gambar = $_FILES['gambar']['name'];
-        $tmp = $_FILES['gambar']['tmp_name'];
-        move_uploaded_file($tmp, "../uploads/" . $gambar);
+        $target_dir = "../uploads/";
+        $gambar = time() . "_" . basename($_FILES['gambar']['name']);
+        $target_file = $target_dir . $gambar;
+
+        if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_file)) {
+            // Hapus gambar lama jika ada
+            if (!empty($produk['gambar']) && file_exists("../uploads/" . $produk['gambar'])) {
+                unlink("../uploads/" . $produk['gambar']);
+            }
+            $sql_update = "UPDATE produk SET nama_produk='$nama_produk', series_id='$series_id', gambar='$gambar' WHERE id=$id";
+        } else {
+            echo "<div class='alert alert-danger'>Upload gambar gagal.</div>";
+        }
     } else {
-        $gambar = $produk['gambar'];
+        $sql_update = "UPDATE produk SET nama_produk='$nama_produk', series_id='$series_id' WHERE id=$id";
     }
 
-    $sql = "UPDATE produk SET 
-            series_id='$series_id', 
-            nama_produk='$nama_produk', 
-            deskripsi='$deskripsi', 
-            spesifikasi='$spesifikasi', 
-            gambar='$gambar' 
-            WHERE id=$id";
-
-    if ($conn->query($sql)) {
-        header("Location: produk.php");
-        exit();
+    if (isset($sql_update) && $conn->query($sql_update)) {
+        echo "<div class='alert alert-success'>Produk berhasil diperbarui. <a href='kelola_produk.php'>Kembali</a></div>";
     } else {
-        echo "Error: " . $conn->error;
+        echo "<div class='alert alert-danger'>Gagal update produk: " . $conn->error . "</div>";
     }
 }
 ?>
@@ -50,39 +63,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-light">
 <div class="container mt-5">
-  <h2>Edit Produk</h2>
+  <h2 class="mb-4">Edit Produk</h2>
   <form method="post" enctype="multipart/form-data">
     <div class="mb-3">
-      <label>Series</label>
-      <select name="series_id" class="form-control" required>
+      <label class="form-label">Nama Produk</label>
+      <input type="text" name="nama_produk" class="form-control" value="<?= htmlspecialchars($produk['nama_produk']) ?>" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Series</label>
+      <select name="series_id" class="form-select" required>
+        <option value="">-- Pilih Series --</option>
         <?php
-        $series = $conn->query("SELECT * FROM series");
-        while ($s = $series->fetch_assoc()) {
-            $selected = ($s['id'] == $produk['series_id']) ? "selected" : "";
-            echo "<option value='{$s['id']}' $selected>{$s['nama_series']}</option>";
+        $sql_series = "SELECT * FROM series ORDER BY nama_series";
+        $result_series = $conn->query($sql_series);
+        while ($row = $result_series->fetch_assoc()) {
+            $selected = ($row['id'] == $produk['series_id']) ? "selected" : "";
+            echo "<option value='{$row['id']}' $selected>{$row['nama_series']}</option>";
         }
         ?>
       </select>
     </div>
     <div class="mb-3">
-      <label>Nama Produk</label>
-      <input type="text" name="nama_produk" class="form-control" value="<?= $produk['nama_produk'] ?>" required>
-    </div>
-    <div class="mb-3">
-      <label>Deskripsi</label>
-      <textarea name="deskripsi" class="form-control"><?= $produk['deskripsi'] ?></textarea>
-    </div>
-    <div class="mb-3">
-      <label>Spesifikasi</label>
-      <textarea name="spesifikasi" class="form-control"><?= $produk['spesifikasi'] ?></textarea>
-    </div>
-    <div class="mb-3">
-      <label>Gambar (biarkan kosong jika tidak ganti)</label>
+      <label class="form-label">Gambar Produk</label><br>
+      <?php if (!empty($produk['gambar']) && file_exists("../uploads/" . $produk['gambar'])): ?>
+        <img src="../uploads/<?= $produk['gambar'] ?>" width="120" class="mb-2"><br>
+      <?php endif; ?>
       <input type="file" name="gambar" class="form-control">
-      <p><img src="../uploads/<?= $produk['gambar'] ?>" width="120"></p>
+      <small class="text-muted">Kosongkan jika tidak ingin mengganti gambar</small>
     </div>
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a href="produk.php" class="btn btn-secondary">Batal</a>
+    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+    <a href="kelola_produk.php" class="btn btn-secondary">Batal</a>
   </form>
 </div>
 </body>

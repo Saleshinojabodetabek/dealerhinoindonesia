@@ -54,10 +54,35 @@ while ($row = $res_spec->fetch_assoc()) {
 <title>Detail Produk</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-.table-spec { border-collapse: collapse; }
-.table-spec th, .table-spec td { border:2px solid #000; vertical-align:middle; padding:6px; }
-.group-title { font-weight:700; font-size:1.1rem; margin-top:20px; }
-.img-karoseri { width:60px; height:auto; object-fit:contain; margin-right:8px; border:1px solid #ccc; padding:2px; border-radius:4px;}
+.table-spec { 
+    border-collapse: collapse; 
+    width: 100%;
+}
+.table-spec th, .table-spec td { 
+    border:2px solid #000; 
+    vertical-align: middle; 
+    padding:8px; 
+    text-align:left;
+}
+.table-spec th {
+    background-color: #f8f9fa;
+}
+.table-spec td:first-child { width: 40%; } /* Parameter */
+.table-spec td:last-child { width: 60%; } /* Nilai */
+.group-title { 
+    font-weight:700; 
+    font-size:1.1rem; 
+    margin-top:20px; 
+}
+.img-karoseri { 
+    width:60px; 
+    height:auto; 
+    object-fit:contain; 
+    margin-right:8px; 
+    border:1px solid #ccc; 
+    padding:2px; 
+    border-radius:4px;
+}
 </style>
 </head>
 <body class="bg-light">

@@ -12,6 +12,7 @@ if (!isset($_SESSION['admin'])) {
 
 include 'config.php';
 
+
 /** Daftar grup spesifikasi & default baris parameternya */
 $spec_groups = [
   'performa'     => ['label' => 'PERFORMA',     'defaults' => ['Kecepatan maksimum (km/h)', 'Daya tanjak']],
@@ -94,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8" />
   <title>Tambah Produk</title>
+  <link rel="stylesheet" href="admin/css/karoseri.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     .table-spec td { vertical-align: middle; }

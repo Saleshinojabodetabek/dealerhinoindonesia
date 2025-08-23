@@ -3,6 +3,11 @@ session_start();
 if(!isset($_SESSION['admin'])) header("Location: login.php");
 include 'config.php';
 
+if(!$conn->query($sql)){
+    die("Gagal menyimpan artikel: ".$conn->error);
+}
+
+
 // Ambil kategori
 $kategoriList = $conn->query("SELECT * FROM kategori_artikel ORDER BY nama");
 

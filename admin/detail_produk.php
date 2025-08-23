@@ -4,59 +4,50 @@ if (!isset($_SESSION['admin'])) header("Location: login.php");
 
 include 'config.php';
 
-// --- Definisi grup spesifikasi (untuk urutan) ---
 $spec_groups = [
-  'performa' => ['label'=>'PERFORMA', 'defaults'=>['Kecepatan maksimum (km/h)','Daya tanjak']],
-  'model_mesin' => ['label'=>'MODEL MESIN', 'defaults'=>['Model','Tipe','Tenaga maksimum','Torsi maksimum','Kapasitas']],
-  'kopling' => ['label'=>'KOPLING','defaults'=>['Tipe']],
-  'transmisi'=>['label'=>'TRANSMISI','defaults'=>['Tipe','Rasio']],
-  'kemudi'=>['label'=>'KEMUDI','defaults'=>['Tipe']],
-  'sumbu'=>['label'=>'SUMBU','defaults'=>['Depan','Belakang']],
-  'rem'=>['label'=>'REM','defaults'=>['Utama','Parkir','Tambahan']],
-  'roda_ban'=>['label'=>'RODA & BAN','defaults'=>['Ukuran Ban']],
-  'sistim_listrik_accu'=>['label'=>'SISTIM LISTRIK ACCU','defaults'=>['Accu (V-Ah)']],
-  'tangki_solar'=>['label'=>'TANGKI SOLAR','defaults'=>['Kapasitas']],
-  'dimensi'=>['label'=>'DIMENSI','defaults'=>['Panjang','Lebar','Tinggi','Jarak Sumbu Roda']],
-  'suspensi'=>['label'=>'SUSPENSI','defaults'=>['Depan','Belakang']],
-  'berat_chasis'=>['label'=>'BERAT CHASIS','defaults'=>['Depan','Belakang','Total']],
+  'performa' => ['label'=>'PERFORMA', 'order'=>['Kecepatan maksimum (km/h)','Daya tanjak']],
+  'model_mesin' => ['label'=>'MODEL MESIN', 'order'=>['Model','Tipe','Tenaga maksimum','Torsi maksimum','Kapasitas']],
+  'kopling' => ['label'=>'KOPLING','order'=>['Tipe']],
+  'transmisi'=>['label'=>'TRANSMISI','order'=>['Tipe','Rasio']],
+  'kemudi'=>['label'=>'KEMUDI','order'=>['Tipe']],
+  'sumbu'=>['label'=>'SUMBU','order'=>['Depan','Belakang']],
+  'rem'=>['label'=>'REM','order'=>['Utama','Parkir','Tambahan']],
+  'roda_ban'=>['label'=>'RODA & BAN','order'=>['Ukuran Ban']],
+  'sistim_listrik_accu'=>['label'=>'SISTIM LISTRIK ACCU','order'=>['Accu (V-Ah)']],
+  'tangki_solar'=>['label'=>'TANGKI SOLAR','order'=>['Kapasitas']],
+  'dimensi'=>['label'=>'DIMENSI','order'=>['Panjang','Lebar','Tinggi','Jarak Sumbu Roda']],
+  'suspensi'=>['label'=>'SUSPENSI','order'=>['Depan','Belakang']],
+  'berat_chasis'=>['label'=>'BERAT CHASIS','order'=>['Depan','Belakang','Total']],
 ];
 
 if (!isset($_GET['id'])) die("ID produk tidak ditemukan");
 $produk_id = (int)$_GET['id'];
 
+// Ambil produk
 $produk = $conn->query("SELECT p.*, s.nama_series FROM produk p LEFT JOIN series s ON p.series_id = s.id WHERE p.id = $produk_id")->fetch_assoc();
 if (!$produk) die("Produk tidak ditemukan.");
 
-// --- Ambil spesifikasi dari DB ---
+// Ambil spesifikasi dari DB
 $existing_spec = [];
-$resSpec = $conn->query("SELECT grup,label,nilai FROM produk_spesifikasi WHERE produk_id=$produk_id ORDER BY sort_order,id");
+$resSpec = $conn->query("SELECT grup,label,nilai FROM produk_spesifikasi WHERE produk_id=$produk_id ORDER BY grup,sort_order,id");
 while($r = $resSpec->fetch_assoc()) {
     $existing_spec[$r['grup']][] = ['label'=>$r['label'], 'nilai'=>$r['nilai']];
 }
 
-// --- Helper untuk gabungkan defaults + data DB ---
-function combine_spec($groupLabel, $defaults, $existing_spec) {
+// --- Helper: urutkan sesuai $spec_groups, hapus baris kosong ---
+function get_spec_rows($groupLabel, $order, $existing_spec) {
     $rows = [];
-
-    // Map existing labels
-    $existing_labels = [];
-    if(!empty($existing_spec[$groupLabel])) {
+    if (!empty($existing_spec[$groupLabel])) {
+        // Buat map label → nilai
+        $map = [];
         foreach($existing_spec[$groupLabel] as $r){
-            $existing_labels[$r['label']] = $r['nilai'];
+            if(trim($r['nilai']) !== '') $map[$r['label']] = $r['nilai'];
+        }
+        // Tampilkan sesuai urutan $order
+        foreach($order as $label){
+            if(isset($map[$label])) $rows[] = ['label'=>$label,'nilai'=>$map[$label]];
         }
     }
-
-    // Tampilkan defaults terlebih dahulu
-    foreach($defaults as $def){
-        $rows[] = ['label'=>$def, 'nilai'=>$existing_labels[$def] ?? ''];
-        unset($existing_labels[$def]); // hapus dari map agar tidak duplikat
-    }
-
-    // Tambahkan sisa label lain dari DB
-    foreach($existing_labels as $label=>$nilai){
-        $rows[] = ['label'=>$label,'nilai'=>$nilai];
-    }
-
     return $rows;
 }
 ?>
@@ -112,7 +103,8 @@ body{font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;background:#f8f9fa;
 <h5 class="mt-3">Spesifikasi Lengkap:</h5>
 <?php foreach($spec_groups as $slug=>$meta):
     $groupLabel = $meta['label'];
-    $rows = combine_spec($groupLabel,$meta['defaults'],$existing_spec);
+    $rows = get_spec_rows($groupLabel,$meta['order'],$existing_spec);
+    if(empty($rows)) continue; // skip jika kosong
 ?>
 <div class="group-title"><?= htmlspecialchars($groupLabel); ?></div>
 <div class="table-responsive mb-3">

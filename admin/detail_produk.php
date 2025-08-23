@@ -1,142 +1,130 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include 'config.php';
 
-// Pastikan ada parameter id
-if (!isset($_GET['id'])) {
-    header("Location: produk.php");
+// Ambil ID produk dari URL
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+if ($id <= 0) {
+    echo "Produk tidak ditemukan.";
     exit();
 }
-
-$id = (int)$_GET['id'];
 
 // Ambil data produk
-$qProduk = $conn->query("SELECT p.*, s.nama_series 
-    FROM produk p
-    LEFT JOIN series s ON s.id = p.series_id
-    WHERE p.id = $id");
-$produk = $qProduk->fetch_assoc();
-
-if (!$produk) {
-    echo "<h3>Produk tidak ditemukan.</h3>";
+$qProduk = $conn->query("SELECT p.*, s.nama_series FROM produk p 
+                         LEFT JOIN series s ON s.id = p.series_id
+                         WHERE p.id=$id");
+if ($qProduk->num_rows === 0) {
+    echo "Produk tidak ditemukan.";
     exit();
 }
+$produk = $qProduk->fetch_assoc();
 
 // Ambil spesifikasi
-$qSpec = $conn->query("SELECT grup, label, nilai 
-    FROM produk_spesifikasi 
-    WHERE produk_id = $id 
-    ORDER BY grup, sort_order");
+$spec_groups = [
+    'PERFORMA',
+    'MODEL MESIN',
+    'KOPLING',
+    'TRANSMISI',
+    'KEMUDI',
+    'SUMBU',
+    'REM',
+    'RODA & BAN',
+    'SISTIM LISTRIK ACCU',
+    'TANGKI SOLAR',
+    'DIMENSI',
+    'SUSPENSI',
+    'BERAT CHASIS',
+];
 
-// Kelompokkan spesifikasi per grup
-$specGroups = [];
+$spesifikasi = [];
+$qSpec = $conn->query("SELECT * FROM produk_spesifikasi WHERE produk_id=$id ORDER BY grup, sort_order");
 while ($row = $qSpec->fetch_assoc()) {
-    $specGroups[$row['grup']][] = [
-        'label' => $row['label'],
-        'nilai' => $row['nilai']
-    ];
+    $spesifikasi[$row['grup']][] = $row;
 }
 
-// Ambil karoseri terkait
-$qKaroseri = $conn->query("SELECT k.nama, k.slug, k.series 
-    FROM produk_karoseri pk
-    JOIN karoseri k ON k.id = pk.karoseri_id
-    WHERE pk.produk_id = $id
-    ORDER BY k.series, k.nama");
-$karoseriList = [];
-while ($row = $qKaroseri->fetch_assoc()) {
-    $karoseriList[] = $row;
+// Ambil karoseri
+$karoseri = [];
+$qKar = $conn->query("SELECT k.* FROM produk_karoseri pk 
+                      JOIN karoseri k ON k.id = pk.karoseri_id
+                      WHERE pk.produk_id = $id 
+                      ORDER BY k.series, k.nama");
+while ($row = $qKar->fetch_assoc()) {
+    $karoseri[$row['series']][] = $row;
 }
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Detail Produk - <?= htmlspecialchars($produk['nama_produk']); ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .karoseri-thumb {
-            width: 80px;
-            height: auto;
-            object-fit: contain;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            padding: 4px;
-            background: #fff;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Detail Produk - <?= htmlspecialchars($produk['nama_produk']); ?></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body class="bg-light">
+<body>
 <div class="container my-5">
 
-    <a href="produk.php" class="btn btn-secondary mb-4">← Kembali ke daftar</a>
+  <h2 class="mb-4"><?= htmlspecialchars($produk['nama_produk']); ?></h2>
+  <p class="text-muted">Series: <?= htmlspecialchars($produk['nama_series']); ?> | Varian: <?= htmlspecialchars($produk['varian']); ?></p>
 
-    <div class="card shadow mb-4">
-        <div class="card-header bg-primary text-white">
-            <h4 class="mb-0"><?= htmlspecialchars($produk['nama_produk']); ?></h4>
-        </div>
-        <div class="card-body">
-            <p><strong>Series:</strong> <?= htmlspecialchars($produk['nama_series']); ?></p>
-            <p><strong>Varian:</strong> <?= htmlspecialchars($produk['varian']); ?></p>
-            <?php if ($produk['gambar']): ?>
-                <img src="../uploads/produk/<?= htmlspecialchars($produk['gambar']); ?>" 
-                     alt="<?= htmlspecialchars($produk['nama_produk']); ?>" 
-                     style="max-width:300px;height:auto;" 
-                     class="img-thumbnail mb-3">
-            <?php endif; ?>
-            <p><?= nl2br(htmlspecialchars($produk['deskripsi'])); ?></p>
-        </div>
+  <!-- Gambar Produk -->
+  <?php if (!empty($produk['gambar'])): ?>
+    <div class="mb-4">
+      <img src="uploads/produk/<?= htmlspecialchars($produk['gambar']); ?>" 
+           alt="<?= htmlspecialchars($produk['nama_produk']); ?>" 
+           class="img-fluid rounded shadow">
     </div>
+  <?php endif; ?>
 
-    <!-- Karoseri -->
-    <?php if (!empty($karoseriList)): ?>
-    <div class="card shadow mb-4">
-        <div class="card-header bg-success text-white">
-            <h5 class="mb-0">Karoseri Terkait</h5>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <?php foreach ($karoseriList as $kr): ?>
-                <div class="col-6 col-md-3 mb-3 text-center">
-                    <img src="../uploads/karoseri/<?= htmlspecialchars($kr['slug']); ?>.png"
-                         alt="<?= htmlspecialchars($kr['nama']); ?>" 
-                         class="karoseri-thumb mb-2">
-                    <div><?= htmlspecialchars($kr['nama']); ?></div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
+  <!-- Deskripsi -->
+  <?php if (!empty($produk['deskripsi'])): ?>
+    <div class="mb-5">
+      <h5>Deskripsi</h5>
+      <p><?= nl2br(htmlspecialchars($produk['deskripsi'])); ?></p>
     </div>
-    <?php endif; ?>
+  <?php endif; ?>
 
-    <!-- Spesifikasi -->
-    <?php if (!empty($specGroups)): ?>
-    <div class="card shadow">
-        <div class="card-header bg-dark text-white">
-            <h5 class="mb-0">Spesifikasi Produk</h5>
-        </div>
-        <div class="card-body">
-            <?php foreach ($specGroups as $group => $items): ?>
-                <h6 class="mt-3"><?= htmlspecialchars($group); ?></h6>
-                <table class="table table-bordered">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Parameter</th>
-                            <th>Nilai</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($items as $spec): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($spec['label']); ?></td>
-                            <td><?= htmlspecialchars($spec['nilai']); ?></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+  <!-- Spesifikasi -->
+  <div class="mb-5">
+    <h4 class="mb-3">Spesifikasi</h4>
+    <?php foreach ($spec_groups as $group): ?>
+      <?php if (!empty($spesifikasi[$group])): ?>
+        <h5 class="mt-4"><?= htmlspecialchars($group); ?></h5>
+        <table class="table table-bordered">
+          <tbody>
+            <?php foreach ($spesifikasi[$group] as $row): ?>
+              <tr>
+                <th style="width: 40%;"><?= htmlspecialchars($row['label']); ?></th>
+                <td><?= htmlspecialchars($row['nilai']); ?></td>
+              </tr>
             <?php endforeach; ?>
+          </tbody>
+        </table>
+      <?php endif; ?>
+    <?php endforeach; ?>
+  </div>
+
+  <!-- Karoseri -->
+  <?php if (!empty($karoseri)): ?>
+    <div class="mb-5">
+      <h4 class="mb-3">Pilihan Karoseri</h4>
+      <?php foreach ($karoseri as $seriesName => $items): ?>
+        <h6 class="mt-3"><?= htmlspecialchars($seriesName); ?></h6>
+        <div class="row">
+          <?php foreach ($items as $kr): ?>
+            <div class="col-6 col-md-3 mb-3 text-center">
+              <img src="uploads/karoseri/<?= htmlspecialchars($kr['slug']); ?>.png" 
+                   alt="<?= htmlspecialchars($kr['nama']); ?>" 
+                   class="img-fluid border rounded mb-2" style="max-height:120px;object-fit:contain;">
+              <p class="mb-0"><?= htmlspecialchars($kr['nama']); ?></p>
+            </div>
+          <?php endforeach; ?>
         </div>
+      <?php endforeach; ?>
     </div>
-    <?php endif; ?>
+  <?php endif; ?>
+
+  <a href="produk.php" class="btn btn-secondary">Kembali</a>
 
 </div>
 </body>

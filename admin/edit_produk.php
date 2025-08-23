@@ -10,21 +10,21 @@ if (!isset($_SESSION['admin'])) {
 
 include 'config.php';
 
-// Grup spesifikasi sama seperti di tambah_produk
+// Daftar grup spesifikasi (sama seperti tambah produk)
 $spec_groups = [
-    'performa' => ['label' => 'PERFORMA', 'defaults' => ['Kecepatan maksimum (km/h)', 'Daya tanjak']],
-    'model_mesin' => ['label' => 'MODEL MESIN', 'defaults' => ['Model', 'Tipe', 'Tenaga maksimum', 'Torsi maksimum', 'Kapasitas']],
-    'kopling' => ['label' => 'KOPLING', 'defaults' => ['Tipe']],
-    'transmisi' => ['label' => 'TRANSMISI', 'defaults' => ['Tipe', 'Rasio']],
-    'kemudi' => ['label' => 'KEMUDI', 'defaults' => ['Tipe']],
-    'sumbu' => ['label' => 'SUMBU', 'defaults' => ['Depan', 'Belakang']],
-    'rem' => ['label' => 'REM', 'defaults' => ['Utama', 'Parkir', 'Tambahan']],
-    'roda_ban' => ['label' => 'RODA & BAN', 'defaults' => ['Ukuran Ban']],
-    'Sistim_Listrik_accu' => ['label' => 'SISTIM LISTRIK ACCU', 'defaults' => ['Accu (V-Ah)']],
-    'Tangki_Solar' => ['label' => 'TANGKI SOLAR', 'defaults' => ['Kapasitas']],
-    'Dimensi' => ['label' => 'DIMENSI', 'defaults' => ['Dimensi']],
-    'Suspensi' => ['label' => 'SUSPENSI', 'defaults' => ['Depan & Belakang']],
-    'Berat_Chasis' => ['label' => 'BERAT CHASIS', 'defaults' => ['Depan & Belakang']],
+    'performa' => ['label' => 'PERFORMA'],
+    'model_mesin' => ['label' => 'MODEL MESIN'],
+    'kopling' => ['label' => 'KOPLING'],
+    'transmisi' => ['label' => 'TRANSMISI'],
+    'kemudi' => ['label' => 'KEMUDI'],
+    'sumbu' => ['label' => 'SUMBU'],
+    'rem' => ['label' => 'REM'],
+    'roda_ban' => ['label' => 'RODA & BAN'],
+    'Sistim_Listrik_accu' => ['label' => 'SISTIM LISTRIK ACCU'],
+    'Tangki_Solar' => ['label' => 'TANGKI SOLAR'],
+    'Dimensi' => ['label' => 'DIMENSI'],
+    'Suspensi' => ['label' => 'SUSPENSI'],
+    'Berat_Chasis' => ['label' => 'BERAT CHASIS'],
 ];
 
 // Ambil ID produk
@@ -35,28 +35,36 @@ if ($id <= 0) {
 }
 
 // Ambil data produk
-$produk = $conn->query("SELECT * FROM produk WHERE id = $id")->fetch_assoc();
-if (!$produk) {
-    echo "Produk tidak ditemukan.";
+$res = $conn->query("SELECT * FROM produk WHERE id=$id");
+if ($res->num_rows === 0) {
+    header("Location: produk.php");
     exit();
 }
+$produk = $res->fetch_assoc();
 
-// Ambil spesifikasi
+// Ambil karoseri terkait
+$karoseri_selected = [];
+$krRes = $conn->query("SELECT karoseri_id FROM produk_karoseri WHERE produk_id=$id");
+while ($kr = $krRes->fetch_assoc()) {
+    $karoseri_selected[] = $kr['karoseri_id'];
+}
+
+// Ambil spesifikasi produk
 $spesifikasi = [];
-$res = $conn->query("SELECT * FROM produk_spesifikasi WHERE produk_id = $id ORDER BY grup, sort_order");
-while ($row = $res->fetch_assoc()) {
-    $slug = array_search($row['grup'], array_column($spec_groups, 'label')) ?: strtolower($row['grup']);
-    $spesifikasi[$slug][] = $row;
+$spRes = $conn->query("SELECT * FROM produk_spesifikasi WHERE produk_id=$id ORDER BY grup, sort_order");
+while ($sp = $spRes->fetch_assoc()) {
+    $slug = array_search($sp['grup'], array_column($spec_groups, 'label'));
+    if (!$slug) {
+        // jika grup di DB tidak ada di array, skip
+        continue;
+    }
+    $spesifikasi[$slug][] = [
+        'label' => $sp['label'],
+        'nilai' => $sp['nilai']
+    ];
 }
 
-// Ambil karoseri terpilih
-$selected_karoseri = [];
-$res2 = $conn->query("SELECT karoseri_id FROM produk_karoseri WHERE produk_id = $id");
-while ($r = $res2->fetch_assoc()) {
-    $selected_karoseri[] = $r['karoseri_id'];
-}
-
-// Proses update
+// Update data produk
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $series_id   = $conn->real_escape_string($_POST['series_id']);
     $varian      = $conn->real_escape_string($_POST['varian']);
@@ -64,80 +72,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $deskripsi   = $conn->real_escape_string($_POST['deskripsi']);
 
     // Upload gambar jika ada
-    $upload_dir = "../uploads/produk/";
-    if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
     $gambar = $produk['gambar'];
-
     if (!empty($_FILES['gambar']['name'])) {
+        $upload_dir = "../uploads/produk/";
+        if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
+
         $gambar = time() . "_" . preg_replace('/\s+/', '_', basename($_FILES['gambar']['name']));
         move_uploaded_file($_FILES['gambar']['tmp_name'], $upload_dir . $gambar);
     }
 
     // Update produk
-    $conn->query("UPDATE produk 
-                  SET series_id='$series_id', varian='$varian', nama_produk='$nama_produk', 
-                      deskripsi='$deskripsi', gambar='$gambar'
-                  WHERE id=$id");
+    $sql = "UPDATE produk SET 
+                series_id='$series_id',
+                varian='$varian',
+                nama_produk='$nama_produk',
+                deskripsi='$deskripsi',
+                gambar='$gambar'
+            WHERE id=$id";
+    if (!$conn->query($sql)) {
+        $error = "Gagal update produk: " . $conn->error;
+    } else {
+        // Hapus spesifikasi lama
+        $conn->query("DELETE FROM produk_spesifikasi WHERE produk_id=$id");
 
-    // Hapus dan simpan ulang spesifikasi
-    $conn->query("DELETE FROM produk_spesifikasi WHERE produk_id=$id");
-    foreach ($spec_groups as $slug => $meta) {
-        $labels = $_POST['spec'][$slug]['label'] ?? [];
-        $values = $_POST['spec'][$slug]['value'] ?? [];
-        for ($i = 0; $i < count($labels); $i++) {
-            $label = trim($labels[$i] ?? '');
-            $nilai = trim($values[$i] ?? '');
-            if ($label === '' && $nilai === '') continue;
+        // Simpan spesifikasi baru
+        foreach ($spec_groups as $slug => $meta) {
+            $labels = $_POST['spec'][$slug]['label'] ?? [];
+            $values = $_POST['spec'][$slug]['value'] ?? [];
 
-            $labelEsc = $conn->real_escape_string($label);
-            $nilaiEsc = $conn->real_escape_string($nilai);
-            $order    = $i + 1;
-            $grup     = $conn->real_escape_string($meta['label']);
-            $conn->query("INSERT INTO produk_spesifikasi (produk_id, grup, label, nilai, sort_order)
-                          VALUES ($id, '$grup', '$labelEsc', '$nilaiEsc', $order)");
+            for ($i = 0; $i < count($labels); $i++) {
+                $label = trim($labels[$i] ?? '');
+                $nilai = trim($values[$i] ?? '');
+                if ($label === '' && $nilai === '') continue;
+
+                $labelEsc = $conn->real_escape_string($label);
+                $nilaiEsc = $conn->real_escape_string($nilai);
+                $order    = $i + 1;
+                $grup     = $conn->real_escape_string($meta['label']);
+
+                $conn->query("INSERT INTO produk_spesifikasi (produk_id, grup, label, nilai, sort_order)
+                              VALUES ($id, '$grup', '$labelEsc', '$nilaiEsc', $order)");
+            }
         }
-    }
 
-    // Hapus dan simpan ulang karoseri
-    $conn->query("DELETE FROM produk_karoseri WHERE produk_id=$id");
-    if (!empty($_POST['karoseri'])) {
-        foreach ($_POST['karoseri'] as $kid) {
-            $kid = (int)$kid;
-            $conn->query("INSERT INTO produk_karoseri (produk_id, karoseri_id) VALUES ($id, $kid)");
+        // Update karoseri
+        $conn->query("DELETE FROM produk_karoseri WHERE produk_id=$id");
+        if (!empty($_POST['karoseri'])) {
+            foreach ($_POST['karoseri'] as $kid) {
+                $kid = (int)$kid;
+                $conn->query("INSERT INTO produk_karoseri (produk_id, karoseri_id)
+                              VALUES ($id, $kid)");
+            }
         }
-    }
 
-    header("Location: produk.php?updated=1");
-    exit();
+        header("Location: produk.php?updated=1");
+        exit();
+    }
 }
 ?>
-
-<!-- Form mirip dengan tambah_produk, tapi isi default sesuai $produk dan $spesifikasi -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Edit Produk</title>
-  <link rel="stylesheet" href="admin/css/karoseri.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Edit Produk</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 <div class="container my-5">
   <div class="card shadow">
-    <div class="card-header bg-warning text-dark">
+    <div class="card-header bg-warning text-white">
       <h4 class="mb-0">Edit Produk</h4>
     </div>
     <div class="card-body">
-      <form method="post" enctype="multipart/form-data">
+      <?php if (!empty($error)): ?>
+        <div class="alert alert-danger"><?= $error ?></div>
+      <?php endif; ?>
 
+      <form method="post" enctype="multipart/form-data">
         <!-- Series -->
         <div class="mb-3">
           <label class="form-label">Series</label>
           <select name="series_id" class="form-select" required>
+            <option value="">-- Pilih Series --</option>
             <?php
             $series = $conn->query("SELECT * FROM series ORDER BY nama_series");
             while ($s = $series->fetch_assoc()) {
-                $sel = $s['id'] == $produk['series_id'] ? 'selected' : '';
+                $sel = $produk['series_id'] == $s['id'] ? 'selected' : '';
                 echo "<option value='{$s['id']}' $sel>".htmlspecialchars($s['nama_series'])."</option>";
             }
             ?>
@@ -161,23 +181,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Nama & Deskripsi -->
         <div class="mb-3">
           <label class="form-label">Nama Produk</label>
-          <input type="text" name="nama_produk" class="form-control" value="<?= htmlspecialchars($produk['nama_produk']); ?>" required>
+          <input type="text" name="nama_produk" class="form-control" value="<?= htmlspecialchars($produk['nama_produk']) ?>" required>
         </div>
         <div class="mb-3">
           <label class="form-label">Deskripsi</label>
-          <textarea name="deskripsi" class="form-control" rows="3"><?= htmlspecialchars($produk['deskripsi']); ?></textarea>
+          <textarea name="deskripsi" class="form-control" rows="3"><?= htmlspecialchars($produk['deskripsi']) ?></textarea>
         </div>
 
         <!-- Gambar -->
         <div class="mb-3">
-          <label class="form-label">Gambar Produk</label><br>
-          <?php if (!empty($produk['gambar'])): ?>
-            <img src="../uploads/produk/<?= htmlspecialchars($produk['gambar']); ?>" style="width:120px;height:auto;" class="mb-2"><br>
+          <label class="form-label">Gambar Produk (kosongkan jika tidak ganti)</label><br>
+          <?php if ($produk['gambar']): ?>
+            <img src="../uploads/produk/<?= htmlspecialchars($produk['gambar']); ?>" alt="" style="max-width:150px;" class="mb-2 d-block">
           <?php endif; ?>
           <input type="file" name="gambar" class="form-control" accept="image/*">
         </div>
 
-        <!-- Pilih Karoseri -->
+        <!-- Karoseri -->
         <div class="mb-4">
           <label class="form-label">Pilih Karoseri</label>
           <?php
@@ -190,13 +210,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <?php
               $karoseri = $conn->query("SELECT * FROM karoseri WHERE series='$seriesName' ORDER BY nama ASC");
               while ($kr = $karoseri->fetch_assoc()):
-                $checked = in_array($kr['id'], $selected_karoseri) ? 'checked' : '';
+                $checked = in_array($kr['id'], $karoseri_selected) ? 'checked' : '';
               ?>
                 <div class="col-md-4 mb-2">
                   <div class="form-check d-flex align-items-center">
                     <input class="form-check-input me-2" type="checkbox" name="karoseri[]" value="<?= $kr['id']; ?>" id="karoseri<?= $kr['id']; ?>" <?= $checked ?>>
                     <label class="form-check-label d-flex align-items-center" for="karoseri<?= $kr['id']; ?>">
-                      <img src="../uploads/karoseri/<?= htmlspecialchars($kr['slug']); ?>.png" style="width:50px;height:auto;" class="me-2 border rounded">
+                      <img src="../uploads/karoseri/<?= htmlspecialchars($kr['slug']); ?>.png" alt="<?= htmlspecialchars($kr['nama']); ?>" style="width:50px;" class="me-2 border rounded">
                       <span><?= htmlspecialchars($kr['nama']); ?></span>
                     </label>
                   </div>
@@ -212,35 +232,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="mb-4">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <div class="fw-bold"><?= htmlspecialchars($meta['label']); ?></div>
-              <button type="button" class="btn btn-sm btn-outline-primary" onclick="addRow('<?= strtolower($slug) ?>')">+ Tambah Baris</button>
+              <button type="button" class="btn btn-sm btn-outline-primary" onclick="addRow('<?= $slug ?>')">+ Tambah Baris</button>
             </div>
-            <table class="table table-bordered align-middle" id="table-<?= strtolower($slug) ?>">
-              <thead class="table-light">
-                <tr><th style="width:40%">Parameter</th><th>Nilai</th><th style="width:80px">Aksi</th></tr>
-              </thead>
-              <tbody>
-                <?php
-                $rows = $spesifikasi[$slug] ?? [];
-                if (!empty($rows)) {
-                    foreach ($rows as $row) {
-                        echo "<tr>
-                                <td><input type='text' name='spec[$slug][label][]' value='".htmlspecialchars($row['label'])."' class='form-control'></td>
-                                <td><input type='text' name='spec[$slug][value][]' value='".htmlspecialchars($row['nilai'])."' class='form-control'></td>
-                                <td><button type='button' class='btn btn-sm btn-outline-danger' onclick='removeRow(this)'>Hapus</button></td>
-                              </tr>";
-                    }
-                } else {
-                    foreach ($meta['defaults'] as $def) {
-                        echo "<tr>
-                                <td><input type='text' name='spec[$slug][label][]' value='".htmlspecialchars($def)."' class='form-control'></td>
-                                <td><input type='text' name='spec[$slug][value][]' class='form-control'></td>
-                                <td><button type='button' class='btn btn-sm btn-outline-danger' onclick='removeRow(this)'>Hapus</button></td>
-                              </tr>";
-                    }
-                }
-                ?>
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table class="table table-bordered align-middle" id="table-<?= $slug ?>">
+                <thead class="table-light">
+                  <tr><th>Parameter</th><th>Nilai</th><th>Aksi</th></tr>
+                </thead>
+                <tbody>
+                  <?php 
+                  if (!empty($spesifikasi[$slug])):
+                    foreach ($spesifikasi[$slug] as $row): ?>
+                      <tr>
+                        <td><input type="text" name="spec[<?= $slug ?>][label][]" value="<?= htmlspecialchars($row['label']) ?>" class="form-control"></td>
+                        <td><input type="text" name="spec[<?= $slug ?>][value][]" value="<?= htmlspecialchars($row['nilai']) ?>" class="form-control"></td>
+                        <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="removeRow(this)">Hapus</button></td>
+                      </tr>
+                  <?php endforeach; endif; ?>
+                </tbody>
+              </table>
+            </div>
           </div>
         <?php endforeach; ?>
 
@@ -265,9 +276,7 @@ function addRow(slug) {
   `;
   tbody.appendChild(tr);
 }
-function removeRow(btn) {
-  btn.closest('tr').remove();
-}
+function removeRow(btn) { btn.closest('tr').remove(); }
 </script>
 </body>
 </html>

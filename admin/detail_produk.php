@@ -58,7 +58,7 @@ while($r=$resKar->fetch_assoc()) {
 <meta charset="UTF-8">
 <title>Detail Produk</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="admin/css/karoseri.css">
+<link rel="stylesheet" href="css/karoseri.css">
 <style>
   .table-spec td { vertical-align: middle; }
   .group-title { font-weight: 700; font-size: 1.05rem; }

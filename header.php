@@ -40,7 +40,7 @@
           <a href="#products-section">Produk</a>
           <a href="#features">Keunggulan Hino</a>
           <a href="#contact">Contact</a>
-          <a href="artikel.php">Blog & Artikel</a>
+          <a href="admin/artikel.php">Blog & Artikel</a>
         </nav>
       </div>
     </header>

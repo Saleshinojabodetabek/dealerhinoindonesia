@@ -51,7 +51,16 @@
   background: #0b5ed7;
 }
 
-#search-input {
+.produk-section .produk-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.produk-section #search-input {
   padding: 10px 14px;
   border: 1px solid #ddd;
   border-radius: 8px;

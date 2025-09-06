@@ -71,33 +71,33 @@
     </section>
 
     <!-- Contact Section -->
-<div class="wrapper">
-  <h2>Contact Us</h2>
-  <p>Fill out the form below to get in touch with us.</p>
+    <div class="wrapper" id="contact-form">
+      <h2>Contact Us</h2>
+      <p>Fill out the form below to get in touch with us.</p>
 
-  <div class="container">
-    <div class="contact-form">
-        <form id="contactForm" method="POST" action="admin/simpan_kontak.php">
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" required />
+      <div class="container">
+        <div class="contact-form">
+            <form id="contactForm" method="POST" action="admin/simpan_kontak.php">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required />
 
-        <label for="email">Your Email:</label>
-        <input type="email" id="email" name="email" required />
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required />
 
-        <label for="phone">Your Phone Number:</label>
-        <input type="tel" id="phone" name="phone" required />
+            <label for="phone">Your Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required />
 
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="6" required></textarea>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
 
-        <button type="submit"><strong>Submit</strong></button>
-        </form>
+            <button type="submit"><strong>Submit</strong></button>
+            </form>
+        </div>
+
+        <div class="map1">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.0011171998644!2d106.72798237355298!3d-6.130550360104524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f70ab03b3611%3A0x2e6e345ac4d4fd04!2sHINO%20CENGKARENG%20(DGMI)!5e0!3m2!1sid!2sid!4v1753083557671!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
     </div>
-
-    <div class="map1">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.0011171998644!2d106.72798237355298!3d-6.130550360104524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f70ab03b3611%3A0x2e6e345ac4d4fd04!2sHINO%20CENGKARENG%20(DGMI)!5e0!3m2!1sid!2sid!4v1753083557671!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-  </div>
-</div>
 
 <?php include 'footer.php'; ?>

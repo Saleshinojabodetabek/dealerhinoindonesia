@@ -122,7 +122,7 @@
             />
             <h3>
               <a
-                href="https://saleshinoindonesia.com/hino300.html"
+                href="https://dealerhinoindonesia.com/hino300.php"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -142,7 +142,7 @@
             />
             <h3>
               <a
-                href="https://saleshinoindonesia.com/hino500.html"
+                href="https://dealerhinoindonesia.com/hino500.php"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -160,7 +160,7 @@
             />
             <h3>
               <a
-                href="https://saleshinoindonesia.com/hinobus.html"
+                href="https://dealerhinoindonesia.com/hinobus.php"
                 target="_blank"
                 rel="noopener noreferrer"
               >

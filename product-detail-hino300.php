@@ -213,21 +213,17 @@ while ($row = $res_spec->fetch_assoc()) {
 
 <!-- JS -->
 <script>
-document.querySelectorAll('.accordion-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    btn.classList.toggle('active');
-    let content = btn.nextElementSibling;
-    content.style.display = content.style.display === "block" ? "none" : "block";
-  });
-});
-</script>
-<script>
-window.addEventListener("load", () => {
-  // Scroll smooth ke hero-section jika hash ada di URL
-  if(window.location.hash) {
-    const target = document.querySelector(window.location.hash);
+document.querySelectorAll(".tabs .tab").forEach(tab => {
+  tab.addEventListener("click", e => {
+    e.preventDefault(); // cegah reload halaman
+    const hash = tab.getAttribute("href").split("#")[1];
+    const target = document.getElementById(hash);
     if(target) target.scrollIntoView({ behavior: "smooth" });
-  }
+
+    // Optional: jalankan fungsi load produk sesuai tab
+    // currentVarian = tab.textContent.trim();
+    // loadProduk();
+  });
 });
 </script>
 

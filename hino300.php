@@ -158,14 +158,11 @@
 
       // Optional: AJAX tab load (kalau pakai JS untuk filter)
       document.querySelectorAll(".tabs .tab").forEach(tab => {
-        tab.addEventListener("click", e => {
-          // e.preventDefault(); // aktifkan kalau pakai AJAX dan tidak reload
-          const hash = tab.getAttribute("href").split("#")[1];
-          const target = document.getElementById(hash);
+        tab.addEventListener("click", () => {
+          const target = document.getElementById("kategori-section");
           if(target) target.scrollIntoView({ behavior: "smooth" });
         });
       });
-    });
     </script>
 
   </body>

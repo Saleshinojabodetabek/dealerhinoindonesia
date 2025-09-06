@@ -13,6 +13,18 @@ if (!$res || $res->num_rows == 0) {
 }
 $produk = $res->fetch_assoc();
 
+// Ambil data karoseri terkait
+$karoseri = [];
+$qk = $conn->query("
+    SELECT k.nama, k.slug, k.gambar
+    FROM produk_karoseri pk
+    JOIN karoseri k ON pk.karoseri_id = k.id
+    WHERE pk.produk_id = $produk_id
+");
+while ($row = $qk->fetch_assoc()) {
+    $karoseri[] = $row;
+}
+
 // Daftar grup spesifikasi (urutan & label)
 $spec_groups = [
     'PERFORMA' => ['label' => 'PERFORMA'],
@@ -30,7 +42,7 @@ $spec_groups = [
     'BERAT CHASIS' => ['label' => 'BERAT CHASIS'],
 ];
 
-// Ambil spesifikasi dari DB
+// Ambil spesifikasi produk
 $specs = [];
 $res_spec = $conn->query("
     SELECT grup, label, nilai, sort_order
@@ -42,6 +54,7 @@ while ($row = $res_spec->fetch_assoc()) {
     $specs[$row['grup']][] = $row;
 }
 ?>
+
 
 <!-- HTML -->
 
@@ -154,56 +167,59 @@ while ($row = $res_spec->fetch_assoc()) {
   </div>
 </section>
 
-    <!-- Spesifikasi -->
-    <div class="detail-specs">
-    <h2>Spesifikasi</h2>
-    <?php if (!empty($karoseri)): ?>
-        <div class="spec-group">
-        <div class="spec-title">KAROSERI</div>
-        <div class="karoseri-grid">
-            <?php foreach ($karoseri as $k): ?>
-            <div class="karoseri-item">
-                <img src="uploads/karoseri/<?= htmlspecialchars($k['gambar']) ?>" 
-                    alt="<?= htmlspecialchars($k['nama']) ?>">
-                <p><?= htmlspecialchars($k['nama']) ?></p>
-            </div>
-            <?php endforeach; ?>
-        </div>
-        </div>
-    <?php endif; ?>
-    <?php foreach ($spec_groups as $slug => $meta): 
-      if (!empty($specs[$slug])): ?>
-        <div class="spec-group">
-          <div class="spec-title"><?= htmlspecialchars($meta['label']) ?></div>
-          <table class="spec-table">
-            <tbody>
-            <?php foreach ($specs[$slug] as $r): ?>
-              <tr>
-                <td class="spec-label"><?= htmlspecialchars($r['label']) ?></td>
-                <td class="spec-value"><?= htmlspecialchars($r['nilai']) ?></td>
-              </tr>
-            <?php endforeach; ?>
-            </tbody>
-          </table>
-        </div>
-    <?php endif; endforeach; ?>
+<!-- Detail Specs -->
+<section class="detail-specs">
+  <h2>Spesifikasi</h2>
+
+  <!-- Karoseri -->
+  <?php if (!empty($karoseri)): ?>
+  <div class="spec-accordion">
+    <button class="accordion-btn">KAROSERI <span class="icon">+</span></button>
+    <div class="accordion-content">
+      <div class="karoseri-grid">
+        <?php foreach ($karoseri as $k): ?>
+          <div class="karoseri-item">
+            <img src="uploads/karoseri/<?= htmlspecialchars($k['gambar']) ?>" 
+                 alt="<?= htmlspecialchars($k['nama']) ?>">
+            <p><?= htmlspecialchars($k['nama']) ?></p>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
   </div>
+  <?php endif; ?>
+
+  <!-- Spesifikasi Lain -->
+  <?php foreach ($spec_groups as $slug => $meta): 
+    if (!empty($specs[$slug])): ?>
+    <div class="spec-accordion">
+      <button class="accordion-btn"><?= htmlspecialchars($meta['label']) ?> <span class="icon">+</span></button>
+      <div class="accordion-content">
+        <table class="spec-table">
+          <tbody>
+          <?php foreach ($specs[$slug] as $r): ?>
+            <tr>
+              <td class="spec-label"><?= htmlspecialchars($r['label']) ?></td>
+              <td class="spec-value"><?= htmlspecialchars($r['nilai']) ?></td>
+            </tr>
+          <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <?php endif; endforeach; ?>
 </section>
 
-<!-- Karoseri Section -->
-<div class="detail-karoseri">
-  <h2>Karoseri Tersedia</h2>
-  <div class="karoseri-grid">
-    <?php foreach ($karoseri as $k): ?>
-      <div class="karoseri-item">
-        <img src="uploads/karoseri/<?= htmlspecialchars($k['gambar']) ?>" 
-             alt="<?= htmlspecialchars($k['nama']) ?>">
-        <p><?= htmlspecialchars($k['nama']) ?></p>
-      </div>
-    <?php endforeach; ?>
-  </div>
-</div>
-
+<!-- JS -->
+<script>
+document.querySelectorAll('.accordion-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    let content = btn.nextElementSibling;
+    content.style.display = content.style.display === "block" ? "none" : "block";
+  });
+});
+</script>
 
 </body>
 </html>

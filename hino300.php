@@ -49,21 +49,11 @@
     </header>
 
     <!-- Hero Hino 300 -->
-    <section class="hero-product fade-element">
-    <!-- Gambar Hero -->
-    <img src="images/Euro 4 Hino 300.jpeg" alt="Hino 300 Series" class="hero-product-bg" />
-
-    <!-- Overlay supaya teks tetap jelas -->
-    <div class="hero-overlay"></div>
-
-    <!-- Konten -->
-    <div class="hero-product-content">
-        <h1>Hino 300 Series</h1>
-        <p>
-        Truk ringan andalan dengan performa tangguh, irit bahan bakar, dan siap mendukung
-        bisnis Anda di seluruh Indonesia.
-        </p>
-        <a href="#products" class="btn-hero">Lihat Produk</a>
-    </div>
-    </section>
-
+      <section
+        class="about-hero"
+        style="
+          background-image: url('img/Euro 4 Hino 300.jpeg');
+          background-size: cover;
+          background-position: center;
+        "
+      ></section>

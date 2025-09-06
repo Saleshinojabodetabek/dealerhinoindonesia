@@ -60,9 +60,9 @@
         <div class="hamburger-menu">&#9776;</div>
         <nav class="nav links">
           <a href="index.php">Home</a>
-          <a href="#promo-utama">Penawaran Harga</a>
-          <a href="#products-section">Produk</a>
-          <a href="#features">Keunggulan Hino</a>
+          <a href="hino300.php">Hino 300 Series</a>
+          <a href="#products-section">Hino 500 Series</a>
+          <a href="#features">Hino Bus Series</a>
           <a href="contact.php">Contact</a>
           <a href="admin/artikel.php">Blog & Artikel</a>
         </nav>

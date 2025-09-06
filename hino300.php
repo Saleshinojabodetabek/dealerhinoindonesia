@@ -72,3 +72,46 @@
     <div class="tab">MIXER</div>
   </div>
 </div>
+
+<div id="produk-container" class="produk-list"></div>
+
+<!-- Product -->
+ <script>
+  const tabs = document.querySelectorAll(".tab");
+  const container = document.getElementById("produk-container");
+
+  function loadProduk(varian = "ALL") {
+    fetch(`admin/api/get_produk.php?varian=${varian}`)
+      .then(res => res.json())
+      .then(data => {
+        container.innerHTML = "";
+        if (data.length === 0) {
+          container.innerHTML = "<p>Tidak ada produk di kategori ini.</p>";
+        } else {
+          data.forEach(item => {
+            container.innerHTML += `
+              <div class="produk-card">
+                <img src="uploads/${item.gambar}" alt="${item.nama_produk}">
+                <h3>${item.nama_produk}</h3>
+                <p>${item.deskripsi ? item.deskripsi.substring(0,80)+'...' : ''}</p>
+                <a href="produk-detail.php?id=${item.id}">Detail</a>
+              </div>
+            `;
+          });
+        }
+      });
+  }
+
+  // Default load semua
+  loadProduk("ALL");
+
+  // Event klik tab
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      loadProduk(tab.textContent.trim().toUpperCase());
+    });
+  });
+</script>
+

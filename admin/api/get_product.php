@@ -1,9 +1,16 @@
 <?php
-include '../config.php'; // koneksi database
-
+include 'config.php';
 header("Content-Type: application/json; charset=UTF-8");
 
-$query = "SELECT id, nama_produk, gambar, harga, deskripsi FROM produk ORDER BY id DESC";
+$varian = isset($_GET['varian']) ? $_GET['varian'] : 'ALL';
+
+if ($varian == 'ALL') {
+    $query = "SELECT * FROM produk ORDER BY id DESC";
+} else {
+    $varian = $conn->real_escape_string($varian);
+    $query = "SELECT * FROM produk WHERE varian='$varian' ORDER BY id DESC";
+}
+
 $result = $conn->query($query);
 
 $produk = [];

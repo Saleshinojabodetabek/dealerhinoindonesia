@@ -1,0 +1,61 @@
+/* === HERO CONTACT === */
+.hero-contact {
+  position: relative;
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("images/hero-contact.jpg") center/cover no-repeat;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 0 0 20px 20px;
+}
+
+.hero-contact-content {
+  max-width: 700px;
+}
+
+.hero-contact h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.hero-contact p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.btn-contact {
+  padding: 14px 32px;
+  border-radius: 8px;
+  background: #2e7d32;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.btn-contact:hover {
+  background: #27682a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-contact {
+    min-height: 50vh;
+    padding: 2rem 1rem;
+  }
+
+  .hero-contact h1 {
+    font-size: 2rem;
+  }
+
+  .hero-contact p {
+    font-size: 1rem;
+  }
+}

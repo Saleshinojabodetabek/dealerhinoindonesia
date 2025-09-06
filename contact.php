@@ -20,6 +20,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/contact/hero.css" />
 
     <!-- JS -->
     <script src="js/script.js"></script>
@@ -46,3 +47,12 @@
         </nav>
       </div>
     </header>
+
+    <!-- Hero Contact -->
+    <section class="hero-contact fade-element">
+    <div class="hero-contact-content">
+        <h1>Hubungi Kami</h1>
+        <p>Kami siap membantu Anda mendapatkan solusi terbaik untuk kebutuhan truk Hino di seluruh Indonesia.</p>
+        <a href="#contact-form" class="btn-contact">Kirim Pesan</a>
+    </div>
+    </section>

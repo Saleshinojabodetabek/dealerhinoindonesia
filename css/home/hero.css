@@ -97,18 +97,6 @@
   box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
 }
 
-/* Website */
-.hero-buttons .btn-website {
-  background-color: #e53935;
-  color: #fff;
-}
-
-.hero-buttons .btn-website:hover {
-  background-color: #d32f2f;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(227, 57, 53, 0.4);
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .hero h2 {

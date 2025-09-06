@@ -55,9 +55,10 @@
 </section>
 
 <!-- Produk Pilihan -->
+<div class="kategori-section">
   <div class="kategori">
     <h1>HINO 300 Series</h1>
-    <img src="images/euro4.png" alt="Euro4 Logo">
+    <img src="euro4-logo.png" alt="Euro4 Logo">
   </div>
 
   <div class="tabs">
@@ -66,3 +67,4 @@
     <div class="tab">DUMP</div>
     <div class="tab">MIXER</div>
   </div>
+</div>

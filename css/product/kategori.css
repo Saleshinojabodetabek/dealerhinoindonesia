@@ -1,39 +1,58 @@
+/* ==========================
+   Section Kategori
+========================== */
+.kategori-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: Arial, sans-serif;
+}
+
 .kategori {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .kategori h1 {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
 }
 
 .kategori img {
-  height: 30px;
+  height: 32px;
 }
 
+/* ==========================
+   Tabs
+========================== */
 .tabs {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .tab {
-  padding: 12px 24px;
-  background: #f5f5f5;
-  font-weight: bold;
+  padding: 12px 28px;
+  background: #f7f7f7;
+  font-weight: 600;
   text-transform: uppercase;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e0e0e0;
 }
 
 .tab:hover {
-  background: #e0e0e0;
+  background: #eeeeee;
+  transform: translateY(-2px);
 }
 
 .tab.active {
-  color: red;
-  background: #f5f5f5;
+  color: #d32f2f; /* merah elegan */
+  background: #fff5f5; /* merah soft background */
+  border-color: #d32f2f;
 }

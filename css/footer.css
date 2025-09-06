@@ -1,22 +1,5 @@
 /* === FOOTER === */
 footer {
-  background: #222;
-  color: #eee;
-  text-align: center;
-  padding: 1.5rem 1rem;
-  font-size: 0.9rem;
-}
-
-footer a {
-  color: #2e7d32;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* ===== Footer Styles ===== */
-footer {
   background: #1a1a1a; /* warna gelap elegan */
   color: #ddd;
   padding: 50px 20px;
@@ -63,6 +46,10 @@ footer {
   margin-bottom: 10px;
 }
 
+.footer-logo p {
+  text-align: left;
+}
+
 .publisher-link {
   margin-top: 5px;
   font-weight: bold;
@@ -94,11 +81,19 @@ footer {
   stroke: #fff;
 }
 
+/* === Rapiin Kontak === */
+.footer-contact p,
+.footer-address p {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* jarak icon dan teks */
+  margin: 0;
+}
+
 .footer-contact p svg,
 .footer-address p svg {
-  margin-right: 8px;
   stroke: #ffcc00;
-  vertical-align: middle;
+  flex-shrink: 0; /* biar tidak geser */
 }
 
 .footer-barcode {
@@ -115,13 +110,9 @@ footer {
   padding: 5px;
 }
 
-.footer-logo p {
-  text-align: left;
-}
-
 .footer-bottom {
   text-align: center;
-  padding: 20px 0 0px; /* atas 10px, bawah 5px */
+  padding: 20px 0 0px;
   font-size: 14px;
   color: #aaa;
   border-top: 1px solid #333;
@@ -129,7 +120,7 @@ footer {
 }
 
 .footer-bottom p {
-  margin: 0; /* hilangkan jarak bawaan paragraf */
+  margin: 0;
 }
 
 /* Responsive Layout */
@@ -139,6 +130,9 @@ footer {
   }
   .footer-section {
     align-items: center;
+  }
+  .footer-logo p {
+    text-align: center;
   }
   .social-icons {
     justify-content: center;

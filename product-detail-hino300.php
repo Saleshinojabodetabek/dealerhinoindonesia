@@ -224,3 +224,5 @@ document.querySelectorAll('.accordion-btn').forEach(btn => {
 
 </body>
 </html>
+
+<?php include 'footer.php'; ?>

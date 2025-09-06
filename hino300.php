@@ -49,6 +49,11 @@
     </header>
 
 <!-- Hero Hino 300 -->
-<section class="hero-product">
-  <img src="images/Euro 4 Hino 300.jpeg" alt="Hino 300 Series" class="hero-product-img" />
-</section>
+      <section
+        class="about-hero"
+        style="
+          background-image: url('img/Euro 4 Hino 300.jpeg');
+          background-size: cover;
+          background-position: center;
+        "
+      ></section>

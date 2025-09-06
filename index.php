@@ -47,7 +47,7 @@
           <a href="#promo-utama">Penawaran Harga</a>
           <a href="#products-section">Produk</a>
           <a href="#features">Keunggulan Hino</a>
-          <a href="#contact">Contact</a>
+          <a href="contact.php">Contact</a>
           <a href="admin/artikel.php">Blog & Artikel</a>
         </nav>
       </div>

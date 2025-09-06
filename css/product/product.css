@@ -77,76 +77,32 @@
 }
 
 /* ==============================
-   Produk Controls (Tabs + Search)
+   Controls (Tabs + Search)
 ============================== */
 .produk-controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* tabs kiri, search kanan */
   align-items: center;
   margin: 20px 0 40px;
-  gap: 10px;
-  flex-wrap: nowrap; /* tetap sejajar, tidak turun */
-  overflow-x: auto;  /* kalau sempit, bisa geser */
-  -webkit-overflow-scrolling: touch;
-}
-
-.produk-controls::-webkit-scrollbar {
-  display: none; /* sembunyikan scrollbar di HP */
+  flex-wrap: wrap;
+  gap: 14px;
 }
 
 .produk-controls .tabs {
   display: flex;
-  gap: 10px;
-  flex: 1; /* biar fleksibel */
-  min-width: 0; /* biar bisa mengecil */
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
-.tab {
-  flex-shrink: 1; /* tab boleh mengecil */
-  padding: 10px 20px;
-  background: #f7f7f7;
-  font-weight: 600;
-  font-size: 14px;
-  text-transform: uppercase;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  border: 1px solid #e0e0e0;
-  white-space: nowrap; /* teks tetap satu baris */
-}
-
-.tab:hover {
-  background: #eeeeee;
-  transform: translateY(-2px);
-}
-
-.tab.active {
-  color: #d32f2f;
-  background: transparent;
-  border-color: transparent;
-  box-shadow: none;
-}
-
-.tab.active::after {
-  content: "";
-  position: absolute;
-  left: 20%;
-  bottom: -6px;
-  width: 60%;
-  height: 3px;
-  background: #d32f2f;
-  border-radius: 2px;
-}
-
-/* Search bar */
+/* Search Bar */
 #search-input {
-  flex-shrink: 0; /* jangan mengecil berlebihan */
-  padding: 8px 12px;
+  padding: 10px 14px;
   border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 13px;
-  width: 180px; /* lebih kecil di mobile */
+  border-radius: 8px;
+  font-size: 14px;
+  width: 240px;
   max-width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
 }
 
@@ -157,17 +113,39 @@
 }
 
 /* ==============================
-   Responsive (HP)
+   Responsive
 ============================== */
+@media (max-width: 992px) {
+  .kategori h1 {
+    font-size: 28px;
+  }
+
+  .kategori img {
+    height: 28px;
+  }
+}
+
 @media (max-width: 768px) {
-  .tab {
-    padding: 8px 14px;   /* tab lebih kecil */
-    font-size: 12px;     /* teks lebih kecil */
+  .kategori {
+    flex-direction: row; /* tetap sejajar */
+    justify-content: space-between;
+  }
+
+  .kategori h1 {
+    font-size: 22px;
+  }
+
+  .kategori img {
+    height: 24px;
+  }
+
+  .produk-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
   }
 
   #search-input {
-    width: 140px;        /* search lebih kecil */
-    font-size: 12px;
-    padding: 6px 10px;
+    width: 100%; /* full width di HP */
   }
 }

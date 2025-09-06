@@ -1,17 +1,12 @@
-/* === HERO PRODUCT (Full Image) === */
 .hero-product {
   width: 100%;
-  height: auto;
-  max-height: 100vh; /* Pastikan tidak lebih tinggi dari layar */
+  height: 100vh; /* penuh setinggi layar */
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .hero-product-img {
   width: 100%;
-  height: auto;
-  object-fit: contain; /* Gambar ditampilkan utuh tanpa cropping */
+  height: 100%;
+  object-fit: cover; /* isi penuh, bisa ada cropping */
   display: block;
 }

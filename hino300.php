@@ -74,7 +74,7 @@
 </div>
 
 <!-- Product -->
- <div id="produk-list" class="produk-grid"></div>
+<div id="produk-list" class="produk-grid"></div>
 
 <script>
 // Fungsi ambil produk dari API
@@ -89,7 +89,7 @@ function loadProduk(varian = 'ALL') {
         data.forEach(p => {
           html += `
             <div class="produk-card">
-              <img src="admin/uploads/${p.gambar}" alt="${p.nama_produk}">
+              <img src="admin/uploads/produk/${p.gambar}" alt="${p.nama_produk}">
               <h3>${p.nama_produk}</h3>
               <p>${p.deskripsi.substring(0,100)}...</p>
               <a href="produk-detail.php?id=${p.id}" class="btn-detail">Lihat Detail</a>
@@ -114,7 +114,7 @@ document.querySelectorAll(".tabs .tab").forEach(tab => {
   tab.addEventListener("click", function() {
     document.querySelectorAll(".tabs .tab").forEach(t => t.classList.remove("active"));
     this.classList.add("active");
-    loadProduk(this.textContent.trim()); // kirim varian: ALL, CARGO, DUMP, MIXER
+    loadProduk(this.textContent.trim()); // isi textContent: ALL, CARGO, DUMP, MIXER
   });
 });
 </script>

@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include 'admin/config.php';
 
 // Ambil ID produk dari URL
 $produk_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;

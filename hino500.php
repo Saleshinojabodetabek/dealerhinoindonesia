@@ -116,7 +116,7 @@
                 <div class="produk-card">
                 <img src="uploads/produk/${p.gambar}" alt="${p.nama_produk}">
                 <h3>${p.nama_produk}</h3>
-                <a href="product-detail-hino300.php?id=${p.id}#hero-section" class="btn-detail">Lihat Detail</a>
+                <a href="product-detail-hino500.php?id=${p.id}#hero-section" class="btn-detail">Lihat Detail</a>
                 </div>
             `;
             });

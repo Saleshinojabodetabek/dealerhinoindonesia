@@ -223,6 +223,31 @@
       </section>
     </main>
 
+    <!-- Blog Section -->
+    <section class="blog-section">
+      <div class="container">
+        <h2>Blog & Artikel</h2>
+        <p>Dapatkan informasi terbaru seputar Truk Hino, perawatan, dan promo terbaik.</p>
+        <div class="blog-grid">
+          <?php
+            $artikelData = json_decode(file_get_contents("https://saleshinoindonesia.com/admin/api/get_artikel.php"), true);
+            if (is_array($artikelData)) {
+              $terbaru = array_slice($artikelData, 0, 3);
+              foreach ($terbaru as $artikel):
+          ?>
+            <div class="blog-card">
+              <img src="<?= htmlspecialchars($artikel['gambar']) ?>" alt="<?= htmlspecialchars($artikel['judul']) ?>" />
+              <div class="blog-card-content">
+                <h3><a href="detail_artikel.php?id=<?= $artikel['id'] ?>"><?= htmlspecialchars($artikel['judul']) ?></a></h3>
+                <p><?= substr(strip_tags($artikel['isi']), 0, 100) ?>...</p>
+                <a href="detail_artikel.php?id=<?= $artikel['id'] ?>" class="read-more">Baca Selengkapnya</a>
+              </div>
+            </div>
+          <?php endforeach; } else { echo "<p>Tidak ada artikel ditemukan.</p>"; } ?>
+        </div>
+      </div>
+    </section>
+
     <!-- Load Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 </main>

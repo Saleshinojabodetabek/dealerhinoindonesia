@@ -13,19 +13,6 @@ if (!$res || $res->num_rows == 0) {
 }
 $produk = $res->fetch_assoc();
 
-// Ambil karoseri produk
-$karoseri = [];
-$res_karoseri = $conn->query("
-    SELECT k.id, k.nama, k.slug, k.series, k.gambar 
-    FROM produk_karoseri pk
-    JOIN karoseri k ON pk.karoseri_id = k.id
-    WHERE pk.produk_id = $produk_id
-");
-while ($row = $res_karoseri->fetch_assoc()) {
-    $karoseri[] = $row;
-}
-
-
 // Daftar grup spesifikasi (urutan & label)
 $spec_groups = [
     'PERFORMA' => ['label' => 'PERFORMA'],
@@ -167,9 +154,23 @@ while ($row = $res_spec->fetch_assoc()) {
   </div>
 </section>
 
-  <!-- Spesifikasi -->
-  <div class="detail-specs">
+    <!-- Spesifikasi -->
+    <div class="detail-specs">
     <h2>Spesifikasi</h2>
+    <?php if (!empty($karoseri)): ?>
+        <div class="spec-group">
+        <div class="spec-title">KAROSERI</div>
+        <div class="karoseri-grid">
+            <?php foreach ($karoseri as $k): ?>
+            <div class="karoseri-item">
+                <img src="uploads/karoseri/<?= htmlspecialchars($k['gambar']) ?>" 
+                    alt="<?= htmlspecialchars($k['nama']) ?>">
+                <p><?= htmlspecialchars($k['nama']) ?></p>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        </div>
+    <?php endif; ?>
     <?php foreach ($spec_groups as $slug => $meta): 
       if (!empty($specs[$slug])): ?>
         <div class="spec-group">

@@ -3,9 +3,9 @@
 ========================== */
 .kategori-section {
   max-width: 1200px;
-  margin: 60px auto 40px; /* tambah jarak atas (60px) */
+  margin: 60px auto 40px; /* jarak atas */
   padding: 0 20px;
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .kategori {
@@ -16,13 +16,14 @@
 }
 
 .kategori h1 {
-  font-size: 30px; /* lebih besar */
-  font-weight: 700;
+  font-size: 32px; /* lebih besar */
+  font-weight: 700; /* bold tebal */
   margin: 0;
+  color: #222; /* teks lebih kuat */
 }
 
 .kategori img {
-  height: 36px; /* sedikit lebih besar */
+  height: 38px; /* lebih besar */
 }
 
 /* ==========================
@@ -35,10 +36,10 @@
 }
 
 .tab {
-  padding: 14px 32px; /* lebih besar */
+  padding: 14px 32px;
   background: #f7f7f7;
   font-weight: 600;
-  font-size: 15px; /* sedikit lebih besar */
+  font-size: 15px;
   text-transform: uppercase;
   border-radius: 6px;
   cursor: pointer;
@@ -53,7 +54,38 @@
 }
 
 .tab.active {
-  color: #d32f2f; /* merah elegan */
-  background: #fff5f5; /* merah soft background */
+  color: #d32f2f;
+  background: #fff5f5;
   border-color: #d32f2f;
+}
+
+/* ==========================
+   Responsive
+========================== */
+@media (max-width: 768px) {
+  .kategori {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .kategori h1 {
+    font-size: 26px;
+  }
+
+  .kategori img {
+    height: 32px;
+  }
+
+  .tabs {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .tab {
+    width: 100%; /* full width di HP */
+    text-align: center; /* rata tengah */
+    padding: 12px;
+  }
 }

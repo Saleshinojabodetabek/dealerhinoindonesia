@@ -23,6 +23,10 @@
     <link rel="stylesheet" href="css/product/hero.css" />
     <link rel="stylesheet" href="css/product/kategori.css" />
 
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+
     <!-- JS -->
     <script src="js/script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
@@ -57,7 +61,7 @@
 <!-- Produk Pilihan -->
 <div class="kategori-section">
   <div class="kategori">
-    <h1>HINO 300 Series</h1>
+    <h1>Hino 300 Series</h1>
     <img src="images/euro4.png" alt="Euro4 Logo">
   </div>
 

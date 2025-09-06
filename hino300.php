@@ -137,21 +137,25 @@
 
     // Event click tab kategori
     document.addEventListener("DOMContentLoaded", () => {
-      // Scroll smooth ketika halaman dibuka dengan hash
+      // Scroll smooth jika halaman dibuka dengan hash
       if(window.location.hash) {
         const target = document.querySelector(window.location.hash);
-        if(target) target.scrollIntoView({ behavior: "smooth" });
+        if(target){
+          const yOffset = -80; // sesuaikan tinggi header
+          const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
       }
 
       // Event click tab
       document.querySelectorAll(".tabs .tab").forEach(tab => {
         tab.addEventListener("click", (e) => {
-          e.preventDefault(); // cegah reload halaman
+          e.preventDefault();
 
           // Scroll ke kategori-section dengan offset
           const target = document.getElementById("kategori-section");
-          if(target) {
-            const yOffset = -100; // jarak 20px dari atas (sesuaikan jika ada header fixed)
+          if(target){
+            const yOffset = -80; // sesuaikan tinggi header
             const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: "smooth" });
           }

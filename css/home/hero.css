@@ -1,0 +1,132 @@
+/* ================================
+   Hero Section
+   ================================ */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  overflow: hidden;
+}
+
+/* Slider */
+.hero .slider {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero .slider img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero .slider img.active {
+  opacity: 1;
+}
+
+/* Overlay */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+
+/* Content */
+.hero .container {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  width: 90%;
+  color: #fff;
+  text-align: center;
+  padding: 30px 20px;
+  background: rgba(0, 0, 0, 0.6); /* agar teks tetap terbaca */
+  border-radius: 12px;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Buttons */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.hero-buttons .btn {
+  display: inline-block;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/* WhatsApp */
+.hero-buttons .btn-contact {
+  background-color: #25d366;
+  color: #fff;
+}
+
+.hero-buttons .btn-contact:hover {
+  background-color: #1ebe5d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+}
+
+/* Website */
+.hero-buttons .btn-website {
+  background-color: #e53935;
+  color: #fff;
+}
+
+.hero-buttons .btn-website:hover {
+  background-color: #d32f2f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 57, 53, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h2 {
+    font-size: 1.6rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .hero-buttons .btn {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+}

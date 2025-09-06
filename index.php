@@ -16,8 +16,13 @@
     <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="images/favicon.png" />
     <link rel="canonical" href="https://www.dealerhinoindonesia.id/" />
+
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/home/hero.css" />
+
+    <!-- JS -->
     <script src="js/script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
   </head>
@@ -41,3 +46,20 @@
         </nav>
       </div>
     </header>
+
+    <!-- Hero -->
+    <section class="hero">
+    <div class="slider">
+        <img src="images/Euro 4 Hino 300.jpeg" class="slide active" alt="Hino 300 Series" loading="lazy"/>
+        <img src="images/Euro 4 Hino 500.jpeg" class="slide" alt="Hino 500 Series" loading="lazy"/>
+        <img src="images/Euro 4 Hino Bus.jpeg" class="slide" alt="Hino Bus Series" loading="lazy"/>
+    </div>
+    <div class="container">
+        <h2>Dealer Resmi Hino Indonesia – Pilihan Tepat untuk Bisnis Anda</h2>
+        <p>Dealer Resmi Hino Terpercaya – Jual Truk Hino Dutro, Ranger & Bus. Promo Harga Terbaik, Cicilan Ringan & Ready Stock. Hubungi Kami Sekarang!</p>
+        <div class="hero-buttons">
+        <a href="https://wa.me/+6285975287684?text=Halo%20Saya%20Dapat%20Nomor%20Anda%20Dari%20Google" class="btn btn-contact" target="_blank">Hubungi Nathan Sekarang</a>
+        <a href="https://saleshinoindonesia.com" class="btn btn-website" target="_blank">Kunjungi Website Utama</a>
+        </div>
+    </div>
+    </section>

@@ -73,45 +73,48 @@
   </div>
 </div>
 
-<div id="produk-container" class="produk-list"></div>
-
 <!-- Product -->
- <script>
-  const tabs = document.querySelectorAll(".tab");
-  const container = document.getElementById("produk-container");
+ <div id="produk-list" class="produk-grid"></div>
 
-  function loadProduk(varian = "ALL") {
-    fetch(`admin/api/get_product.php?varian=${varian}`)
-      .then(res => res.json())
-      .then(data => {
-        container.innerHTML = "";
-        if (data.length === 0) {
-          container.innerHTML = "<p>Tidak ada produk di kategori ini.</p>";
-        } else {
-          data.forEach(item => {
-            container.innerHTML += `
-              <div class="produk-card">
-                <img src="uploads/${item.gambar}" alt="${item.nama_produk}">
-                <h3>${item.nama_produk}</h3>
-                <p>${item.deskripsi ? item.deskripsi.substring(0,80)+'...' : ''}</p>
-                <a href="produk-detail.php?id=${item.id}">Detail</a>
-              </div>
-            `;
-          });
-        }
-      });
-  }
-
-  // Default load semua
-  loadProduk("ALL");
-
-  // Event klik tab
-  tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      tabs.forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      loadProduk(tab.textContent.trim().toUpperCase());
+<script>
+// Fungsi ambil produk dari API
+function loadProduk(varian = 'ALL') {
+  fetch("admin/api/get_product.php?varian=" + varian)
+    .then(res => res.json())
+    .then(data => {
+      let html = "";
+      if (data.length === 0) {
+        html = "<p>Tidak ada produk untuk kategori ini.</p>";
+      } else {
+        data.forEach(p => {
+          html += `
+            <div class="produk-card">
+              <img src="admin/uploads/${p.gambar}" alt="${p.nama_produk}">
+              <h3>${p.nama_produk}</h3>
+              <p>${p.deskripsi.substring(0,100)}...</p>
+              <a href="produk-detail.php?id=${p.id}" class="btn-detail">Lihat Detail</a>
+            </div>
+          `;
+        });
+      }
+      document.getElementById("produk-list").innerHTML = html;
+    })
+    .catch(err => {
+      document.getElementById("produk-list").innerHTML =
+        "<p style='color:red'>Gagal load produk.</p>";
+      console.error("Error load produk:", err);
     });
-  });
-</script>
+}
 
+// Load semua produk pertama kali
+loadProduk();
+
+// Event listener untuk tab kategori
+document.querySelectorAll(".tabs .tab").forEach(tab => {
+  tab.addEventListener("click", function() {
+    document.querySelectorAll(".tabs .tab").forEach(t => t.classList.remove("active"));
+    this.classList.add("active");
+    loadProduk(this.textContent.trim()); // kirim varian: ALL, CARGO, DUMP, MIXER
+  });
+});
+</script>

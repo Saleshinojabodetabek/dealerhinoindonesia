@@ -211,14 +211,32 @@ while ($row = $res_spec->fetch_assoc()) {
   <?php endif; endforeach; ?>
 </section>
 
-<!-- JS -->
+<!-- JS Accordion -->
 <script>
 document.querySelectorAll('.accordion-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     btn.classList.toggle('active');
-    let content = btn.nextElementSibling;
-    content.style.display = content.style.display === "block" ? "none" : "block";
+
+    const content = btn.nextElementSibling;
+
+    if (content.style.maxHeight) {
+      // Jika sudah terbuka, tutup
+      content.style.maxHeight = null;
+    } else {
+      // Tutup semua accordion lain (opsional)
+      document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
+
+      // Buka accordion saat ini
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
   });
+});
+
+// Optional: atur awal semua accordion tertutup
+document.querySelectorAll('.accordion-content').forEach(c => {
+  c.style.maxHeight = null;
+  c.style.overflow = "hidden";
+  c.style.transition = "max-height 0.3s ease";
 });
 </script>
 

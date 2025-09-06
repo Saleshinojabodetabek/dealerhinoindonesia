@@ -213,20 +213,14 @@ while ($row = $res_spec->fetch_assoc()) {
 
 <!-- JS -->
 <script>
-document.querySelectorAll(".tabs .tab").forEach(tab => {
-  tab.addEventListener("click", e => {
-    e.preventDefault(); // cegah reload halaman
-    const hash = tab.getAttribute("href").split("#")[1];
-    const target = document.getElementById(hash);
-    if(target) target.scrollIntoView({ behavior: "smooth" });
-
-    // Optional: jalankan fungsi load produk sesuai tab
-    // currentVarian = tab.textContent.trim();
-    // loadProduk();
+document.querySelectorAll('.accordion-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    let content = btn.nextElementSibling;
+    content.style.display = content.style.display === "block" ? "none" : "block";
   });
 });
 </script>
-
 
 </body>
 </html>

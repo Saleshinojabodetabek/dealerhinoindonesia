@@ -6,11 +6,12 @@
       <div class="footer-container">
         <div class="footer-section footer-logo">
           <img src="images/logo3.png" alt="Hino Logo" loading="lazy" />
-          <p>Nathan Hino siap membantu Anda mendapatkan truk Hino baru dengan harga kompetitif untuk seluruh Indonesia...</p>
+          <p>Jangan lewatkan kesempatan terbaik memiliki truk Hino baru! Nathan Hino memberikan promo harga menarik, DP ringan, dan unit ready stock untuk seluruh Indonesia. Klik WhatsApp sekarang untuk penawaran khusus!</p>
         </div>
         <div class="footer-section footer-address">
           <h3>Alamat</h3>
-          <p><i data-feather="map-pin"></i> Golf Lake Ruko Venice, Jl. Lkr. Luar Barat No.78...</p>
+          <p><i data-feather="map-pin"></i> Golf Lake Ruko Venice, Jl. Lkr. Luar Barat No.78 Blok B, RT.9/RW.14, Cengkareng Tim., Kecamatan Cengkareng, JAKARTA, Daerah Khusus Ibukota Jakarta 11730
+</p>
           <div class="social-icons">
             <a href="https://www.instagram.com/saleshinojabodetabek"><i data-feather="instagram"></i></a>
             <a href="https://www.facebook.com/profile.php?id=61573843992250"><i data-feather="facebook"></i></a>

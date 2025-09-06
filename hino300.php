@@ -81,7 +81,7 @@
   const container = document.getElementById("produk-container");
 
   function loadProduk(varian = "ALL") {
-    fetch(`admin/api/get_produk.php?varian=${varian}`)
+    fetch(`admin/api/get_product.php?varian=${varian}`)
       .then(res => res.json())
       .then(data => {
         container.innerHTML = "";

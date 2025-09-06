@@ -1,7 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 include __DIR__ . '/../config.php';  // naik satu folder ke admin lalu ambil config.php
 header("Content-Type: application/json; charset=UTF-8");
 

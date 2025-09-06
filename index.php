@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/home/hero.css" />
+    <link rel="stylesheet" href="css/home/promoutama.css" />
 
     <!-- JS -->
     <script src="js/script.js"></script>
@@ -62,4 +63,43 @@
         <a href="https://wa.me/+6285975287684?text=Halo%20Saya%20Dapat%20Nomor%20Anda%20Dari%20Google" class="btn btn-contact" target="_blank">Hubungi Nathan Sekarang</a>
         </div>
     </div>
+    </section>
+
+    <!-- Section: Promo Utama -->
+    <section id="promo-utama" class="promo-section fade-element">
+    <div class="promo-text">
+        <h2>
+        Dapatkan Harga dan Penawaran Terbaik Langsung dari Dealer Resmi Hino
+        Indonesia
+        </h2>
+        <ul>
+        <li>Ingin harga terbaik untuk semua jenis truk Hino?</li>
+        <li>Bingung memilih kendaraan yang tepat untuk bisnis Anda?</li>
+        <li>Butuh pelayanan cepat, ramah, dan profesional?</li>
+        <li>
+            Hubungi Nathan Hino sekarang juga dan dapatkan solusi terbaik!
+        </li>
+        </ul>
+        <p>
+        Anda berada di tempat yang tepat! Nathan Hino siap membantu Anda
+        mendapatkan truk Hino baru dengan harga kompetitif untuk seluruh
+        Indonesia, <strong>terutama di Jabodetabek dan Jawa Barat</strong>.
+        Pelayanan cepat, terpercaya, dan tanpa ribet menanti Anda!
+        </p>
+        <div class="promo-buttons">
+        <a
+            href="https://wa.me/6285975287684"
+            class="btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Konsultasi Pembelian</a
+        >
+        </div>
+    </div>
+    <img
+        src="images/hino.png"
+        alt="Truk Hino Hijau"
+        loading="lazy"
+        class="promo-main-image"
+    />
     </section>

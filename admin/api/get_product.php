@@ -40,7 +40,7 @@ $result = $stmt->get_result();
 $produk = [];
 while ($row = $result->fetch_assoc()) {
     $series = $row['nama_series'];
-    unset($row['nama_series']);
+    unset($row['nama_series']); // hapus biar rapih
     $produk[$series][] = $row;
 }
 

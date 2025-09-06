@@ -9,21 +9,26 @@ $params = [];
 $types = '';
 
 if ($varian !== 'ALL') {
-    $where[] = "varian = ?";
+    $where[] = "p.varian = ?";
     $params[] = $varian;
     $types   .= "s";
 }
 
 if (!empty($search)) {
-    $where[] = "nama_produk LIKE ?";
+    $where[] = "p.nama_produk LIKE ?";
     $params[] = "%" . $search . "%";
     $types   .= "s";
 }
 
 $whereSql = $where ? "WHERE " . implode(" AND ", $where) : "";
 
-// Ambil data produk
-$sql = "SELECT id, nama_produk, gambar FROM produk $whereSql ORDER BY id DESC";
+// Ambil data produk + join ke series
+$sql = "SELECT p.id, p.nama_produk, p.gambar, s.nama_series
+        FROM produk p
+        JOIN series s ON p.series_id = s.id
+        $whereSql
+        ORDER BY s.id, p.id DESC";
+
 $stmt = $conn->prepare($sql);
 if ($params) {
     $stmt->bind_param($types, ...$params);
@@ -31,10 +36,13 @@ if ($params) {
 $stmt->execute();
 $result = $stmt->get_result();
 
+// Kelompokkan berdasarkan series
 $produk = [];
 while ($row = $result->fetch_assoc()) {
-    $produk[] = $row;
+    $series = $row['nama_series'];
+    unset($row['nama_series']);
+    $produk[$series][] = $row;
 }
 
 header('Content-Type: application/json');
-echo json_encode($produk);
+echo json_encode($produk, JSON_PRETTY_PRINT);

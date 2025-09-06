@@ -1,0 +1,74 @@
+/* === HERO PRODUK HINO 300 === */
+.hero-product {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("images/Euro 4 Hino 300.jpeg") no-repeat center center/cover;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
+.hero-product-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(27, 94, 32, 0.85),
+    rgba(46, 125, 50, 0.65)
+  );
+  z-index: 1;
+}
+
+.hero-product-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  padding: 0 1rem;
+  text-align: left;
+  color: #fff;
+}
+
+.hero-product-text h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-product-text p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.btn-hero {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #ffcc00;
+  color: #1a1a1a;
+  border-radius: 8px;
+  font-weight: 700;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-hero:hover {
+  background: #e6b800;
+  transform: translateY(-2px);
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .hero-product {
+    height: 60vh;
+    border-radius: 0;
+  }
+  .hero-product-text h1 {
+    font-size: 2rem;
+  }
+  .hero-product-text p {
+    font-size: 1rem;
+  }
+}

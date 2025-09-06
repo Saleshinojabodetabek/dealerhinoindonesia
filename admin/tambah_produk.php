@@ -26,12 +26,11 @@ $spec_groups = [
     'Berat_Chasis' => ['label'=>'BERAT CHASIS','defaults'=>['Depan & Belakang']],
 ];
 
-// Proses simpan produk sama seperti sebelumnya
+// Proses simpan produk
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $series_id   = $conn->real_escape_string($_POST['series_id'] ?? '');
     $varian      = $conn->real_escape_string($_POST['varian'] ?? '');
     $nama_produk = $conn->real_escape_string($_POST['nama_produk'] ?? '');
-    $deskripsi   = $conn->real_escape_string($_POST['deskripsi'] ?? '');
 
     $upload_dir = "../uploads/produk/";
     if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
@@ -42,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($_FILES['gambar']['tmp_name'], $upload_dir . $gambar);
     }
 
-    $sql = "INSERT INTO produk (series_id, varian, nama_produk, deskripsi, gambar)
-            VALUES ('$series_id', '$varian', '$nama_produk', '$deskripsi', '$gambar')";
+    $sql = "INSERT INTO produk (series_id, varian, nama_produk, gambar)
+            VALUES ('$series_id', '$varian', '$nama_produk', '$gambar')";
 
     if (!$conn->query($sql)) {
         $error = "Gagal menyimpan produk: " . $conn->error;
@@ -155,20 +154,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="Mixer">Mixer</option>
           </select>
         </div>
-        <!-- Nama & Deskripsi -->
+        <!-- Nama Produk -->
         <div class="mb-3">
           <label class="form-label">Nama Produk</label>
           <input type="text" name="nama_produk" class="form-control" required>
         </div>
-        <div class="mb-3">
-          <label class="form-label">Deskripsi</label>
-          <textarea name="deskripsi" class="form-control" rows="3"></textarea>
-        </div>
+
         <!-- Gambar -->
         <div class="mb-3">
           <label class="form-label">Gambar Produk</label>
           <input type="file" name="gambar" class="form-control" accept="image/*" required>
         </div>
+
         <!-- Pilih Karoseri -->
         <div class="mb-4">
           <label class="form-label">Pilih Karoseri</label>

@@ -86,7 +86,7 @@
   margin: 20px 0 40px;
   gap: 10px;
   flex-wrap: nowrap; /* tetap sejajar, tidak turun */
-  overflow-x: auto; /* kalau sempit, bisa geser */
+  overflow-x: auto;  /* kalau sempit, bisa geser */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -161,12 +161,12 @@
 ============================== */
 @media (max-width: 768px) {
   .tab {
-    padding: 8px 14px; /* tab lebih kecil */
-    font-size: 12px; /* teks lebih kecil */
+    padding: 8px 14px;   /* tab lebih kecil */
+    font-size: 12px;     /* teks lebih kecil */
   }
 
   #search-input {
-    width: 140px; /* search lebih kecil */
+    width: 140px;        /* search lebih kecil */
     font-size: 12px;
     padding: 6px 10px;
   }

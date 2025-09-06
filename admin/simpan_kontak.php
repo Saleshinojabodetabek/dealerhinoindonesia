@@ -1,13 +1,14 @@
 <?php
-include 'config.php'; // karena config.php ada di folder yang sama (admin/)
+include 'config.php'; // config.php ada di folder admin
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nama = $conn->real_escape_string($_POST['name']);
-    $telepon = $conn->real_escape_string($_POST['phone']);
-    $pesan = $conn->real_escape_string($_POST['message']);
+    $name = $conn->real_escape_string($_POST['name']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $phone = $conn->real_escape_string($_POST['phone']);
+    $message = $conn->real_escape_string($_POST['message']);
 
-    $sql = "INSERT INTO kontak (nama, telepon, pesan) 
-            VALUES ('$nama', '$telepon', '$pesan')";
+    $sql = "INSERT INTO contact_messages (name, email, phone, message) 
+            VALUES ('$name', '$email', '$phone', '$message')";
 
     if ($conn->query($sql) === TRUE) {
         echo "<script>

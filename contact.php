@@ -77,9 +77,12 @@
 
   <div class="container">
     <div class="contact-form">
-      <form id="contactForm" method="POST" action="admin/simpan_kontak.php">
+        <form id="contactForm" method="POST" action="admin/simpan_kontak.php">
         <label for="name">Your Name:</label>
         <input type="text" id="name" name="name" required />
+
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required />
 
         <label for="phone">Your Phone Number:</label>
         <input type="tel" id="phone" name="phone" required />
@@ -88,7 +91,7 @@
         <textarea id="message" name="message" rows="6" required></textarea>
 
         <button type="submit"><strong>Submit</strong></button>
-      </form>
+        </form>
     </div>
 
     <div class="map1">

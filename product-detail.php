@@ -140,11 +140,16 @@ while ($row = $res_spec->fetch_assoc()) {
       </div>
     </div>
 
-    <!-- Hero Detail -->
-    <section class="detail-hero">
+    <!-- Hero Section -->
+    <section class="hero-diagonal">
+    <div class="hero-text">
+        <h3>TRUK</h3>
+        <h1>115 SD STD - Euro4</h1>
+    </div>
+    <div class="hero-image">
         <img src="uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" 
             alt="<?= htmlspecialchars($produk['nama_produk']) ?>">
-        <h1><?= htmlspecialchars($produk['nama_produk']) ?></h1>
+    </div>
     </section>
 
     <!-- Konten Detail -->

@@ -1,116 +1,78 @@
 /* =======================
-   Hero Detail
+   HERO DIAGONAL
 ======================= */
-.detail-hero {
+.hero-diagonal {
   position: relative;
-  width: 100%;
-  height: 380px;
-  background: #d32f2f; /* merah Hino */
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
+  padding: 60px 80px;
+  height: 420px;
   overflow: hidden;
-}
-.detail-hero img {
-  max-height: 320px;
-  object-fit: contain;
-  z-index: 2;
-}
-.detail-hero h1 {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 32px;
-  font-weight: 700;
   color: #fff;
-  z-index: 3;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-}
-
-/* =======================
-   Container
-======================= */
-.detail-container {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 0 20px;
   font-family: "Poppins", sans-serif;
 }
 
-/* =======================
-   Spesifikasi
-======================= */
-.detail-specs {
-  margin-top: 40px;
-}
-.detail-specs h2 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 30px;
-  color: #222;
-  text-align: center;
-}
-.spec-group {
-  margin-bottom: 40px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-.spec-title {
+/* Background diagonal merah */
+.hero-diagonal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 130%;
+  height: 100%;
   background: #d32f2f;
-  color: #fff;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 12px 16px;
-}
-.spec-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.spec-table tr:nth-child(even) {
-  background: #f9f9f9;
-}
-.spec-table td {
-  padding: 12px 16px;
-  font-size: 15px;
-  border-top: 1px solid #eee;
-  vertical-align: middle;
-}
-.spec-label {
-  width: 40%;
-  font-weight: 600;
-  color: #333;
-}
-.spec-value {
-  width: 60%;
-  color: #555;
+  transform: skewY(-6deg);
+  transform-origin: top left;
+  z-index: 0;
 }
 
-/* =======================
-   Responsive
-======================= */
+.hero-text {
+  position: relative;
+  z-index: 2;
+  max-width: 40%;
+}
+.hero-text h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.hero-text h1 {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.hero-image {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.hero-image img {
+  max-height: 340px;
+  object-fit: contain;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .detail-hero {
-    height: 260px;
+  .hero-diagonal {
+    flex-direction: column;
+    height: auto;
+    padding: 40px 20px;
+    text-align: center;
   }
-  .detail-hero img {
-    max-height: 200px;
+  .hero-text {
+    max-width: 100%;
+    margin-bottom: 20px;
   }
-  .detail-hero h1 {
-    font-size: 22px;
+  .hero-text h1 {
+    font-size: 26px;
   }
-  .detail-specs h2 {
-    font-size: 22px;
+  .hero-image {
+    justify-content: center;
   }
-  .spec-table td {
-    padding: 10px;
-    font-size: 14px;
-  }
-  .spec-title {
-    font-size: 16px;
-    padding: 10px;
+  .hero-image img {
+    max-height: 220px;
   }
 }

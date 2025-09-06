@@ -151,7 +151,7 @@
           // Scroll ke kategori-section dengan offset
           const target = document.getElementById("kategori-section");
           if(target) {
-            const yOffset = -70; // jarak 20px dari atas (sesuaikan jika ada header fixed)
+            const yOffset = -100; // jarak 20px dari atas (sesuaikan jika ada header fixed)
             const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: "smooth" });
           }

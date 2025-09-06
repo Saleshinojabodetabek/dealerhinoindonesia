@@ -134,17 +134,29 @@
   .hero-contact-content {
     flex-direction: column;
     text-align: center;
+    justify-content: center;
   }
+
+  .hero-contact-text {
+    text-align: center;
+  }
+
   .hero-contact-text h1 {
-    font-size: 2.2rem;
+    font-size: 2.5rem; /* diperbesar agar menonjol */
   }
+
   .hero-contact-text p {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   /* Hilangkan gambar di mobile */
   .hero-contact-image {
     display: none;
+  }
+
+  .btn-contact {
+    margin: 0 auto; /* tombol ke tengah */
+    display: block;
   }
 }
 
@@ -153,12 +165,15 @@
   .hero-contact {
     padding: 60px 15px;
   }
+
   .hero-contact-text h1 {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
   }
+
   .hero-contact-text p {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
+
   .btn-contact {
     font-size: 1rem;
     padding: 10px 22px;

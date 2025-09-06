@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include 'admin/config.php';
 
 $produk_id = (int)($_GET['id'] ?? 0);
 if ($produk_id <= 0) {

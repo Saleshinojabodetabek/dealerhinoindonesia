@@ -1,49 +1,51 @@
 <?php
-include 'admin/config.php';
+include 'config.php';
 
-// Ambil ID produk dari URL
-$produk_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$produk_id = (int)($_GET['id'] ?? 0);
 if ($produk_id <= 0) {
     die("Produk tidak ditemukan.");
 }
 
 // Ambil data produk
-$qProduk = $conn->query("SELECT * FROM produk WHERE id=$produk_id");
-if (!$qProduk || $qProduk->num_rows == 0) {
+$res = $conn->query("SELECT * FROM produk WHERE id=$produk_id");
+if (!$res || $res->num_rows == 0) {
     die("Produk tidak ditemukan.");
 }
-$produk = $qProduk->fetch_assoc();
+$produk = $res->fetch_assoc();
 
-// Daftar grup spesifikasi (untuk urutan)
+// Daftar grup spesifikasi (urutan & label)
 $spec_groups = [
-    'performa' => ['label'=>'PERFORMA'],
-    'model_mesin' => ['label'=>'MODEL MESIN'],
-    'kopling' => ['label'=>'KOPLING'],
-    'transmisi' => ['label'=>'TRANSMISI'],
-    'kemudi' => ['label'=>'KEMUDI'],
-    'sumbu' => ['label'=>'SUMBU'],
-    'rem' => ['label'=>'REM'],
-    'roda_ban' => ['label'=>'RODA & BAN'],
-    'Sistim_Listrik_accu' => ['label'=>'SISTIM LISTRIK ACCU'],
-    'Tangki_Solar' => ['label'=>'TANGKI SOLAR'],
-    'Dimensi' => ['label'=>'DIMENSI'],
-    'Suspensi' => ['label'=>'SUSPENSI'],
-    'Berat_Chasis' => ['label'=>'BERAT CHASIS'],
+    'PERFORMA' => ['label' => 'PERFORMA'],
+    'MODEL MESIN' => ['label' => 'MODEL MESIN'],
+    'KOPLING' => ['label' => 'KOPLING'],
+    'TRANSMISI' => ['label' => 'TRANSMISI'],
+    'KEMUDI' => ['label' => 'KEMUDI'],
+    'SUMBU' => ['label' => 'SUMBU'],
+    'REM' => ['label' => 'REM'],
+    'RODA & BAN' => ['label' => 'RODA & BAN'],
+    'SISTIM LISTRIK ACCU' => ['label' => 'SISTIM LISTRIK ACCU'],
+    'TANGKI SOLAR' => ['label' => 'TANGKI SOLAR'],
+    'DIMENSI' => ['label' => 'DIMENSI'],
+    'SUSPENSI' => ['label' => 'SUSPENSI'],
+    'BERAT CHASIS' => ['label' => 'BERAT CHASIS'],
 ];
 
-// Ambil spesifikasi produk
+// Ambil spesifikasi dari DB
 $specs = [];
-$res_spec = $conn->query("SELECT grup, label, nilai, sort_order 
-                          FROM produk_spesifikasi 
-                          WHERE produk_id=$produk_id 
-                          ORDER BY sort_order ASC");
+$res_spec = $conn->query("
+    SELECT grup, label, nilai, sort_order
+    FROM produk_spesifikasi
+    WHERE produk_id = $produk_id
+    ORDER BY FIELD(grup, '" . implode("','", array_keys($spec_groups)) . "'), sort_order ASC
+");
 while ($row = $res_spec->fetch_assoc()) {
     $specs[$row['grup']][] = $row;
 }
 ?>
 
 <!-- HTML -->
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -68,7 +70,6 @@ while ($row = $res_spec->fetch_assoc()) {
     <link rel="stylesheet" href="css/product/hero.css" />
     <link rel="stylesheet" href="css/product/kategori.css" />
     <link rel="stylesheet" href="css/product/product.css" />
-    <link rel="stylesheet" href="css/product/detail.css" />
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -140,42 +141,43 @@ while ($row = $res_spec->fetch_assoc()) {
       </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="hero-diagonal">
-    <div class="hero-text">
-        <h3>TRUK</h3>
-        <h1>115 SD STD - Euro4</h1>
-    </div>
-    <div class="hero-image">
-        <img src="uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" 
-            alt="<?= htmlspecialchars($produk['nama_produk']) ?>">
-    </div>
-    </section>
+<!-- Hero Section -->
+<section class="hero-diagonal">
+  <div class="hero-text">
+    <h3>TRUK</h3>
+    <h1><?= htmlspecialchars($produk['nama_produk']) ?></h1>
+  </div>
+  <div class="hero-image">
+    <img src="uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" 
+         alt="<?= htmlspecialchars($produk['nama_produk']) ?>">
+  </div>
+</section>
 
-    <!-- Konten Detail -->
-    <section class="detail-container">
-        <p><strong>Varian:</strong> <?= htmlspecialchars($produk['varian']) ?></p>
+<!-- Konten Detail -->
+<section class="detail-container">
+  <p><strong>Varian:</strong> <?= htmlspecialchars($produk['varian']) ?></p>
 
-        <!-- Spesifikasi -->
-        <div class="detail-specs">
-        <h2>Spesifikasi</h2>
-        <?php foreach ($spec_groups as $slug => $meta): 
-            if (!empty($specs[$slug])): ?>
-            <div class="spec-group">
-            <div class="spec-title"><?= htmlspecialchars($meta['label']) ?></div>
-            <table class="spec-table">
-                <tbody>
-                <?php foreach ($specs[$slug] as $r): ?>
-                <tr>
-                    <td class="spec-label"><?= htmlspecialchars($r['label']) ?></td>
-                    <td class="spec-value"><?= htmlspecialchars($r['nilai']) ?></td>
-                </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-            </div>
-        <?php endif; endforeach; ?>
+  <!-- Spesifikasi -->
+  <div class="detail-specs">
+    <h2>Spesifikasi</h2>
+    <?php foreach ($spec_groups as $slug => $meta): 
+      if (!empty($specs[$slug])): ?>
+        <div class="spec-group">
+          <div class="spec-title"><?= htmlspecialchars($meta['label']) ?></div>
+          <table class="spec-table">
+            <tbody>
+            <?php foreach ($specs[$slug] as $r): ?>
+              <tr>
+                <td class="spec-label"><?= htmlspecialchars($r['label']) ?></td>
+                <td class="spec-value"><?= htmlspecialchars($r['nilai']) ?></td>
+              </tr>
+            <?php endforeach; ?>
+            </tbody>
+          </table>
         </div>
-    </section>
+    <?php endif; endforeach; ?>
+  </div>
+</section>
+
 </body>
 </html>

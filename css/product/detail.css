@@ -1,6 +1,4 @@
-/* =======================
-   HERO DIAGONAL
-======================= */
+/* Hero diagonal */
 .hero-diagonal {
   position: relative;
   display: flex;
@@ -10,10 +8,7 @@
   height: 420px;
   overflow: hidden;
   color: #fff;
-  font-family: "Poppins", sans-serif;
 }
-
-/* Background diagonal merah */
 .hero-diagonal::before {
   content: "";
   position: absolute;
@@ -26,7 +21,6 @@
   transform-origin: top left;
   z-index: 0;
 }
-
 .hero-text {
   position: relative;
   z-index: 2;
@@ -41,7 +35,6 @@
   font-size: 36px;
   font-weight: 600;
 }
-
 .hero-image {
   position: relative;
   z-index: 2;
@@ -52,6 +45,45 @@
 .hero-image img {
   max-height: 340px;
   object-fit: contain;
+}
+
+/* Detail container */
+.detail-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: "Poppins", sans-serif;
+}
+.detail-specs {
+  margin-top: 30px;
+}
+.spec-group {
+  margin-bottom: 25px;
+}
+.spec-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #d32f2f;
+}
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+.spec-table td {
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+}
+.spec-label {
+  width: 40%;
+  font-weight: 500;
+  color: #333;
+}
+.spec-value {
+  width: 60%;
+  color: #555;
 }
 
 /* Responsive */

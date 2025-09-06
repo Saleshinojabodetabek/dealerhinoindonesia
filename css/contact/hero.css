@@ -1,107 +1,76 @@
 /* === HERO CONTACT === */
 .hero-contact {
-  position: relative;
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  background: linear-gradient(135deg, #1b5e20, #43a047, #81c784);
   color: #fff;
-  overflow: hidden;
+  padding: 4rem 2rem;
   border-radius: 0 0 20px 20px;
 }
 
-/* Background image */
-.hero-contact-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
+.hero-contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
-/* Overlay */
-.hero-contact-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.6),
-    rgba(0, 0, 0, 0.5)
-  );
-  z-index: 1;
+/* Teks kiri */
+.hero-contact-text {
+  flex: 1 1 450px;
 }
 
-/* Content */
-.hero-contact-content {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-  padding: 0 20px;
-}
-
-.hero-contact-content h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+.hero-contact-text h1 {
+  font-size: 2.8rem;
   font-weight: 700;
+  margin-bottom: 1rem;
 }
 
-.hero-contact-content p {
+.hero-contact-text p {
   font-size: 1.2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
   line-height: 1.6;
 }
 
-/* Buttons */
-.hero-contact-buttons {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.btn-contact,
-.btn-whatsapp {
-  padding: 14px 32px;
+.btn-contact {
+  padding: 12px 28px;
   border-radius: 8px;
+  background: #fff;
+  color: #2e7d32;
+  font-weight: 700;
   font-size: 1.1rem;
-  font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
-.btn-contact {
-  background: #2e7d32;
-  color: #fff;
-}
-
 .btn-contact:hover {
-  background: #1b5e20;
+  background: #e8f5e9;
 }
 
-.btn-whatsapp {
-  background: #25d366;
-  color: #fff;
+/* Gambar kanan */
+.hero-contact-image {
+  flex: 1 1 400px;
+  text-align: center;
 }
 
-.btn-whatsapp:hover {
-  background: #1ebe5d;
+.hero-contact-image img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero-contact-content h1 {
+  .hero-contact-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-contact-text h1 {
     font-size: 2rem;
   }
 
-  .hero-contact-content p {
+  .hero-contact-text p {
     font-size: 1rem;
-  }
-
-  .btn-contact,
-  .btn-whatsapp {
-    width: 100%;
-    text-align: center;
   }
 }

@@ -50,23 +50,19 @@
 
 <!-- Hero Contact -->
 <section class="hero-contact fade-element">
-  <!-- Background image -->
-  <img src="images/banner-300.jpg" alt="Customer Service Hino" class="hero-contact-bg" />
+  <div class="hero-contact-container">
+    <!-- Kiri: Teks -->
+    <div class="hero-contact-text">
+      <h1>Kontak Kami</h1>
+      <p>Dapatkan bantuan dukungan dari tim resmi HinoMobil.</p>
+      <a href="#contact-form" class="btn-contact">Hubungi Sekarang</a>
+    </div>
 
-  <!-- Overlay -->
-  <div class="hero-contact-overlay"></div>
-
-  <!-- Content -->
-  <div class="hero-contact-content">
-    <h1>Hubungi Kami</h1>
-    <p>
-      Tim Hino siap membantu Anda mendapatkan solusi terbaik untuk kebutuhan
-      truk bisnis di seluruh Indonesia. Konsultasi gratis, cepat, dan terpercaya.
-    </p>
-    <div class="hero-contact-buttons">
-      <a href="#contact-form" class="btn-contact">Kirim Pesan</a>
-      <a href="https://wa.me/6285975287684" class="btn-whatsapp">Chat WhatsApp</a>
+    <!-- Kanan: Gambar -->
+    <div class="hero-contact-image">
+      <img src="images/contact.png" alt="Contact Hino" />
     </div>
   </div>
 </section>
+
 

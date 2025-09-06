@@ -98,57 +98,44 @@
     <div id="produk-list" class="produk-grid"></div>
 
     <script>
-      let currentVarian = 'ALL';
-      let currentSearch = '';
+    let currentVarian = 'ALL';
+    let currentSearch = '';
 
-      function loadProduk() {
-        fetch(`admin/api/get_product.php?varian=${currentVarian}&search=${encodeURIComponent(currentSearch)}`)
-          .then(res => res.json())
-          .then(data => {
-            let html = "";
-            if (data.length === 0) {
-              html = "<p>Tidak ada produk untuk kategori ini.</p>";
-            } else {
-              data.forEach(p => {
-                html += `
-                  <div class="produk-card">
-                    <img src="uploads/produk/${p.gambar}" alt="${p.nama_produk}">
-                    <h3>${p.nama_produk}</h3>
-                    <a href="product-detail-hino300.php?id=${p.id}#hero-section" class="btn-detail">Lihat Detail</a>
-                  </div>
-                `;
-              });
-            }
-            document.getElementById("produk-list").innerHTML = html;
-          })
-          .catch(err => {
-            document.getElementById("produk-list").innerHTML =
-              "<p style='color:red'>Gagal load produk.</p>";
-            console.error("Error load produk:", err);
-          });
-      }
-
-      // Event tab kategori
-      document.querySelectorAll(".tabs .tab").forEach(tab => {
-        tab.addEventListener("click", function() {
-          document.querySelectorAll(".tabs .tab").forEach(t => t.classList.remove("active"));
-          this.classList.add("active");
-          currentVarian = this.textContent.trim();
-          loadProduk();
+    // Fungsi load produk
+    function loadProduk() {
+      fetch(`admin/api/get_product.php?varian=${currentVarian}&search=${encodeURIComponent(currentSearch)}`)
+        .then(res => res.json())
+        .then(data => {
+          let html = "";
+          if (data.length === 0) {
+            html = "<p>Tidak ada produk untuk kategori ini.</p>";
+          } else {
+            data.forEach(p => {
+              html += `
+                <div class="produk-card">
+                  <img src="uploads/produk/${p.gambar}" alt="${p.nama_produk}">
+                  <h3>${p.nama_produk}</h3>
+                  <a href="product-detail-hino300.php?id=${p.id}#hero-section" class="btn-detail">Lihat Detail</a>
+                </div>
+              `;
+            });
+          }
+          document.getElementById("produk-list").innerHTML = html;
+        })
+        .catch(err => {
+          document.getElementById("produk-list").innerHTML =
+            "<p style='color:red'>Gagal load produk.</p>";
+          console.error("Error load produk:", err);
         });
-      });
+    }
 
-      // Event search
-      document.getElementById("search-input").addEventListener("input", function() {
-        currentSearch = this.value.trim();
-        loadProduk();
-      });
-
-      // Load pertama kali
+    // Event search
+    document.getElementById("search-input").addEventListener("input", function() {
+      currentSearch = this.value.trim();
       loadProduk();
-    </script>
+    });
 
-    <script>
+    // Event click tab kategori
     document.addEventListener("DOMContentLoaded", () => {
       // Scroll smooth ketika halaman dibuka dengan hash
       if(window.location.hash) {
@@ -156,15 +143,29 @@
         if(target) target.scrollIntoView({ behavior: "smooth" });
       }
 
-      // Optional: AJAX tab load (kalau pakai JS untuk filter)
+      // Event click tab
       document.querySelectorAll(".tabs .tab").forEach(tab => {
-        tab.addEventListener("click", () => {
+        tab.addEventListener("click", (e) => {
+          e.preventDefault(); // cegah reload halaman
+
+          // Scroll ke kategori-section
           const target = document.getElementById("kategori-section");
           if(target) target.scrollIntoView({ behavior: "smooth" });
+
+          // Set tab aktif
+          document.querySelectorAll(".tabs .tab").forEach(t => t.classList.remove("active"));
+          tab.classList.add("active");
+
+          // Set varian sesuai tab dan reload produk
+          currentVarian = tab.textContent.trim();
+          loadProduk();
         });
       });
-    </script>
 
+      // Load produk pertama kali
+      loadProduk();
+    });
+    </script>
   </body>
 </html>
 

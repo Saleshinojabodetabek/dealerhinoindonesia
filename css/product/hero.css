@@ -1,74 +1,86 @@
-/* === HERO PRODUK HINO 300 === */
+/* === HERO PRODUCT === */
 .hero-product {
   position: relative;
-  height: 80vh;
+  width: 100%;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("images/Euro 4 Hino 300.jpeg") no-repeat center center/cover;
+  text-align: center;
+  color: #fff;
   border-radius: 12px;
   overflow: hidden;
-  margin-bottom: 3rem;
 }
 
-.hero-product-overlay {
+/* Gambar background */
+.hero-product-bg {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(27, 94, 32, 0.85),
-    rgba(46, 125, 50, 0.65)
-  );
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   z-index: 1;
 }
 
-.hero-product-container {
-  position: relative;
+/* Overlay gradasi hijau */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(46, 125, 50, 0.7), rgba(27, 94, 32, 0.8));
   z-index: 2;
-  max-width: 1100px;
-  padding: 0 1rem;
-  text-align: left;
-  color: #fff;
 }
 
-.hero-product-text h1 {
+/* Konten di atas gambar */
+.hero-product-content {
+  position: relative;
+  z-index: 3;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.hero-product h1 {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  font-family: "Montserrat", sans-serif;
 }
 
-.hero-product-text p {
+.hero-product p {
   font-size: 1.2rem;
-  margin-bottom: 2rem;
-  max-width: 600px;
+  margin-bottom: 1.5rem;
   line-height: 1.6;
 }
 
 .btn-hero {
   display: inline-block;
-  padding: 12px 28px;
+  padding: 12px 30px;
+  border-radius: 8px;
   background: #ffcc00;
   color: #1a1a1a;
-  border-radius: 8px;
   font-weight: 700;
-  transition: background 0.3s ease, transform 0.2s ease;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background 0.3s ease;
 }
 
 .btn-hero:hover {
   background: #e6b800;
-  transform: translateY(-2px);
 }
 
 /* Responsif */
 @media (max-width: 768px) {
   .hero-product {
-    height: 60vh;
-    border-radius: 0;
+    min-height: 60vh;
+    padding: 1.5rem;
   }
-  .hero-product-text h1 {
+  .hero-product h1 {
     font-size: 2rem;
   }
-  .hero-product-text p {
+  .hero-product p {
     font-size: 1rem;
   }
 }

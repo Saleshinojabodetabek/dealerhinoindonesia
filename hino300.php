@@ -48,17 +48,22 @@
       </div>
     </header>
 
-    <!-- Hero Produk Hino 300 -->
+    <!-- Hero Hino 300 -->
     <section class="hero-product fade-element">
-    <div class="hero-product-overlay"></div>
-    <div class="hero-product-container">
-        <div class="hero-product-text">
+    <!-- Gambar Hero -->
+    <img src="images/Euro 4 Hino 300.jpeg" alt="Hino 300 Series" class="hero-product-bg" />
+
+    <!-- Overlay supaya teks tetap jelas -->
+    <div class="hero-overlay"></div>
+
+    <!-- Konten -->
+    <div class="hero-product-content">
         <h1>Hino 300 Series</h1>
         <p>
-            Truk ringan tangguh dengan teknologi Euro 4, irit bahan bakar, ramah
-            lingkungan, dan performa optimal untuk mendukung bisnis Anda.
+        Truk ringan andalan dengan performa tangguh, irit bahan bakar, dan siap mendukung
+        bisnis Anda di seluruh Indonesia.
         </p>
-        <a href="#contact" class="btn-hero">Dapatkan Penawaran</a>
-        </div>
+        <a href="#products" class="btn-hero">Lihat Produk</a>
     </div>
     </section>
+

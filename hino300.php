@@ -55,18 +55,14 @@
 </section>
 
 <!-- Produk Pilihan -->
-  <div class="container">
-    <h1>HINO 300 Series <span class="euro4-badge">EURO 4</span></h1>
+  <div class="kategori">
+    <h1>HINO 300 Series</h1>
+    <img src="images/euro4.png" alt="Euro4 Logo">
+  </div>
 
-    <!-- Filter -->
-    <div class="filter-menu">
-      <button class="filter-btn active" data-category="all">ALL</button>
-      <button class="filter-btn" data-category="cargo">CARGO</button>
-      <button class="filter-btn" data-category="dump">DUMP</button>
-      <button class="filter-btn" data-category="mixer">MIXER</button>
-    </div>
-
-    <!-- Product List -->
-    <div class="product-list" id="product-list">
-      <!-- Produk akan dimuat di sini -->
-    </div>
+  <div class="tabs">
+    <div class="tab active">ALL</div>
+    <div class="tab">CARGO</div>
+    <div class="tab">DUMP</div>
+    <div class="tab">MIXER</div>
+  </div>

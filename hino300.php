@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/product/hero.css" />
+    <link rel="stylesheet" href="css/product/kategori.css" />
 
     <!-- JS -->
     <script src="js/script.js"></script>
@@ -52,3 +53,20 @@
 <section class="hero-product">
   <img src="images/Euro 4 Hino 300.jpeg" alt="Hino 300 Series" class="hero-product-img" />
 </section>
+
+<!-- Produk Pilihan -->
+  <div class="container">
+    <h1>HINO 300 Series <span class="euro4-badge">EURO 4</span></h1>
+
+    <!-- Filter -->
+    <div class="filter-menu">
+      <button class="filter-btn active" data-category="all">ALL</button>
+      <button class="filter-btn" data-category="cargo">CARGO</button>
+      <button class="filter-btn" data-category="dump">DUMP</button>
+      <button class="filter-btn" data-category="mixer">MIXER</button>
+    </div>
+
+    <!-- Product List -->
+    <div class="product-list" id="product-list">
+      <!-- Produk akan dimuat di sini -->
+    </div>

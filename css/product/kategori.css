@@ -55,13 +55,15 @@
   transform: translateY(-2px);
 }
 
-/* efek underline animasi */
+/* aktif tanpa kotak merah */
 .tab.active {
   color: #d32f2f;
-  background: #fff5f5;
-  border-color: #d32f2f;
+  background: transparent; /* hilangkan background merah soft */
+  border-color: transparent; /* hilangkan border merah */
+  box-shadow: none; /* hilangkan shadow khusus aktif */
 }
 
+/* underline animasi */
 .tab.active::after {
   content: "";
   position: absolute;

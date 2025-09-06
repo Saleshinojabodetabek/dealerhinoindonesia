@@ -1,3 +1,6 @@
+/* ==============================
+   Produk Grid & Card
+============================== */
 .produk-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -51,32 +54,54 @@
   background: #0b5ed7;
 }
 
-/* Search CSS
-/* Controls (tabs + search bar) */
+/* ==============================
+   Kategori Section (Title + Logo)
+============================== */
+.kategori {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.kategori h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  color: #222;
+}
+
+.kategori img {
+  height: 34px;
+  flex-shrink: 0; /* biar nggak ketekan */
+}
+
+/* ==============================
+   Controls (Tabs + Search)
+============================== */
 .produk-controls {
   display: flex;
-  justify-content: space-between; /* tab di kiri, search di kanan */
+  justify-content: space-between; /* tabs kiri, search kanan */
   align-items: center;
   margin: 20px 0 40px;
-  flex-wrap: wrap; /* biar pas di HP turun */
+  flex-wrap: wrap;
   gap: 14px;
 }
 
-/* Tabs tetap */
 .produk-controls .tabs {
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
 }
 
-/* Search bar */
+/* Search Bar */
 #search-input {
   padding: 10px 14px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
-  width: 240px; /* ukuran tetap */
-  max-width: 100%; /* responsif */
+  width: 240px;
+  max-width: 100%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
 }
@@ -87,14 +112,40 @@
   box-shadow: 0 2px 6px rgba(13, 110, 253, 0.25);
 }
 
-/* Responsive */
+/* ==============================
+   Responsive
+============================== */
+@media (max-width: 992px) {
+  .kategori h1 {
+    font-size: 28px;
+  }
+
+  .kategori img {
+    height: 28px;
+  }
+}
+
 @media (max-width: 768px) {
+  .kategori {
+    flex-direction: row; /* tetap sejajar */
+    justify-content: space-between;
+  }
+
+  .kategori h1 {
+    font-size: 22px;
+  }
+
+  .kategori img {
+    height: 24px;
+  }
+
   .produk-controls {
-    flex-direction: column; /* di HP jadi vertikal */
+    flex-direction: column;
     align-items: stretch;
+    gap: 12px;
   }
 
   #search-input {
-    width: 100%; /* search bar full di HP */
+    width: 100%; /* full width di HP */
   }
 }

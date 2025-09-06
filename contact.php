@@ -48,21 +48,23 @@
       </div>
     </header>
 
-<!-- Hero Contact -->
-<section class="hero-contact">
-  <div class="hero-contact-content">
-    <!-- Kiri: Teks -->
-    <div class="hero-contact-text">
-      <h1>Kontak Kami</h1>
-      <p>Dapatkan bantuan dukungan dari tim resmi HinoMobil.</p>
+    <!-- Hero Contact -->
+    <section class="hero-contact">
+    <!-- Aksen bulat -->
+    <div class="dot dot-yellow"></div>
+    <div class="dot dot-blue"></div>
+
+    <div class="hero-contact-content">
+        <!-- Teks -->
+        <div class="hero-contact-text">
+        <h1>Kontak Kami</h1>
+        <p>Kami siap membantu Anda mendapatkan solusi terbaik untuk kebutuhan truk Hino di seluruh Indonesia.</p>
+        <a href="#contact-form" class="btn-contact">Kirim Pesan</a>
+        </div>
+
+        <!-- Gambar -->
+        <div class="hero-contact-image">
+        <img src="images/contact.png" alt="Customer Service Hino" />
+        </div>
     </div>
-
-    <!-- Kanan: Gambar -->
-    <div class="hero-contact-image">
-      <img src="images/contact.png" alt="Contact Hino" />
-    </div>
-  </div>
-</section>
-
-
-
+    </section>

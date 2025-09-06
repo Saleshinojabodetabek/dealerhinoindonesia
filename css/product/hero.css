@@ -1,10 +1,10 @@
 /* Hero Section */
 .about-hero {
-  background-image: url("/img/banner-300.jpg"); /* Pastikan path ini sesuai */
+  background-image: url("img/Euro-4-Hino-300.jpeg");
   background-size: cover;
-  background-position: top center;
+  background-position: center;
   background-repeat: no-repeat;
-  height: 100vh; /* Gunakan 100% tinggi layar */
+  height: 100vh;
   position: relative;
   display: flex;
   align-items: center;

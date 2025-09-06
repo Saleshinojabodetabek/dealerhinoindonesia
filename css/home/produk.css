@@ -1,10 +1,23 @@
 /* === PRODUCTS SECTION === */
+.products-section {
+  text-align: center;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+}
+
+.products-section .section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2e7d32;
+  margin-bottom: 2rem;
+}
+
+/* Grid Produk */
 .products {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
-  padding: 0 1rem;
 }
 
 .product {
@@ -13,10 +26,10 @@
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
   text-align: center;
   max-width: 300px;
   flex: 1 1 280px;
+  overflow: hidden;
   padding-bottom: 1rem;
 }
 
@@ -30,7 +43,7 @@
 .product h3 {
   font-size: 18px;
   margin: 0.8rem 0 0.4rem;
-  color: #2e7d32; /* konsisten dengan tema hijau */
+  color: #2e7d32;
 }
 
 .product p {

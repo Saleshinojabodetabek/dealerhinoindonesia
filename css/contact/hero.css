@@ -141,8 +141,10 @@
   .hero-contact-text p {
     font-size: 1rem;
   }
-  .hero-contact-image img {
-    max-width: 280px;
+
+  /* Hilangkan gambar di mobile */
+  .hero-contact-image {
+    display: none;
   }
 }
 
@@ -160,8 +162,5 @@
   .btn-contact {
     font-size: 1rem;
     padding: 10px 22px;
-  }
-  .hero-contact-image img {
-    max-width: 220px;
   }
 }

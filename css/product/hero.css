@@ -1,4 +1,3 @@
-/* === HERO PRODUCT (Full Image) === */
 .hero-product {
   width: 100%;
   height: 100vh; /* penuh setinggi layar */
@@ -10,25 +9,4 @@
   height: 100%;
   object-fit: cover; /* isi penuh, bisa ada cropping */
   display: block;
-}
-
-/* ============================
-   RESPONSIVE HERO PRODUCT
-   ============================ */
-@media (max-width: 1024px) {
-  .hero-product {
-    height: 90vh; /* sedikit lebih pendek di tablet */
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-product {
-    height: 80vh; /* lebih fleksibel di layar HP sedang */
-  }
-}
-
-@media (max-width: 576px) {
-  .hero-product {
-    height: 70vh; /* di layar HP kecil, biar tidak terlalu tinggi */
-  }
 }

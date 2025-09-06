@@ -1,9 +1,4 @@
 <?php
-echo "ID: " . $id . "<br>";
-print_r($produk);
-exit;
-?>
-
 session_start();
 include 'admin/config.php'; // sesuaikan path ke file koneksi
 

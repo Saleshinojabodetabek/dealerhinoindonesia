@@ -104,7 +104,7 @@
 
     // Fungsi load produk
     function loadProduk() {
-      fetch(`admin/api/get_product.php?varian=${currentVarian}&search=${encodeURIComponent(currentSearch)}`)
+      fetch(`admin/api/get_product.php?series_id=${seriesId}&varian=${currentVarian}&search=${encodeURIComponent(currentSearch)}`)
         .then(res => res.json())
         .then(data => {
           let html = "";
@@ -129,6 +129,7 @@
           console.error("Error load produk:", err);
         });
     }
+
 
     // Event search
     document.getElementById("search-input").addEventListener("input", function() {

@@ -50,3 +50,21 @@
 .produk-card .btn-detail:hover {
   background: #0b5ed7;
 }
+
+.produk-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  flex-wrap: wrap; /* biar responsif di HP */
+  gap: 10px;
+}
+
+#search-input {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  max-width: 260px;
+  width: 100%;
+}

@@ -81,15 +81,15 @@
         <img src="images/euro4.png" alt="Euro4 Logo">
       </div>
 
-      <div class="tabs">
-        <div class="tab active">ALL</div>
-        <div class="tab">CARGO</div>
-        <div class="tab">DUMP</div>
-        <div class="tab">MIXER</div>
-      </div>
-
-      <!-- Search Bar -->
       <div class="produk-controls">
+        <div class="tabs">
+          <div class="tab active">ALL</div>
+          <div class="tab">CARGO</div>
+          <div class="tab">DUMP</div>
+          <div class="tab">MIXER</div>
+        </div>
+
+        <!-- Search Bar -->
         <input type="text" id="search-input" placeholder="Cari produk..." />
       </div>
     </div>

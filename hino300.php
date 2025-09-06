@@ -75,7 +75,7 @@
     </section>
 
     <!-- Produk Pilihan -->
-    <div class="kategori-section">
+    <div id="kategori-section" class="kategori-section">
       <div class="kategori">
         <h1>Hino 300 Series</h1>
         <img src="images/euro4.png" alt="Euro4 Logo">

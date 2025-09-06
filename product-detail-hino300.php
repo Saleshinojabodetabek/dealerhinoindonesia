@@ -144,10 +144,10 @@ while ($row = $res_spec->fetch_assoc()) {
 
       <div class="produk-controls">
         <div class="tabs">
-          <a href="hino300.php" class="tab">ALL</a>
-          <a href="hino300.php" class="tab">CARGO</a>
-          <a href="hino300.php" class="tab">DUMP</a>
-          <a href="hino300.php" class="tab">MIXER</a>
+          <a href="hino300.php#kategori-section" class="tab">ALL</a>
+          <a href="hino300.php#kategori-section&varian=CARGO" class="tab">CARGO</a>
+          <a href="hino300.php#kategori-section&varian=DUMP" class="tab">DUMP</a>
+          <a href="hino300.php#kategori-section&varian=MIXER" class="tab">MIXER</a>
         </div>
 
 

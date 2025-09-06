@@ -154,10 +154,6 @@ while ($row = $res_spec->fetch_assoc()) {
   </div>
 </section>
 
-<!-- Konten Detail -->
-<section class="detail-container">
-  <p><strong>Varian:</strong> <?= htmlspecialchars($produk['varian']) ?></p>
-
   <!-- Spesifikasi -->
   <div class="detail-specs">
     <h2>Spesifikasi</h2>

@@ -100,13 +100,6 @@
               rel="noopener noreferrer"
               >Konsultasi Pembelian</a
             >
-            <a
-              href="https://saleshinoindonesia.com/"
-              class="btn-secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Kunjungi Website Utama</a
-            >
           </div>
         </div>
         <img

@@ -152,6 +152,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="Cargo">Cargo</option>
             <option value="Dump">Dump</option>
             <option value="Mixer">Mixer</option>
+            <option value="Tractor Head">Tractor Head</option>
+            <option value="Bus Mikro">Bus Mikro</option>
+            <option value="Bus Medium">Bus Medium</option>
+            <option value="Bus Besar">Bus Besar</option>
           </select>
         </div>
         <!-- Nama Produk -->

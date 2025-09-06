@@ -158,7 +158,7 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
           <label class="form-label">Varian</label>
           <select name="varian" class="form-select" required>
             <option value="">-- Pilih Varian --</option>
-            <?php foreach (['All','Cargo','Dump','Mixer'] as $v):
+            <?php foreach (['All','Cargo','Dump','Mixer','Tractor Head','Bus Mikro','Bus Medium','Bus Besar'] as $v):
               $selected = ($produk['varian']==$v)?'selected':'';
               echo "<option value='$v' $selected>$v</option>";
             endforeach; ?>

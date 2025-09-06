@@ -19,7 +19,7 @@ $produk = $res->fetch_assoc();
 // Ambil data karoseri terkait
 $karoseri = [];
 $qk = $conn->query("
-    SELECT k.nama, k.slug, k.gambar
+    SELECT k.nama, k.slug
     FROM produk_karoseri pk
     JOIN karoseri k ON pk.karoseri_id = k.id
     WHERE pk.produk_id = $produk_id
@@ -182,8 +182,8 @@ while ($row = $res_spec->fetch_assoc()) {
       <div class="karoseri-grid">
         <?php foreach ($karoseri as $k): ?>
           <div class="karoseri-item">
-            <img src="uploads/karoseri/<?= htmlspecialchars($k['gambar']) ?>" 
-                 alt="<?= htmlspecialchars($k['nama']) ?>">
+            <img src="uploads/karoseri/<?= htmlspecialchars($k['slug']) ?>.png" 
+                alt="<?= htmlspecialchars($k['nama']) ?>">
             <p><?= htmlspecialchars($k['nama']) ?></p>
           </div>
         <?php endforeach; ?>

@@ -84,9 +84,9 @@
       <div class="produk-controls">
         <div class="tabs">
           <div class="tab active">ALL</div>
-          <div class="tab">CARGO</div>
-          <div class="tab">DUMP</div>
-          <div class="tab">MIXER</div>
+          <div class="tab">BUS MIKRO</div>
+          <div class="tab">BUS MEDIUM</div>
+          <div class="tab">BUS BESAR</div>
         </div>
 
         <!-- Search Bar -->

@@ -87,6 +87,7 @@
           <div class="tab">CARGO</div>
           <div class="tab">DUMP</div>
           <div class="tab">MIXER</div>
+          <div class="tab">TRACTOR HEAD</div>
         </div>
 
         <!-- Search Bar -->

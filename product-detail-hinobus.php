@@ -145,9 +145,9 @@ while ($row = $res_spec->fetch_assoc()) {
       <div class="produk-controls">
         <div class="tabs">
           <a href="hinobus.php#kategori-section" class="tab">ALL</a>
-          <a href="hinobus.php#kategori-section" class="tab">CARGO</a>
-          <a href="hinobus.php#kategori-section" class="tab">DUMP</a>
-          <a href="hinobus.php#kategori-section" class="tab">MIXER</a>
+          <a href="hinobus.php#kategori-section" class="tab">BUS MIKRO</a>
+          <a href="hinobus.php#kategori-section" class="tab">BUS MEDIUM</a>
+          <a href="hinobus.php#kategori-section" class="tab">BUS BESAR</a>
         </div>
 
 

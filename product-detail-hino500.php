@@ -148,6 +148,7 @@ while ($row = $res_spec->fetch_assoc()) {
           <a href="hino500.php#kategori-section" class="tab">CARGO</a>
           <a href="hino500.php#kategori-section" class="tab">DUMP</a>
           <a href="hino500.php#kategori-section" class="tab">MIXER</a>
+          <a href="hino500.php#kategori-section" class="tab">TRACTOR HEAD</a>
         </div>
 
 

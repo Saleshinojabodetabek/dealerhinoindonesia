@@ -148,9 +148,13 @@
         tab.addEventListener("click", (e) => {
           e.preventDefault(); // cegah reload halaman
 
-          // Scroll ke kategori-section
+          // Scroll ke kategori-section dengan offset
           const target = document.getElementById("kategori-section");
-          if(target) target.scrollIntoView({ behavior: "smooth" });
+          if(target) {
+            const yOffset = -20; // jarak 20px dari atas (sesuaikan jika ada header fixed)
+            const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: "smooth" });
+          }
 
           // Set tab aktif
           document.querySelectorAll(".tabs .tab").forEach(t => t.classList.remove("active"));

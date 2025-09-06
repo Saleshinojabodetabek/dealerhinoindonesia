@@ -104,31 +104,32 @@
 
     // Fungsi load produk
     function loadProduk() {
-      fetch(`admin/api/get_product.php?varian=${currentVarian}&search=${encodeURIComponent(currentSearch)}`)
+    fetch(`admin/api/get_product.php?series_id=${seriesId}&varian=${currentVarian}&search=${encodeURIComponent(currentSearch)}`)
         .then(res => res.json())
         .then(data => {
-          let html = "";
-          if (data.length === 0) {
+        let html = "";
+        if (data.length === 0) {
             html = "<p>Tidak ada produk untuk kategori ini.</p>";
-          } else {
+        } else {
             data.forEach(p => {
-              html += `
+            html += `
                 <div class="produk-card">
-                  <img src="uploads/produk/${p.gambar}" alt="${p.nama_produk}">
-                  <h3>${p.nama_produk}</h3>
-                  <a href="product-detail-hino500.php?id=${p.id}#hero-section" class="btn-detail">Lihat Detail</a>
+                <img src="uploads/produk/${p.gambar}" alt="${p.nama_produk}">
+                <h3>${p.nama_produk}</h3>
+                <a href="product-detail-hino300.php?id=${p.id}#hero-section" class="btn-detail">Lihat Detail</a>
                 </div>
-              `;
+            `;
             });
-          }
-          document.getElementById("produk-list").innerHTML = html;
+        }
+        document.getElementById("produk-list").innerHTML = html;
         })
         .catch(err => {
-          document.getElementById("produk-list").innerHTML =
+        document.getElementById("produk-list").innerHTML =
             "<p style='color:red'>Gagal load produk.</p>";
-          console.error("Error load produk:", err);
+        console.error("Error load produk:", err);
         });
     }
+
 
     // Event search
     document.getElementById("search-input").addEventListener("input", function() {

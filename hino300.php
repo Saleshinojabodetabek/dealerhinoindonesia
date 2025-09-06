@@ -155,7 +155,7 @@
           // Scroll ke kategori-section dengan offset
           const target = document.getElementById("kategori-section");
           if(target){
-            const yOffset = -80; // sesuaikan tinggi header
+            const yOffset = -105; // sesuaikan tinggi header
             const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: "smooth" });
           }

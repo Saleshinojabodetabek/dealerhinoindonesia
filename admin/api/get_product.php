@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include __DIR__ . '/../config.php';  // naik satu folder ke admin lalu ambil config.php
 header("Content-Type: application/json; charset=UTF-8");
 
 $varian = isset($_GET['varian']) ? $_GET['varian'] : 'ALL';

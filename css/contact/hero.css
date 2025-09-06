@@ -112,7 +112,24 @@
   }
 }
 
-/* Responsive */
+/* ============================
+   RESPONSIVE HERO CONTACT
+   ============================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .hero-contact-text h1 {
+    font-size: 2.4rem;
+  }
+  .hero-contact-text p {
+    font-size: 1.1rem;
+  }
+  .hero-contact-image img {
+    max-width: 340px;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .hero-contact-content {
     flex-direction: column;
@@ -121,7 +138,30 @@
   .hero-contact-text h1 {
     font-size: 2.2rem;
   }
+  .hero-contact-text p {
+    font-size: 1rem;
+  }
   .hero-contact-image img {
     max-width: 280px;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 480px) {
+  .hero-contact {
+    padding: 60px 15px;
+  }
+  .hero-contact-text h1 {
+    font-size: 1.8rem;
+  }
+  .hero-contact-text p {
+    font-size: 0.95rem;
+  }
+  .btn-contact {
+    font-size: 1rem;
+    padding: 10px 22px;
+  }
+  .hero-contact-image img {
+    max-width: 220px;
   }
 }

@@ -252,3 +252,5 @@
     <!-- Load Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 </main>
+
+<?php include 'footer.php'; ?>

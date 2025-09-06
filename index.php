@@ -230,7 +230,7 @@
 </main>
 
 <!-- Blog Section -->
-<section class="blog-section">
+<section class="blog-section fade-element">
   <div class="container">
     <h2>Blog & Artikel</h2>
     <p>Dapatkan informasi terbaru seputar Truk Hino, perawatan, dan promo terbaik.</p>

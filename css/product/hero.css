@@ -4,7 +4,6 @@
   height: auto;
   max-height: 100vh; /* Pastikan tidak lebih tinggi dari layar */
   overflow: hidden;
-  border-radius: 12px; /* Opsional: untuk sudut melengkung */
   display: flex;
   justify-content: center;
   align-items: center;

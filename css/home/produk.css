@@ -28,9 +28,9 @@
 }
 
 .product h3 {
-  color: #2e7d32;
   font-size: 18px;
   margin: 0.8rem 0 0.4rem;
+  color: #2e7d32; /* konsisten dengan tema hijau */
 }
 
 .product p {

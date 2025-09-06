@@ -1,0 +1,94 @@
+.product-detail {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.product-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.img-gallery {
+  flex: 1 1 400px;
+}
+.img-gallery img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.product-info {
+  flex: 1 1 300px;
+}
+.product-info h1 {
+  font-size: 28px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.price {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+}
+.actions .btn-contact,
+.actions .btn-wishlist {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.actions .btn-contact {
+  background: #0d6efd;
+  color: white;
+}
+.actions .btn-wishlist {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.product-specs {
+  margin-top: 40px;
+}
+.spec-group + .spec-group {
+  margin-top: 24px;
+}
+.spec-group h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.spec-group table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.spec-group table th,
+.spec-group table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+.spec-group table th {
+  background: #f8f8f8;
+  width: 35%;
+}
+
+@media (max-width: 768px) {
+  .product-top {
+    flex-direction: column;
+  }
+  .product-info h1 {
+    font-size: 24px;
+  }
+  .price {
+    font-size: 18px;
+  }
+}

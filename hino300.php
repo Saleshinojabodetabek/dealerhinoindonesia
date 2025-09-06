@@ -1,9 +1,3 @@
-<?php
-// Ambil varian dari URL, default ALL
-$currentVarian = $_GET['varian'] ?? 'ALL';
-?>
-
-
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -89,10 +83,10 @@ $currentVarian = $_GET['varian'] ?? 'ALL';
 
       <div class="produk-controls">
         <div class="tabs">
-          <a href="hino300.php?varian=ALL" class="tab <?= ($_GET['varian'] ?? 'ALL')==='ALL'?'active':'' ?>">ALL</a>
-          <a href="hino300.php?varian=CARGO" class="tab <?= ($_GET['varian'] ?? '')==='CARGO'?'active':'' ?>">CARGO</a>
-          <a href="hino300.php?varian=DUMP" class="tab <?= ($_GET['varian'] ?? '')==='DUMP'?'active':'' ?>">DUMP</a>
-          <a href="hino300.php?varian=MIXER" class="tab <?= ($_GET['varian'] ?? '')==='MIXER'?'active':'' ?>">MIXER</a>
+          <div class="tab active">ALL</div>
+          <div class="tab">CARGO</div>
+          <div class="tab">DUMP</div>
+          <div class="tab">MIXER</div>
         </div>
 
         <!-- Search Bar -->
@@ -152,9 +146,6 @@ $currentVarian = $_GET['varian'] ?? 'ALL';
 
       // Load pertama kali
       loadProduk();
-      
-      let currentVarian = '<?= $currentVarian ?>';
-
     </script>
   </body>
 </html>

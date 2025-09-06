@@ -48,5 +48,7 @@
       </div>
     </header>
 
-<!-- Hero Hino 300 -->
-<section class="about-hero"></section>
+<!-- Hero Product — Gambar Penuh -->
+<section class="hero-product">
+  <img src="images/Euro 4 Hino 300.jpeg" alt="Hino 300 Series" class="hero-product-img" />
+</section>

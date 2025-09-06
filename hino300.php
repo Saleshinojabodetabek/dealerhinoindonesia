@@ -5,10 +5,6 @@
   <div class="hero-image">
     <img src="images/Euro 4 Hino 300.jpeg" alt="Hino 300 Series" loading="lazy"/>
   </div>
-    <div class="hero-buttons">
-      <a href="https://wa.me/+6285975287684?text=Halo%20Saya%20Dapat%20Nomor%20Anda%20Dari%20Google" class="btn btn-contact" target="_blank">Hubungi Nathan Sekarang</a>
-      <a href="https://saleshinoindonesia.com" class="btn btn-website" target="_blank">Kunjungi Website Utama</a>
-    </div>
   </div>
 </section>
 

@@ -13,6 +13,19 @@ if (!$res || $res->num_rows == 0) {
 }
 $produk = $res->fetch_assoc();
 
+// Ambil karoseri produk
+$karoseri = [];
+$res_karoseri = $conn->query("
+    SELECT k.id, k.nama, k.slug, k.series, k.gambar 
+    FROM produk_karoseri pk
+    JOIN karoseri k ON pk.karoseri_id = k.id
+    WHERE pk.produk_id = $produk_id
+");
+while ($row = $res_karoseri->fetch_assoc()) {
+    $karoseri[] = $row;
+}
+
+
 // Daftar grup spesifikasi (urutan & label)
 $spec_groups = [
     'PERFORMA' => ['label' => 'PERFORMA'],
@@ -175,6 +188,21 @@ while ($row = $res_spec->fetch_assoc()) {
     <?php endif; endforeach; ?>
   </div>
 </section>
+
+<!-- Karoseri Section -->
+<div class="detail-karoseri">
+  <h2>Karoseri Tersedia</h2>
+  <div class="karoseri-grid">
+    <?php foreach ($karoseri as $k): ?>
+      <div class="karoseri-item">
+        <img src="uploads/karoseri/<?= htmlspecialchars($k['gambar']) ?>" 
+             alt="<?= htmlspecialchars($k['nama']) ?>">
+        <p><?= htmlspecialchars($k['nama']) ?></p>
+      </div>
+    <?php endforeach; ?>
+  </div>
+</div>
+
 
 </body>
 </html>

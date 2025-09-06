@@ -52,20 +52,17 @@
   z-index: 2;
   flex: 1;
   display: flex;
-  justify-content: center; /* sebelumnya flex-end -> supaya agak ke tengah */
-  align-items: center;
+  justify-content: flex-end;
 }
 
 .hero-image img {
-  max-height: 400px; /* diperbesar dari 360px */
+  max-height: 360px;
   object-fit: contain;
   filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
-  transition: transform 0.4s ease, margin 0.3s ease;
-  margin-left: 40px; /* geser sedikit ke tengah */
+  transition: transform 0.4s ease;
 }
-
 .hero-image img:hover {
-  transform: scale(1.07);
+  transform: scale(1.05);
 }
 
 /* =========================
@@ -246,7 +243,6 @@
   }
 
   .hero-image img {
-    max-height: 260px; /* tetap proporsional di HP */
-    margin-left: 0; /* hilangkan geseran di layar kecil */
+    max-height: 220px;
   }
 }

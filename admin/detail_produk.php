@@ -55,9 +55,12 @@ $spec_groups = [
     'Berat_Chasis' => ['label'=>'BERAT CHASIS'],
 ];
 
-// Ambil spesifikasi dan simpan berdasarkan grup dan sort_order
+// Ambil spesifikasi
 $specs = [];
-$res_spec = $conn->query("SELECT grup, label, nilai, sort_order FROM produk_spesifikasi WHERE produk_id=$produk_id ORDER BY sort_order ASC");
+$res_spec = $conn->query("SELECT grup, label, nilai, sort_order 
+                          FROM produk_spesifikasi 
+                          WHERE produk_id=$produk_id 
+                          ORDER BY sort_order ASC");
 while ($row = $res_spec->fetch_assoc()) {
     $specs[$row['grup']][] = $row;
 }
@@ -116,7 +119,6 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
         <tr><th>Nama Produk</th><td><?= htmlspecialchars($produk['nama_produk']) ?></td></tr>
         <tr><th>Series</th><td><?= htmlspecialchars($produk['nama_series']) ?></td></tr>
         <tr><th>Varian</th><td><?= htmlspecialchars($produk['varian']) ?></td></tr>
-        <tr><th>Deskripsi</th><td><?= nl2br(htmlspecialchars($produk['deskripsi'])) ?></td></tr>
         <tr><th>Gambar</th>
           <td>
           <?php if($produk['gambar'] && file_exists("../uploads/produk/".$produk['gambar'])): ?>

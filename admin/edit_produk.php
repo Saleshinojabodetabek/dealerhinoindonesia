@@ -51,7 +51,6 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     $series_id   = $conn->real_escape_string($_POST['series_id'] ?? '');
     $varian      = $conn->real_escape_string($_POST['varian'] ?? '');
     $nama_produk = $conn->real_escape_string($_POST['nama_produk'] ?? '');
-    $deskripsi   = $conn->real_escape_string($_POST['deskripsi'] ?? '');
     
     $gambar = $produk['gambar'];
     if (!empty($_FILES['gambar']['name'])) {
@@ -61,7 +60,9 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
         move_uploaded_file($_FILES['gambar']['tmp_name'],$upload_dir.$gambar);
     }
 
-    $conn->query("UPDATE produk SET series_id='$series_id', varian='$varian', nama_produk='$nama_produk', deskripsi='$deskripsi', gambar='$gambar' WHERE id=$produk_id");
+    $conn->query("UPDATE produk 
+                  SET series_id='$series_id', varian='$varian', nama_produk='$nama_produk', gambar='$gambar' 
+                  WHERE id=$produk_id");
 
     // Update spesifikasi
     $conn->query("DELETE FROM produk_spesifikasi WHERE produk_id=$produk_id");
@@ -73,7 +74,8 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
             $label = trim($labels[$i] ?? '');
             $nilai = trim($values[$i] ?? '');
             if ($label==='' && $nilai==='') continue;
-            $conn->query("INSERT INTO produk_spesifikasi (produk_id,grup,label,nilai,sort_order) VALUES ($produk_id,'$grup','".$conn->real_escape_string($label)."','".$conn->real_escape_string($nilai)."',".($i+1).")");
+            $conn->query("INSERT INTO produk_spesifikasi (produk_id,grup,label,nilai,sort_order) 
+                          VALUES ($produk_id,'$grup','".$conn->real_escape_string($label)."','".$conn->real_escape_string($nilai)."',".($i+1).")");
         }
     }
 
@@ -163,14 +165,10 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
           </select>
         </div>
 
-        <!-- Nama & Deskripsi -->
+        <!-- Nama Produk -->
         <div class="mb-3">
           <label class="form-label">Nama Produk</label>
           <input type="text" name="nama_produk" class="form-control" required value="<?= htmlspecialchars($produk['nama_produk']) ?>">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Deskripsi</label>
-          <textarea name="deskripsi" class="form-control" rows="3"><?= htmlspecialchars($produk['deskripsi']) ?></textarea>
         </div>
 
         <!-- Gambar -->

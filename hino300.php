@@ -89,7 +89,7 @@ function loadProduk(varian = 'ALL') {
         data.forEach(p => {
           html += `
             <div class="produk-card">
-              <img src="admin/uploads/produk/${p.gambar}" alt="${p.nama_produk}">
+              <img src="uploads/produk/${p.gambar}" alt="${p.nama_produk}">
               <h3>${p.nama_produk}</h3>
               <p>${p.deskripsi.substring(0,100)}...</p>
               <a href="produk-detail.php?id=${p.id}" class="btn-detail">Lihat Detail</a>

@@ -1,21 +1,25 @@
 <?php
-include __DIR__ . '/../config.php';  // naik satu folder ke admin lalu ambil config.php
-header("Content-Type: application/json; charset=UTF-8");
+include '../config.php';
 
-$varian = isset($_GET['varian']) ? $_GET['varian'] : 'ALL';
+$varian = $_GET['varian'] ?? 'ALL';
 
-if ($varian == 'ALL') {
-    $query = "SELECT * FROM produk ORDER BY id DESC";
+if ($varian === 'ALL') {
+    $sql = "SELECT id, nama_produk, gambar FROM produk ORDER BY id DESC";
 } else {
-    $varian = $conn->real_escape_string($varian);
-    $query = "SELECT * FROM produk WHERE varian='$varian' ORDER BY id DESC";
+    $sql = "SELECT id, nama_produk, gambar FROM produk WHERE varian = ? ORDER BY id DESC";
 }
 
-$result = $conn->query($query);
+$stmt = $conn->prepare($sql);
+if ($varian !== 'ALL') {
+    $stmt->bind_param("s", $varian);
+}
+$stmt->execute();
+$result = $stmt->get_result();
 
 $produk = [];
 while ($row = $result->fetch_assoc()) {
     $produk[] = $row;
 }
 
+header('Content-Type: application/json');
 echo json_encode($produk);

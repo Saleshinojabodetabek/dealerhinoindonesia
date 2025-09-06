@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/product/hero.css" />
     <link rel="stylesheet" href="css/product/kategori.css" />
+    <link rel="stylesheet" href="css/product/product.css" />
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -91,7 +92,6 @@ function loadProduk(varian = 'ALL') {
             <div class="produk-card">
               <img src="uploads/produk/${p.gambar}" alt="${p.nama_produk}">
               <h3>${p.nama_produk}</h3>
-              <p>${p.deskripsi.substring(0,100)}...</p>
               <a href="produk-detail.php?id=${p.id}" class="btn-detail">Lihat Detail</a>
             </div>
           `;

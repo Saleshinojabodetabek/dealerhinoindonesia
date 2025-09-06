@@ -1,12 +1,19 @@
 <?php
 include '../config.php';
 
-$varian = $_GET['varian'] ?? 'ALL';
-$search = $_GET['search'] ?? '';
+$series_id = $_GET['series_id'] ?? null;
+$varian    = $_GET['varian'] ?? 'ALL';
+$search    = $_GET['search'] ?? '';
 
 $where = [];
 $params = [];
 $types = '';
+
+if ($series_id) {
+    $where[] = "p.series_id = ?";
+    $params[] = $series_id;
+    $types   .= "i";
+}
 
 if ($varian !== 'ALL') {
     $where[] = "p.varian = ?";
@@ -22,12 +29,10 @@ if (!empty($search)) {
 
 $whereSql = $where ? "WHERE " . implode(" AND ", $where) : "";
 
-// Ambil data produk + join ke series
-$sql = "SELECT p.id, p.nama_produk, p.gambar, s.nama_series
+$sql = "SELECT p.id, p.nama_produk, p.gambar
         FROM produk p
-        JOIN series s ON p.series_id = s.id
         $whereSql
-        ORDER BY s.id, p.id DESC";
+        ORDER BY p.id DESC";
 
 $stmt = $conn->prepare($sql);
 if ($params) {
@@ -36,13 +41,10 @@ if ($params) {
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Kelompokkan berdasarkan series
 $produk = [];
 while ($row = $result->fetch_assoc()) {
-    $series = $row['nama_series'];
-    unset($row['nama_series']); // hapus biar rapih
-    $produk[$series][] = $row;
+    $produk[] = $row;
 }
 
 header('Content-Type: application/json');
-echo json_encode($produk, JSON_PRETTY_PRINT);
+echo json_encode($produk);

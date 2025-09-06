@@ -70,6 +70,7 @@ while ($row = $res_spec->fetch_assoc()) {
     <link rel="stylesheet" href="css/product/hero.css" />
     <link rel="stylesheet" href="css/product/kategori.css" />
     <link rel="stylesheet" href="css/product/product.css" />
+    <link rel="stylesheet" href="css/product/detail.css" />
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">

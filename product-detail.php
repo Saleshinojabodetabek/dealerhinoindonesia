@@ -1,22 +1,49 @@
 <?php
-include "admin/config.php";
+include 'config.php';
 
-// Ambil ID dari URL
-$id = (int)($_GET['id'] ?? 0);
-if ($id <= 0) {
+// Ambil ID produk dari URL
+$produk_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+if ($produk_id <= 0) {
     die("Produk tidak ditemukan.");
 }
 
-// Query produk berdasarkan ID
-$sql = "SELECT * FROM produk WHERE id = $id LIMIT 1";
-$res = $conn->query($sql);
-if (!$res || $res->num_rows === 0) {
+// Ambil data produk
+$qProduk = $conn->query("SELECT * FROM produk WHERE id=$produk_id");
+if (!$qProduk || $qProduk->num_rows == 0) {
     die("Produk tidak ditemukan.");
 }
-$produk = $res->fetch_assoc();
+$produk = $qProduk->fetch_assoc();
+
+// Daftar grup spesifikasi (untuk urutan)
+$spec_groups = [
+    'performa' => ['label'=>'PERFORMA'],
+    'model_mesin' => ['label'=>'MODEL MESIN'],
+    'kopling' => ['label'=>'KOPLING'],
+    'transmisi' => ['label'=>'TRANSMISI'],
+    'kemudi' => ['label'=>'KEMUDI'],
+    'sumbu' => ['label'=>'SUMBU'],
+    'rem' => ['label'=>'REM'],
+    'roda_ban' => ['label'=>'RODA & BAN'],
+    'Sistim_Listrik_accu' => ['label'=>'SISTIM LISTRIK ACCU'],
+    'Tangki_Solar' => ['label'=>'TANGKI SOLAR'],
+    'Dimensi' => ['label'=>'DIMENSI'],
+    'Suspensi' => ['label'=>'SUSPENSI'],
+    'Berat_Chasis' => ['label'=>'BERAT CHASIS'],
+];
+
+// Ambil spesifikasi produk
+$specs = [];
+$res_spec = $conn->query("SELECT grup, label, nilai, sort_order 
+                          FROM produk_spesifikasi 
+                          WHERE produk_id=$produk_id 
+                          ORDER BY sort_order ASC");
+while ($row = $res_spec->fetch_assoc()) {
+    $specs[$row['grup']][] = $row;
+}
 ?>
 
-<!DOCTYPE html>
+<!-- HTML -->
+ <!DOCTYPE html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -41,6 +68,7 @@ $produk = $res->fetch_assoc();
     <link rel="stylesheet" href="css/product/hero.css" />
     <link rel="stylesheet" href="css/product/kategori.css" />
     <link rel="stylesheet" href="css/product/product.css" />
+    <link rel="stylesheet" href="css/product/detail.css" />
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -112,32 +140,37 @@ $produk = $res->fetch_assoc();
       </div>
     </div>
 
-<!-- Hero Detail -->
-<section class="detail-hero">
-  <img src="uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" alt="<?= htmlspecialchars($produk['nama_produk']) ?>">
-</section>
+    <!-- Hero Detail -->
+    <section class="detail-hero">
+        <img src="uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" 
+            alt="<?= htmlspecialchars($produk['nama_produk']) ?>">
+        <h1><?= htmlspecialchars($produk['nama_produk']) ?></h1>
+    </section>
 
-<!-- Konten Detail -->
-<section class="detail-container">
-  <div class="detail-info">
-    <h1><?= htmlspecialchars($produk['nama_produk']) ?></h1>
-    <p><strong>Varian:</strong> <?= htmlspecialchars($produk['varian']) ?></p>
-    
-    <?php if (!empty($produk['spesifikasi'])): ?>
-      <div class="detail-spesifikasi">
+    <!-- Konten Detail -->
+    <section class="detail-container">
+        <p><strong>Varian:</strong> <?= htmlspecialchars($produk['varian']) ?></p>
+
+        <!-- Spesifikasi -->
+        <div class="detail-specs">
         <h2>Spesifikasi</h2>
-        <p><?= nl2br(htmlspecialchars($produk['spesifikasi'])) ?></p>
-      </div>
-    <?php endif; ?>
-
-    <?php if (!empty($produk['karoseri_gambar'])): ?>
-      <div class="detail-karoseri">
-        <h2>Karoseri</h2>
-        <img src="uploads/karoseri/<?= htmlspecialchars($produk['karoseri_gambar']) ?>" alt="Karoseri <?= htmlspecialchars($produk['nama_produk']) ?>">
-      </div>
-    <?php endif; ?>
-  </div>
-</section>
-
+        <?php foreach ($spec_groups as $slug => $meta): 
+            if (!empty($specs[$slug])): ?>
+            <div class="spec-group">
+            <div class="spec-title"><?= htmlspecialchars($meta['label']) ?></div>
+            <table class="spec-table">
+                <tbody>
+                <?php foreach ($specs[$slug] as $r): ?>
+                <tr>
+                    <td class="spec-label"><?= htmlspecialchars($r['label']) ?></td>
+                    <td class="spec-value"><?= htmlspecialchars($r['nilai']) ?></td>
+                </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+        <?php endif; endforeach; ?>
+        </div>
+    </section>
 </body>
 </html>

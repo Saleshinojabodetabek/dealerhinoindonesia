@@ -1,14 +1,17 @@
-/* === HERO PRODUCT (Full Image) === */
+/* === HERO PRODUCT (Full Image, rapih) === */
 .hero-product {
   width: 100%;
-  height: 80vh; /* bisa disesuaikan */
+  height: auto; /* biar menyesuaikan gambar */
   overflow: hidden;
   border-radius: 12px;
+  display: flex;
+  justify-content: center;
 }
 
 .hero-product-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* gambar tetap proporsional */
+  height: auto;
+  max-height: 90vh; /* batas tinggi agar tidak terlalu panjang */
+  object-fit: contain; /* gambar tetap penuh tanpa terpotong */
   display: block;
 }

@@ -50,9 +50,18 @@
 
     <!-- Hero Contact -->
     <section class="hero-contact fade-element">
-    <div class="hero-contact-content">
+    <div class="hero-contact-container">
+        <!-- Kiri: Teks -->
+        <div class="hero-contact-text">
         <h1>Hubungi Kami</h1>
         <p>Kami siap membantu Anda mendapatkan solusi terbaik untuk kebutuhan truk Hino di seluruh Indonesia.</p>
         <a href="#contact-form" class="btn-contact">Kirim Pesan</a>
+        </div>
+
+        <!-- Kanan: Gambar -->
+        <div class="hero-contact-image">
+        <img src="images/contact-hero.png" alt="Customer Service Hino" />
+        </div>
     </div>
     </section>
+

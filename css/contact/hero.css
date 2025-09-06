@@ -1,29 +1,31 @@
 /* === HERO CONTACT === */
 .hero-contact {
-  position: relative;
-  width: 100%;
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("images/hero-contact.jpg") center/cover no-repeat;
+  background: linear-gradient(135deg, #1b5e20, #2e7d32 50%, #81c784);
   color: #fff;
-  padding: 2rem;
+  padding: 4rem 2rem;
   border-radius: 0 0 20px 20px;
 }
 
-.hero-contact-content {
-  max-width: 700px;
+.hero-contact-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 
-.hero-contact h1 {
+.hero-contact-text {
+  flex: 1 1 500px;
+}
+
+.hero-contact-text h1 {
   font-size: 2.8rem;
   margin-bottom: 1rem;
 }
 
-.hero-contact p {
+.hero-contact-text p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
   line-height: 1.6;
@@ -32,30 +34,49 @@
 .btn-contact {
   padding: 14px 32px;
   border-radius: 8px;
-  background: #2e7d32;
-  color: #fff;
+  background: #fff;
+  color: #2e7d32;
   font-size: 1.1rem;
   font-weight: 700;
   text-decoration: none;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .btn-contact:hover {
-  background: #27682a;
+  background: #2e7d32;
+  color: #fff;
+}
+
+/* Gambar di kanan */
+.hero-contact-image {
+  flex: 1 1 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-contact-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .hero-contact {
-    min-height: 50vh;
-    padding: 2rem 1rem;
+@media (max-width: 900px) {
+  .hero-contact-container {
+    flex-direction: column;
+    text-align: center;
   }
 
-  .hero-contact h1 {
-    font-size: 2rem;
+  .hero-contact-text h1 {
+    font-size: 2.2rem;
   }
 
-  .hero-contact p {
+  .hero-contact-text p {
     font-size: 1rem;
+  }
+
+  .hero-contact-image {
+    margin-top: 2rem;
   }
 }

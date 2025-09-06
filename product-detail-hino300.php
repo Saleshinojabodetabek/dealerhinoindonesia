@@ -211,6 +211,10 @@ while ($row = $res_spec->fetch_assoc()) {
   <?php endif; endforeach; ?>
 </section>
 
+<!-- Back to Top Button -->
+<button id="back-to-top" title="Kembali ke atas">&#8679;</button>
+
+
 <!-- JS -->
 <script>
 document.querySelectorAll('.accordion-btn').forEach(btn => {
@@ -219,6 +223,22 @@ document.querySelectorAll('.accordion-btn').forEach(btn => {
     let content = btn.nextElementSibling;
     content.style.display = content.style.display === "block" ? "none" : "block";
   });
+});
+// Back to Top Button
+const backToTopBtn = document.getElementById("back-to-top");
+
+// Tampilkan tombol ketika scroll lebih dari 300px
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTopBtn.style.display = "block";
+  } else {
+    backToTopBtn.style.display = "none";
+  }
+});
+
+// Scroll ke atas ketika diklik
+backToTopBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 </script>
 

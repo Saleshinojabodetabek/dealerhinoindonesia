@@ -16,14 +16,14 @@
 }
 
 .kategori h1 {
-  font-size: 32px; /* lebih besar */
-  font-weight: 700; /* bold tebal */
+  font-size: 32px;
+  font-weight: 700;
   margin: 0;
-  color: #222; /* teks lebih kuat */
+  color: #222;
 }
 
 .kategori img {
-  height: 38px; /* lebih besar */
+  height: 38px;
 }
 
 /* ==========================
@@ -31,11 +31,13 @@
 ========================== */
 .tabs {
   display: flex;
-  gap: 14px;
+  justify-content: center; /* tengah */
+  gap: 18px;
   flex-wrap: wrap;
 }
 
 .tab {
+  position: relative;
   padding: 14px 32px;
   background: #f7f7f7;
   font-weight: 600;
@@ -44,7 +46,7 @@
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   border: 1px solid #e0e0e0;
 }
 
@@ -53,10 +55,34 @@
   transform: translateY(-2px);
 }
 
+/* efek underline animasi */
 .tab.active {
   color: #d32f2f;
   background: #fff5f5;
   border-color: #d32f2f;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 20%;
+  bottom: -6px;
+  width: 60%;
+  height: 3px;
+  background: #d32f2f;
+  border-radius: 2px;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 60%;
+    opacity: 1;
+  }
 }
 
 /* ==========================
@@ -79,13 +105,19 @@
 
   .tabs {
     flex-direction: column;
+    align-items: stretch;
     gap: 10px;
     width: 100%;
   }
 
   .tab {
-    width: 100%; /* full width di HP */
-    text-align: center; /* rata tengah */
+    width: 100%;
+    text-align: center;
     padding: 12px;
+  }
+
+  .tab.active::after {
+    left: 10%;
+    width: 80%;
   }
 }

@@ -58,7 +58,7 @@
 <div class="kategori-section">
   <div class="kategori">
     <h1>HINO 300 Series</h1>
-    <img src="euro4-logo.png" alt="Euro4 Logo">
+    <img src="images/euro4.png" alt="Euro4 Logo">
   </div>
 
   <div class="tabs">

@@ -3,7 +3,7 @@
 ========================== */
 .kategori-section {
   max-width: 1200px;
-  margin: 40px auto;
+  margin: 60px auto 40px; /* tambah jarak atas (60px) */
   padding: 0 20px;
   font-family: Arial, sans-serif;
 }
@@ -11,18 +11,18 @@
 .kategori {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 14px;
+  margin-bottom: 28px;
 }
 
 .kategori h1 {
-  font-size: 26px;
+  font-size: 30px; /* lebih besar */
   font-weight: 700;
   margin: 0;
 }
 
 .kategori img {
-  height: 32px;
+  height: 36px; /* sedikit lebih besar */
 }
 
 /* ==========================
@@ -30,14 +30,15 @@
 ========================== */
 .tabs {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
 .tab {
-  padding: 12px 28px;
+  padding: 14px 32px; /* lebih besar */
   background: #f7f7f7;
   font-weight: 600;
+  font-size: 15px; /* sedikit lebih besar */
   text-transform: uppercase;
   border-radius: 6px;
   cursor: pointer;

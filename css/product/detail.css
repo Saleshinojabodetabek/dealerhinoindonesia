@@ -1,0 +1,43 @@
+.detail-hero {
+  width: 100%;
+  max-height: 450px;
+  overflow: hidden;
+}
+
+.detail-hero img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  background: #f9f9f9;
+}
+
+.detail-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.detail-info h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+.detail-info p {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.detail-spesifikasi,
+.detail-karoseri {
+  margin-top: 24px;
+}
+
+.detail-karoseri img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 8px;
+}

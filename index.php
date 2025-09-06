@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="css/home/produk.css" />
     <link rel="stylesheet" href="css/home/feature.css" />
     <link rel="stylesheet" href="css/home/contact.css" />
+    <link rel="stylesheet" href="css/home/blog.css" />
 
     <!-- JS -->
     <script src="js/script.js"></script>

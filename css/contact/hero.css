@@ -1,57 +1,44 @@
-/* === HERO CONTACT === */
+/* Hero Contact */
 .hero-contact {
-  background: linear-gradient(135deg, #1b5e20, #43a047, #81c784);
-  color: #fff;
+  background: linear-gradient(135deg, #1b5e20, #388e3c);
   padding: 4rem 2rem;
-  border-radius: 0 0 20px 20px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
 }
 
-.hero-contact-container {
+.hero-contact-content {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 /* Teks kiri */
 .hero-contact-text {
-  flex: 1 1 450px;
+  flex: 1 1 500px;
 }
 
 .hero-contact-text h1 {
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .hero-contact-text p {
   font-size: 1.2rem;
-  margin-bottom: 1.8rem;
   line-height: 1.6;
-}
-
-.btn-contact {
-  padding: 12px 28px;
-  border-radius: 8px;
-  background: #fff;
-  color: #2e7d32;
-  font-weight: 700;
-  font-size: 1.1rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.btn-contact:hover {
-  background: #e8f5e9;
+  color: #e8f5e9;
 }
 
 /* Gambar kanan */
 .hero-contact-image {
   flex: 1 1 400px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .hero-contact-image img {
@@ -61,7 +48,7 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero-contact-container {
+  .hero-contact-content {
     flex-direction: column;
     text-align: center;
   }

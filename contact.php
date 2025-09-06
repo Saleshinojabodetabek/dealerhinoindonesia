@@ -49,13 +49,12 @@
     </header>
 
 <!-- Hero Contact -->
-<section class="hero-contact fade-element">
-  <div class="hero-contact-container">
+<section class="hero-contact">
+  <div class="hero-contact-content">
     <!-- Kiri: Teks -->
     <div class="hero-contact-text">
       <h1>Kontak Kami</h1>
       <p>Dapatkan bantuan dukungan dari tim resmi HinoMobil.</p>
-      <a href="#contact-form" class="btn-contact">Hubungi Sekarang</a>
     </div>
 
     <!-- Kanan: Gambar -->
@@ -64,5 +63,6 @@
     </div>
   </div>
 </section>
+
 
 

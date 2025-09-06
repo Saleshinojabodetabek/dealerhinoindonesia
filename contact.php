@@ -77,7 +77,7 @@
 
   <div class="container">
     <div class="contact-form">
-      <form id="contactForm">
+      <form id="contactForm" method="POST" action="admin/simpan_kontak.php">
         <label for="name">Your Name:</label>
         <input type="text" id="name" name="name" required />
 

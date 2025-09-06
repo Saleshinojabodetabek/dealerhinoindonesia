@@ -114,7 +114,7 @@
                   <div class="produk-card">
                     <img src="uploads/produk/${p.gambar}" alt="${p.nama_produk}">
                     <h3>${p.nama_produk}</h3>
-                    <a href="product-detail-hino300.php?id=${p.id}" class="btn-detail">Lihat Detail</a>
+                    <a href="product-detail-hino300.php?id=${p.id}#hero-section" class="btn-detail">Lihat Detail</a>
                   </div>
                 `;
               });
@@ -147,5 +147,26 @@
       // Load pertama kali
       loadProduk();
     </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Scroll smooth ketika halaman dibuka dengan hash
+      if(window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if(target) target.scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Optional: AJAX tab load (kalau pakai JS untuk filter)
+      document.querySelectorAll(".tabs .tab").forEach(tab => {
+        tab.addEventListener("click", e => {
+          // e.preventDefault(); // aktifkan kalau pakai AJAX dan tidak reload
+          const hash = tab.getAttribute("href").split("#")[1];
+          const target = document.getElementById(hash);
+          if(target) target.scrollIntoView({ behavior: "smooth" });
+        });
+      });
+    });
+    </script>
+
   </body>
 </html>

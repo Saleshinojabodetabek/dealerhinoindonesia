@@ -157,7 +157,7 @@ while ($row = $res_spec->fetch_assoc()) {
     </div>
 
 <!-- Hero Section -->
-<section class="hero-diagonal">
+<section id="hero-section" class="hero-diagonal">
   <div class="hero-text">
     <h3>TRUK</h3>
     <h1><?= htmlspecialchars($produk['nama_produk']) ?></h1>
@@ -221,6 +221,16 @@ document.querySelectorAll('.accordion-btn').forEach(btn => {
   });
 });
 </script>
+<script>
+window.addEventListener("load", () => {
+  // Scroll smooth ke hero-section jika hash ada di URL
+  if(window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if(target) target.scrollIntoView({ behavior: "smooth" });
+  }
+});
+</script>
+
 
 </body>
 </html>

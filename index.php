@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/home/hero.css" />
     <link rel="stylesheet" href="css/home/promoutama.css" />
+    <link rel="stylesheet" href="css/home/produk.css" />
 
     <!-- JS -->
     <script src="js/script.js"></script>

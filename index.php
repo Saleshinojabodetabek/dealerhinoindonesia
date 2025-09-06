@@ -56,7 +56,8 @@
     </div>
     <div class="container">
         <h2>Dealer Resmi Hino Indonesia – Pilihan Tepat untuk Bisnis Anda</h2>
-        <p>Dealer Resmi Hino Terpercaya – Jual Truk Hino Dutro, Ranger & Bus. Promo Harga Terbaik, Cicilan Ringan & Ready Stock. Hubungi Kami Sekarang!</p>
+        <p>Kami hadir sebagai mitra terpercaya dalam menyediakan berbagai kendaraan Hino yang tangguh, mulai dari truk ringan, truk berat hingga bus. Dengan layanan profesional, stok lengkap, serta penawaran harga dan pembiayaan yang kompetitif, kami siap mendukung kebutuhan transportasi dan operasional bisnis Anda. Dapatkan solusi terbaik hanya di Dealer Resmi Hino Indonesia.</p>
+
         <div class="hero-buttons">
         <a href="https://wa.me/+6285975287684?text=Halo%20Saya%20Dapat%20Nomor%20Anda%20Dari%20Google" class="btn btn-contact" target="_blank">Hubungi Nathan Sekarang</a>
         </div>

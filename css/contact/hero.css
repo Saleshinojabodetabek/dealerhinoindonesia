@@ -139,10 +139,11 @@
 
   .hero-contact-text {
     text-align: center;
+    margin-top: 40px; /* tambahin jarak supaya turun */
   }
 
   .hero-contact-text h1 {
-    font-size: 2.5rem; /* diperbesar agar menonjol */
+    font-size: 2.5rem;
   }
 
   .hero-contact-text p {
@@ -155,7 +156,7 @@
   }
 
   .btn-contact {
-    margin: 0 auto; /* tombol ke tengah */
+    margin: 20px auto 0; /* tombol agak ke bawah */
     display: block;
   }
 }
@@ -163,7 +164,11 @@
 /* Extra Small Mobile */
 @media (max-width: 480px) {
   .hero-contact {
-    padding: 60px 15px;
+    padding: 80px 15px 60px; /* padding atas lebih besar agar turun */
+  }
+
+  .hero-contact-text {
+    margin-top: 50px; /* lebih turun di layar kecil */
   }
 
   .hero-contact-text h1 {

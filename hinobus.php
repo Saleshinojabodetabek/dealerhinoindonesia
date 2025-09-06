@@ -100,7 +100,7 @@
     <script>
     let currentVarian = 'ALL';
     let currentSearch = '';
-    let seriesId = 5;
+    let seriesId = 6;
 
     // Fungsi load produk
     function loadProduk() {

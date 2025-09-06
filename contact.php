@@ -60,7 +60,7 @@
 
         <!-- Kanan: Gambar -->
         <div class="hero-contact-image">
-        <img src="images/contact-hero.png" alt="Customer Service Hino" />
+        <img src="images/banner-300.jpg" alt="Customer Service Hino" />
         </div>
     </div>
     </section>

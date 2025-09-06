@@ -1,19 +1,5 @@
 <?php include 'config.php'; ?>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hino 300 Series | Truk Ringan Tangguh</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/header.css">
-  <link rel="stylesheet" href="css/produk/headerproduk.css">
-  <link rel="stylesheet" href="css/produk/produk.css">
-  <script src="https://unpkg.com/feather-icons"></script>
-</head>
-<body>
-
-  <?php include 'header.php'; ?>
+<?php include 'header.php'; ?>
 
   <main>
     <!-- Hero -->

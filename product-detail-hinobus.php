@@ -159,7 +159,7 @@ while ($row = $res_spec->fetch_assoc()) {
 <!-- Hero Section -->
 <section id="hero-section" class="hero-diagonal">
   <div class="hero-text">
-    <h3>TRUK</h3>
+    <h3>BUS</h3>
     <h1><?= htmlspecialchars($produk['nama_produk']) ?></h1>
   </div>
   <div class="hero-image">

@@ -27,10 +27,25 @@
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-
     <!-- JS -->
     <script src="js/script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+      /* Tambahan CSS untuk search */
+      .produk-controls {
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      #search-input {
+        width: 100%;
+        max-width: 400px;
+        padding: 12px 16px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+    </style>
   </head>
   <body>
 
@@ -54,67 +69,83 @@
       </div>
     </header>
 
-<!-- Hero Product — Gambar Penuh -->
-<section class="hero-product">
-  <img src="images/Euro 4 Hino 300.jpeg" alt="Hino 300 Series" class="hero-product-img" />
-</section>
+    <!-- Hero Product — Gambar Penuh -->
+    <section class="hero-product">
+      <img src="images/Euro 4 Hino 300.jpeg" alt="Hino 300 Series" class="hero-product-img" />
+    </section>
 
-<!-- Produk Pilihan -->
-<div class="kategori-section">
-  <div class="kategori">
-    <h1>Hino 300 Series</h1>
-    <img src="images/euro4.png" alt="Euro4 Logo">
-  </div>
+    <!-- Produk Pilihan -->
+    <div class="kategori-section">
+      <div class="kategori">
+        <h1>Hino 300 Series</h1>
+        <img src="images/euro4.png" alt="Euro4 Logo">
+      </div>
 
-  <div class="tabs">
-    <div class="tab active">ALL</div>
-    <div class="tab">CARGO</div>
-    <div class="tab">DUMP</div>
-    <div class="tab">MIXER</div>
-  </div>
-</div>
+      <div class="tabs">
+        <div class="tab active">ALL</div>
+        <div class="tab">CARGO</div>
+        <div class="tab">DUMP</div>
+        <div class="tab">MIXER</div>
+      </div>
 
-<!-- Product -->
-<div id="produk-list" class="produk-grid"></div>
+      <!-- Search Bar -->
+      <div class="produk-controls">
+        <input type="text" id="search-input" placeholder="Cari produk..." />
+      </div>
+    </div>
 
-<script>
-// Fungsi ambil produk dari API
-function loadProduk(varian = 'ALL') {
-  fetch("admin/api/get_product.php?varian=" + varian)
-    .then(res => res.json())
-    .then(data => {
-      let html = "";
-      if (data.length === 0) {
-        html = "<p>Tidak ada produk untuk kategori ini.</p>";
-      } else {
-        data.forEach(p => {
-          html += `
-            <div class="produk-card">
-              <img src="uploads/produk/${p.gambar}" alt="${p.nama_produk}">
-              <h3>${p.nama_produk}</h3>
-              <a href="produk-detail.php?id=${p.id}" class="btn-detail">Lihat Detail</a>
-            </div>
-          `;
-        });
+    <!-- Product -->
+    <div id="produk-list" class="produk-grid"></div>
+
+    <script>
+      let currentVarian = 'ALL';
+      let currentSearch = '';
+
+      function loadProduk() {
+        fetch(`admin/api/get_product.php?varian=${currentVarian}&search=${encodeURIComponent(currentSearch)}`)
+          .then(res => res.json())
+          .then(data => {
+            let html = "";
+            if (data.length === 0) {
+              html = "<p>Tidak ada produk untuk kategori ini.</p>";
+            } else {
+              data.forEach(p => {
+                html += `
+                  <div class="produk-card">
+                    <img src="uploads/produk/${p.gambar}" alt="${p.nama_produk}">
+                    <h3>${p.nama_produk}</h3>
+                    <a href="produk-detail.php?id=${p.id}" class="btn-detail">Lihat Detail</a>
+                  </div>
+                `;
+              });
+            }
+            document.getElementById("produk-list").innerHTML = html;
+          })
+          .catch(err => {
+            document.getElementById("produk-list").innerHTML =
+              "<p style='color:red'>Gagal load produk.</p>";
+            console.error("Error load produk:", err);
+          });
       }
-      document.getElementById("produk-list").innerHTML = html;
-    })
-    .catch(err => {
-      document.getElementById("produk-list").innerHTML =
-        "<p style='color:red'>Gagal load produk.</p>";
-      console.error("Error load produk:", err);
-    });
-}
 
-// Load semua produk pertama kali
-loadProduk();
+      // Event tab kategori
+      document.querySelectorAll(".tabs .tab").forEach(tab => {
+        tab.addEventListener("click", function() {
+          document.querySelectorAll(".tabs .tab").forEach(t => t.classList.remove("active"));
+          this.classList.add("active");
+          currentVarian = this.textContent.trim();
+          loadProduk();
+        });
+      });
 
-// Event listener untuk tab kategori
-document.querySelectorAll(".tabs .tab").forEach(tab => {
-  tab.addEventListener("click", function() {
-    document.querySelectorAll(".tabs .tab").forEach(t => t.classList.remove("active"));
-    this.classList.add("active");
-    loadProduk(this.textContent.trim()); // isi textContent: ALL, CARGO, DUMP, MIXER
-  });
-});
-</script>
+      // Event search
+      document.getElementById("search-input").addEventListener("input", function() {
+        currentSearch = this.value.trim();
+        loadProduk();
+      });
+
+      // Load pertama kali
+      loadProduk();
+    </script>
+  </body>
+</html>

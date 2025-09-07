@@ -12,7 +12,7 @@ include 'config.php';
 
 // Daftar grup spesifikasi
 $spec_groups = [
-    'performa' => ['label'=>'PERFORMA','defaults'=>['Kecepatan maksimum (km/h)','Daya tanjak (tan %)']],
+    'performa' => ['label'=>'PERFORMA','defaults'=>['Kecepatan Maksimum (km/h)','Daya Tanjak (tan %)']],
     'model_mesin' => ['label'=>'MODEL MESIN','defaults'=>['Model','Model Tipe','Tenaga Maksimum (PS/rpm)','Daya Maksimum (Kgm/rpm)','Jumlah Silinder','Diameter x Langkah Piston (mm)','Isi Silinder (L)']],
     'kopling' => ['label'=>'KOPLING','defaults'=>['Tipe','Diameter Cakram (mm)']],
     'transmisi' => ['label'=>'TRANSMISI','defaults'=>['Tipe','Ke-1','Ke-2','Ke-3','Ke-4','Ke-5','Mundur']],

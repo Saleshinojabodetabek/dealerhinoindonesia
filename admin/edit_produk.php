@@ -12,19 +12,19 @@ include 'config.php';
 
 // Daftar grup spesifikasi
 $spec_groups = [
-    'performa' => ['label'=>'PERFORMA','defaults'=>['Kecepatan maksimum (km/h)','Daya tanjak']],
-    'model_mesin' => ['label'=>'MODEL MESIN','defaults'=>['Model','Tipe','Tenaga maksimum','Torsi maksimum','Kapasitas']],
-    'kopling' => ['label'=>'KOPLING','defaults'=>['Tipe']],
-    'transmisi' => ['label'=>'TRANSMISI','defaults'=>['Tipe','Rasio']],
-    'kemudi' => ['label'=>'KEMUDI','defaults'=>['Tipe']],
-    'sumbu' => ['label'=>'SUMBU','defaults'=>['Depan','Belakang']],
-    'rem' => ['label'=>'REM','defaults'=>['Utama','Parkir','Tambahan']],
-    'roda_ban' => ['label'=>'RODA & BAN','defaults'=>['Ukuran Ban']],
+    'performa' => ['label'=>'PERFORMA','defaults'=>['Kecepatan maksimum (km/h)','Daya tanjak (tan %)']],
+    'model_mesin' => ['label'=>'MODEL MESIN','defaults'=>['Model','Model Tipe','Tenaga Maksimum (PS/rpm)','Daya Maksimum (Kgm/rpm)','Jumlah Silinder','Diameter x Langkah Piston (mm)','Isi Silinder (L)']],
+    'kopling' => ['label'=>'KOPLING','defaults'=>['Tipe','Diameter Cakram (mm)']],
+    'transmisi' => ['label'=>'TRANSMISI','defaults'=>['Tipe','Ke-1','Ke-2','Ke-3','Ke-4','Ke-5','Mundur']],
+    'kemudi' => ['label'=>'KEMUDI','defaults'=>['Tipe','Minimal Radius Putar (m)']],
+    'sumbu' => ['label'=>'SUMBU','defaults'=>['Depan','Belakang','Perbandingan Gigi Akhir']],
+    'rem' => ['label'=>'REM','defaults'=>['Rem Utama','Rem Pelambat','Rem Parkir']],
+    'roda_ban' => ['label'=>'RODA & BAN','defaults'=>['Ukuran Ban','Ukuran Rim','Jumlah Ban']],
     'Sistim_Listrik_accu' => ['label'=>'SISTIM LISTRIK ACCU','defaults'=>['Accu (V-Ah)']],
-    'Tangki_Solar' => ['label'=>'TANGKI SOLAR','defaults'=>['Kapasitas']],
-    'Dimensi' => ['label'=>'DIMENSI','defaults'=>['Dimensi']],
+    'Tangki_Solar' => ['label'=>'TANGKI SOLAR','defaults'=>['Kapasitas (L)']],
+    'Dimensi' => ['label'=>'DIMENSI','defaults'=>['Jarak Sumbu Roda	WB (mm)','Total Panjang OL (mm)','Total Lebar OW (mm)','Total Tinggi OH (mm)','Lebar Jejak Depan FR Tr (mm)','Lebar Jejak Belakang RR Tr (mm)','Julur Depan	FOH (mm)','Julur Belakang ROH (mm)','Kabin Kesumbu Roda Belakang CA (mm)']],
     'Suspensi' => ['label'=>'SUSPENSI','defaults'=>['Depan & Belakang']],
-    'Berat_Chasis' => ['label'=>'BERAT CHASIS','defaults'=>['Depan & Belakang']],
+    'Berat_Chasis' => ['label'=>'BERAT CHASIS','defaults'=>['Berat Kosong (kg)','Berat Total Kendaraan (kg)']],
 ];
 
 // Ambil ID produk

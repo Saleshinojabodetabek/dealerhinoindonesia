@@ -181,3 +181,7 @@
     padding: 10px 22px;
   }
 }
+/* Tambahkan ini di global CSS */
+html {
+  scroll-behavior: smooth;
+}

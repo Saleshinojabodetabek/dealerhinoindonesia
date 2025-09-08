@@ -7,10 +7,10 @@
   height: 50vh;
 
   /* Gradient hijau muda + background image */
-  background: linear-gradient(135deg, #4CAF50, #66BB6A, #26A69A),
-              url("/images/banner-300.jpg") no-repeat center center;
-  background-size: 300% 300%, cover; /* gradient animasi, gambar tetap cover */
-  background-attachment: fixed; /* efek parallax ringan */
+  background: linear-gradient(135deg, #4caf50, #66bb6a, #26a69a),
+    url("/images/banner-300.jpg") no-repeat center center;
+  background-size: 300% 300%, cover;
+  background-attachment: fixed;
 
   display: flex;
   align-items: center;
@@ -21,18 +21,22 @@
   color: #fff;
   overflow: hidden;
 
-  /* Animasi gradasi */
   animation: gradientMove 10s ease infinite;
 }
 
-/* Animasi gradient bergerak */
 @keyframes gradientMove {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-/* Overlay hitam transparan */
+/* Overlay hitam */
 .hero-banner .overlay {
   position: absolute;
   inset: 0;
@@ -40,7 +44,7 @@
   z-index: 1;
 }
 
-/* Wave putih di bawah hero */
+/* Wave bawah */
 .hero-banner::after {
   content: "";
   position: absolute;
@@ -52,7 +56,7 @@
   z-index: 2;
 }
 
-/* Konten hero (text & button) */
+/* Konten */
 .hero-banner .hero-content {
   position: relative;
   z-index: 3;
@@ -65,8 +69,7 @@
   font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 15px;
-  color: #fff;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8); /* biar makin tegas */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
 }
 
 /* Deskripsi */
@@ -81,7 +84,7 @@
 /* Tombol */
 .hero-banner .hero-btn {
   display: inline-block;
-  background: #e60012;
+  background: #ffcc00;
   color: #fff;
   padding: 10px 25px;
   border-radius: 8px;
@@ -93,4 +96,57 @@
 
 .hero-banner .hero-btn:hover {
   background: #cc0010;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+
+/* Tablet (<= 992px) */
+@media (max-width: 992px) {
+  .hero-banner {
+    height: 45vh;
+  }
+  .hero-banner h1 {
+    font-size: 1.8rem;
+  }
+  .hero-banner p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile (<= 768px) */
+@media (max-width: 768px) {
+  .hero-banner {
+    height: 40vh;
+    background-attachment: scroll; /* nonaktifkan parallax di HP */
+  }
+  .hero-banner h1 {
+    font-size: 1.6rem;
+  }
+  .hero-banner p {
+    font-size: 0.9rem;
+  }
+  .hero-banner .hero-btn {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Small Mobile (<= 480px) */
+@media (max-width: 480px) {
+  .hero-banner {
+    height: 35vh;
+    padding: 10px;
+  }
+  .hero-banner h1 {
+    font-size: 1.4rem;
+  }
+  .hero-banner p {
+    font-size: 0.85rem;
+  }
+  .hero-banner .hero-btn {
+    padding: 7px 18px;
+    font-size: 0.85rem;
+  }
 }

@@ -1,13 +1,12 @@
 <?php
-// Ambil slug artikel dari URL
-$slug = $_GET['slug'] ?? null;
-$data = json_decode(file_get_contents("https://dealerhinoindonesia.com/admin/api/get_artikel.php"), true);
+$slug = isset($_GET['slug']) ? trim((string)$_GET['slug']) : '';
+$response = json_decode(file_get_contents("https://dealerhinoindonesia.com/admin/api/get_artikel.php?perPage=100"), true);
+$data = $response['data'] ?? [];
 $artikel = null;
 
-// Cari artikel berdasarkan slug
-if ($slug && is_array($data)) {
+if ($slug !== '' && is_array($data)) {
     foreach ($data as $item) {
-        if ($item['slug'] === $slug) {
+        if (isset($item['slug']) && $item['slug'] === $slug) {
             $artikel = $item;
             break;
         }

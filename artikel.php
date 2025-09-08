@@ -1,0 +1,165 @@
+<?php
+// Ambil data kategori dari API dealerhino
+$kategoriData = json_decode(file_get_contents("https://dealerhinoindonesia.com/admin/api/get_kategoriartikel.php"), true);
+
+// Ambil parameter filter
+$search = $_GET['search'] ?? '';
+$selectedKategori = $_GET['kategori'] ?? '';
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$perPage = 6;
+
+// Bangun URL API artikel
+$apiUrl = "https://dealerhinoindonesia.com/admin/api/get_artikel.php";
+$params = [];
+
+if ($search !== '') {
+    $params[] = "search=" . urlencode($search);
+}
+if ($selectedKategori !== '') {
+    $params[] = "kategori=" . urlencode($selectedKategori);
+}
+if (!empty($params)) {
+    $apiUrl .= '?' . implode('&', $params);
+}
+
+// Ambil data artikel
+$artikelData = json_decode(file_get_contents($apiUrl), true);
+$totalArtikel = is_array($artikelData) ? count($artikelData) : 0;
+$totalPages = ceil($totalArtikel / $perPage);
+$offset = ($page - 1) * $perPage;
+$artikel = array_slice($artikelData, $offset, $perPage);
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+          content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan untuk seluruh Indonesia, khususnya Jabodetabek dan Jawa Barat. Hubungi Nathan Hino sekarang juga! 0859-7528-7684" />
+    <meta name="keywords"
+          content="Dealer Hino Indonesia, Dealer Resmi Hino, Jual Truk Hino, Harga Truk Hino Terbaru, Promo Truk Hino 2025, Hino Dutro 300 Series, Hino Ranger 500 Series, Hino Profia, Hino Bus, Hino Euro 4, Kredit Truk Hino, Cicilan Truk Hino, DP Truk Hino, Harga Hino Jabodetabek, Dealer Hino Jakarta, Dealer Hino Tangerang, Dealer Hino Bekasi, Dealer Hino Bogor, Dealer Hino Depok, Dealer Hino Bandung, Penjualan Hino Indonesia, Sales Hino Resmi, Sales Truk Hino, Promo Hino Jabodetabek, Harga Hino Termurah, Hino Dump Truck, Hino Wingbox, Hino Box, Hino Trailer, Spare Part Hino, Servis Hino Resmi, Bengkel Hino, Truk Hino Angkutan, Truk Hino Logistik, Truk Hino Tambang, Hino Termurah 2025, Beli Hino Baru, Truk Hino Kredit, Leasing Truk Hino, Hino Dutro Murah, Hino Ranger Murah, Harga Hino Profia, Penawaran Dealer Hino, Truk Hino untuk Bisnis, Truk Hino Angkut Barang, Truk Hino Ekspedisi, Hino Resmi Indonesia, Hino Terpercaya, Harga Hino Resmi, Truk Hino Jabodetabek, Truk Hino Jawa Barat, Dealer Hino Terlengkap" />
+    <meta name="author" content="Nathan Hino" />
+
+    <title>Dealer Resmi Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025</title>
+
+    <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="images/favicon.png" />
+    <link rel="canonical" href="https://dealerhinoindonesia.com/" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/blog/artikel.css" />
+
+    <!-- JS -->
+    <script src="js/script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="container header-content navbar">
+        <div class="header-title">
+            <a href="https://dealerhinoindonesia.com">
+                <img src="images/logo3.png" alt="Logo Hino" loading="lazy" style="height: 60px"/>
+            </a>
+        </div>
+        <div class="hamburger-menu">&#9776;</div>
+        <nav class="nav links">
+            <a href="index.php">Home</a>
+            <a href="#promo-utama">Penawaran Harga</a>
+            <a href="#products-section">Produk</a>
+            <a href="#features">Keunggulan Hino</a>
+            <a href="contact.php">Contact</a>
+            <a href="admin/artikel.php" class="active">Blog & Artikel</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero Banner Blog & Artikel Hino -->
+<section class="relative bg-gray-900 text-white">
+    <!-- Background image -->
+    <div class="absolute inset-0">
+        <img src="/images/banner-300.jpg" alt="Hino Blog & Artikel"
+             class="w-full h-full object-cover opacity-70">
+        <div class="absolute inset-0 bg-black/60"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 container mx-auto px-6 py-24 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Blog & Artikel Hino Indonesia</h1>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6">
+            Dapatkan berita terbaru, tips, promo, dan informasi seputar truk Hino untuk mendukung bisnis Anda.
+        </p>
+        <a href="#artikel"
+           class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition">
+            Jelajahi Artikel
+        </a>
+    </div>
+</section>
+
+<!-- Blog Filter -->
+<section class="content-section" id="artikel">
+    <div class="container">
+
+        <form method="get" class="blog-filter" style="margin-bottom: 20px;">
+            <input type="text" name="search" placeholder="Cari artikel..."
+                   value="<?= htmlspecialchars($search) ?>" />
+
+            <select name="kategori" onchange="this.form.submit()">
+                <option value="">Semua Kategori</option>
+                <?php if (is_array($kategoriData)): ?>
+                    <?php foreach ($kategoriData as $kat): ?>
+                        <option value="<?= htmlspecialchars($kat['nama']) ?>"
+                            <?= $selectedKategori === $kat['nama'] ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($kat['nama']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </select>
+
+            <button type="submit">Filter</button>
+        </form>
+
+        <!-- Artikel Grid -->
+        <div class="blog-grid">
+            <?php if (is_array($artikel) && count($artikel) > 0): ?>
+                <?php foreach ($artikel as $row): ?>
+                    <div class="blog-post">
+                        <img src="<?= htmlspecialchars($row['gambar']) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
+                        <h2>
+                            <a href="detail_artikel.php?id=<?= urlencode($row['id']) ?>">
+                                <?= htmlspecialchars($row['judul']) ?>
+                            </a>
+                        </h2>
+                        <p><?= substr(strip_tags($row['isi']), 0, 100) ?>...</p>
+                        <div class="card-footer">
+                            <a href="detail_artikel.php?id=<?= urlencode($row['id']) ?>">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Tidak ada artikel yang ditemukan.</p>
+            <?php endif; ?>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <a class="<?= $i === $page ? 'active' : '' ?>"
+                   href="?search=<?= urlencode($search) ?>&kategori=<?= urlencode($selectedKategori) ?>&page=<?= $i ?>">
+                    <?= $i ?>
+                </a>
+            <?php endfor; ?>
+        </div>
+
+    </div>
+</section>
+
+<?php include 'footer.php'; ?>
+
+<script>feather.replace();</script>
+</body>
+</html>

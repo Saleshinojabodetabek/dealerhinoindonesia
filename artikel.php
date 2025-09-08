@@ -83,6 +83,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
     </div>
 </header>
 
+<!-- Hero -->
 <section class="hero-blog">
   <div class="hero-blog-content">
     <div class="hero-blog-text">

@@ -2,10 +2,10 @@
 .hero-banner {
   position: relative;
   width: 100%;
-  height: 100vh; /* full tinggi layar */
+  height: 50vh; /* lebih kecil dari full screen */
   background: linear-gradient(to bottom right, #006400, #00b050),
-    /* gradasi hijau */ url("/images/banner-300.jpg") no-repeat center center; /* gambar */
-  background-size: cover; /* cover agar tetap proporsional */
+    url("/images/banner-300.jpg") no-repeat center center;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,7 +18,7 @@
 .hero-banner .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6); /* overlay hitam */
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .hero-banner .hero-content {
@@ -29,22 +29,22 @@
 }
 
 .hero-banner h1 {
-  font-size: 2.5rem;
+  font-size: 2rem; /* agak kecil biar proporsional */
   font-weight: 700;
   margin-bottom: 15px;
 }
 
 .hero-banner p {
-  font-size: 1.2rem;
-  margin-bottom: 25px;
-  line-height: 1.6;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 .hero-banner .hero-btn {
   display: inline-block;
-  background: #e60012; /* merah khas Hino */
+  background: #e60012;
   color: #fff;
-  padding: 12px 30px;
+  padding: 10px 25px;
   border-radius: 8px;
   font-weight: 600;
   text-decoration: none;

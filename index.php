@@ -43,12 +43,12 @@
         </div>
         <div class="hamburger-menu">&#9776;</div>
         <nav class="nav links">
-          <a href="index.php">Home</a>
+          <a href="https://dealerhinoindonesia.com/">Home</a>
           <a href="#promo-utama">Penawaran Harga</a>
           <a href="#products-section">Produk</a>
           <a href="#features">Keunggulan Hino</a>
-          <a href="contact.php">Contact</a>
-          <a href="admin/artikel.php">Blog & Artikel</a>
+          <a href="https://dealerhinoindonesia.com/contact.php">Contact</a>
+          <a href="https://dealerhinoindonesia.com/artikel.php">Blog & Artikel</a>
         </nav>
       </div>
     </header>
@@ -229,7 +229,7 @@
     <p>Dapatkan informasi terbaru seputar Truk Hino, perawatan, dan promo terbaik.</p>
     <div class="blog-grid">
       <?php
-        $artikelData = json_decode(file_get_contents("https://saleshinoindonesia.com/admin/api/get_artikel.php"), true);
+        $artikelData = json_decode(file_get_contents("https://dealerhinoindonesia.com/admin/api/get_artikel.php"), true);
         if (is_array($artikelData)) {
           $terbaru = array_slice($artikelData, 0, 3);
           foreach ($terbaru as $artikel):

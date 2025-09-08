@@ -44,8 +44,8 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
     <meta name="description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan untuk seluruh Indonesia. Hubungi Nathan Hino sekarang juga! 0859-7528-7684" />
     <meta name="keywords" content="Dealer Hino Indonesia, Dealer Resmi Hino, Jual Truk Hino, Harga Truk Hino Terbaru, Promo Truk Hino 2025, Hino Dutro, Hino Ranger, Hino Bus, Kredit Hino, Cicilan Hino, DP Hino, Dealer Hino Jakarta, Dealer Hino Tangerang, Dealer Hino Bekasi, Dealer Hino Bogor, Dealer Hino Bandung, Sales Hino Resmi" />
     <meta name="author" content="Nathan Hino" />
-    <link rel="canonical" href="https://dealerhinoindonesia.com/" />
-    <title>Dealer Resmi Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025</title>
+    <link rel="canonical" href="https://dealerhinoindonesia.com/artikel.php" />
+    <title>Blog & Artikel Resmi Dealer Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32" />
@@ -75,12 +75,12 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
         </div>
         <div class="hamburger-menu">&#9776;</div>
         <nav class="nav links">
-            <a href="index.php">Home</a>
-            <a href="#promo-utama">Penawaran Harga</a>
-            <a href="#products-section">Produk</a>
-            <a href="#features">Keunggulan Hino</a>
-            <a href="contact.php">Contact</a>
-            <a href="artikel.php" class="active">Blog & Artikel</a>
+          <a href="https://dealerhinoindonesia.com/">Home</a>
+          <a href="https://dealerhinoindonesia.com/hino300.php">Hino 300 Series</a>
+          <a href="https://dealerhinoindonesia.com/hino500.php">Hino 500 Series</a>
+          <a href="https://dealerhinoindonesia.com/hinobus.php">Hino Bus Series</a>
+          <a href="https://dealerhinoindonesia.com/contact.php">Contact</a>
+          <a href="https://dealerhinoindonesia.com/artikel.php">Blog & Artikel</a>
         </nav>
     </div>
 </header>

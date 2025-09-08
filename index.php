@@ -230,8 +230,8 @@
     <div class="blog-grid">
       <?php
         $artikelData = json_decode(file_get_contents("https://dealerhinoindonesia.com/admin/api/get_artikel.php"), true);
-        if (is_array($artikelData)) {
-          $terbaru = array_slice($artikelData, 0, 3);
+        if (isset($artikelData['data']) && is_array($artikelData['data'])) {
+          $terbaru = array_slice($artikelData['data'], 0, 3);
           foreach ($terbaru as $artikel):
       ?>
         <div class="blog-card">
@@ -246,5 +246,6 @@
     </div>
   </div>
 </section>
+
 
 <?php include 'footer.php'; ?>

@@ -21,9 +21,15 @@ if ($selectedKategori !== '') {
 $response = json_decode(file_get_contents($apiUrl), true);
 
 // Pastikan data valid
-$page = $response['page'] ?? 1;
-$totalPages = $response['totalPages'] ?? 1;
-$artikel = $response['data'] ?? [];
+if (!$response || !isset($response['data'])) {
+    $page = 1;
+    $totalPages = 1;
+    $artikel = [];
+} else {
+    $page = (int)($response['page'] ?? 1);
+    $totalPages = (int)($response['totalPages'] ?? 1);
+    $artikel = $response['data'] ?? [];
+}
 
 // Buat base URL pagination
 $baseUrl = "?";

@@ -2,7 +2,7 @@
 session_start();
 if(!isset($_SESSION['admin'])) header("Location: login.php");
 include 'config.php';
-include 'functions.php'; // pastikan ada createSlug() dan uniqueSlug()
+include 'function.php'; // pastikan ada createSlug() dan uniqueSlug()
 
 $id = (int)($_GET['id'] ?? 0);
 if($id<=0) header("Location: artikel.php");

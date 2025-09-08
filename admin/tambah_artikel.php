@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 session_start();
 if(!isset($_SESSION['admin'])) header("Location: login.php");
 include 'config.php';
-include 'functions.php'; // pastikan ada createSlug() dan uniqueSlug()
+include 'function.php'; // pastikan ada createSlug() dan uniqueSlug()
 
 $error = '';
 $kategoriList = $conn->query("SELECT * FROM kategori_artikel ORDER BY nama ASC");

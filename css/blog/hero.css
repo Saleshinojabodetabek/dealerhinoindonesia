@@ -2,8 +2,8 @@
 .hero-banner {
   position: relative;
   width: 100%;
-  height: 50vh; /* lebih kecil dari full screen */
-  background: linear-gradient(to bottom right, #006400, #00b050),
+  height: 50vh;
+  background: linear-gradient(135deg, #006400, #00b050, #009688),
     url("/images/banner-300.jpg") no-repeat center center;
   background-size: cover;
   display: flex;
@@ -15,12 +15,34 @@
   overflow: hidden;
 }
 
+/* Overlay hitam */
 .hero-banner .overlay {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
 }
 
+/* Garis dekoratif diagonal */
+.hero-banner::before,
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 2px,
+    transparent 2px,
+    transparent 20px
+  );
+  z-index: 1;
+  transform: rotate(5deg);
+}
+
+/* Content */
 .hero-banner .hero-content {
   position: relative;
   z-index: 2;
@@ -29,7 +51,7 @@
 }
 
 .hero-banner h1 {
-  font-size: 2rem; /* agak kecil biar proporsional */
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 15px;
 }

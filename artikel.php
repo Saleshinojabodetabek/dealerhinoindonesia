@@ -9,33 +9,27 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $perPage = 6;
 
 // Bangun URL API artikel
-$apiUrl = "https://dealerhinoindonesia.com/admin/api/get_artikel.php";
-$params = [];
-
+$apiUrl = "https://dealerhinoindonesia.com/admin/api/get_artikel.php?page=$page&perPage=$perPage";
 if ($search !== '') {
-    $params[] = "search=" . urlencode($search);
+    $apiUrl .= "&search=" . urlencode($search);
 }
 if ($selectedKategori !== '') {
-    $params[] = "kategori=" . urlencode($selectedKategori);
-}
-if (!empty($params)) {
-    $apiUrl .= '?' . implode('&', $params);
+    $apiUrl .= "&kategori=" . urlencode($selectedKategori);
 }
 
-// Ambil data artikel
-$artikelData = json_decode(file_get_contents($apiUrl), true);
-$totalArtikel = is_array($artikelData) ? count($artikelData) : 0;
-$totalPages = ceil($totalArtikel / $perPage);
-$offset = ($page - 1) * $perPage;
-$artikel = array_slice($artikelData, $offset, $perPage);
+// Ambil data artikel dari API
+$response = json_decode(file_get_contents($apiUrl), true);
+
+// Pastikan data valid
+$page = $response['page'] ?? 1;
+$totalPages = $response['totalPages'] ?? 1;
+$artikel = $response['data'] ?? [];
 
 // Buat base URL pagination
 $baseUrl = "?";
 if ($search !== '') $baseUrl .= "search=" . urlencode($search) . "&";
 if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKategori) . "&";
 ?>
-
-<!-- HTML -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -80,7 +74,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
           <a href="https://dealerhinoindonesia.com/hino500.php">Hino 500 Series</a>
           <a href="https://dealerhinoindonesia.com/hinobus.php">Hino Bus Series</a>
           <a href="https://dealerhinoindonesia.com/contact.php">Contact</a>
-          <a href="https://dealerhinoindonesia.com/artikel.php">Blog & Artikel</a>
+          <a href="https://dealerhinoindonesia.com/artikel.php" class="active">Blog & Artikel</a>
         </nav>
     </div>
 </header>
@@ -93,11 +87,8 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
       <p>Dapatkan informasi terbaru, tips, dan berita seputar Hino untuk mendukung bisnis Anda.</p>
       <a href="#artikel" class="btn-blog">Lihat Artikel</a>
     </div>
-    <div class="hero-blog-image">
-    </div>
+    <div class="hero-blog-image"></div>
   </div>
-
-  <!-- Aksen Dot -->
   <div class="dot dot-yellow"></div>
   <div class="dot dot-blue"></div>
 </section>

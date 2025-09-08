@@ -11,30 +11,16 @@ $perPage = 6;
 // Bangun URL API artikel
 $apiUrl = "https://dealerhinoindonesia.com/admin/api/get_artikel.php";
 $params = [];
-
-if ($search !== '') {
-    $params[] = "search=" . urlencode($search);
-}
-if ($selectedKategori !== '') {
-    $params[] = "kategori=" . urlencode($selectedKategori);
-}
-if (!empty($params)) {
-    $apiUrl .= '?' . implode('&', $params);
-}
+if ($search !== '') $params[] = "search=" . urlencode($search);
+if ($selectedKategori !== '') $params[] = "kategori=" . urlencode($selectedKategori);
+if (!empty($params)) $apiUrl .= '?' . implode('&', $params);
 
 // Ambil data artikel
 $artikelData = json_decode(file_get_contents($apiUrl), true);
-
-if (is_array($artikelData)) {
-    $totalArtikel = count($artikelData);
-    $totalPages = ceil($totalArtikel / $perPage);
-    $offset = ($page - 1) * $perPage;
-    $artikel = array_slice($artikelData, $offset, $perPage);
-} else {
-    $totalArtikel = 0;
-    $totalPages = 0;
-    $artikel = [];
-}
+$totalArtikel = is_array($artikelData) ? count($artikelData) : 0;
+$totalPages = ceil($totalArtikel / $perPage);
+$offset = ($page - 1) * $perPage;
+$artikel = array_slice($artikelData, $offset, $perPage);
 
 // Buat base URL pagination
 $baseUrl = "?";
@@ -44,97 +30,165 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blog & Artikel Resmi Dealer Hino Jakarta</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/navbar.css" />
-  <link rel="stylesheet" href="css/blog/artikel.css" />
-  <link rel="stylesheet" href="css/blog/hero.css" />
-  <style>
-    .blog-filter { display:flex; gap:10px; margin-bottom:20px; }
-    .blog-filter input, .blog-filter select { padding:6px 10px; border:1px solid #ddd; border-radius:5px; }
-    .blog-filter input { width:200px; }
-    .blog-filter button { padding:6px 15px; background:#006400; color:#fff; border:none; border-radius:5px; }
-    .pagination { text-align:center; margin-top:20px; }
-    .pagination a { padding:6px 12px; margin:0 3px; border:1px solid #ddd; border-radius:4px; text-decoration:none; color:#333; }
-    .pagination a.active { background:#006400; color:#fff; border-color:#006400; }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan untuk seluruh Indonesia. Hubungi Nathan Hino sekarang juga! 0859-7528-7684" />
+    <meta name="keywords" content="Dealer Hino Indonesia, Dealer Resmi Hino, Jual Truk Hino, Harga Truk Hino Terbaru, Promo Truk Hino 2025, Hino Dutro, Hino Ranger, Hino Bus, Kredit Hino, Cicilan Hino, DP Hino, Dealer Hino Jakarta, Dealer Hino Tangerang, Dealer Hino Bekasi, Dealer Hino Bogor, Dealer Hino Bandung, Sales Hino Resmi" />
+    <meta name="author" content="Nathan Hino" />
+    <link rel="canonical" href="https://dealerhinoindonesia.com/artikel.php" />
+    <title>Blog & Artikel Resmi Dealer Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="images/favicon.png" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/blog/artikel.css" />
+    <link rel="stylesheet" href="css/blog/hero.css" />
+
+    <!-- Extra CSS untuk filter & pagination -->
+    <style>
+      .blog-filter {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-bottom: 20px;
+      }
+      .blog-filter input, 
+      .blog-filter select, 
+      .blog-filter button {
+          padding: 8px 12px;
+          font-size: 14px;
+      }
+      .blog-filter input {
+          flex: 1;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+      }
+      .blog-filter select, 
+      .blog-filter button {
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          background: #f8f8f8;
+          cursor: pointer;
+      }
+      .pagination {
+          margin-top: 30px;
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+      }
+      .pagination a {
+          padding: 8px 14px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          text-decoration: none;
+          color: #333;
+      }
+      .pagination a.active {
+          background: #e30613;
+          color: #fff;
+          border-color: #e30613;
+      }
+    </style>
 </head>
 <body>
 
+<!-- Header -->
 <header>
-  <div class="container header-content navbar">
-    <div class="header-title">
-      <a href="https://dealerhinoindonesia.com">
-        <img src="images/logo3.png" alt="Logo Hino Indonesia" style="height:60px"/>
-      </a>
+    <div class="container header-content navbar">
+        <div class="header-title">
+            <a href="https://dealerhinoindonesia.com">
+                <img src="images/logo3.png" alt="Logo Hino Indonesia" loading="lazy" style="height: 60px"/>
+            </a>
+        </div>
+        <div class="hamburger-menu">&#9776;</div>
+        <nav class="nav links">
+          <a href="https://dealerhinoindonesia.com/">Home</a>
+          <a href="https://dealerhinoindonesia.com/hino300.php">Hino 300 Series</a>
+          <a href="https://dealerhinoindonesia.com/hino500.php">Hino 500 Series</a>
+          <a href="https://dealerhinoindonesia.com/hinobus.php">Hino Bus Series</a>
+          <a href="https://dealerhinoindonesia.com/contact.php">Contact</a>
+          <a href="https://dealerhinoindonesia.com/artikel.php">Blog & Artikel</a>
+        </nav>
     </div>
-    <nav class="nav links">
-      <a href="https://dealerhinoindonesia.com/">Home</a>
-      <a href="https://dealerhinoindonesia.com/hino300.php">Hino 300 Series</a>
-      <a href="https://dealerhinoindonesia.com/hino500.php">Hino 500 Series</a>
-      <a href="https://dealerhinoindonesia.com/hinobus.php">Hino Bus Series</a>
-      <a href="https://dealerhinoindonesia.com/contact.php">Contact</a>
-      <a href="https://dealerhinoindonesia.com/artikel.php">Blog & Artikel</a>
-    </nav>
-  </div>
 </header>
 
-<section class="content-section" id="artikel">
-  <div class="container">
-
-    <!-- Filter -->
-    <form method="get" class="blog-filter">
-      <input type="text" name="search" placeholder="Cari..." value="<?= htmlspecialchars($search) ?>" />
-      <select name="kategori" onchange="this.form.submit()">
-        <option value="">Semua</option>
-        <?php if (is_array($kategoriData)): ?>
-          <?php foreach ($kategoriData as $kat): ?>
-            <option value="<?= htmlspecialchars($kat['nama']) ?>" <?= $selectedKategori === $kat['nama'] ? 'selected' : '' ?>>
-              <?= htmlspecialchars($kat['nama']) ?>
-            </option>
-          <?php endforeach; ?>
-        <?php endif; ?>
-      </select>
-      <button type="submit">Cari</button>
-    </form>
-
-    <!-- Artikel -->
-    <div class="blog-grid">
-      <?php if (count($artikel) > 0): ?>
-        <?php foreach ($artikel as $row): ?>
-          <div class="blog-post">
-            <img src="<?= !empty($row['gambar']) ? htmlspecialchars($row['gambar']) : 'images/no-image.jpg' ?>" 
-                 alt="<?= htmlspecialchars($row['judul']) ?>" loading="lazy">
-            <h2>
-              <a href="detail_artikel.php?id=<?= urlencode($row['id']) ?>">
-                <?= htmlspecialchars($row['judul']) ?>
-              </a>
-            </h2>
-            <p><?= substr(strip_tags($row['isi']), 0, 120) ?>...</p>
-            <div class="card-footer">
-              <a href="detail_artikel.php?id=<?= urlencode($row['id']) ?>">Baca Selengkapnya</a>
-            </div>
-          </div>
-        <?php endforeach; ?>
-      <?php else: ?>
-        <p>Tidak ada artikel yang ditemukan.</p>
-      <?php endif; ?>
+<!-- Hero -->
+<section class="hero-blog">
+  <div class="hero-blog-content">
+    <div class="hero-blog-text">
+      <h1>Jelajahi Artikel</h1>
+      <p>Dapatkan informasi terbaru, tips, dan berita seputar Hino untuk mendukung bisnis Anda.</p>
+      <a href="#artikel" class="btn-blog">Lihat Artikel</a>
     </div>
-
-    <!-- Pagination -->
-    <?php if ($totalPages > 1): ?>
-      <div class="pagination">
-        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-          <a class="<?= $i === $page ? 'active' : '' ?>" href="<?= $baseUrl ?>page=<?= $i ?>"><?= $i ?></a>
-        <?php endfor; ?>
-      </div>
-    <?php endif; ?>
-
+    <div class="hero-blog-image"></div>
   </div>
+  <div class="dot dot-yellow"></div>
+  <div class="dot dot-blue"></div>
+</section>
+
+<!-- Blog & Artikel -->
+<section class="content-section" id="artikel">
+    <div class="container">
+
+        <!-- Filter -->
+        <form method="get" class="blog-filter">
+            <input type="text" name="search" placeholder="Cari artikel..." value="<?= htmlspecialchars($search) ?>" />
+            <select name="kategori" onchange="this.form.submit()">
+                <option value="">Semua Kategori</option>
+                <?php if (is_array($kategoriData)): ?>
+                    <?php foreach ($kategoriData as $kat): ?>
+                        <option value="<?= htmlspecialchars($kat['nama']) ?>" <?= $selectedKategori === $kat['nama'] ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($kat['nama']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </select>
+            <button type="submit">Cari</button>
+        </form>
+
+        <!-- Artikel Grid -->
+        <div class="blog-grid">
+            <?php if (is_array($artikel) && count($artikel) > 0): ?>
+                <?php foreach ($artikel as $row): ?>
+                    <div class="blog-post">
+                        <img src="<?= htmlspecialchars($row['gambar']) ?>" 
+                             alt="Artikel Hino - <?= htmlspecialchars($row['judul']) ?>" 
+                             loading="lazy">
+                        <h2>
+                            <a href="detail_artikel.php?id=<?= urlencode($row['id']) ?>">
+                                <?= htmlspecialchars($row['judul']) ?>
+                            </a>
+                        </h2>
+                        <p><?= substr(strip_tags($row['isi']), 0, 120) ?>...</p>
+                        <div class="card-footer">
+                            <a href="detail_artikel.php?id=<?= urlencode($row['id']) ?>">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Tidak ada artikel yang ditemukan.</p>
+            <?php endif; ?>
+        </div>
+
+        <!-- Pagination -->
+        <?php if ($totalPages > 1): ?>
+            <div class="pagination" aria-label="Navigasi halaman">
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a class="<?= $i === $page ? 'active' : '' ?>" href="<?= $baseUrl ?>page=<?= $i ?>">
+                        <?= $i ?>
+                    </a>
+                <?php endfor; ?>
+            </div>
+        <?php endif; ?>
+
+    </div>
 </section>
 
 <?php include 'footer.php'; ?>
+<script>feather.replace();</script>
 </body>
 </html>

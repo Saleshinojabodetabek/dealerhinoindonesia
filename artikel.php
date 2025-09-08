@@ -122,13 +122,13 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
                              alt="Artikel Hino - <?= htmlspecialchars($row['judul']) ?>" 
                              loading="lazy">
                         <h2>
-                            <a href="detail_artikel.php?id=<?= urlencode($row['id']) ?>">
+                            <a href="detail_artikel.php?slug=<?= urlencode($row['slug']) ?>">
                                 <?= htmlspecialchars($row['judul']) ?>
                             </a>
                         </h2>
                         <p><?= substr(strip_tags($row['isi']), 0, 120) ?>...</p>
                         <div class="card-footer">
-                            <a href="detail_artikel.php?id=<?= urlencode($row['id']) ?>">Baca Selengkapnya</a>
+                            <a href="detail_artikel.php?slug=<?= urlencode($row['slug']) ?>">Baca Selengkapnya</a>
                         </div>
                     </div>
                 <?php endforeach; ?>

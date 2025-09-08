@@ -51,6 +51,7 @@ $artikel = array_slice($artikelData, $offset, $perPage);
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/blog/artikel.css" />
+    <link rel="stylesheet" href="css/blog/hero.css" />
 
     <!-- JS -->
     <script src="js/script.js"></script>
@@ -79,26 +80,21 @@ $artikel = array_slice($artikelData, $offset, $perPage);
 </header>
 
 <!-- Hero Banner Blog & Artikel Hino -->
-<section class="relative bg-gray-900 text-white">
-    <!-- Background image -->
-    <div class="absolute inset-0">
-        <img src="/images/banner-300.jpg" alt="Hino Blog & Artikel"
-             class="w-full h-full object-cover opacity-70">
-        <div class="absolute inset-0 bg-black/60"></div>
-    </div>
+<section class="hero-banner">
+  <div class="hero-bg">
+    <img src="/images/banner-300.jpg" alt="Hino Blog & Artikel">
+    <div class="overlay"></div>
+  </div>
 
-    <!-- Content -->
-    <div class="relative z-10 container mx-auto px-6 py-24 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Blog & Artikel Hino Indonesia</h1>
-        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6">
-            Dapatkan berita terbaru, tips, promo, dan informasi seputar truk Hino untuk mendukung bisnis Anda.
-        </p>
-        <a href="#artikel"
-           class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition">
-            Jelajahi Artikel
-        </a>
-    </div>
+  <div class="hero-content">
+    <h1>Blog & Artikel Hino Indonesia</h1>
+    <p>
+      Dapatkan berita terbaru, tips, promo, dan informasi seputar truk Hino untuk mendukung bisnis Anda.
+    </p>
+    <a href="#artikel" class="hero-btn">Jelajahi Artikel</a>
+  </div>
 </section>
+
 
 <!-- Blog Filter -->
 <section class="content-section" id="artikel">

@@ -1,5 +1,5 @@
-/* === HERO CONTACT === */
-.hero-contact {
+/* === HERO BLOG === */
+.hero-blog {
   position: relative;
   background: linear-gradient(135deg, #1b5e20, #43a047, #81c784);
   color: white;
@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 
-.hero-contact-content {
+.hero-blog-content {
   max-width: 1100px;
   margin: 0 auto;
   display: flex;
@@ -17,24 +17,24 @@
   flex-wrap: wrap;
 }
 
-.hero-contact-text {
+.hero-blog-text {
   flex: 1 1 400px;
   z-index: 2;
 }
 
-.hero-contact-text h1 {
+.hero-blog-text h1 {
   font-size: 2.8rem;
   margin-bottom: 1rem;
   font-weight: 700;
 }
 
-.hero-contact-text p {
+.hero-blog-text p {
   font-size: 1.2rem;
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
 
-.btn-contact {
+.btn-blog {
   display: inline-block;
   padding: 12px 28px;
   border-radius: 8px;
@@ -45,18 +45,18 @@
   transition: background 0.3s ease;
 }
 
-.btn-contact:hover {
+.btn-blog:hover {
   background: #e6b800;
 }
 
 /* Gambar Hero */
-.hero-contact-image {
+.hero-blog-image {
   flex: 1 1 400px;
   text-align: center;
   z-index: 2;
 }
 
-.hero-contact-image img {
+.hero-blog-image img {
   max-width: 400px;
   width: 100%;
   height: auto;
@@ -64,7 +64,7 @@
 }
 
 /* Aksen Dot */
-.hero-contact .dot {
+.hero-blog .dot {
   position: absolute;
   border-radius: 50%;
   opacity: 0.25;
@@ -73,21 +73,21 @@
   height: 120px;
 }
 
-.hero-contact .dot-yellow {
+.hero-blog .dot-yellow {
   background: #ffcc00;
   top: 20%;
   left: 60%;
   animation: float 5s ease-in-out infinite;
 }
 
-.hero-contact .dot-blue {
+.hero-blog .dot-blue {
   background: #4fc3f7;
   bottom: 25%;
   right: 40%;
   animation: floatX 6s ease-in-out infinite;
 }
 
-/* Animasi Floating */
+/* Animasi Floating (re-use dari contact) */
 @keyframes float {
   0% {
     transform: translateY(0);
@@ -112,74 +112,58 @@
   }
 }
 
-/* ============================
-   RESPONSIVE HERO CONTACT
-   ============================ */
-
-/* Tablet */
+/* Responsive */
 @media (max-width: 1024px) {
-  .hero-contact-text h1 {
+  .hero-blog-text h1 {
     font-size: 2.4rem;
   }
-  .hero-contact-text p {
+  .hero-blog-text p {
     font-size: 1.1rem;
   }
-  .hero-contact-image img {
+  .hero-blog-image img {
     max-width: 340px;
   }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
-  .hero-contact-content {
+  .hero-blog-content {
     flex-direction: column;
     text-align: center;
     justify-content: center;
   }
-
-  .hero-contact-text {
+  .hero-blog-text {
     text-align: center;
-    margin-top: 40px; /* tambahin jarak supaya turun */
+    margin-top: 40px;
   }
-
-  .hero-contact-text h1 {
+  .hero-blog-text h1 {
     font-size: 2.5rem;
   }
-
-  .hero-contact-text p {
+  .hero-blog-text p {
     font-size: 1.1rem;
   }
-
-  /* Hilangkan gambar di mobile */
-  .hero-contact-image {
+  .hero-blog-image {
     display: none;
   }
-
-  .btn-contact {
-    margin: 20px auto 0; /* tombol agak ke bawah */
+  .btn-blog {
+    margin: 20px auto 0;
     display: block;
   }
 }
 
-/* Extra Small Mobile */
 @media (max-width: 480px) {
-  .hero-contact {
-    padding: 80px 15px 60px; /* padding atas lebih besar agar turun */
+  .hero-blog {
+    padding: 80px 15px 60px;
   }
-
-  .hero-contact-text {
-    margin-top: 50px; /* lebih turun di layar kecil */
+  .hero-blog-text {
+    margin-top: 50px;
   }
-
-  .hero-contact-text h1 {
+  .hero-blog-text h1 {
     font-size: 2.2rem;
   }
-
-  .hero-contact-text p {
+  .hero-blog-text p {
     font-size: 1rem;
   }
-
-  .btn-contact {
+  .btn-blog {
     font-size: 1rem;
     padding: 10px 22px;
   }

@@ -83,14 +83,20 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
     </div>
 </header>
 
-<!-- Hero Banner -->
-<section class="hero-banner">
-    <div class="overlay"></div>
-    <div class="hero-content">
-        <h1>Blog & Artikel Hino Indonesia</h1>
-        <p>Dapatkan berita terbaru, tips, promo, dan informasi seputar truk Hino untuk mendukung bisnis Anda.</p>
-        <a href="#artikel" class="hero-btn">Jelajahi Artikel</a>
+<section class="hero-blog">
+  <div class="hero-blog-content">
+    <div class="hero-blog-text">
+      <h1>Jelajahi Artikel</h1>
+      <p>Dapatkan informasi terbaru, tips, dan berita seputar Hino untuk mendukung bisnis Anda.</p>
+      <a href="#artikel" class="btn-blog">Lihat Artikel</a>
     </div>
+    <div class="hero-blog-image">
+    </div>
+  </div>
+
+  <!-- Aksen Dot -->
+  <div class="dot dot-yellow"></div>
+  <div class="dot dot-blue"></div>
 </section>
 
 <!-- Blog & Artikel -->

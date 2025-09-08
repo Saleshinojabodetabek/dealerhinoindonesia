@@ -237,9 +237,13 @@
         <div class="blog-card">
           <img src="<?= htmlspecialchars($artikel['gambar']) ?>" alt="<?= htmlspecialchars($artikel['judul']) ?>" />
           <div class="blog-card-content">
-            <h3><a href="detail_artikel.php?id=<?= $artikel['id'] ?>"><?= htmlspecialchars($artikel['judul']) ?></a></h3>
+            <h3>
+              <a href="detail_artikel.php?slug=<?= urlencode($artikel['slug']) ?>">
+                <?= htmlspecialchars($artikel['judul']) ?>
+              </a>
+            </h3>
             <p><?= substr(strip_tags($artikel['isi']), 0, 100) ?>...</p>
-            <a href="detail_artikel.php?id=<?= $artikel['id'] ?>" class="read-more">Baca Selengkapnya</a>
+            <a href="detail_artikel.php?slug=<?= urlencode($artikel['slug']) ?>" class="read-more">Baca Selengkapnya</a>
           </div>
         </div>
       <?php endforeach; } else { echo "<p>Tidak ada artikel ditemukan.</p>"; } ?>

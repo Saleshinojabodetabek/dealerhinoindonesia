@@ -81,11 +81,7 @@ $artikel = array_slice($artikelData, $offset, $perPage);
 
 <!-- Hero Banner Blog & Artikel Hino -->
 <section class="hero-banner">
-  <div class="hero-bg">
-    <img src="/images/banner-300.jpg" alt="Hino Blog & Artikel">
-    <div class="overlay"></div>
-  </div>
-
+  <div class="overlay"></div>
   <div class="hero-content">
     <h1>Blog & Artikel Hino Indonesia</h1>
     <p>

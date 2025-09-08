@@ -2,28 +2,16 @@
 .hero-banner {
   position: relative;
   width: 100%;
-  height: 60vh;
+  height: 100vh; /* full tinggi layar */
+  background: url('/images/banner-300.jpg') no-repeat center center;
+  background-size: 100% 100%; /* gambar full tanpa terpotong */
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  overflow: hidden;
   text-align: center;
-  font-family: "Open Sans", sans-serif;
-}
-
-.hero-banner .hero-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  font-family: 'Open Sans', sans-serif;
   overflow: hidden;
-}
-
-.hero-banner .hero-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .hero-banner .overlay {
@@ -59,7 +47,7 @@
   border-radius: 8px;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   transition: background 0.3s ease;
 }
 

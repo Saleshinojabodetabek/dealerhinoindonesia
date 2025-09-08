@@ -1,3 +1,6 @@
+/* ================================
+   Filter & Pagination
+   ================================ */
 .blog-filter {
   display: flex;
   gap: 10px;
@@ -39,16 +42,13 @@
 }
 
 /* ================================
-   Section: Blog / Artikel Website
+   Artikel List (Grid & Card)
    ================================ */
-
-/* Container Section */
 .content-section {
   padding: 60px 20px;
   background: linear-gradient(180deg, #f7f7f7 0%, #e8f5e9 100%);
 }
 
-/* Grid Layout */
 .blog-grid {
   display: flex;
   flex-wrap: wrap;
@@ -58,7 +58,6 @@
   margin: 0 auto;
 }
 
-/* Card Artikel */
 .blog-post {
   background-color: #ffffff;
   border-radius: 8px;
@@ -104,13 +103,9 @@
   line-height: 1.6;
   flex-grow: 1;
   min-height: 72px;
-  position: relative;
-  z-index: 2;
 }
 .blog-post .card-footer {
   margin: auto 20px 20px 20px;
-  position: relative;
-  z-index: 2;
 }
 .blog-post .card-footer a {
   font-size: 14px;
@@ -129,14 +124,9 @@
   overflow: hidden;
 }
 
-/* Artikel Isi */
-.artikel-isi {
-  font-size: 16px;
-  line-height: 1.8;
-  color: #333;
-}
-
-/* ======== Artikel Container ======== */
+/* ================================
+   Artikel Detail
+   ================================ */
 .detail-artikel {
   padding: 40px 20px;
   background-color: #f9f9f9;
@@ -147,14 +137,12 @@
   margin: auto;
 }
 
-/* ======== Wrapper ======== */
 .artikel-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
 }
 
-/* ======== Artikel Utama ======== */
 .artikel-main {
   flex: 1 1 65%;
   background-color: #fff;
@@ -180,7 +168,6 @@
   line-height: 1.8;
 }
 
-/* ======== Tombol Kembali ======== */
 .btn-kembali {
   display: inline-block;
   margin-top: 20px;
@@ -196,7 +183,7 @@
   background-color: #005e35;
 }
 
-/* ======== Sidebar ======== */
+/* Sidebar */
 .artikel-sidebar {
   flex: 1 1 30%;
 }
@@ -230,7 +217,7 @@
   color: #007b45;
 }
 
-/* ======== Related Posts ======== */
+/* Related Posts */
 .related-posts {
   margin-top: 60px;
 }
@@ -267,10 +254,11 @@
   display: block;
   font-size: 15px;
   color: #333;
-  text-decoration: none;
 }
 
-/* ======== Responsive ======== */
+/* ================================
+   Responsive
+   ================================ */
 @media (max-width: 992px) {
   .artikel-main,
   .artikel-sidebar {

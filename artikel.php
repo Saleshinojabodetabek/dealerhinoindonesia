@@ -34,6 +34,8 @@ $baseUrl = "?";
 if ($search !== '') $baseUrl .= "search=" . urlencode($search) . "&";
 if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKategori) . "&";
 ?>
+
+<!-- HTML -->
 <!DOCTYPE html>
 <html lang="id">
 <head>

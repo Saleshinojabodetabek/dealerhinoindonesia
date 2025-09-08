@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 session_start();
 if(!isset($_SESSION['admin'])) header("Location: login.php");
 include 'config.php';
+include 'functions.php'; // pastikan ada createSlug() dan uniqueSlug()
 
 $error = '';
 $kategoriList = $conn->query("SELECT * FROM kategori_artikel ORDER BY nama ASC");
@@ -32,8 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (!$error) {
-            $sql = "INSERT INTO artikel (judul, kategori_id, isi, gambar, tanggal)
-                    VALUES ('$judul', $kategori_id, '$isi', ".($gambar ? "'$gambar'" : "NULL").", '$tanggal')";
+            // === Generate slug SEO-friendly & unik ===
+            $slug = createSlug($judul);
+            $slug = uniqueSlug($conn, $slug);
+
+            $sql = "INSERT INTO artikel (judul, slug, kategori_id, isi, gambar, tanggal)
+                    VALUES ('$judul', '$slug', $kategori_id, '$isi', ".($gambar ? "'$gambar'" : "NULL").", '$tanggal')";
             if (!$conn->query($sql)) {
                 $error = "Gagal menyimpan artikel: " . $conn->error;
             } else {
@@ -44,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
+<!-- FORM HTML sama seperti sebelumnya, tidak ada perubahan -->
 
 <!DOCTYPE html>
 <html lang="id">

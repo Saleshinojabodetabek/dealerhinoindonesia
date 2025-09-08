@@ -2,6 +2,7 @@
 session_start();
 if(!isset($_SESSION['admin'])) header("Location: login.php");
 include 'config.php';
+include 'functions.php'; // pastikan ada createSlug() dan uniqueSlug()
 
 $id = (int)($_GET['id'] ?? 0);
 if($id<=0) header("Location: artikel.php");
@@ -28,11 +29,20 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         move_uploaded_file($_FILES['gambar']['tmp_name'],$upload_dir.$gambar);
     }
 
-    $sql = "UPDATE artikel SET judul='$judul', kategori_id=$kategori_id, isi='$isi', gambar='$gambar' WHERE id=$id";
+    // === Generate slug SEO-friendly & unik ===
+    $slug = createSlug($judul);
+    $slug = uniqueSlug($conn, $slug, $id);
+
+    $sql = "UPDATE artikel 
+            SET judul='$judul', slug='$slug', kategori_id=$kategori_id, isi='$isi', gambar='$gambar' 
+            WHERE id=$id";
     if($conn->query($sql)) header("Location: artikel.php?success=1");
     else $error = "Gagal update artikel: ".$conn->error;
 }
 ?>
+
+<!-- FORM HTML sama seperti sebelumnya, tidak ada perubahan -->
+
 <!DOCTYPE html>
 <html lang="id">
 <head>

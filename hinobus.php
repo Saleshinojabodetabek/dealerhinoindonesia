@@ -53,7 +53,7 @@
     <header>
       <div class="container header-content navbar">
         <div class="header-title">
-          <a href="https://dealerhinoindonesia.id">
+          <a href="https://dealerhinoindonesia.com">
             <img src="images/logo3.png" alt="Logo Hino" loading="lazy" style="height: 60px"/>
           </a>
         </div>

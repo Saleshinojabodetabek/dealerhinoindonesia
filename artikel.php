@@ -24,10 +24,17 @@ if (!empty($params)) {
 
 // Ambil data artikel
 $artikelData = json_decode(file_get_contents($apiUrl), true);
-$totalArtikel = is_array($artikelData) ? count($artikelData) : 0;
-$totalPages = ceil($totalArtikel / $perPage);
-$offset = ($page - 1) * $perPage;
-$artikel = is_array($artikelData) ? array_slice($artikelData, $offset, $perPage) : [];
+
+if (is_array($artikelData)) {
+    $totalArtikel = count($artikelData);
+    $totalPages = ceil($totalArtikel / $perPage);
+    $offset = ($page - 1) * $perPage;
+    $artikel = array_slice($artikelData, $offset, $perPage);
+} else {
+    $totalArtikel = 0;
+    $totalPages = 0;
+    $artikel = [];
+}
 
 // Buat base URL pagination
 $baseUrl = "?";
@@ -39,85 +46,30 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan untuk seluruh Indonesia. Hubungi Nathan Hino sekarang juga! 0859-7528-7684" />
-  <meta name="keywords" content="Dealer Hino Indonesia, Dealer Resmi Hino, Jual Truk Hino, Harga Truk Hino Terbaru, Promo Truk Hino 2025, Hino Dutro, Hino Ranger, Hino Bus, Kredit Hino, Cicilan Hino, DP Hino, Dealer Hino Jakarta, Dealer Hino Tangerang, Dealer Hino Bekasi, Dealer Hino Bogor, Dealer Hino Bandung, Sales Hino Resmi" />
-  <meta name="author" content="Nathan Hino" />
-  <link rel="canonical" href="https://dealerhinoindonesia.com/artikel.php" />
-  <title>Blog & Artikel Resmi Dealer Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32" />
-  <link rel="apple-touch-icon" href="images/favicon.png" />
-
-  <!-- CSS -->
+  <title>Blog & Artikel Resmi Dealer Hino Jakarta</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/navbar.css" />
   <link rel="stylesheet" href="css/blog/artikel.css" />
   <link rel="stylesheet" href="css/blog/hero.css" />
-
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
-
-  <!-- Custom Style untuk Filter -->
   <style>
-    .blog-filter {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-    .blog-filter input[type="text"] {
-        width: 200px;
-        padding: 6px 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-    .blog-filter select {
-        padding: 6px 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-    .blog-filter button {
-        padding: 6px 15px;
-        background: #006400;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .pagination {
-        text-align: center;
-        margin-top: 20px;
-    }
-    .pagination a {
-        padding: 6px 12px;
-        margin: 0 3px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        text-decoration: none;
-        color: #333;
-    }
-    .pagination a.active {
-        background: #006400;
-        color: #fff;
-        border-color: #006400;
-    }
+    .blog-filter { display:flex; gap:10px; margin-bottom:20px; }
+    .blog-filter input, .blog-filter select { padding:6px 10px; border:1px solid #ddd; border-radius:5px; }
+    .blog-filter input { width:200px; }
+    .blog-filter button { padding:6px 15px; background:#006400; color:#fff; border:none; border-radius:5px; }
+    .pagination { text-align:center; margin-top:20px; }
+    .pagination a { padding:6px 12px; margin:0 3px; border:1px solid #ddd; border-radius:4px; text-decoration:none; color:#333; }
+    .pagination a.active { background:#006400; color:#fff; border-color:#006400; }
   </style>
-
-  <!-- JS -->
-  <script src="js/script.js"></script>
 </head>
 <body>
 
-<!-- Header -->
 <header>
   <div class="container header-content navbar">
     <div class="header-title">
       <a href="https://dealerhinoindonesia.com">
-        <img src="images/logo3.png" alt="Logo Hino Indonesia" loading="lazy" style="height: 60px"/>
+        <img src="images/logo3.png" alt="Logo Hino Indonesia" style="height:60px"/>
       </a>
     </div>
-    <div class="hamburger-menu">&#9776;</div>
     <nav class="nav links">
       <a href="https://dealerhinoindonesia.com/">Home</a>
       <a href="https://dealerhinoindonesia.com/hino300.php">Hino 300 Series</a>
@@ -129,21 +81,6 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
   </div>
 </header>
 
-<!-- Hero -->
-<section class="hero-blog">
-  <div class="hero-blog-content">
-    <div class="hero-blog-text">
-      <h1>Jelajahi Artikel</h1>
-      <p>Dapatkan informasi terbaru, tips, dan berita seputar Hino untuk mendukung bisnis Anda.</p>
-      <a href="#artikel" class="btn-blog">Lihat Artikel</a>
-    </div>
-    <div class="hero-blog-image"></div>
-  </div>
-  <div class="dot dot-yellow"></div>
-  <div class="dot dot-blue"></div>
-</section>
-
-<!-- Blog & Artikel -->
 <section class="content-section" id="artikel">
   <div class="container">
 
@@ -163,14 +100,13 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
       <button type="submit">Cari</button>
     </form>
 
-    <!-- Artikel Grid -->
+    <!-- Artikel -->
     <div class="blog-grid">
-      <?php if (is_array($artikel) && count($artikel) > 0): ?>
+      <?php if (count($artikel) > 0): ?>
         <?php foreach ($artikel as $row): ?>
           <div class="blog-post">
             <img src="<?= !empty($row['gambar']) ? htmlspecialchars($row['gambar']) : 'images/no-image.jpg' ?>" 
-                 alt="Artikel Hino - <?= htmlspecialchars($row['judul']) ?>" 
-                 loading="lazy">
+                 alt="<?= htmlspecialchars($row['judul']) ?>" loading="lazy">
             <h2>
               <a href="detail_artikel.php?id=<?= urlencode($row['id']) ?>">
                 <?= htmlspecialchars($row['judul']) ?>
@@ -189,11 +125,9 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
 
     <!-- Pagination -->
     <?php if ($totalPages > 1): ?>
-      <div class="pagination" aria-label="Navigasi halaman">
+      <div class="pagination">
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-          <a class="<?= $i === $page ? 'active' : '' ?>" href="<?= $baseUrl ?>page=<?= $i ?>">
-            <?= $i ?>
-          </a>
+          <a class="<?= $i === $page ? 'active' : '' ?>" href="<?= $baseUrl ?>page=<?= $i ?>"><?= $i ?></a>
         <?php endfor; ?>
       </div>
     <?php endif; ?>
@@ -202,6 +136,5 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
 </section>
 
 <?php include 'footer.php'; ?>
-<script>feather.replace();</script>
 </body>
 </html>

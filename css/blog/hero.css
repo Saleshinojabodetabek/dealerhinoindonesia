@@ -1,152 +1,183 @@
-/* =========================
-   HERO BANNER SECTION
-   ========================= */
-.hero-banner {
+/* === HERO BLOG === */
+.hero-blog {
   position: relative;
-  width: 100%;
-  height: 50vh;
+  background: linear-gradient(
+    135deg,
+    #1b5e20,
+    #43a047,
+    #81c784
+  ); /* warna saja */
+  color: white;
+  padding: 80px 20px;
+  overflow: hidden;
+}
 
-  /* Gradient hijau muda + background image */
-  background: linear-gradient(135deg, #4caf50, #66bb6a, #26a69a),
-    url("/images/banner-300.jpg") no-repeat center center;
-  background-size: 300% 300%, cover;
-  background-attachment: fixed;
-
+.hero-blog-content {
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  font-family: "Open Sans", sans-serif;
-  color: #fff;
-  overflow: hidden;
-
-  animation: gradientMove 10s ease infinite;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Overlay hitam */
-.hero-banner .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 1;
-}
-
-/* Wave bawah */
-.hero-banner::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 120px;
-  background-size: cover;
+.hero-blog-text {
+  flex: 1 1 400px;
   z-index: 2;
 }
 
-/* Konten */
-.hero-banner .hero-content {
-  position: relative;
-  z-index: 3;
-  max-width: 800px;
-  padding: 20px;
-}
-
-/* Judul */
-.hero-banner h1 {
-  font-size: 2.2rem;
+.hero-blog-text h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
   font-weight: 700;
-  margin-bottom: 15px;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
 }
 
-/* Deskripsi */
-.hero-banner p {
-  font-size: 1rem;
-  margin-bottom: 20px;
-  line-height: 1.5;
-  color: #f8f9fa;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+.hero-blog-text p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
 }
 
-/* Tombol */
-.hero-banner .hero-btn {
+.btn-blog {
   display: inline-block;
-  background: #ffcc00;
-  color: #fff;
-  padding: 10px 25px;
+  padding: 12px 28px;
   border-radius: 8px;
   font-weight: 600;
-  text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  font-size: 1.1rem;
+  background: #ffcc00;
+  color: #333;
   transition: background 0.3s ease;
 }
 
-.hero-banner .hero-btn:hover {
-  background: #cc0010;
+.btn-blog:hover {
+  background: #e6b800;
 }
 
-/* =========================
-   RESPONSIVE DESIGN
-   ========================= */
+/* Gambar Hero (opsional, bisa kosong) */
+.hero-blog-image {
+  flex: 1 1 400px;
+  text-align: center;
+  z-index: 2;
+}
 
-/* Tablet (<= 992px) */
-@media (max-width: 992px) {
-  .hero-banner {
-    height: 45vh;
+.hero-blog-image img {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Aksen Dot */
+.hero-blog .dot {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.25;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+}
+
+.hero-blog .dot-yellow {
+  background: #ffcc00;
+  top: 20%;
+  left: 60%;
+  animation: float 5s ease-in-out infinite;
+}
+
+.hero-blog .dot-blue {
+  background: #4fc3f7;
+  bottom: 25%;
+  right: 40%;
+  animation: floatX 6s ease-in-out infinite;
+}
+
+/* Animasi Floating */
+@keyframes float {
+  0% {
+    transform: translateY(0);
   }
-  .hero-banner h1 {
-    font-size: 1.8rem;
+  50% {
+    transform: translateY(-15px);
   }
-  .hero-banner p {
-    font-size: 0.95rem;
+  100% {
+    transform: translateY(0);
   }
 }
 
-/* Mobile (<= 768px) */
+@keyframes floatX {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(15px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* ============================
+   RESPONSIVE HERO BLOG
+   ============================ */
+@media (max-width: 1024px) {
+  .hero-blog-text h1 {
+    font-size: 2.4rem;
+  }
+  .hero-blog-text p {
+    font-size: 1.1rem;
+  }
+  .hero-blog-image img {
+    max-width: 340px;
+  }
+}
+
 @media (max-width: 768px) {
-  .hero-banner {
-    height: 40vh;
-    background-attachment: scroll; /* nonaktifkan parallax di HP */
+  .hero-blog-content {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
   }
-  .hero-banner h1 {
-    font-size: 1.6rem;
+
+  .hero-blog-text {
+    text-align: center;
+    margin-top: 40px;
   }
-  .hero-banner p {
-    font-size: 0.9rem;
+
+  .hero-blog-text h1 {
+    font-size: 2.5rem;
   }
-  .hero-banner .hero-btn {
-    padding: 8px 20px;
-    font-size: 0.9rem;
+  .hero-blog-text p {
+    font-size: 1.1rem;
+  }
+
+  .hero-blog-image {
+    display: none;
+  }
+
+  .btn-blog {
+    margin: 20px auto 0;
+    display: block;
   }
 }
 
-/* Small Mobile (<= 480px) */
 @media (max-width: 480px) {
-  .hero-banner {
-    height: 35vh;
-    padding: 10px;
+  .hero-blog {
+    padding: 80px 15px 60px;
   }
-  .hero-banner h1 {
-    font-size: 1.4rem;
+
+  .hero-blog-text {
+    margin-top: 50px;
   }
-  .hero-banner p {
-    font-size: 0.85rem;
+  .hero-blog-text h1 {
+    font-size: 2.2rem;
   }
-  .hero-banner .hero-btn {
-    padding: 7px 18px;
-    font-size: 0.85rem;
+  .hero-blog-text p {
+    font-size: 1rem;
+  }
+
+  .btn-blog {
+    font-size: 1rem;
+    padding: 10px 22px;
   }
 }

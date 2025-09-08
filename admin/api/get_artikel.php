@@ -33,7 +33,7 @@ $totalResult = $conn->query("SELECT COUNT(*) as total " . $query);
 $total = $totalResult->fetch_assoc()['total'];
 
 // Ambil data artikel dengan limit
-$sql = "SELECT a.id, a.judul, a.isi, a.konten, a.gambar, a.tanggal, k.nama AS kategori 
+$sql = "SELECT a.id, a.slug, a.judul, a.isi, a.konten, a.gambar, a.tanggal, k.nama AS kategori  
         " . $query . " 
         ORDER BY a.id DESC 
         LIMIT $perPage OFFSET $offset";

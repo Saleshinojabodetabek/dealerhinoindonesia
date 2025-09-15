@@ -29,7 +29,7 @@ if (!empty($search)) {
 
 $whereSql = $where ? "WHERE " . implode(" AND ", $where) : "";
 
-$sql = "SELECT p.id, p.nama_produk, p.gambar
+$sql = "SELECT p.id, p.nama_produk, p.gambar, p.slug
         FROM produk p
         $whereSql
         ORDER BY p.id DESC";

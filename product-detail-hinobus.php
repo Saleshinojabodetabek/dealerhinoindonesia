@@ -1,17 +1,19 @@
 <?php
 include 'admin/config.php';
 
-$produk_id = (int)($_GET['id'] ?? 0);
-if ($produk_id <= 0) {
+$slug = $conn->real_escape_string($_GET['slug'] ?? '');
+if ($slug === '') {
     die("Produk tidak ditemukan.");
 }
 
 // Ambil data produk
-$res = $conn->query("SELECT * FROM produk WHERE id=$produk_id");
+$res = $conn->query("SELECT * FROM produk WHERE slug='$slug'");
 if (!$res || $res->num_rows == 0) {
     die("Produk tidak ditemukan.");
 }
 $produk = $res->fetch_assoc();
+$produk_id = (int)$produk['id']; // masih dipakai untuk ambil spesifikasi & karoseri
+
 
 // Ambil data karoseri terkait
 $karoseri = [];

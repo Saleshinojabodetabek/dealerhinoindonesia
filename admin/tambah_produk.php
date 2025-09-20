@@ -10,6 +10,28 @@ if (!isset($_SESSION['admin'])) {
 
 include 'config.php';
 
+/* ==== FUNGSI SLUG ==== */
+function createSlug($string) {
+    $slug = strtolower(trim($string));
+    $slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);
+    $slug = preg_replace('/[\s-]+/', '-', $slug);
+    return $slug;
+}
+
+function uniqueSlug($conn, $slug, $exclude_id = null) {
+    $base = $slug;
+    $i = 1;
+    $where = $exclude_id ? "AND id != $exclude_id" : "";
+    while (true) {
+        $check = $conn->query("SELECT id FROM produk WHERE slug = '$slug' $where LIMIT 1");
+        if ($check->num_rows == 0) break;
+        $slug = $base . "-" . $i;
+        $i++;
+    }
+    return $slug;
+}
+/* ===================== */
+
 $spec_groups = [
     'performa' => ['label'=>'PERFORMA','defaults'=>['Kecepatan Maksimum (km/h)','Daya Tanjak (tan %)']],
     'model_mesin' => ['label'=>'MODEL MESIN','defaults'=>['Model','Model Tipe','Tenaga Maksimum (PS/rpm)','Daya Maksimum (Kgm/rpm)','Jumlah Silinder','Diameter x Langkah Piston (mm)','Isi Silinder (L)']],
@@ -32,6 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $varian      = $conn->real_escape_string($_POST['varian'] ?? '');
     $nama_produk = $conn->real_escape_string($_POST['nama_produk'] ?? '');
 
+    // Generate slug otomatis
+    $slug = createSlug($nama_produk);
+    $slug = uniqueSlug($conn, $slug);
+
     $upload_dir = "../uploads/produk/";
     if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
 
@@ -41,17 +67,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($_FILES['gambar']['tmp_name'], $upload_dir . $gambar);
     }
 
-    $sql = "INSERT INTO produk (series_id, varian, nama_produk, gambar)
-            VALUES ('$series_id', '$varian', '$nama_produk', '$gambar')";
+    $sql = "INSERT INTO produk (series_id, varian, nama_produk, slug, gambar)
+            VALUES ('$series_id', '$varian', '$nama_produk', '$slug', '$gambar')";
 
     if (!$conn->query($sql)) {
         $error = "Gagal menyimpan produk: " . $conn->error;
     } else {
         $produk_id = $conn->insert_id;
 
-        foreach ($spec_groups as $slug => $meta) {
-            $labels = $_POST['spec'][$slug]['label'] ?? [];
-            $values = $_POST['spec'][$slug]['value'] ?? [];
+        foreach ($spec_groups as $slugSpec => $meta) {
+            $labels = $_POST['spec'][$slugSpec]['label'] ?? [];
+            $values = $_POST['spec'][$slugSpec]['value'] ?? [];
             $grup   = $conn->real_escape_string($meta['label']);
 
             for ($i = 0; $i < count($labels); $i++) {
@@ -203,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Spesifikasi -->
         <h5 class="mb-3">Spesifikasi</h5>
-        <?php foreach ($spec_groups as $slug => $meta): $slug_lower = $slug; ?>
+        <?php foreach ($spec_groups as $slugSpec => $meta): $slug_lower = $slugSpec; ?>
           <div class="mb-4">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <div class="group-title"><?= htmlspecialchars($meta['label']); ?></div>

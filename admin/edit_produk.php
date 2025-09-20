@@ -60,15 +60,19 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
         move_uploaded_file($_FILES['gambar']['tmp_name'],$upload_dir.$gambar);
     }
 
+    // ✅ Generate slug baru
+    $slug = createSlug($nama_produk);
+    $slug = uniqueSlug($conn, $slug, $produk_id);
+
     $conn->query("UPDATE produk 
-                  SET series_id='$series_id', varian='$varian', nama_produk='$nama_produk', gambar='$gambar' 
+                  SET series_id='$series_id', varian='$varian', nama_produk='$nama_produk', slug='$slug', gambar='$gambar' 
                   WHERE id=$produk_id");
 
     // Update spesifikasi
     $conn->query("DELETE FROM produk_spesifikasi WHERE produk_id=$produk_id");
-    foreach ($spec_groups as $slug=>$meta) {
-        $labels = $_POST['spec'][$slug]['label'] ?? [];
-        $values = $_POST['spec'][$slug]['value'] ?? [];
+    foreach ($spec_groups as $slugSpec=>$meta) {
+        $labels = $_POST['spec'][$slugSpec]['label'] ?? [];
+        $values = $_POST['spec'][$slugSpec]['value'] ?? [];
         $grup = $conn->real_escape_string($meta['label']);
         for ($i=0;$i<count($labels);$i++) {
             $label = trim($labels[$i] ?? '');

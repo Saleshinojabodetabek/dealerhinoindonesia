@@ -11,28 +11,6 @@ if (!isset($_SESSION['admin'])) {
 include 'config.php';
 include 'function.php';
 
-/* ==== FUNGSI SLUG ==== */
-function createSlug($string) {
-    $slug = strtolower(trim($string));
-    $slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);
-    $slug = preg_replace('/[\s-]+/', '-', $slug);
-    return $slug;
-}
-
-function uniqueSlug($conn, $slug, $exclude_id = null) {
-    $base = $slug;
-    $i = 1;
-    $where = $exclude_id ? "AND id != $exclude_id" : "";
-    while (true) {
-        $check = $conn->query("SELECT id FROM produk WHERE slug = '$slug' $where LIMIT 1");
-        if ($check->num_rows == 0) break;
-        $slug = $base . "-" . $i;
-        $i++;
-    }
-    return $slug;
-}
-/* ===================== */
-
 $spec_groups = [
     'performa' => ['label'=>'PERFORMA','defaults'=>['Kecepatan Maksimum (km/h)','Daya Tanjak (tan %)']],
     'model_mesin' => ['label'=>'MODEL MESIN','defaults'=>['Model','Model Tipe','Tenaga Maksimum (PS/rpm)','Daya Maksimum (Kgm/rpm)','Jumlah Silinder','Diameter x Langkah Piston (mm)','Isi Silinder (L)']],

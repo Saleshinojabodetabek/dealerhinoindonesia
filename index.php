@@ -33,6 +33,34 @@
   </head>
   <body>
 
+    <!-- Open Graph -->
+  <meta property="og:title" content="Dealer Resmi Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025" />
+  <meta property="og:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan." />
+  <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
+  <meta property="og:url" content="https://dealerhinoindonesia.com/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dealer Resmi Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025" />
+  <meta name="twitter:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino dengan harga terbaik dan promo terbaru 2025." />
+  <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Dealer Hino Indonesia",
+  "url": "https://dealerhinoindonesia.com",
+  "logo": "https://dealerhinoindonesia.com/images/logo3.png",
+  "image": "https://dealerhinoindonesia.com/images/promohino1.jpg",
+  "description": "Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Promo terbaru 2025, kredit dan cicilan Hino Jabodetabek & Jawa Barat."
+}
+</script>
+<link rel="image_src" href="https://dealerhinoindonesia.com/images/promohino1.jpg" />
+
+
+
     <!-- Header -->
     <header>
       <div class="container header-content navbar">

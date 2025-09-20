@@ -5,17 +5,21 @@ function createSlug($judul) {
     return $slug;
 }
 
-// Pastikan slug unik, $id dipakai untuk edit agar tidak bertabrakan dengan ID sendiri
-function uniqueSlug($conn, $slug, $id=0){
+// Bisa dipakai untuk artikel maupun produk
+function uniqueSlug($conn, $slug, $id=0, $table='artikel'){
     $sql = $id > 0 
-        ? "SELECT id FROM artikel WHERE slug='$slug' AND id<>$id"
-        : "SELECT id FROM artikel WHERE slug='$slug'";
+        ? "SELECT id FROM $table WHERE slug='$slug' AND id<>$id"
+        : "SELECT id FROM $table WHERE slug='$slug'";
     $res = $conn->query($sql);
+
     $original = $slug;
     $i = 1;
-    while($res->num_rows > 0){
+    while ($res && $res->num_rows > 0) {
         $slug = $original . '-' . $i;
-        $res = $conn->query("SELECT id FROM artikel WHERE slug='$slug'" . ($id>0?" AND id<>$id":""));
+        $sql = $id > 0 
+            ? "SELECT id FROM $table WHERE slug='$slug' AND id<>$id"
+            : "SELECT id FROM $table WHERE slug='$slug'";
+        $res = $conn->query($sql);
         $i++;
     }
     return $slug;

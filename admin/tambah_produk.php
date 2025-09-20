@@ -9,6 +9,7 @@ if (!isset($_SESSION['admin'])) {
 }
 
 include 'config.php';
+include 'function.php';
 
 /* ==== FUNGSI SLUG ==== */
 function createSlug($string) {

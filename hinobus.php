@@ -1,3 +1,8 @@
+<?php
+include 'webp_loader.php'; // panggil fungsi convertImgToWebp
+ob_start('convertImgToWebp'); // aktifkan output buffering
+?>
+
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -235,7 +240,7 @@
       loadProduk();
     });
     </script>
+    <?php include 'footer.php'; ?>
   </body>
 </html>
-
-<?php include 'footer.php'; ?>
+<?php ob_end_flush(); ?>

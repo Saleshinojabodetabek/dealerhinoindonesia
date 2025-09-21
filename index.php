@@ -44,55 +44,45 @@
     <meta name="twitter:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino dengan harga terbaik dan promo terbaru 2025." />
     <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
     
+    <!-- Schema.org -->
     <script type="application/ld+json">
     {
-    "@context": "https://schema.org",
-    "@type": "AutoDealer",
-    "name": "Dealer Hino Indonesia",
-    "image": "https://dealerhinoindonesia.com/images/promohino1.jpg",
-    "@id": "https://dealerhinoindonesia.com/",
-    "url": "https://dealerhinoindonesia.com/",
-    "telephone": "+62-859-7528-7684",
-    "priceRange": "$$$",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Golf Lake Ruko Venice, Jl. Lkr. Luar Barat No.78 Blok B, RT.9/RW.14",
-      "addressLocality": "Jakarta Barat",
-      "addressRegion": "DKI Jakarta",
-      "postalCode": "11730",
-      "addressCountry": "ID"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": -6.1305504,
-      "longitude": 106.7279824
-    },
-    "openingHoursSpecification": [
-      {
+      "@context": "https://schema.org",
+      "@type": "AutoDealer",
+      "name": "Dealer Hino Indonesia",
+      "image": "https://dealerhinoindonesia.com/images/promohino1.jpg",
+      "@id": "https://dealerhinoindonesia.com/",
+      "url": "https://dealerhinoindonesia.com/",
+      "telephone": "+62-859-7528-7684",
+      "priceRange": "$$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Golf Lake Ruko Venice, Jl. Lkr. Luar Barat No.78 Blok B, RT.9/RW.14",
+        "addressLocality": "Jakarta Barat",
+        "addressRegion": "DKI Jakarta",
+        "postalCode": "11730",
+        "addressCountry": "ID"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -6.1305504,
+        "longitude": 106.7279824
+      },
+      "openingHoursSpecification": [{
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
         "opens": "08:00",
         "closes": "17:00"
-      }
-    ],
-    "sameAs": [
-      "https://www.facebook.com/profile.php?id=61573843992250",
-      "https://www.instagram.com/saleshinojabodetabek",
-      "https://www.tiktok.com/@saleshinoindonesia"
-    ]
+      }],
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61573843992250",
+        "https://www.instagram.com/saleshinojabodetabek",
+        "https://www.tiktok.com/@saleshinoindonesia"
+      ]
     }
     </script>
   </head>
   <body>
-
-
     <!-- Header -->
     <header>
       <div class="container header-content navbar">
@@ -115,59 +105,37 @@
 
     <!-- Hero -->
     <section class="hero">
-    <div class="slider">
+      <div class="slider">
         <img src="images/Euro 4 Hino 300.jpeg" class="slide active" alt="Hino 300 Series" loading="lazy"/>
         <img src="images/Euro 4 Hino 500.jpeg" class="slide" alt="Hino 500 Series" loading="lazy"/>
         <img src="images/Euro 4 Hino Bus.jpeg" class="slide" alt="Hino Bus Series" loading="lazy"/>
-    </div>
-    <div class="container">
+      </div>
+      <div class="container">
         <h2>Dealer Resmi Hino Indonesia – Pilihan Tepat untuk Bisnis Anda</h2>
         <p>Kami hadir sebagai mitra terpercaya dalam menyediakan berbagai kendaraan Hino yang tangguh, mulai dari truk ringan, truk berat hingga bus. Dengan layanan profesional, stok lengkap, serta penawaran harga dan pembiayaan yang kompetitif, kami siap mendukung kebutuhan transportasi dan operasional bisnis Anda. Dapatkan solusi terbaik hanya di Dealer Resmi Hino Indonesia.</p>
-
         <div class="hero-buttons">
-        <a href="https://wa.me/+6285975287684?text=Halo%20Saya%20Dapat%20Nomor%20Anda%20Dari%20Google" class="btn btn-contact" target="_blank">Hubungi Nathan Sekarang</a>
+          <a href="https://wa.me/+6285975287684?text=Halo%20Saya%20Dapat%20Nomor%20Anda%20Dari%20Google" class="btn btn-contact" target="_blank">Hubungi Nathan Sekarang</a>
         </div>
-    </div>
+      </div>
     </section>
 
-<main>
+    <main>
       <!-- Section: Promo Utama -->
       <section id="promo-utama" class="promo-section fade-element">
         <div class="promo-text">
-          <h2>
-            Dapatkan Harga dan Penawaran Terbaik Langsung dari Dealer Resmi Hino
-            Indonesia
-          </h2>
+          <h2>Dapatkan Harga dan Penawaran Terbaik Langsung dari Dealer Resmi Hino Indonesia</h2>
           <ul>
             <li>Ingin harga terbaik untuk semua jenis truk Hino?</li>
             <li>Bingung memilih kendaraan yang tepat untuk bisnis Anda?</li>
             <li>Butuh pelayanan cepat, ramah, dan profesional?</li>
-            <li>
-              Hubungi Nathan Hino sekarang juga dan dapatkan solusi terbaik!
-            </li>
+            <li>Hubungi Nathan Hino sekarang juga dan dapatkan solusi terbaik!</li>
           </ul>
-          <p>
-            Anda berada di tempat yang tepat! Nathan Hino siap membantu Anda
-            mendapatkan truk Hino baru dengan harga kompetitif untuk seluruh
-            Indonesia, <strong>terutama di Jabodetabek dan Jawa Barat</strong>.
-            Pelayanan cepat, terpercaya, dan tanpa ribet menanti Anda!
-          </p>
+          <p>Anda berada di tempat yang tepat! Nathan Hino siap membantu Anda mendapatkan truk Hino baru dengan harga kompetitif untuk seluruh Indonesia, <strong>terutama di Jabodetabek dan Jawa Barat</strong>. Pelayanan cepat, terpercaya, dan tanpa ribet menanti Anda!</p>
           <div class="promo-buttons">
-            <a
-              href="https://wa.me/6285975287684"
-              class="btn-primary"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Konsultasi Pembelian</a
-            >
+            <a href="https://wa.me/6285975287684" class="btn-primary" target="_blank" rel="noopener noreferrer">Konsultasi Pembelian</a>
           </div>
         </div>
-        <img
-          src="images/hino.png"
-          alt="Truk Hino Hijau"
-          loading="lazy"
-          class="promo-main-image"
-        />
+        <img src="images/hino.png" alt="Truk Hino Hijau" loading="lazy" class="promo-main-image"/>
       </section>
 
       <!-- Produk -->
@@ -175,58 +143,18 @@
         <h2 class="section-title">Produk Truk Hino Unggulan</h2>
         <div class="products">
           <div class="product">
-            <img
-              src="images/Euro 4 Hino 300.jpeg"
-              alt="Hino 300 Dutro"
-              loading="lazy"
-            />
-            <h3>
-              <a
-                href="https://dealerhinoindonesia.com/hino300.php"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Hino 300 Series (Dutro)
-              </a>
-            </h3>
-            <p>
-              Truk ringan dan tangguh, cocok untuk usaha kecil dan menengah.
-            </p>
+            <img src="images/Euro 4 Hino 300.jpeg" alt="Hino 300 Dutro" loading="lazy"/>
+            <h3><a href="https://dealerhinoindonesia.com/hino300.php" target="_blank" rel="noopener noreferrer">Hino 300 Series (Dutro)</a></h3>
+            <p>Truk ringan dan tangguh, cocok untuk usaha kecil dan menengah.</p>
           </div>
-
           <div class="product">
-            <img
-              src="images/Euro 4 Hino 500.jpeg"
-              alt="Hino 500 Ranger"
-              loading="lazy"
-            />
-            <h3>
-              <a
-                href="https://dealerhinoindonesia.com/hino500.php"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Hino 500 Series (Ranger)
-              </a>
-            </h3>
+            <img src="images/Euro 4 Hino 500.jpeg" alt="Hino 500 Ranger" loading="lazy"/>
+            <h3><a href="https://dealerhinoindonesia.com/hino500.php" target="_blank" rel="noopener noreferrer">Hino 500 Series (Ranger)</a></h3>
             <p>Performa handal untuk pengangkutan berat dan jarak jauh.</p>
           </div>
-
           <div class="product">
-            <img
-              src="images/Euro 4 Hino Bus.jpeg"
-              alt="Hino Bus Series"
-              loading="lazy"
-            />
-            <h3>
-              <a
-                href="https://dealerhinoindonesia.com/hinobus.php"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Hino Bus Series
-              </a>
-            </h3>
+            <img src="images/Euro 4 Hino Bus.jpeg" alt="Hino Bus Series" loading="lazy"/>
+            <h3><a href="https://dealerhinoindonesia.com/hinobus.php" target="_blank" rel="noopener noreferrer">Hino Bus Series</a></h3>
             <p>Solusi transportasi penumpang dengan kenyamanan terbaik.</p>
           </div>
         </div>
@@ -244,18 +172,12 @@
           <div class="feature">
             <div class="icon">👥</div>
             <h3>Pelatihan & Konsultasi</h3>
-            <p>
-              Kami siap memberikan pelatihan dan konsultasi sesuai kebutuhan
-              bisnis Anda.
-            </p>
+            <p>Kami siap memberikan pelatihan dan konsultasi sesuai kebutuhan bisnis Anda.</p>
           </div>
           <div class="feature">
             <div class="icon">🔧</div>
             <h3>Servis dan Support</h3>
-            <p>
-              Jaringan servis luas dan suku cadang tersedia di seluruh
-              Indonesia.
-            </p>
+            <p>Jaringan servis luas dan suku cadang tersedia di seluruh Indonesia.</p>
           </div>
         </div>
       </section>
@@ -263,53 +185,44 @@
       <!-- Kontak -->
       <section id="contact" class="contact fade-element">
         <h2>Butuh Bantuan atau Info Harga?</h2>
-        <p>
-          Hubungi Nathan langsung via WhatsApp. Nathan siap membantu Anda
-          memilih truk terbaik.
-        </p>
-        <a
-          href="https://wa.me/6285975287684"
-          class="whatsapp-link"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Chat WhatsApp Sekarang</a
-        >
+        <p>Hubungi Nathan langsung via WhatsApp. Nathan siap membantu Anda memilih truk terbaik.</p>
+        <a href="https://wa.me/6285975287684" class="whatsapp-link" target="_blank" rel="noopener noreferrer">Chat WhatsApp Sekarang</a>
+      </section>
+
+      <!-- Blog Section -->
+      <section class="blog-section fade-element">
+        <div class="container">
+          <h2>Blog & Artikel</h2>
+          <p>Dapatkan informasi terbaru seputar Truk Hino, perawatan, dan promo terbaik.</p>
+          <div class="blog-grid">
+            <?php
+              $artikelData = json_decode(file_get_contents("https://dealerhinoindonesia.com/admin/api/get_artikel.php"), true);
+              if (isset($artikelData['data']) && is_array($artikelData['data'])) {
+                $terbaru = array_slice($artikelData['data'], 0, 3);
+                foreach ($terbaru as $artikel):
+            ?>
+              <div class="blog-card">
+                <img src="<?= htmlspecialchars($artikel['gambar']) ?>" alt="<?= htmlspecialchars($artikel['judul']) ?>" loading="lazy"/>
+                <div class="blog-card-content">
+                  <h3>
+                    <a href="detail_artikel.php?slug=<?= urlencode($artikel['slug']) ?>">
+                      <?= htmlspecialchars($artikel['judul']) ?>
+                    </a>
+                  </h3>
+                  <p><?= htmlspecialchars(substr(strip_tags($artikel['isi']), 0, 100)) ?>...</p>
+                  <a href="detail_artikel.php?slug=<?= urlencode($artikel['slug']) ?>" class="read-more">Baca Selengkapnya</a>
+                </div>
+              </div>
+            <?php endforeach; } else { echo "<p>Tidak ada artikel ditemukan.</p>"; } ?>
+          </div>
+        </div>
       </section>
     </main>
 
-    
+    <?php include 'footer.php'; ?>
+
     <!-- Load Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
-</main>
-
-<!-- Blog Section -->
-<section class="blog-section fade-element">
-  <div class="container">
-    <h2>Blog & Artikel</h2>
-    <p>Dapatkan informasi terbaru seputar Truk Hino, perawatan, dan promo terbaik.</p>
-    <div class="blog-grid">
-      <?php
-        $artikelData = json_decode(file_get_contents("https://dealerhinoindonesia.com/admin/api/get_artikel.php"), true);
-        if (isset($artikelData['data']) && is_array($artikelData['data'])) {
-          $terbaru = array_slice($artikelData['data'], 0, 3);
-          foreach ($terbaru as $artikel):
-      ?>
-        <div class="blog-card">
-          <img src="<?= htmlspecialchars($artikel['gambar']) ?>" alt="<?= htmlspecialchars($artikel['judul']) ?>" />
-          <div class="blog-card-content">
-            <h3>
-              <a href="detail_artikel.php?slug=<?= urlencode($artikel['slug']) ?>">
-                <?= htmlspecialchars($artikel['judul']) ?>
-              </a>
-            </h3>
-            <p><?= substr(strip_tags($artikel['isi']), 0, 100) ?>...</p>
-            <a href="detail_artikel.php?slug=<?= urlencode($artikel['slug']) ?>" class="read-more">Baca Selengkapnya</a>
-          </div>
-        </div>
-      <?php endforeach; } else { echo "<p>Tidak ada artikel ditemukan.</p>"; } ?>
-    </div>
-  </div>
-</section>
-
-
-<?php include 'footer.php'; ?>
+    <script>feather.replace()</script>
+  </body>
+</html>

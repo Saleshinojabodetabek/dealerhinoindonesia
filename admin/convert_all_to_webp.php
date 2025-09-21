@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Konfigurasi
 $rootDir  = __DIR__ . "/uploads"; // ganti path ke folder uploads Anda
 $quality  = 80; // kualitas webp (0-100)

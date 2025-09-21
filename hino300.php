@@ -46,8 +46,67 @@
         font-size: 14px;
       }
     </style>
+    <!-- Open Graph -->
+    <meta property="og:title" content="Dealer Resmi Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025" />
+    <meta property="og:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan." />
+    <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
+    <meta property="og:url" content="https://dealerhinoindonesia.com/" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dealer Resmi Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025" />
+    <meta name="twitter:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino dengan harga terbaik dan promo terbaru 2025." />
+    <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
+    
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "AutoDealer",
+    "name": "Dealer Hino Indonesia",
+    "image": "https://dealerhinoindonesia.com/images/promohino1.jpg",
+    "@id": "https://dealerhinoindonesia.com/",
+    "url": "https://dealerhinoindonesia.com/",
+    "telephone": "+62-859-7528-7684",
+    "priceRange": "$$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Golf Lake Ruko Venice, Jl. Lkr. Luar Barat No.78 Blok B, RT.9/RW.14",
+      "addressLocality": "Jakarta Barat",
+      "addressRegion": "DKI Jakarta",
+      "postalCode": "11730",
+      "addressCountry": "ID"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -6.1305504,
+      "longitude": 106.7279824
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "08:00",
+        "closes": "17:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61573843992250",
+      "https://www.instagram.com/saleshinojabodetabek",
+      "https://www.tiktok.com/@saleshinoindonesia"
+    ]
+    }
+    </script>
   </head>
   <body>
+
 
     <!-- Header -->
     <header>

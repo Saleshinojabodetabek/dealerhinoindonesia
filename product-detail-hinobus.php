@@ -1,6 +1,12 @@
 <?php
 include 'admin/config.php';
 
+// aktifkan webp loader
+include 'webp_loader.php';
+ob_start('convertImgToWebp');
+
+
+
 $slug = $conn->real_escape_string($_GET['slug'] ?? '');
 if ($slug === '') {
     die("Produk tidak ditemukan.");
@@ -302,7 +308,7 @@ backToTopBtn.addEventListener("click", () => {
 });
 </script>
 
-</body>
+    <?php include 'footer.php'; ?>
+  </body>
 </html>
-
-<?php include 'footer.php'; ?>
+<?php ob_end_flush(); ?>

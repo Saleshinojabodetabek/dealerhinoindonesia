@@ -1,32 +1,34 @@
 <?php
 /**
  * WebP Auto Loader
- * Mengganti semua <img> jadi .webp + loading="lazy"
+ * Ganti semua <img> jadi <picture> dengan .webp + fallback + lazy load
  */
-
 function convertImgToWebp($html) {
-    // Cari semua <img> di HTML
     return preg_replace_callback(
-        '/<img([^>]+)src=["\']([^"\']+\.(jpg|jpeg|png))["\']([^>]*)>/i',
+        '/<img([^>]+)src=["\']([^"\']+\.(jpe?g|png))["\']([^>]*)>/i',
         function ($matches) {
-            $before = $matches[1]; // atribut sebelum src
-            $src    = $matches[2]; // URL gambar asli
-            $ext    = $matches[3]; // ekstensi asli
-            $after  = $matches[4]; // atribut setelah src
+            $before = trim($matches[1]); // atribut sebelum src
+            $src    = $matches[2];       // URL gambar asli
+            $ext    = strtolower($matches[3]); // ekstensi (jpg/jpeg/png)
+            $after  = trim($matches[4]); // atribut setelah src
 
-            // Buat versi WebP
-            $webp = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $src);
+            // Buat versi WebP (ubah ekstensi)
+            $webp = preg_replace('/\.(jpe?g|png)$/i', '.webp', $src);
 
-            // Pastikan ada lazy load
+            // Tambah lazy load kalau belum ada
             if (!preg_match('/loading=/i', $before . $after)) {
                 $after .= ' loading="lazy"';
             }
 
-            // Kembalikan dalam bentuk <picture> agar ada fallback
+            // Hindari <img> duplikat atribut spasi ganda
+            $before = $before ? $before . ' ' : '';
+            $after  = $after ? ' ' . $after : '';
+
+            // Bangun kembali dengan <picture>
             return '<picture>'
-                . '<source srcset="' . $webp . '" type="image/webp">'
-                . '<source srcset="' . $src . '" type="image/' . $ext . '">'
-                . '<img ' . trim($before) . ' src="' . $src . '"' . $after . '>'
+                . '<source srcset="' . htmlspecialchars($webp, ENT_QUOTES) . '" type="image/webp">'
+                . '<source srcset="' . htmlspecialchars($src, ENT_QUOTES) . '" type="image/' . $ext . '">'
+                . '<img ' . $before . 'src="' . htmlspecialchars($src, ENT_QUOTES) . '"' . $after . '>'
                 . '</picture>';
         },
         $html

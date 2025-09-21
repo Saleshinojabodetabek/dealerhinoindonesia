@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Konfigurasi
-$rootDir  = __DIR__ . "/uploads"; // ganti path ke folder uploads Anda
+$rootDir  = dirname(__DIR__) . "/uploads"; // ganti path ke folder uploads Anda
 $quality  = 80; // kualitas webp (0-100)
 
 // Fungsi konversi ke WebP

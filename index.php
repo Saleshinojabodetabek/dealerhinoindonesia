@@ -224,6 +224,10 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
       </section>
     </main>
 
+    <!-- WhatsApp Chat -->
+    <script src="https://static.elfsight.com/platform/platform.js" async></script>
+    <div class="elfsight-app-1c150e27-6597-4113-becd-79df393b9756" data-elfsight-app-lazy></div>
+
     <?php include 'footer.php'; ?>
 
     <!-- Load Feather Icons -->

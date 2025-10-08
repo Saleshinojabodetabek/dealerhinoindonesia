@@ -1,7 +1,7 @@
 <?php
 // ===== Nonaktifkan error agar XML tidak rusak =====
-error_reporting(0);
-@ini_set('display_errors', 0);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // ===== Koneksi database =====
 $host = "localhost";

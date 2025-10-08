@@ -127,10 +127,10 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
         <div class="container">
           <div class="about-content">
             <div class="text">
-              <h2>Sales Hino Indonesia</h2>
+              <h2>Dealer Hino Indonesia</h2>
               <div class="divider"></div>
               <p>
-                Nathan, Sales Hino Indonesia yang berpengalaman dan profesional, siap menjadi mitra terbaik Anda dalam memenuhi kebutuhan kendaraan niaga. Dengan pemahaman mendalam tentang produk Hino serta solusi pembiayaan yang fleksibel, Nathan selalu memberikan pelayanan cepat, ramah, dan tepat sasaran untuk setiap jenis usaha.
+                Nathan, Dealer Hino Indonesia yang berpengalaman dan profesional, siap menjadi mitra terbaik Anda dalam memenuhi kebutuhan kendaraan niaga. Dengan pemahaman mendalam tentang produk Hino serta solusi pembiayaan yang fleksibel, Nathan selalu memberikan pelayanan cepat, ramah, dan tepat sasaran untuk setiap jenis usaha.
               </p>
               <p>
             Komitmen Nathan adalah memberikan lebih dari sekadar penjualan. Ia hadir untuk membangun hubungan jangka panjang dengan pelanggan melalui layanan after-sales yang responsif, konsultasi kebutuhan armada yang akurat, serta penawaran harga terbaik. Percayakan kebutuhan truk Hino Anda kepada Nathan, dan rasakan pengalaman membeli yang aman, nyaman, dan menguntungkan.
@@ -141,12 +141,12 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
               </div>
             </div>
             <div class="image-gallery">
-              <img src="img/promohino1.jpg" alt="Promo Hino" />
+              <img src="images/promohino.jpeg" alt="Promo Hino" />
             </div>
             </div>
           </div>
         </section>
-        
+
       <!-- Produk -->
       <section id="products-section" class="products-section fade-element">
         <h2 class="section-title">Produk Truk Hino Unggulan</h2>

@@ -58,4 +58,3 @@ if ($result = $conn->query("SHOW TABLES LIKE 'artikel'")) {
 echo "</urlset>";
 $conn->close();
 ?>
-</urlset>

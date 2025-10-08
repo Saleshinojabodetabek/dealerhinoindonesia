@@ -122,24 +122,31 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     </section>
 
     <main>
-      <!-- Section: Promo Utama -->
-      <section id="promo-utama" class="promo-section fade-element">
-        <div class="promo-text">
-          <h2>Dapatkan Harga dan Penawaran Terbaik Langsung dari Dealer Resmi Hino Indonesia</h2>
-          <ul>
-            <li>Ingin harga terbaik untuk semua jenis truk Hino?</li>
-            <li>Bingung memilih kendaraan yang tepat untuk bisnis Anda?</li>
-            <li>Butuh pelayanan cepat, ramah, dan profesional?</li>
-            <li>Hubungi Nathan Hino sekarang juga dan dapatkan solusi terbaik!</li>
-          </ul>
-          <p>Anda berada di tempat yang tepat! Nathan Hino siap membantu Anda mendapatkan truk Hino baru dengan harga kompetitif untuk seluruh Indonesia, <strong>terutama di Jabodetabek dan Jawa Barat</strong>. Pelayanan cepat, terpercaya, dan tanpa ribet menanti Anda!</p>
-          <div class="promo-buttons">
-            <a href="https://wa.me/6285975287684" class="btn-primary" target="_blank" rel="noopener noreferrer">Konsultasi Pembelian</a>
+      <!-- About Company -->
+      <section class="about-company">
+        <div class="container">
+          <div class="about-content">
+            <div class="text">
+              <h2>Sales Hino Indonesia</h2>
+              <div class="divider"></div>
+              <p>
+                Nathan, Sales Hino Indonesia yang berpengalaman dan profesional, siap menjadi mitra terbaik Anda dalam memenuhi kebutuhan kendaraan niaga. Dengan pemahaman mendalam tentang produk Hino serta solusi pembiayaan yang fleksibel, Nathan selalu memberikan pelayanan cepat, ramah, dan tepat sasaran untuk setiap jenis usaha.
+              </p>
+              <p>
+            Komitmen Nathan adalah memberikan lebih dari sekadar penjualan. Ia hadir untuk membangun hubungan jangka panjang dengan pelanggan melalui layanan after-sales yang responsif, konsultasi kebutuhan armada yang akurat, serta penawaran harga terbaik. Percayakan kebutuhan truk Hino Anda kepada Nathan, dan rasakan pengalaman membeli yang aman, nyaman, dan menguntungkan.
+          </p>
+              <div class="contact-buttons">
+                <a href="https://wa.me/6285975287684" class="btn whatsapp-btn"><i class="fab fa-whatsapp"></i> +62 859-7528-7684</a>
+                <a href="mailto:saleshinojabodetabek@gmail.com" class="btn email-btn"><i class="fas fa-envelope"></i> saleshinojabodetabek@gmail.com</a>
+              </div>
+            </div>
+            <div class="image-gallery">
+              <img src="img/promohino1.jpg" alt="Promo Hino" />
+            </div>
+            </div>
           </div>
-        </div>
-        <img src="images/hino.png" alt="Truk Hino Hijau" loading="lazy" class="promo-main-image"/>
-      </section>
-
+        </section>
+        
       <!-- Produk -->
       <section id="products-section" class="products-section fade-element">
         <h2 class="section-title">Produk Truk Hino Unggulan</h2>
@@ -161,7 +168,25 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
           </div>
         </div>
       </section>
-
+      
+      <!-- Section: Promo Utama -->
+      <section id="promo-utama" class="promo-section fade-element">
+        <div class="promo-text">
+          <h2>Dapatkan Harga dan Penawaran Terbaik Langsung dari Dealer Resmi Hino Indonesia</h2>
+          <ul>
+            <li>Ingin harga terbaik untuk semua jenis truk Hino?</li>
+            <li>Bingung memilih kendaraan yang tepat untuk bisnis Anda?</li>
+            <li>Butuh pelayanan cepat, ramah, dan profesional?</li>
+            <li>Hubungi Nathan Hino sekarang juga dan dapatkan solusi terbaik!</li>
+          </ul>
+          <p>Anda berada di tempat yang tepat! Nathan Hino siap membantu Anda mendapatkan truk Hino baru dengan harga kompetitif untuk seluruh Indonesia, <strong>terutama di Jabodetabek dan Jawa Barat</strong>. Pelayanan cepat, terpercaya, dan tanpa ribet menanti Anda!</p>
+          <div class="promo-buttons">
+            <a href="https://wa.me/6285975287684" class="btn-primary" target="_blank" rel="noopener noreferrer">Konsultasi Pembelian</a>
+          </div>
+        </div>
+        <img src="images/hino.png" alt="Truk Hino Hijau" loading="lazy" class="promo-main-image"/>
+      </section>
+      
       <!-- Fitur -->
       <section id="features" class="features fade-element">
         <h2 class="section-title">Kenapa Pilih Hino?</h2>

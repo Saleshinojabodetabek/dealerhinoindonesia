@@ -125,3 +125,139 @@
     text-align: center;
   }
 }
+
+/* Company Profile */
+.about-company {
+  padding: 60px 20px;
+  background-color: #fff;
+  font-family: sans-serif;
+}
+
+.about-company .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.about-content .text {
+  flex: 1 1 55%;
+}
+
+.about-content .text h2 {
+  font-size: 2.5rem;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.about-content .divider {
+  width: 80px;
+  height: 6px;
+  background-color: #f97316;
+  margin: 16px 0;
+}
+
+.about-content .text p {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.contact-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  color: #fff;
+}
+
+.whatsapp-btn {
+  background-color: #25d366;
+}
+
+.whatsapp-btn:hover {
+  background-color: #1ebe57;
+}
+
+.email-btn {
+  background-color: #1d4ed8;
+}
+
+.email-btn:hover {
+  background-color: #1e40af;
+}
+
+.about-content .image {
+  flex: 1 1 40%;
+  text-align: right; /* Tambahan: untuk geser isi ke kanan */
+  display: flex;
+  justify-content: flex-end; /* Tambahan: dorong gambar ke kanan */
+}
+
+.about-content .image img {
+  max-width: 70%;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.image-gallery {
+  flex: 1 1 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0; /* hilangkan jarak antar gambar */
+}
+
+.image-gallery img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 0; /* hilangkan lengkungan jika perlu */
+  box-shadow: none; /* hilangkan bayangan jika ingin benar-benar rapat */
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-content .text,
+  .about-content .image {
+    flex: 1 1 100%;
+  }
+
+  .contact-buttons {
+    justify-content: center;
+  }
+
+  .about-content .divider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-content .image img {
+    max-width: 100%; /* Tambahan: lebih kecil khusus untuk mobile */
+  }
+}

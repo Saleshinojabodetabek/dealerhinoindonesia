@@ -1,7 +1,7 @@
 <?php
 // ===== Nonaktifkan error agar XML tidak rusak =====
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+error_reporting(0);
+@ini_set('display_errors', 0);
 
 // ===== Koneksi database =====
 $host = "localhost";
@@ -10,6 +10,7 @@ $pass = "Natanael110405";
 $db   = "u868657420_db_dealer_hino";
 $conn = new mysqli($host, $user, $pass, $db);
 
+// ===== Header XML =====
 header("Content-Type: application/xml; charset=utf-8");
 
 // ===== Jika koneksi gagal =====
@@ -57,8 +58,9 @@ if ($result = $conn->query("SHOW TABLES LIKE 'artikel'")) {
     }
 }
 
-// ===== Tutup XML & koneksi =====
+// ===== Tutup XML =====
 echo "</urlset>";
+
 $conn->close();
 exit;
 ?>

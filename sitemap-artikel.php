@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 
 // ===== Cetak header XML =====
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-echo "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"></urlset>";
+echo "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 
 // ===== Fungsi bantu =====
 function printUrl($loc, $lastmod, $changefreq = "monthly", $priority = "0.7") {

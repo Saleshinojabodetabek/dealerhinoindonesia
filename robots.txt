@@ -1,8 +1,7 @@
 User-agent: *
 Disallow: /admin/
-Disallow: /login.php
-Disallow: /logout.php
+Disallow: /uploads/
 
 Allow: /
 
-Sitemap: https://dealerhinoindonesia.com/sitemap.xml
+Sitemap: https://dealerhinoindonesia.com/sitemap-index.xml

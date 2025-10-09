@@ -34,10 +34,10 @@ printUrl("$base_url/artikel.php", date('Y-m-d'), 'weekly', '0.9');
 
 try {
     // koneksi DB (sesuaikan bila host bukan 'localhost')
-    $host = "localhost";
-    $user = "u868657420_root";
-    $pass = "Natanael110405";
-    $db   = "u868657420_db_dealer_hino";
+    $host = "localhost"; 
+    $user = "u868657420_dealerhinojkt"; 
+    $pass = "Natanael110405"; 
+    $db   = "u868657420_dealerhinojkt";
 
     $conn = new mysqli($host, $user, $pass, $db);
     $conn->set_charset('utf8mb4');

@@ -3,10 +3,10 @@ error_reporting(0);
 ob_clean();
 header("Content-Type: application/xml; charset=utf-8");
 
-$host = "localhost";
-$user = "u868657420_root";
-$pass = "Natanael110405";
-$db   = "u868657420_db_dealer_hino";
+$host = "localhost"; 
+$user = "u868657420_dealerhinojkt"; 
+$pass = "Natanael110405"; 
+$db   = "u868657420_dealerhinojkt";
 $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) exit;
 

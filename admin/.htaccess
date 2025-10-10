@@ -22,9 +22,16 @@ Require all denied
 
 # Protect API folder (so user cannot directly open /admin/api/)
 
-<Directory "api">
-Require all denied
-</Directory>
+# Lindungi hanya jika diakses langsung via browser
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Hanya izinkan akses API dari domain sendiri
+    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?dealerhinoindonesia\.com [NC]
+    RewriteRule ^api/ - [F,L]
+
+</IfModule>
 
 # Allow only through PHP scripts inside admin
 

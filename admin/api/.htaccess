@@ -2,8 +2,15 @@
 # 🔒 ADMIN API SECURITY
 ##############################################
 
-# Deny all direct access
-Require all denied
+# Izinkan hanya file tertentu
+<FilesMatch "^(get_artikel\.php|get_produk\.php)$">
+    Require all granted
+</FilesMatch>
+
+# Tolak lainnya
+<FilesMatch "^(config\.php|db\.php)$">
+    Require all denied
+</FilesMatch>
 
 ##############################################
 # ✅ End of admin API protection

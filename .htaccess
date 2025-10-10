@@ -123,6 +123,9 @@ Require all denied
 
 # --- Protect sensitive directories ---
 
+# Block akses langsung ke admin, kecuali folder API yang digunakan frontend
+
+RewriteCond %{REQUEST_URI} !^/admin/api/
 RewriteRule ^(admin|config|system|private|core)/ - [F,L,NC]
 
 # --- Prevent PHP interpreted as script in text-based MIME ---

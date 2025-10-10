@@ -1,33 +1,52 @@
 ##############################################
+
 # 🔒 ADMIN PANEL SECURITY
+
 ##############################################
 
 # Disable directory listing
+
 Options -Indexes
 
 # Protect config and system files
+
 <FilesMatch "^(config\.php|function\.php|\.htaccess|\.htpasswd)$">
-    Require all denied
+Require all denied
 </FilesMatch>
 
 # Deny access to sensitive extensions
+
 <FilesMatch "\.(bak|sql|ini|log|conf|env)$">
-    Require all denied
+Require all denied
 </FilesMatch>
 
 # Protect API folder (so user cannot directly open /admin/api/)
+
 <Directory "api">
-    Require all denied
+Require all denied
 </Directory>
 
 # Allow only through PHP scripts inside admin
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
     # Block direct access to admin API files
     RewriteRule ^api/ - [F,L,NC]
+
 </IfModule>
 
 ##############################################
+
 # ✅ End of admin security config
+
 ##############################################
+
+# Extra Security Headers
+
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set X-XSS-Protection "1; mode=block"
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "no-referrer-when-downgrade"
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"

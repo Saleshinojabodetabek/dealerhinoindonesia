@@ -14,7 +14,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     />
     <meta name="keywords" content="Dealer Hino, Dealer Hino Jakarta, Promo Truk Hino 2025, Harga Truk Hino Dutro, Hino Ranger 500 Series, Kredit Truk Hino Jakarta, Cicilan Truk Hino, Dealer Resmi Hino Indonesia, Jual Truk Hino Jakarta, Hino Euro 4 Terbaru, Harga Truk Hino Jabodetabek, Dealer Hino Tangerang, Bekasi, Depok, Bogor, Bandung, Truk Hino untuk Bisnis, Truk Hino Angkut Barang, Sales Hino Resmi Jakarta, Leasing Truk Hino, Hino Dump Truck, Truk Hino Termurah, Bengkel & Servis Hino Resmi" />
     <meta name="author" content="Nathan Hino" />
-    <title>Dealer Hino Jakarta 2025 | Harga & Promo Truk Dutro, Ranger, Bus</title>
+    <title>Dealer Hino Jabodetabek Resmi | Harga & Promo Truk Dutro, Ranger, Bus</title>
     <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="images/favicon.png" />
     <link rel="canonical" href="https://dealerhinoindonesia.com/" />

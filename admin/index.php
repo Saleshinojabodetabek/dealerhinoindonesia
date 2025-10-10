@@ -85,6 +85,7 @@ if (!isset($_SESSION['admin'])) {
     <a href="artikel.php">Artikel</a>
     <a href="produk.php">Produk</a>
     <a href="pesan.php">Pesan Customer</a> <!-- Tambahan menu baru -->
+    <a href="ubah_password.php">Ganti Pasword</a>
     <a href="logout.php">Logout</a>
   </div>
 

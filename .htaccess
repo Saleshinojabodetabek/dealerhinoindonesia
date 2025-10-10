@@ -1,40 +1,142 @@
-# ============================
-# HINO DEALER INDONESIA .HTACCESS
-# ============================
+# ============================================
+
+# 🔰 HINO DEALER INDONESIA - .HTACCESS CONFIG
+
+# ============================================
+
+# ==========================================================
+
+# 1️⃣ FORCE HTTPS + NON-WWW (https://dealerhinoindonesia.com)
+
+# ==========================================================
 
 RewriteEngine On
-
-# --- 1. Paksa HTTPS + non-www (https://dealerhinoindonesia.com) ---
 RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} ^www\.dealerhinoindonesia\.com [NC]
-RewriteRule ^(.*)$ https://dealerhinoindonesia.com/$1 [L,R=301]
+RewriteRule ^(.\*)$ https://dealerhinoindonesia.com/$1 [L,R=301]
 
-# --- 2. Jangan rewrite kalau file/folder asli ada ---
+# ============================================
+
+# 2️⃣ SKIP REWRITE UNTUK FILE / FOLDER ASLI
+
+# ============================================
+
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# --- 3. SEO Friendly Produk ---
-# Hino 300 Series
-# Contoh: https://dealerhinoindonesia.com/hino300/115-sd-std-euro4
+# ============================================
+
+# 3️⃣ SEO FRIENDLY URL - PRODUK
+
+# ============================================
+
+# --- Hino 300 Series ---
+
+# Contoh: /hino300/115-sd-std-euro4
+
 RewriteRule ^hino300/([a-z0-9-]+)/?$ product-detail-hino300.php?slug=$1 [L,QSA]
 
-# Hino 500 Series
-# Contoh: https://dealerhinoindonesia.com/hino500/fg-260-js-euro4
+# --- Hino 500 Series ---
+
+# Contoh: /hino500/fg-260-js-euro4
+
 RewriteRule ^hino500/([a-z0-9-]+)/?$ product-detail-hino500.php?slug=$1 [L,QSA]
 
-# Hino Bus Series
-# Contoh: https://dealerhinoindonesia.com/hinobus/115-sdb-std-euro4
+# --- Hino Bus Series ---
+
+# Contoh: /hinobus/115-sdb-std-euro4
+
 RewriteRule ^hinobus/([a-z0-9-]+)/?$ product-detail-hinobus.php?slug=$1 [L,QSA]
 
-# --- 4. SEO Friendly Artikel ---
-# Artikel detail
-# Contoh: https://dealerhinoindonesia.com/artikel/bus-hino-kembali-dipercaya
+# ============================================
+
+# 4️⃣ SEO FRIENDLY URL - ARTIKEL
+
+# ============================================
+
+# --- Artikel detail ---
+
+# Contoh: /artikel/bus-hino-kembali-dipercaya
+
 RewriteRule ^artikel/([a-z0-9-]+)/?$ artikel-detail.php?slug=$1 [L,QSA]
 
-# Kategori artikel
-# Contoh: https://dealerhinoindonesia.com/kategori/promo
+# --- Kategori artikel ---
+
+# Contoh: /kategori/promo
+
 RewriteRule ^kategori/([a-z0-9-]+)/?$ artikel.php?kategori=$1 [L,QSA]
 
-# --- 5. Default file index.php ---
+# ============================================
+
+# 5️⃣ DEFAULT INDEX FILE
+
+# ============================================
+
 DirectoryIndex index.php
+
+# ============================================
+
+# 🔒 ROOT SECURITY CONFIGURATION
+
+# ============================================
+
+# --- Disable directory listing ---
+
+Options -Indexes -ExecCGI
+
+# --- Protect sensitive files ---
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(\.env|composer\.(json|lock)|\.git|\.ht(access|passwd)|config\.php)$ - [F,L,NC]
+</IfModule>
+
+# --- Deny direct access to core config files ---
+
+<FilesMatch "^(config\.php|\.htaccess|\.htpasswd)$">
+Require all denied
+</FilesMatch>
+
+# --- Deny dangerous extensions ---
+
+<FilesMatch "\.(bak|sql|ini|sh|log|conf|env|json|yml)$">
+Require all denied
+</FilesMatch>
+
+# --- Prevent PHP execution in risky folders ---
+
+<IfModule mod_php.c>
+    <Directory "uploads">
+        <FilesMatch "\.ph(p|ar|tml|phtml)$">
+            Require all denied
+        </FilesMatch>
+    </Directory>
+
+    <Directory "images">
+        <FilesMatch "\.ph(p|ar|tml|phtml)$">
+            Require all denied
+        </FilesMatch>
+    </Directory>
+
+</IfModule>
+
+# --- Protect sensitive directories ---
+
+RewriteRule ^(admin|config|system|private|core)/ - [F,L,NC]
+
+# --- Prevent PHP interpreted as script in text-based MIME ---
+
+AddType text/plain .php .phtml .php3 .php4 .php5 .phps
+
+# --- Deny access to hidden/temp files ---
+
+<FilesMatch "(\.(swp|swo|DS_Store|tmp))$">
+Require all denied
+</FilesMatch>
+
+# ============================================
+
+# ✅ END OF .HTACCESS CONFIG
+
+# ============================================

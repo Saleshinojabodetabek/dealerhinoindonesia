@@ -1,0 +1,33 @@
+##############################################
+# 🔒 ADMIN PANEL SECURITY
+##############################################
+
+# Disable directory listing
+Options -Indexes
+
+# Protect config and system files
+<FilesMatch "^(config\.php|function\.php|\.htaccess|\.htpasswd)$">
+    Require all denied
+</FilesMatch>
+
+# Deny access to sensitive extensions
+<FilesMatch "\.(bak|sql|ini|log|conf|env)$">
+    Require all denied
+</FilesMatch>
+
+# Protect API folder (so user cannot directly open /admin/api/)
+<Directory "api">
+    Require all denied
+</Directory>
+
+# Allow only through PHP scripts inside admin
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block direct access to admin API files
+    RewriteRule ^api/ - [F,L,NC]
+</IfModule>
+
+##############################################
+# ✅ End of admin security config
+##############################################

@@ -186,25 +186,16 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
         <div class="blog-grid">
             <?php if (is_array($artikel) && count($artikel) > 0): ?>
                 <?php foreach ($artikel as $row): ?>
-                    <?php
-                    // Bersihkan dan deteksi apakah gambar sudah berupa URL penuh
-                    $gambarValue = trim($row['gambar']);
-                    if (preg_match('/^https?:\/\//', $gambarValue)) {
-                        $gambarPath = $gambarValue;
-                    } else {
-                        $gambarPath = '/admin/uploads/artikel/' . ltrim($gambarValue, '/');
-                    }
-                    ?>
                     <div class="blog-post">
-                        <img src="<?= htmlspecialchars($gambarPath) ?>" 
-                            alt="Artikel Hino - <?= htmlspecialchars($row['judul']) ?>" 
-                            loading="lazy">
+                        <img src="<?= htmlspecialchars($row['gambar']) ?>" 
+                             alt="Artikel Hino - <?= htmlspecialchars($row['judul']) ?>" 
+                             loading="lazy">
                         <h2>
                             <a href="detail_artikel.php?slug=<?= urlencode($row['slug']) ?>">
                                 <?= htmlspecialchars($row['judul']) ?>
                             </a>
                         </h2>
-                        <p><?= htmlspecialchars(substr(strip_tags($row['isi']), 0, 120)) ?>...</p>
+                        <p><?= substr(strip_tags($row['isi']), 0, 120) ?>...</p>
                         <div class="card-footer">
                             <a href="detail_artikel.php?slug=<?= urlencode($row['slug']) ?>">Baca Selengkapnya</a>
                         </div>
@@ -214,10 +205,6 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
                 <p>Tidak ada artikel yang ditemukan.</p>
             <?php endif; ?>
         </div>
-
-
-
-
 
         <!-- Pagination -->
         <?php if ($totalPages > 1): ?>

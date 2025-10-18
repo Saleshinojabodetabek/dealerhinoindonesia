@@ -142,16 +142,7 @@ if ($slug !== '' && is_array($data)) {
                     <p style="color: #888; font-size: 14px; margin-bottom: 15px;">
                         Diposting pada <?= date('d M Y', strtotime($artikel['tanggal'] ?? 'now')) ?>
                     </p>
-                    <?php
-                    // Deteksi otomatis: apakah sudah URL penuh (http/https) atau hanya nama file
-                    $gambarPath = (preg_match('/^https?:\/\//', $artikel['gambar']))
-                        ? $artikel['gambar']
-                        : 'admin/uploads/artikel/' . $artikel['gambar'];
-                    ?>
-                    <img src="<?= htmlspecialchars($gambarPath) ?>" 
-                        alt="<?= htmlspecialchars($artikel['judul']) ?>" 
-                        class="featured-image" 
-                        style="width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="<?= htmlspecialchars($artikel['gambar']) ?>" alt="<?= htmlspecialchars($artikel['judul']) ?>" class="featured-image" style="width: 100%; height: auto; margin-bottom: 20px;">
                     <div class="isi-artikel">
                         <?= nl2br($artikel['isi']) ?>
                     </div>
@@ -171,7 +162,7 @@ if ($slug !== '' && is_array($data)) {
                             if ($recent['slug'] != $slug) {
                                 echo '<div class="recent-post-item" style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">';
                                 echo '<a href="detail_artikel.php?slug=' . urlencode($recent['slug']) . '" style="flex-shrink: 0;">';
-                                echo '<img src="admin/uploads/artikel/' . htmlspecialchars($recent['gambar']) . '" alt="' . htmlspecialchars($recent['judul']) . '" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">';
+                                echo '<img src="' . htmlspecialchars($recent['gambar']) . '" alt="' . htmlspecialchars($recent['judul']) . '" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">';
                                 echo '</a>';
                                 echo '<div style="flex: 1;">';
                                 echo '<a href="detail_artikel.php?slug=' . urlencode($recent['slug']) . '" style="font-weight: 600; text-decoration: none; color: #333; line-height: 1.3; display: block;">' . htmlspecialchars($recent['judul']) . '</a>';
@@ -212,7 +203,7 @@ if ($slug !== '' && is_array($data)) {
                     if ($rel['slug'] != $slug && isset($rel['kategori'], $artikel['kategori']) && $rel['kategori'] === $artikel['kategori']) {
                         echo '<div class="related-item" style="background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">';
                         echo '<a href="detail_artikel.php?slug=' . urlencode($rel['slug']) . '" style="text-decoration: none; color: #333;">';
-                        echo '<img src="admin/uploads/artikel/' . htmlspecialchars($rel['gambar']) . '" alt="' . htmlspecialchars($rel['judul']) . '" style="width: 100%; height: 160px; object-fit: cover;">';
+                        echo '<img src="' . htmlspecialchars($rel['gambar']) . '" alt="' . htmlspecialchars($rel['judul']) . '" style="width: 100%; height: 160px; object-fit: cover;">';
                         echo '<div style="padding: 15px;">';
                         echo '<h4 style="font-size: 16px; font-weight: 600; margin: 0 0 10px 0;">' . htmlspecialchars($rel['judul']) . '</h4>';
                         echo '<p style="font-size: 14px; color: #666;">' . substr(strip_tags($rel['isi']), 0, 100) . '...</p>';

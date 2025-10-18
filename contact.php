@@ -166,7 +166,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
         </div>
 
         <div class="map1">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.0011171998644!2d106.72798237355298!3d-6.130550360104524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f70ab03b3611%3A0x2e6e345ac4d4fd04!2sHINO%20CENGKARENG%20(DGMI)!5e0!3m2!1sid!2sid!4v1753083557671!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63471.95288843176!2d106.65860738294855!3d-6.131096504333846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a1d775401fa6d%3A0xc7e25a8d81b821ec!2sDealer%20Hino%20Jabodetabek%20Resmi!5e0!3m2!1sen!2sus!4v1760817261750!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>

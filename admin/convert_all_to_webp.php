@@ -48,14 +48,25 @@ foreach ($files as $file) {
     if (!in_array($ext, ['jpg', 'jpeg', 'png'])) continue;
 
     $webpFile = preg_replace('/\.(jpe?g|png)$/i', '.webp', $file);
+
+    // Jika file WebP sudah ada, skip
     if (file_exists($webpFile)) {
         echo "Skip (sudah ada): " . basename($webpFile) . "<br>";
         continue;
     }
 
+    // Konversi ke WebP
     if (convertToWebP($file, $webpFile, $quality)) {
         echo "OK: " . basename($file) . " → " . basename($webpFile) . "<br>";
         $count++;
+
+        // Hapus file asli setelah konversi sukses
+        if (unlink($file)) {
+            echo "🗑️ Dihapus: " . basename($file) . "<br>";
+        } else {
+            echo "⚠️ Gagal menghapus: " . basename($file) . "<br>";
+        }
+
     } else {
         echo "GAGAL: " . basename($file) . "<br>";
     }

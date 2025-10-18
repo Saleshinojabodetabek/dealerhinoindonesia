@@ -4,9 +4,9 @@ ob_clean();
 header("Content-Type: application/xml; charset=utf-8");
 
 $host = "localhost"; 
-$user = "u868657420_dealerhinojkt"; 
-$pass = "Natanael110405"; 
-$db   = "u868657420_dealerhinojkt";
+$user = "u429834259_dealerhinoidn"; 
+$pass = "NatanaelH1no0504@@"; 
+$db   = "u429834259_dealerhinoidn";
 $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) exit;
 

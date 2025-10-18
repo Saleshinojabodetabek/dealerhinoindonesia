@@ -187,7 +187,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
             <?php if (is_array($artikel) && count($artikel) > 0): ?>
                 <?php foreach ($artikel as $row): ?>
                     <?php
-                    // Langsung gabungkan path gambar karena semua gambar berada di folder yang sama
+                    // Gambar disimpan hanya sebagai nama file → langsung gabungkan
                     $gambarPath = 'https://dealerhinoindonesia.com/admin/uploads/artikel/' . ltrim($row['gambar'], '/');
                     ?>
                     <div class="blog-post">

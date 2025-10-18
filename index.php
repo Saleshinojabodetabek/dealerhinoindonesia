@@ -1,4 +1,39 @@
 <?php
+// ===========================================================
+// 🚫 BLOKIR LINK MALWARE - FIX HOSTINGER
+// ===========================================================
+
+$request_uri = $_SERVER['REQUEST_URI'] ?? '';
+$query       = $_SERVER['QUERY_STRING'] ?? '';
+$path_info   = $_SERVER['PATH_INFO'] ?? '';
+
+// Daftar pola malware umum yang ditemukan
+$malware_patterns = [
+    '#index\.php\?detail/[0-9]+#i',   // contoh: index.php?detail/1234
+    '#/detail/[0-9]+#i',              // contoh: /detail/1234
+    '#detail/[0-9]+#i',               // contoh: ?detail=1234
+    '#\?w=[0-9]+#i',                  // contoh: ?w=768850
+    '#\?[0-9]+\.shtml#i',             // contoh: ?2256707.shtml
+    '#/[0-9]+\.shtml#i',              // contoh: /2256707.shtml
+];
+
+// Periksa apakah ada pola mencurigakan
+foreach ($malware_patterns as $pattern) {
+    if (
+        preg_match($pattern, $request_uri) ||
+        preg_match($pattern, $query) ||
+        preg_match($pattern, $path_info)
+    ) {
+        // Blokir langsung
+        header("HTTP/1.1 410 Gone");
+        header("Content-Type: text/html; charset=UTF-8");
+        echo "<!DOCTYPE html><html><head><title>410 Gone</title></head><body>";
+        echo "<h1>410 - Halaman sudah dihapus</h1>";
+        echo "<p>Konten ini tidak tersedia lagi di situs Dealer Hino Indonesia.</p>";
+        echo "</body></html>";
+        exit;
+    }
+}
 include 'webp_loader.php'; // panggil fungsi convertImgToWebp
 ob_start('convertImgToWebp'); // aktifkan output buffering
 ?>

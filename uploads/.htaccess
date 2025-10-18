@@ -1,15 +1,27 @@
-# Prevent execution of scripts in uploads directory
+# ===========================
 
-<FilesMatch "\.(php|phtml|php3|php4|php5|phar|pl|py|jsp|asp|aspx)$">
-Require all denied
+# UPLOADS SECURITY
+
+# ===========================
+
+Options -Indexes
+
+# Nonaktifkan PHP & script lain
+
+<FilesMatch "\.(php|php3|php4|php5|phtml|phps|html|htm|js|css|exe|sh|bat|pl|py|jsp|asp)$">
+Order allow,deny
+Deny from all
 </FilesMatch>
 
-# Allow images, css, js to be served normally
+# Hanya izinkan gambar
 
-<FilesMatch "\.(jpe?g|png|gif|webp|svg)$">
-Require all granted
+<FilesMatch "\.(jpg|jpeg|png|gif|webp|svg)$">
+Allow from all
 </FilesMatch>
 
-# Extra: if host allows, disable PHP engine (may be ignored on some shared hosts)
+# Blok file yang mirip gambar tapi ada PHP
 
-# php_flag engine off
+<FilesMatch ".\*\.(jpg|jpeg|png|gif|webp|svg)\.(php|phps|php5|phtml)$">
+Order allow,deny
+Deny from all
+</FilesMatch>

@@ -1,6 +1,5 @@
 <?php
 include "../config.php";
-include "../api_secure.php";
 header('Content-Type: application/json; charset=utf-8');
 
 // Ambil parameter

@@ -1,7 +1,6 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 include "../config.php"; // koneksi database
-include "../api_secure.php"; // koneksi database
 
 // Query ambil kategori artikel
 $sql = "SELECT id, nama FROM kategori_artikel ORDER BY nama ASC";

@@ -186,7 +186,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
             data.forEach(p => {
             html += `
                 <div class="produk-card">
-                <img src="uploads/produk/${p.gambar}" alt="${p.nama_produk}">
+                <img src="admin/uploads/produk/${p.gambar}" alt="${p.nama_produk}">
                 <h3>${p.nama_produk}</h3>
                 <a href="product-detail-hino500.php?slug=${p.slug}#hero-section" class="btn-detail">Lihat Detail</a>
                 </div>

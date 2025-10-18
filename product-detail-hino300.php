@@ -235,7 +235,7 @@ while ($row = $res_spec->fetch_assoc()) {
     <h1><?= htmlspecialchars($produk['nama_produk']) ?></h1>
   </div>
   <div class="hero-image">
-    <img src="uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" 
+    <img src="admin/uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" 
          alt="<?= htmlspecialchars($produk['nama_produk']) ?>">
   </div>
 </section>
@@ -252,7 +252,7 @@ while ($row = $res_spec->fetch_assoc()) {
       <div class="karoseri-grid">
         <?php foreach ($karoseri as $k): ?>
           <div class="karoseri-item">
-            <img src="uploads/karoseri/<?= htmlspecialchars($k['slug']) ?>.png" 
+            <img src="admin/uploads/karoseri/<?= htmlspecialchars($k['slug']) ?>.png" 
                 alt="<?= htmlspecialchars($k['nama']) ?>">
             <p><?= htmlspecialchars($k['nama']) ?></p>
           </div>

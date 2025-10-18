@@ -1,0 +1,49 @@
+# ====== Proteksi Dasar Folder ======
+Options -Indexes
+AllowOverride All
+
+# ====== Batasi Jenis File yang Bisa Diakses ======
+<FilesMatch "\.(php|json|txt)$">
+    Require all granted
+</FilesMatch>
+
+<FilesMatch "\.(bak|inc|ini|log|conf|env|sh|py|pl|cgi)$">
+    Require all denied
+</FilesMatch>
+
+# ====== Izinkan hanya file API yang sah ======
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Cegah akses langsung ke file yang mencurigakan
+RewriteCond %{REQUEST_URI} (?:uploads?|shell|backdoor|cmd|eval|config|tmp|cache) [NC]
+RewriteRule .* - [F,L]
+
+# Hanya izinkan file PHP API berikut:
+RewriteCond %{REQUEST_FILENAME} !get_artikel\.php$
+RewriteCond %{REQUEST_FILENAME} !get_kategoriartikel\.php$
+RewriteCond %{REQUEST_FILENAME} !get_product\.php$
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule \.php$ - [F,L]
+
+# ====== Batasi Akses Berdasarkan Referer Domain ======
+# Hanya izinkan permintaan dari domain Anda sendiri
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?dealerhinoindonesia\.com [NC]
+RewriteCond %{HTTP_REFERER} !^$  # kosong artinya langsung dari browser (bisa dibolehkan opsional)
+RewriteRule .* - [F,L]
+</IfModule>
+
+# ====== Header Keamanan Tambahan ======
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ====== Anti Upload / Eksekusi Berbahaya ======
+<IfModule mod_security.c>
+    SecFilterEngine On
+    SecFilterScanPOST On
+</IfModule>

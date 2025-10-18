@@ -51,8 +51,8 @@ body { font-family:"Segoe UI",sans-serif; background:#f8f9fa; }
 <tr><th>Kategori</th><td><?= htmlspecialchars($artikel['kategori']) ?></td></tr>
 <tr><th>Isi</th><td><?= nl2br(htmlspecialchars($artikel['isi'])) ?></td></tr>
 <tr><th>Gambar</th><td>
-<?php if($artikel['gambar'] && file_exists("../uploads/artikel/".$artikel['gambar'])): ?>
-<img src="../uploads/artikel/<?= htmlspecialchars($artikel['gambar']) ?>" width="200">
+<?php if($artikel['gambar'] && file_exists("uploads/artikel/".$artikel['gambar'])): ?>
+<img src="uploads/artikel/<?= htmlspecialchars($artikel['gambar']) ?>" width="200">
 <?php else: echo "-"; endif; ?>
 </td></tr>
 <tr><th>Tanggal</th><td><?= $artikel['tanggal'] ?></td></tr>

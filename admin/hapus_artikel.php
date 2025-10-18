@@ -9,8 +9,8 @@ if($id>0){
     $res = $conn->query("SELECT gambar FROM artikel WHERE id=$id");
     if($res && $res->num_rows>0){
         $row = $res->fetch_assoc();
-        if($row['gambar'] && file_exists("../uploads/artikel/".$row['gambar'])){
-            unlink("../uploads/artikel/".$row['gambar']);
+        if($row['gambar'] && file_exists("uploads/artikel/".$row['gambar'])){
+            unlink("uploads/artikel/".$row['gambar']);
         }
     }
     // Hapus artikel

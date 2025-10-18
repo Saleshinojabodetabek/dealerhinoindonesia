@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $slug = createSlug($nama_produk);
     $slug = uniqueSlug($conn, $slug);
 
-    $upload_dir = "../uploads/produk/";
+    $upload_dir = "uploads/produk/";
     if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
 
     $gambar = null;
@@ -196,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <div class="form-check d-flex align-items-center">
                     <input class="form-check-input me-2" type="checkbox" name="karoseri[]" value="<?= $kr['id']; ?>" id="karoseri<?= $kr['id']; ?>" <?= $checked ?>>
                     <label class="form-check-label d-flex align-items-center" for="karoseri<?= $kr['id']; ?>">
-                      <img src="../uploads/karoseri/<?= htmlspecialchars($kr['slug']); ?>.png" alt="<?= htmlspecialchars($kr['nama']); ?>" style="width:50px;height:auto;object-fit:contain;" class="me-2 border rounded">
+                      <img src="uploads/karoseri/<?= htmlspecialchars($kr['slug']); ?>.png" alt="<?= htmlspecialchars($kr['nama']); ?>" style="width:50px;height:auto;object-fit:contain;" class="me-2 border rounded">
                       <span><?= htmlspecialchars($kr['nama']); ?></span>
                     </label>
                   </div>

@@ -121,8 +121,8 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
         <tr><th>Varian</th><td><?= htmlspecialchars($produk['varian']) ?></td></tr>
         <tr><th>Gambar</th>
           <td>
-          <?php if($produk['gambar'] && file_exists("../uploads/produk/".$produk['gambar'])): ?>
-            <img src="../uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" width="180">
+          <?php if($produk['gambar'] && file_exists("uploads/produk/".$produk['gambar'])): ?>
+            <img src="uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" width="180">
           <?php else: ?>
             - Tidak ada gambar -
           <?php endif; ?>
@@ -136,7 +136,7 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
         <div class="d-flex flex-wrap">
           <?php foreach($karoseriList as $k): ?>
             <div class="d-flex align-items-center me-3 mb-2">
-              <img src="../uploads/karoseri/<?= htmlspecialchars($k['slug']) ?>.png" class="img-karoseri" alt="<?= htmlspecialchars($k['nama']) ?>">
+              <img src="uploads/karoseri/<?= htmlspecialchars($k['slug']) ?>.png" class="img-karoseri" alt="<?= htmlspecialchars($k['nama']) ?>">
               <span><?= htmlspecialchars($k['nama']) ?></span>
             </div>
           <?php endforeach; ?>

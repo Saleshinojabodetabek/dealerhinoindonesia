@@ -69,8 +69,8 @@ while($row = $artikel->fetch_assoc()): ?>
 <td><?= htmlspecialchars($row['judul']) ?></td>
 <td><?= htmlspecialchars($row['kategori']) ?></td>
 <td>
-<?php if($row['gambar'] && file_exists("../uploads/artikel/".$row['gambar'])): ?>
-<img src="../uploads/artikel/<?= htmlspecialchars($row['gambar']) ?>" width="80">
+<?php if($row['gambar'] && file_exists("uploads/artikel/".$row['gambar'])): ?>
+<img src="uploads/artikel/<?= htmlspecialchars($row['gambar']) ?>" width="80">
 <?php else: echo "-"; endif; ?>
 </td>
 <td><?= $row['tanggal'] ?></td>

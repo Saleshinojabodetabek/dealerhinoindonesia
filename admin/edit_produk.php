@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     
     $gambar = $produk['gambar'];
     if (!empty($_FILES['gambar']['name'])) {
-        $upload_dir = "../uploads/produk/";
+        $upload_dir = "uploads/produk/";
         if (!is_dir($upload_dir)) mkdir($upload_dir,0777,true);
         $gambar = time()."_".preg_replace('/\s+/','_',basename($_FILES['gambar']['name']));
         move_uploaded_file($_FILES['gambar']['tmp_name'],$upload_dir.$gambar);
@@ -180,7 +180,7 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
         <div class="mb-3">
           <label class="form-label">Gambar Produk</label>
           <?php if($produk['gambar']): ?>
-          <div class="mb-2"><img src="../uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" width="120"></div>
+          <div class="mb-2"><img src="uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" width="120"></div>
           <?php endif; ?>
           <input type="file" name="gambar" class="form-control" accept="image/*">
         </div>
@@ -204,7 +204,7 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
               <div class="form-check d-flex align-items-center">
                 <input class="form-check-input me-2" type="checkbox" name="karoseri[]" value="<?= $kr['id'] ?>" <?= $checked ?>>
                 <label class="form-check-label d-flex align-items-center">
-                  <img src="../uploads/karoseri/<?= htmlspecialchars($kr['slug']) ?>.png" class="img-karoseri" alt="<?= htmlspecialchars($kr['nama']) ?>">
+                  <img src="uploads/karoseri/<?= htmlspecialchars($kr['slug']) ?>.png" class="img-karoseri" alt="<?= htmlspecialchars($kr['nama']) ?>">
                   <span><?= htmlspecialchars($kr['nama']) ?></span>
                 </label>
               </div>

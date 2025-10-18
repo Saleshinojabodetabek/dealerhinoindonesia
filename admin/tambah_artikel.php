@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $gambar = null;
         if (!empty($_FILES['gambar']['name'])) {
-            $upload_dir = "../uploads/artikel/";
+            $upload_dir = "uploads/artikel/";
             if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
 
             $gambar = time() . "_" . preg_replace('/\s+/', '_', basename($_FILES['gambar']['name']));

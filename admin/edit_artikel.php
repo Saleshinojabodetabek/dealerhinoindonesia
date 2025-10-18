@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
     $gambar = $artikel['gambar'];
     if(!empty($_FILES['gambar']['name'])){
-        $upload_dir="../uploads/artikel/";
+        $upload_dir="uploads/artikel/";
         if(!is_dir($upload_dir)) mkdir($upload_dir,0777,true);
         $gambar = time().'_'.preg_replace('/\s+/','_',basename($_FILES['gambar']['name']));
         move_uploaded_file($_FILES['gambar']['tmp_name'],$upload_dir.$gambar);
@@ -108,8 +108,8 @@ $selected = ($k['id']==$artikel['kategori_id'])?'selected':''; ?>
 
 <div class="mb-3">
 <label class="form-label">Gambar</label>
-<?php if($artikel['gambar'] && file_exists("../uploads/artikel/".$artikel['gambar'])): ?>
-<div class="mb-2"><img src="../uploads/artikel/<?= htmlspecialchars($artikel['gambar']) ?>" width="120"></div>
+<?php if($artikel['gambar'] && file_exists("uploads/artikel/".$artikel['gambar'])): ?>
+<div class="mb-2"><img src="uploads/artikel/<?= htmlspecialchars($artikel['gambar']) ?>" width="120"></div>
 <?php endif; ?>
 <input type="file" name="gambar" class="form-control" accept="image/*">
 </div>

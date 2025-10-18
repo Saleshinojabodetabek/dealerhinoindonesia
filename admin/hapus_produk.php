@@ -14,7 +14,7 @@ if ($id > 0) {
     $produk = $res->fetch_assoc();
 
     if ($produk) {
-        $upload_dir = "../uploads/";
+        $upload_dir = "uploads/produk";
 
         // hapus file gambar utama
         if (!empty($produk['gambar']) && file_exists($upload_dir.$produk['gambar'])) {

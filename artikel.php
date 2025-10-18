@@ -187,14 +187,8 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
             <?php if (is_array($artikel) && count($artikel) > 0): ?>
                 <?php foreach ($artikel as $row): ?>
                     <?php
-                    // Deteksi otomatis: jika sudah URL penuh, jangan tambahkan prefix lagi
-                    if (preg_match('/^https?:\/\//', $row['gambar'])) {
-                        // Sudah URL penuh, langsung pakai
-                        $gambarPath = $row['gambar'];
-                    } else {
-                        // Tambahkan base URL lengkap agar tidak salah arah
-                        $gambarPath = 'https://dealerhinoindonesia.com/admin/uploads/artikel/' . $row['gambar'];
-                    }
+                    // Langsung gabungkan path gambar karena semua gambar berada di folder yang sama
+                    $gambarPath = 'https://dealerhinoindonesia.com/admin/uploads/artikel/' . ltrim($row['gambar'], '/');
                     ?>
                     <div class="blog-post">
                         <img src="<?= htmlspecialchars($gambarPath) ?>" 
@@ -205,7 +199,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
                                 <?= htmlspecialchars($row['judul']) ?>
                             </a>
                         </h2>
-                        <p><?= substr(strip_tags($row['isi']), 0, 120) ?>...</p>
+                        <p><?= htmlspecialchars(substr(strip_tags($row['isi']), 0, 120)) ?>...</p>
                         <div class="card-footer">
                             <a href="detail_artikel.php?slug=<?= urlencode($row['slug']) ?>">Baca Selengkapnya</a>
                         </div>

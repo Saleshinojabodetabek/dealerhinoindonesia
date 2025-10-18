@@ -19,6 +19,16 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     <link rel="apple-touch-icon" href="images/favicon.png" />
     <link rel="canonical" href="https://www.dealerhinoindonesia.com/contact.php" />
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EC6CVWN4SB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-EC6CVWN4SB');
+    </script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/navbar.css" />

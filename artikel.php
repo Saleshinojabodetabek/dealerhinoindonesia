@@ -41,6 +41,16 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
     <link rel="canonical" href="https://dealerhinoindonesia.com/artikel.php" />
     <title>Blog & Artikel Resmi Dealer Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025</title>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EC6CVWN4SB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-EC6CVWN4SB');
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="images/favicon.png" />

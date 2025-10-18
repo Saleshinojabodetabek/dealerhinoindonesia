@@ -43,7 +43,7 @@ $result = $conn->query($sql);
 $artikel = [];
 while ($row = $result->fetch_assoc()) {
     $row['gambar'] = !empty($row['gambar']) 
-        ? 'https://dealerhinoindonesia.com/uploads/artikel/' . $row['gambar'] 
+        ? 'https://dealerhinoindonesia.com/admin/uploads/artikel/' . $row['gambar'] 
         : null;
     $artikel[] = $row;
 }

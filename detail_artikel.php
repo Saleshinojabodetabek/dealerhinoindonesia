@@ -142,7 +142,16 @@ if ($slug !== '' && is_array($data)) {
                     <p style="color: #888; font-size: 14px; margin-bottom: 15px;">
                         Diposting pada <?= date('d M Y', strtotime($artikel['tanggal'] ?? 'now')) ?>
                     </p>
-                    <img src="admin/uploads/artikel/<?= htmlspecialchars($artikel['gambar']) ?>" alt="<?= htmlspecialchars($artikel['judul']) ?>" class="featured-image" style="width: 100%; height: auto; margin-bottom: 20px;">
+                    <?php
+                    // Deteksi otomatis: apakah sudah URL penuh (http/https) atau hanya nama file
+                    $gambarPath = (preg_match('/^https?:\/\//', $artikel['gambar']))
+                        ? $artikel['gambar']
+                        : 'admin/uploads/artikel/' . $artikel['gambar'];
+                    ?>
+                    <img src="<?= htmlspecialchars($gambarPath) ?>" 
+                        alt="<?= htmlspecialchars($artikel['judul']) ?>" 
+                        class="featured-image" 
+                        style="width: 100%; height: auto; margin-bottom: 20px;">
                     <div class="isi-artikel">
                         <?= nl2br($artikel['isi']) ?>
                     </div>

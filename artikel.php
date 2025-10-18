@@ -186,10 +186,16 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
         <div class="blog-grid">
             <?php if (is_array($artikel) && count($artikel) > 0): ?>
                 <?php foreach ($artikel as $row): ?>
+                    <?php
+                    // Deteksi otomatis: jika sudah URL penuh, jangan tambahkan prefix lagi
+                    $gambarPath = (preg_match('/^https?:\/\//', $row['gambar']))
+                        ? $row['gambar']
+                        : 'admin/uploads/artikel/' . $row['gambar'];
+                    ?>
                     <div class="blog-post">
-                        <img src="admin/uploads/artikel/<?= htmlspecialchars($row['gambar']) ?>" 
-                             alt="Artikel Hino - <?= htmlspecialchars($row['judul']) ?>" 
-                             loading="lazy">
+                        <img src="<?= htmlspecialchars($gambarPath) ?>" 
+                            alt="Artikel Hino - <?= htmlspecialchars($row['judul']) ?>" 
+                            loading="lazy">
                         <h2>
                             <a href="detail_artikel.php?slug=<?= urlencode($row['slug']) ?>">
                                 <?= htmlspecialchars($row['judul']) ?>
@@ -205,6 +211,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
                 <p>Tidak ada artikel yang ditemukan.</p>
             <?php endif; ?>
         </div>
+
 
         <!-- Pagination -->
         <?php if ($totalPages > 1): ?>

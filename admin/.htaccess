@@ -1,0 +1,59 @@
+# ===========================
+# DealerHinoIndonesia - Admin Security
+# Aggressive but safe .htaccess for /admin
+# ===========================
+
+Options -Indexes
+RewriteEngine On
+
+# 1️⃣ Izinkan hanya HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://dealerhinoindonesia.com/admin%{REQUEST_URI} [L,R=301]
+
+# 2️⃣ Batasi metode HTTP
+<LimitExcept GET POST>
+  Require all denied
+</LimitExcept>
+
+# 3️⃣ Blokir akses langsung ke file sensitif
+<FilesMatch "^(config|function|convert_all_to_webp|webp_loader)\.php$">
+  Require all denied
+</FilesMatch>
+
+# 4️⃣ Lindungi file .htaccess agar tidak bisa dibaca
+<Files ~ "^\.ht">
+  Require all denied
+</Files>
+
+# 5️⃣ Hanya izinkan akses ke halaman login & logout tanpa session
+# (Untuk admin yang sudah login, gunakan proteksi di PHP session)
+# Contoh: semua file PHP selain login/logout hanya boleh diakses via login session
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_FILENAME} \.php$
+RewriteCond %{THE_REQUEST} !/login\.php [NC]
+RewriteCond %{THE_REQUEST} !/logout\.php [NC]
+# Jika Anda ingin menutup akses publik sepenuhnya tanpa session, aktifkan baris di bawah:
+# RewriteRule .* - [F,L]
+
+# 6️⃣ Nonaktifkan eksekusi file script berbahaya di folder API admin
+<If "%{REQUEST_URI} =~ m#^/admin/api/#">
+  <FilesMatch "\.(php|phtml|php3|php4|php5|phar|pl|py|jsp|asp|aspx)$">
+    Require all denied
+  </FilesMatch>
+</If>
+
+# 7️⃣ Blokir query string mencurigakan
+RewriteCond %{QUERY_STRING} (base64_encode|eval\(|UNION(\s)+SELECT|GLOBALS|_REQUEST|/etc/passwd) [NC]
+RewriteRule .* - [F,L]
+
+# 8️⃣ Header keamanan tambahan
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "no-referrer-when-downgrade"
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+</IfModule>
+
+# 9️⃣ Matikan server signature
+ServerSignature Off

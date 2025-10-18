@@ -1,0 +1,85 @@
+# ===========================
+# Aggressive security rules
+# DealerHinoIndonesia - .htaccess
+# ===========================
+
+# 0) Nonaktifkan directory listing
+Options -Indexes
+
+# 1) Force HTTPS + non-www
+RewriteEngine On
+# If you want to keep www, remove the second rule
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://dealerhinoindonesia.com%{REQUEST_URI} [L,R=301]
+
+# 2) Deny dangerous HTTP methods
+<LimitExcept GET POST HEAD OPTIONS>
+  Require all denied
+</LimitExcept>
+
+# 3) Deny access to "dotfiles" (hidden files) and common backup/db files
+<FilesMatch "^\.|(\.(env|git|svn|sql|bak|old|dist|inc|swp|tar|gz|zip)$)">
+  Require all denied
+</FilesMatch>
+
+# 4) Protect key application files (config, backups, composer, etc)
+<FilesMatch "(^config\.php$|^\.htaccess$|^composer.*|^package\.json$|^.*\.(sql|sql\.gz|tar|zip)$)">
+  Require all denied
+</FilesMatch>
+
+# 5) Deny access to xmlrpc and other common attack targets
+<FilesMatch "^(xmlrpc\.php|wp-config\.php|readme\.html|license\.(txt|html))$">
+  Require all denied
+</FilesMatch>
+
+# 6) Block requests containing common exploit patterns in query string
+RewriteCond %{QUERY_STRING} (base64_encode|eval\(|UNION(\s)+SELECT|SELECT(\s)+\*|GLOBALS|_REQUEST|/etc/passwd) [NC]
+RewriteRule .* - [F,L]
+
+# 7) Block suspicious filenames/extensions
+RewriteRule \.(bak|old|sql|inc|phps|dist|swp)$ - [F,NC]
+
+# 8) Prevent PHP (and other script) execution inside /uploads and subfolders,
+#     while still allowing images and static assets to be served.
+#     This uses an Apache expression to only apply the FilesMatch for upload paths.
+<If "%{REQUEST_URI} =~ m#^/uploads/#">
+  <FilesMatch "\.(php|phtml|php3|php4|php5|phar|pl|py|jsp|asp|aspx)$">
+    Require all denied
+  </FilesMatch>
+</If>
+
+# 9) Security headers (safe defaults)
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "no-referrer-when-downgrade"
+  # HSTS: only enable after you confirm HTTPS works across the site.
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+  # Optionally uncomment a CSP when ready (may need tweaks to avoid breaking admin)
+  # Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:;"
+</IfModule>
+
+# 10) Small protections for user-agents and known bad requests (basic)
+<IfModule mod_setenvif.c>
+  SetEnvIfNoCase User-Agent "libwww-perl" bad_bot
+  SetEnvIfNoCase User-Agent "masscan" bad_bot
+  Deny from env=bad_bot
+</IfModule>
+
+# 11) Prevent clickjacking of admin pages by frame embedding (extra)
+<FilesMatch "^(admin|login)\.(php|html)$">
+  Header always set X-Frame-Options "SAMEORIGIN"
+</FilesMatch>
+
+# 12) Block direct access to PHP files in uploads via query trick
+RewriteCond %{REQUEST_URI} ^/uploads/ [NC]
+RewriteCond %{THE_REQUEST} \.php [NC]
+RewriteRule .* - [F,L]
+
+# 13) Small performance/security tweaks
+# Disable server signature
+ServerSignature Off
+
+# End of file

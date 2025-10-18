@@ -1,0 +1,15 @@
+# Prevent execution of scripts in uploads directory
+
+<FilesMatch "\.(php|phtml|php3|php4|php5|phar|pl|py|jsp|asp|aspx)$">
+Require all denied
+</FilesMatch>
+
+# Allow images, css, js to be served normally
+
+<FilesMatch "\.(jpe?g|png|gif|webp|svg)$">
+Require all granted
+</FilesMatch>
+
+# Extra: if host allows, disable PHP engine (may be ignored on some shared hosts)
+
+# php_flag engine off

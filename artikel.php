@@ -186,12 +186,8 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
         <div class="blog-grid">
             <?php if (is_array($artikel) && count($artikel) > 0): ?>
                 <?php foreach ($artikel as $row): ?>
-                    <?php
-                    // Gambar disimpan hanya sebagai nama file → langsung gabungkan
-                    $gambarPath = 'https://dealerhinoindonesia.com/admin/uploads/artikel/' . ltrim($row['gambar'], '/');
-                    ?>
                     <div class="blog-post">
-                        <img src="<?= htmlspecialchars($gambarPath) ?>" 
+                        <img src="/admin/uploads/artikel/<?= htmlspecialchars($row['gambar']) ?>" 
                             alt="Artikel Hino - <?= htmlspecialchars($row['judul']) ?>" 
                             loading="lazy">
                         <h2>
@@ -209,6 +205,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
                 <p>Tidak ada artikel yang ditemukan.</p>
             <?php endif; ?>
         </div>
+
 
         <!-- Pagination -->
         <?php if ($totalPages > 1): ?>

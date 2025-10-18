@@ -1,5 +1,6 @@
 <?php
 include '../config.php';
+include '../api_secure.php';
 
 $series_id = $_GET['series_id'] ?? null;
 $varian    = $_GET['varian'] ?? 'ALL';

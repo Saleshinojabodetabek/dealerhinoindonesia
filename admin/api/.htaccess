@@ -11,27 +11,24 @@ AllowOverride All
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-# Cegah akses langsung ke file berbahaya
+# Blokir file mencurigakan
 RewriteCond %{REQUEST_URI} (?:uploads?|shell|backdoor|cmd|eval|config|tmp|cache) [NC]
 RewriteRule .* - [F,L]
 
-# Hanya izinkan 3 file PHP ini
+# Hanya izinkan 3 file API
 RewriteCond %{REQUEST_FILENAME} !get_artikel\.php$
 RewriteCond %{REQUEST_FILENAME} !get_kategoriartikel\.php$
 RewriteCond %{REQUEST_FILENAME} !get_product\.php$
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule \.php$ - [F,L]
 
-# ====== Batasi Akses Berdasarkan Referer Domain ======
-# Izinkan hanya permintaan dari domain resmi (front-end)
-RewriteCond %{HTTP_REFERER} !^https?://(www\.)?dealerhinoindonesia\.com [NC]
+# Batasi domain pengakses (hanya front-end)
 RewriteCond %{HTTP_ORIGIN} !^https?://(www\.)?dealerhinoindonesia\.com [NC]
-# Namun izinkan request tanpa referer dari server internal (misalnya AJAX yang tidak kirim referer)
-RewriteCond %{HTTP_REFERER} !^$ 
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?dealerhinoindonesia\.com [NC]
 RewriteRule .* - [F,L]
 </IfModule>
 
-# ====== Header Keamanan Tambahan ======
+# ====== Header Keamanan ======
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"
     Header always set X-Frame-Options "SAMEORIGIN"

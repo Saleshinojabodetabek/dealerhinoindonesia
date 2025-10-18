@@ -188,9 +188,11 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
                 <?php foreach ($artikel as $row): ?>
                     <?php
                     // Deteksi otomatis: jika sudah URL penuh, jangan tambahkan prefix lagi
-                    $gambarPath = (preg_match('/^https?:\/\//', $row['gambar']))
-                        ? $row['gambar']
-                        : 'admin/uploads/artikel/' . $row['gambar'];
+                    if (preg_match('/^https?:\/\//', $row['gambar'])) {
+                        $gambarPath = $row['gambar'];
+                    } else {
+                        $gambarPath = '/admin/uploads/artikel/' . $row['gambar'];
+                    }
                     ?>
                     <div class="blog-post">
                         <img src="<?= htmlspecialchars($gambarPath) ?>" 
@@ -211,7 +213,6 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
                 <p>Tidak ada artikel yang ditemukan.</p>
             <?php endif; ?>
         </div>
-
 
         <!-- Pagination -->
         <?php if ($totalPages > 1): ?>

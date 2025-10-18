@@ -187,10 +187,11 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
             <?php if (is_array($artikel) && count($artikel) > 0): ?>
                 <?php foreach ($artikel as $row): ?>
                     <?php
-                    if (preg_match('/^https?:\/\//', $row['gambar'])) {
-                        $gambarPath = $row['gambar'];
+                    $gambarValue = trim($row['gambar']);
+                    if (preg_match('/^https?:\/\//', $gambarValue)) {
+                        $gambarPath = $gambarValue;
                     } else {
-                        $gambarPath = '/admin/uploads/artikel/' . ltrim($row['gambar'], '/');
+                        $gambarPath = '/admin/uploads/artikel/' . ltrim($gambarValue, '/');
                     }
                     ?>
                     <div class="blog-post">
@@ -212,6 +213,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
                 <p>Tidak ada artikel yang ditemukan.</p>
             <?php endif; ?>
         </div>
+
 
 
 

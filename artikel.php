@@ -190,7 +190,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
                     // Deteksi otomatis: jika sudah URL penuh, jangan tambahkan prefix lagi
                     if (preg_match('/^https?:\/\//', $row['gambar'])) {
                         // Sudah URL penuh, langsung pakai
-                        $gambarPath = 'https://dealerhinoindonesia.com/admin/uploads/artikel/' . $row['gambar'];
+                        $gambarPath = $row['gambar'];
                     } else {
                         // Tambahkan base URL lengkap agar tidak salah arah
                         $gambarPath = 'https://dealerhinoindonesia.com/admin/uploads/artikel/' . $row['gambar'];

@@ -235,7 +235,7 @@ while ($row = $res_spec->fetch_assoc()) {
     <h1><?= htmlspecialchars($produk['nama_produk']) ?></h1>
   </div>
   <div class="hero-image">
-    <img src="admin/uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" 
+    <img src="/admin/uploads/produk/<?= htmlspecialchars($produk['gambar']) ?>" 
          alt="<?= htmlspecialchars($produk['nama_produk']) ?>">
   </div>
 </section>

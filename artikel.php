@@ -192,7 +192,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
                     if (preg_match('/^https?:\/\//', $gambarValue)) {
                         $gambarPath = $gambarValue;
                     } else {
-                        $gambarPath = '/admin/uploads/artikel/' . ltrim($gambarValue, '/');
+                        $gambarPath = '' . ltrim($gambarValue, '/');
                     }
                     ?>
                     <div class="blog-post">

@@ -187,7 +187,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
             <?php if (is_array($artikel) && count($artikel) > 0): ?>
                 <?php foreach ($artikel as $row): ?>
                     <div class="blog-post">
-                        <img src="<?= htmlspecialchars($row['gambar']) ?>" 
+                        <img src="admin/uploads/artikel/<?= htmlspecialchars($row['gambar']) ?>" 
                              alt="Artikel Hino - <?= htmlspecialchars($row['judul']) ?>" 
                              loading="lazy">
                         <h2>

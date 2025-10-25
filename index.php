@@ -168,7 +168,6 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     </section>
 
     <main>
-    <h1>Dealer Hino Indonesia</h1>
       <!-- About Company -->
       <section class="about-company">
         <div class="container">

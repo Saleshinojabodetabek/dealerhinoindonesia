@@ -269,7 +269,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
           <p>Dapatkan informasi terbaru seputar Truk Hino, perawatan, dan promo terbaik.</p>
           <div class="blog-grid">
             <?php
-              $artikelData = json_decode(file_get_contents("https://dealerhinoindonesia.com/admin/api/get_artikel.php"), true);
+              $artikelData = json_decode(file_get_contents("https://dealerhinoindonesia.com/admin/api/get_artikel.php?page=1&perPage=3"), true);
               if (isset($artikelData['data']) && is_array($artikelData['data'])) {
                 $terbaru = array_slice($artikelData['data'], 0, 3);
                 foreach ($terbaru as $artikel):

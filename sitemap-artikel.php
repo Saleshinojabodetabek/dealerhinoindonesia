@@ -27,7 +27,7 @@ function printUrl($loc, $lastmod, $changefreq = 'monthly', $priority = '0.7') {
 }
 
 // base
-$base_url = 'https://dealerhinoindonesia.com';
+$base_url = 'https://dealerhinoindonesia.com/artikel.php';
 
 // selalunya kita cetak halaman index artikel
 printUrl("$base_url/artikel.php", date('Y-m-d'), 'weekly', '0.9');

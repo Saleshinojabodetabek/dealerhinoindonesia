@@ -84,6 +84,8 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
     <meta property="og:url" content="https://dealerhinoindonesia.com/" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Dealer Hino Indonesia">
+
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />

@@ -40,11 +40,13 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Dealer Resmi Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025" />
+    <meta property="og:title" content="Dealer Hino Indonesia | Harga & Promo Truk Hino Terbaru 2025" />
     <meta property="og:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan." />
     <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
     <meta property="og:url" content="https://dealerhinoindonesia.com/" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Dealer Hino Indonesia">
+
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />

@@ -198,3 +198,19 @@ RewriteRule .\* - [F,L]
 # END OF MALWARE BLOCK SECTION
 
 # ============================================
+
+# =====================================
+# 🌐 CLEAN URL (Tanpa .php di Frontend)
+# =====================================
+
+RewriteEngine On
+
+# Abaikan semua request yang menuju folder admin
+RewriteCond %{REQUEST_URI} !^/admin
+
+# Abaikan juga jika file atau folder fisik memang ada (biar tidak error)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+# Arahkan semua permintaan tanpa ekstensi ke file .php
+RewriteRule ^([^/]+)/?$ $1.php [L,QSA]

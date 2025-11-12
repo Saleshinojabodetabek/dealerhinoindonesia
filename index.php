@@ -9,31 +9,32 @@ $path_info   = $_SERVER['PATH_INFO'] ?? '';
 
 // Daftar pola malware umum yang ditemukan
 $malware_patterns = [
-    '#index\.php\?detail/[0-9]+#i',   // contoh: index.php?detail/1234
-    '#/detail/[0-9]+#i',              // contoh: /detail/1234
-    '#detail/[0-9]+#i',               // contoh: ?detail=1234
-    '#\?w=[0-9]+#i',                  // contoh: ?w=768850
-    '#\?[0-9]+\.shtml#i',             // contoh: ?2256707.shtml
-    '#/[0-9]+\.shtml#i',              // contoh: /2256707.shtml
+  '#index\.php\?detail/[0-9]+#i',   // contoh: index.php?detail/1234
+  '#/detail/[0-9]+#i',              // contoh: /detail/1234
+  '#detail/[0-9]+#i',               // contoh: ?detail=1234
+  '#\?w=[0-9]+#i',                  // contoh: ?w=768850
+  '#\?[0-9]+\.shtml#i',             // contoh: ?2256707.shtml
+  '#/[0-9]+\.shtml#i',              // contoh: /2256707.shtml
 ];
 
 // Periksa apakah ada pola mencurigakan
 foreach ($malware_patterns as $pattern) {
-    if (
-        preg_match($pattern, $request_uri) ||
-        preg_match($pattern, $query) ||
-        preg_match($pattern, $path_info)
-    ) {
-        // Blokir langsung
-        header("HTTP/1.1 410 Gone");
-        header("Content-Type: text/html; charset=UTF-8");
-        echo "<!DOCTYPE html><html><head><title>410 Gone</title></head><body>";
-        echo "<h1>410 - Halaman sudah dihapus</h1>";
-        echo "<p>Konten ini tidak tersedia lagi di situs Dealer Hino Indonesia.</p>";
-        echo "</body></html>";
-        exit;
-    }
+  if (
+    preg_match($pattern, $request_uri) ||
+    preg_match($pattern, $query) ||
+    preg_match($pattern, $path_info)
+  ) {
+    // Blokir langsung
+    header("HTTP/1.1 410 Gone");
+    header("Content-Type: text/html; charset=UTF-8");
+    echo "<!DOCTYPE html><html><head><title>410 Gone</title></head><body>";
+    echo "<h1>410 - Halaman sudah dihapus</h1>";
+    echo "<p>Konten ini tidak tersedia lagi di situs Dealer Hino Indonesia.</p>";
+    echo "</body></html>";
+    exit;
+  }
 }
+
 include 'webp_loader.php'; // panggil fungsi convertImgToWebp
 ob_start('convertImgToWebp'); // aktifkan output buffering
 ?>
@@ -41,15 +42,35 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
 <!DOCTYPE html>
 <html lang="id">
   <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-P7TN9DJW');
+    </script>
+    <!-- End Google Tag Manager -->
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
       content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan untuk seluruh Indonesia, khususnya Jabodetabek dan Jawa Barat. Hubungi Nathan Hino sekarang juga! 0859-7528-7684"
     />
-    <meta name="keywords" content="Dealer Hino, Dealer Hino Jakarta, Promo Truk Hino 2025, Harga Truk Hino Dutro, Hino Ranger 500 Series, Kredit Truk Hino Jakarta, Cicilan Truk Hino, Dealer Resmi Hino Indonesia, Jual Truk Hino Jakarta, Hino Euro 4 Terbaru, Harga Truk Hino Jabodetabek, Dealer Hino Tangerang, Bekasi, Depok, Bogor, Bandung, Truk Hino untuk Bisnis, Truk Hino Angkut Barang, Sales Hino Resmi Jakarta, Leasing Truk Hino, Hino Dump Truck, Truk Hino Termurah, Bengkel & Servis Hino Resmi" />
+    <meta
+      name="keywords"
+      content="Dealer Hino, Dealer Hino Jakarta, Promo Truk Hino 2025, Harga Truk Hino Dutro, Hino Ranger 500 Series, Kredit Truk Hino Jakarta, Cicilan Truk Hino, Dealer Resmi Hino Indonesia, Jual Truk Hino Jakarta, Hino Euro 4 Terbaru, Harga Truk Hino Jabodetabek, Dealer Hino Tangerang, Bekasi, Depok, Bogor, Bandung, Truk Hino untuk Bisnis, Truk Hino Angkut Barang, Sales Hino Resmi Jakarta, Leasing Truk Hino, Hino Dump Truck, Truk Hino Termurah, Bengkel & Servis Hino Resmi"
+    />
     <meta name="author" content="Nathan Hino" />
+
     <title>Dealer Hino Indonesia | Dealer Resmi Hino Jabodetabek, Dutro, Ranger, Bus</title>
+
     <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="images/favicon.png" />
     <link rel="canonical" href="https://dealerhinoindonesia.com/" />
@@ -58,9 +79,8 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EC6CVWN4SB"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
-
       gtag('config', 'G-EC6CVWN4SB');
     </script>
 
@@ -76,7 +96,11 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
 
     <!-- JS -->
     <script src="js/script.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Dealer Hino Indonesia | Harga & Promo Truk Hino Terbaru 2025" />
@@ -84,61 +108,69 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
     <meta property="og:url" content="https://dealerhinoindonesia.com/" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Dealer Hino Indonesia">
+    <meta property="og:site_name" content="Dealer Hino Indonesia" />
 
-    
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Dealer Hino Indonesia | Harga & Promo Truk Hino Terbaru 2025" />
     <meta name="twitter:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino dengan harga terbaik dan promo terbaru 2025." />
     <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
-    
+
     <!-- Schema.org -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "AutoDealer",
-      "name": "Dealer Hino Indonesia",
-      "alternateName": "Dealer Hino Resmi Jakarta",
-      "image": "https://dealerhinoindonesia.com/images/promohino1.jpg",
-      "@id": "https://dealerhinoindonesia.com/",
-      "url": "https://dealerhinoindonesia.com/",
-      "telephone": "+62-859-7528-7684",
-      "priceRange": "$$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Golf Lake Ruko Venice, Jl. Lkr. Luar Barat No.78 Blok B, RT.9/RW.14",
-        "addressLocality": "Jakarta Barat",
-        "addressRegion": "DKI Jakarta",
-        "postalCode": "11730",
-        "addressCountry": "ID"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": -6.1305504,
-        "longitude": 106.7279824
-      },
-      "openingHoursSpecification": [{
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-        "opens": "08:00",
-        "closes": "17:00"
-      }],
-      "sameAs": [
-        "https://www.facebook.com/profile.php?id=61573843992250",
-        "https://www.instagram.com/saleshinojabodetabek",
-        "https://www.tiktok.com/@saleshinoindonesia"
-      ]
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "AutoDealer",
+        "name": "Dealer Hino Indonesia",
+        "alternateName": "Dealer Hino Resmi Jakarta",
+        "image": "https://dealerhinoindonesia.com/images/promohino1.jpg",
+        "@id": "https://dealerhinoindonesia.com/",
+        "url": "https://dealerhinoindonesia.com/",
+        "telephone": "+62-859-7528-7684",
+        "priceRange": "$$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Golf Lake Ruko Venice, Jl. Lkr. Luar Barat No.78 Blok B, RT.9/RW.14",
+          "addressLocality": "Jakarta Barat",
+          "addressRegion": "DKI Jakarta",
+          "postalCode": "11730",
+          "addressCountry": "ID"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -6.1305504,
+          "longitude": 106.7279824
+        },
+        "openingHoursSpecification": [{
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "08:00",
+          "closes": "17:00"
+        }],
+        "sameAs": [
+          "https://www.facebook.com/profile.php?id=61573843992250",
+          "https://www.instagram.com/saleshinojabodetabek",
+          "https://www.tiktok.com/@saleshinoindonesia"
+        ]
+      }
     </script>
   </head>
+
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7TN9DJW"
+        height="0" width="0" style="display:none;visibility:hidden">
+      </iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <!-- Header -->
     <header>
       <div class="container header-content navbar">
         <div class="header-title">
           <a href="https://dealerhinoindonesia.com">
-            <img src="images/logo3.png" alt="Logo Hino" loading="lazy" style="height: 60px"/>
+            <img src="images/logo3.png" alt="Logo Hino" loading="lazy" style="height: 60px" />
           </a>
         </div>
         <div class="hamburger-menu">&#9776;</div>

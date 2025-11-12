@@ -200,17 +200,18 @@ RewriteRule .\* - [F,L]
 # ============================================
 
 # =====================================
-# 🌐 CLEAN URL (Tanpa .php di Frontend)
+# 🌐 CLEAN URL TANPA .PHP (FINAL)
 # =====================================
 
 RewriteEngine On
 
-# Abaikan semua request yang menuju folder admin
+# 1️⃣ Redirect URL yang mengandung .php ke versi tanpa .php (SEO friendly)
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
 RewriteCond %{REQUEST_URI} !^/admin
+RewriteRule ^ %1 [R=301,L]
 
-# Abaikan juga jika file atau folder fisik memang ada (biar tidak error)
+# 2️⃣ Buka halaman tanpa .php di frontend
+RewriteCond %{REQUEST_URI} !^/admin
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
-
-# Arahkan semua permintaan tanpa ekstensi ke file .php
 RewriteRule ^([^/]+)/?$ $1.php [L,QSA]

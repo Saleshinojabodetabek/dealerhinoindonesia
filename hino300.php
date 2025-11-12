@@ -187,10 +187,10 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
         <nav class="nav links">
           <a href="https://dealerhinoindonesia.com/">Home</a>
           <a href="https://dealerhinoindonesia.com/hino300.php">Hino 300 Series</a>
-          <a href="https://dealerhinoindonesia.com/hino500.php">Hino 500 Series</a>
-          <a href="https://dealerhinoindonesia.com/hinobus.php">Hino Bus Series</a>
-          <a href="https://dealerhinoindonesia.com/contact.php">Contact</a>
-          <a href="https://dealerhinoindonesia.com/artikel.php">Blog & Artikel</a>
+          <a href="https://dealerhinoindonesia.com/hino500">Hino 500 Series</a>
+          <a href="https://dealerhinoindonesia.com/hinobus">Hino Bus Series</a>
+          <a href="https://dealerhinoindonesia.com/contact">Contact</a>
+          <a href="https://dealerhinoindonesia.com/artikel">Blog & Artikel</a>
         </nav>
       </div>
     </header>

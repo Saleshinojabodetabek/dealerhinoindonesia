@@ -179,8 +179,8 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
           <a href="#promo-utama">Penawaran Harga</a>
           <a href="#products-section">Produk</a>
           <a href="#features">Keunggulan Hino</a>
-          <a href="https://dealerhinoindonesia.com/contact.php">Contact</a>
-          <a href="https://dealerhinoindonesia.com/artikel.php">Blog & Artikel</a>
+          <a href="https://dealerhinoindonesia.com/contact">Contact</a>
+          <a href="https://dealerhinoindonesia.com/artikel">Blog & Artikel</a>
         </nav>
       </div>
     </header>

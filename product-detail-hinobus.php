@@ -80,10 +80,10 @@ while ($row = $res_spec->fetch_assoc()) {
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Dealer Resmi Hino Indonesia - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan untuk seluruh Indonesia, khususnya Jabodetabek dan Jawa Barat. Hubungi Nathan Hino sekarang juga! 0859-7528-7684" />
-  <meta name="keywords" content="Dealer Hino, Dealer Hino Jakarta, Promo Truk Hino 2025, Harga Truk Hino Dutro, Hino Ranger 500 Series, Kredit Truk Hino Jakarta, Cicilan Truk Hino, Dealer Resmi Hino Indonesia, Jual Truk Hino Jakarta, Hino Euro 4 Terbaru, Harga Truk Hino Jabodetabek, Dealer Hino Tangerang, Bekasi, Depok, Bogor, Bandung, Truk Hino untuk Bisnis, Truk Hino Angkut Barang, Sales Hino Resmi Jakarta, Leasing Truk Hino, Hino Dump Truck, Truk Hino Termurah, Bengkel & Servis Hino Resmi" />
+  <meta name="description" content="Dealer Resmi Hino Indonesia - Jual Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan untuk seluruh Indonesia, khususnya Jabodetabek dan Jawa Barat. Hubungi Nathan Hino sekarang juga! 0859-7528-7684" />
+  <meta name="keywords" content="Dealer Hino, Dealer Hino Jakarta, Promo Hino 2025, Harga Hino Dutro, Hino Ranger 500 Series, Kredit Truk Hino Jakarta, Cicilan Hino, Dealer Resmi Hino Indonesia, Jual Hino Jakarta, Hino Euro 4 Terbaru, Harga Hino Jabodetabek, Dealer Hino Tangerang, Bekasi, Depok, Bogor, Bandung, Hino untuk Bisnis, Hino Angkut Barang, Sales Hino Resmi Jakarta, Leasing Hino, Hino Dump Truck, Hino Termurah, Bengkel & Servis Hino Resmi" />
   <meta name="author" content="Nathan Hino" />
-  <title>Hino Bus Series | Harga & Promo Truk Hino Terbaru 2025</title>
+  <title>Hino Bus Series | Harga & Promo Hino Terbaru 2025</title>
 
   <link rel="icon" type="image/png" href="images/favicon.webp" sizes="32x32" />
   <link rel="apple-touch-icon" href="images/favicon.webp" />
@@ -127,8 +127,8 @@ while ($row = $res_spec->fetch_assoc()) {
   </style>
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Dealer Hino Indonesia | Harga & Promo Truk Hino Terbaru 2025" />
-  <meta property="og:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan." />
+  <meta property="og:title" content="Dealer Hino Indonesia | Harga & Promo Hino Terbaru 2025" />
+  <meta property="og:description" content="Dealer Resmi Hino Jakarta - Jual Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan." />
   <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
   <meta property="og:url" content="https://dealerhinoindonesia.com/" />
   <meta property="og:type" content="website" />
@@ -136,8 +136,8 @@ while ($row = $res_spec->fetch_assoc()) {
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Dealer Resmi Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025" />
-  <meta name="twitter:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino dengan harga terbaik dan promo terbaru 2025." />
+  <meta name="twitter:title" content="Dealer Resmi Hino Jakarta | Harga & Promo Hino Terbaru 2025" />
+  <meta name="twitter:description" content="Dealer Resmi Hino Jakarta - Jual Hino Dutro, Ranger, dan Bus Hino dengan harga terbaik dan promo terbaru 2025." />
   <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
 
   <!-- Structured Data -->

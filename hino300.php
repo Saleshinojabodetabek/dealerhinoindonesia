@@ -25,7 +25,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Dealer Resmi Hino Indonesia - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan untuk seluruh Indonesia, khususnya Jabodetabek dan Jawa Barat. Hubungi Nathan Hino sekarang juga! 0859-7528-7684"
+      content="Dealer Resmi Hino Indonesia - Jual Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan untuk seluruh Indonesia, khususnya Jabodetabek dan Jawa Barat. Hubungi Nathan Hino sekarang juga! 0859-7528-7684"
     />
     <meta
       name="keywords"
@@ -33,7 +33,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     />
     <meta name="author" content="Nathan Hino" />
 
-    <title>Hino 300 Series | Harga & Promo Truk Hino Terbaru 2025</title>
+    <title>Hino 300 Series | Harga & Promo Hino Terbaru 2025</title>
 
     <link rel="icon" type="image/png" href="images/favicon.webp" sizes="32x32" />
     <link rel="apple-touch-icon" href="images/favicon.webp" />

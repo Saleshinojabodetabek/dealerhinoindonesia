@@ -65,8 +65,8 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
     </script>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="images/favicon.png" />
+    <link rel="icon" type="image/png" href="images/favicon.webp" sizes="32x32" />
+    <link rel="apple-touch-icon" href="images/favicon.webp" />
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css" />
@@ -83,7 +83,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
     <!-- Open Graph -->
     <meta property="og:title" content="Dealer Hino Indonesia | Harga & Promo Truk Hino Terbaru 2025" />
     <meta property="og:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan." />
-    <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
+    <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
     <meta property="og:url" content="https://dealerhinoindonesia.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Dealer Hino Indonesia" />
@@ -92,7 +92,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Dealer Resmi Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025" />
     <meta name="twitter:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino dengan harga terbaik dan promo terbaru 2025." />
-    <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
+    <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
 
     <!-- JSON-LD Schema -->
     <script type="application/ld+json">
@@ -100,7 +100,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
       "@context": "https://schema.org",
       "@type": "AutoDealer",
       "name": "Dealer Hino Indonesia",
-      "image": "https://dealerhinoindonesia.com/images/promohino1.jpg",
+      "image": "https://dealerhinoindonesia.com/images/promohino1.webp",
       "@id": "https://dealerhinoindonesia.com/",
       "url": "https://dealerhinoindonesia.com/",
       "telephone": "+62-859-7528-7684",
@@ -144,7 +144,7 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
         <div class="container header-content navbar">
             <div class="header-title">
                 <a href="https://dealerhinoindonesia.com">
-                    <img src="images/logo3.png" alt="Logo Hino Indonesia" loading="lazy" style="height: 60px" />
+                    <img src="images/logo3.webp" alt="Logo Hino Indonesia" loading="lazy" style="height: 60px" />
                 </a>
             </div>
             <div class="hamburger-menu">&#9776;</div>

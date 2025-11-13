@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <div class="sidebar">
   <div class="text-center mb-4">
-    <img src="../images/logo3.png" alt="Logo Hino">
+    <img src="../images/logo3.webp" alt="Logo Hino">
   </div>
   <a href="index.php">Dashboard</a>
   <a href="artikel.php">Artikel</a>
@@ -196,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <div class="form-check d-flex align-items-center">
                     <input class="form-check-input me-2" type="checkbox" name="karoseri[]" value="<?= $kr['id']; ?>" id="karoseri<?= $kr['id']; ?>" <?= $checked ?>>
                     <label class="form-check-label d-flex align-items-center" for="karoseri<?= $kr['id']; ?>">
-                      <img src="uploads/karoseri/<?= htmlspecialchars($kr['slug']); ?>.png" alt="<?= htmlspecialchars($kr['nama']); ?>" style="width:50px;height:auto;object-fit:contain;" class="me-2 border rounded">
+                      <img src="uploads/karoseri/<?= htmlspecialchars($kr['slug']); ?>.webp" alt="<?= htmlspecialchars($kr['nama']); ?>" style="width:50px;height:auto;object-fit:contain;" class="me-2 border rounded">
                       <span><?= htmlspecialchars($kr['nama']); ?></span>
                     </label>
                   </div>

@@ -5,7 +5,7 @@
     <footer>
       <div class="footer-container">
         <div class="footer-section footer-logo">
-          <img src="images/logo3.png" alt="Hino Logo" loading="lazy" />
+          <img src="images/logo3.webp" alt="Hino Logo" loading="lazy" />
           <p>Jangan lewatkan kesempatan terbaik memiliki truk Hino baru! Nathan Hino memberikan promo harga menarik, DP ringan, dan unit ready stock untuk seluruh Indonesia. Klik WhatsApp sekarang untuk penawaran khusus!</p>
         </div>
         <div class="footer-section footer-address">
@@ -27,7 +27,7 @@
         </div>
         <div class="footer-section footer-barcode">
           <h3>Scan Barcode</h3>
-          <img src="images/barcode.jpeg" alt="Barcode" loading="lazy" class="barcode-img"/>
+          <img src="images/barcode.webp" alt="Barcode" loading="lazy" class="barcode-img"/>
         </div>
       </div>
       <div class="footer-bottom">

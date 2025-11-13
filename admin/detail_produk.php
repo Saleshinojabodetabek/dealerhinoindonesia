@@ -94,7 +94,7 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
 <!-- Sidebar -->
 <div class="sidebar">
   <div class="text-center mb-4">
-    <img src="../images/logo3.png" alt="Logo Hino">
+    <img src="../images/logo3.webp" alt="Logo Hino">
   </div>
   <a href="index.php">Dashboard</a>
   <a href="artikel.php">Artikel</a>
@@ -136,7 +136,7 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
         <div class="d-flex flex-wrap">
           <?php foreach($karoseriList as $k): ?>
             <div class="d-flex align-items-center me-3 mb-2">
-              <img src="uploads/karoseri/<?= htmlspecialchars($k['slug']) ?>.png" class="img-karoseri" alt="<?= htmlspecialchars($k['nama']) ?>">
+              <img src="uploads/karoseri/<?= htmlspecialchars($k['slug']) ?>.webp" class="img-karoseri" alt="<?= htmlspecialchars($k['nama']) ?>">
               <span><?= htmlspecialchars($k['nama']) ?></span>
             </div>
           <?php endforeach; ?>

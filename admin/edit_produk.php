@@ -123,7 +123,7 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
 
 <!-- Sidebar -->
 <div class="sidebar">
-  <div class="text-center mb-4"><img src="../images/logo3.png" alt="Logo Hino"></div>
+  <div class="text-center mb-4"><img src="../images/logo3.webp" alt="Logo Hino"></div>
   <a href="index.php">Dashboard</a>
   <a href="artikel.php">Artikel</a>
   <a href="produk.php" class="active">Produk</a>
@@ -204,7 +204,7 @@ body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:
               <div class="form-check d-flex align-items-center">
                 <input class="form-check-input me-2" type="checkbox" name="karoseri[]" value="<?= $kr['id'] ?>" <?= $checked ?>>
                 <label class="form-check-label d-flex align-items-center">
-                  <img src="uploads/karoseri/<?= htmlspecialchars($kr['slug']) ?>.png" class="img-karoseri" alt="<?= htmlspecialchars($kr['nama']) ?>">
+                  <img src="uploads/karoseri/<?= htmlspecialchars($kr['slug']) ?>.webp" class="img-karoseri" alt="<?= htmlspecialchars($kr['nama']) ?>">
                   <span><?= htmlspecialchars($kr['nama']) ?></span>
                 </label>
               </div>

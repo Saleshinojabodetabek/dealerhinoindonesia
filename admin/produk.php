@@ -67,7 +67,7 @@ include 'config.php'; // <- pastikan ini benar
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="text-center mb-4">
-      <img src="../images/logo3.png" alt="Logo Hino">
+      <img src="../images/logo3.webp" alt="Logo Hino">
     </div>
     <a href="index.php">Dashboard</a>
     <a href="artikel.php">Artikel</a>

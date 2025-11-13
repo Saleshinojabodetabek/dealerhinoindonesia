@@ -35,8 +35,8 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
 
     <title>Hino 300 Series | Harga & Promo Truk Hino Terbaru 2025</title>
 
-    <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="images/favicon.png" />
+    <link rel="icon" type="image/png" href="images/favicon.webp" sizes="32x32" />
+    <link rel="apple-touch-icon" href="images/favicon.webp" />
     <link rel="canonical" href="https://dealerhinoindonesia.com/hino300.php" />
 
     <!-- Google tag (gtag.js) -->
@@ -96,7 +96,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     />
     <meta
       property="og:image"
-      content="https://dealerhinoindonesia.com/images/promohino1.jpg"
+      content="https://dealerhinoindonesia.com/images/promohino1.webp"
     />
     <meta property="og:url" content="https://dealerhinoindonesia.com/" />
     <meta property="og:type" content="website" />
@@ -114,7 +114,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     />
     <meta
       name="twitter:image"
-      content="https://dealerhinoindonesia.com/images/promohino1.jpg"
+      content="https://dealerhinoindonesia.com/images/promohino1.webp"
     />
 
     <!-- Schema.org -->
@@ -123,7 +123,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
         "@context": "https://schema.org",
         "@type": "AutoDealer",
         "name": "Dealer Hino Indonesia",
-        "image": "https://dealerhinoindonesia.com/images/promohino1.jpg",
+        "image": "https://dealerhinoindonesia.com/images/promohino1.webp",
         "@id": "https://dealerhinoindonesia.com/",
         "url": "https://dealerhinoindonesia.com/",
         "telephone": "+62-859-7528-7684",
@@ -176,7 +176,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
         <div class="header-title">
           <a href="https://dealerhinoindonesia.id">
             <img
-              src="images/logo3.png"
+              src="images/logo3.webp"
               alt="Logo Hino"
               loading="lazy"
               style="height: 60px"
@@ -198,7 +198,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     <!-- Hero Product -->
     <section class="hero-product">
       <img
-        src="images/Euro 4 Hino 300.jpeg"
+        src="images/Euro 4 Hino 300.webp"
         alt="Hino 300 Series"
         class="hero-product-img"
       />
@@ -208,7 +208,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     <div id="kategori-section" class="kategori-section">
       <div class="kategori">
         <h1>Hino 300 Series</h1>
-        <img src="images/euro4.png" alt="Euro4 Logo" />
+        <img src="images/euro4.webp" alt="Euro4 Logo" />
       </div>
 
       <div class="produk-controls">

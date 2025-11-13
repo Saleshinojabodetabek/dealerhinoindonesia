@@ -71,8 +71,8 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
 
     <title>Dealer Hino Indonesia | Dealer Resmi Hino Jabodetabek, Dutro, Ranger, Bus</title>
 
-    <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="images/favicon.png" />
+    <link rel="icon" type="image/png" href="images/favicon.webp" sizes="32x32" />
+    <link rel="apple-touch-icon" href="images/favicon.webp" />
     <link rel="canonical" href="https://dealerhinoindonesia.com/" />
 
     <!-- Google tag (gtag.js) -->
@@ -105,7 +105,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     <!-- Open Graph -->
     <meta property="og:title" content="Dealer Hino Indonesia | Harga & Promo Truk Hino Terbaru 2025" />
     <meta property="og:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan." />
-    <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
+    <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
     <meta property="og:url" content="https://dealerhinoindonesia.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Dealer Hino Indonesia" />
@@ -114,7 +114,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Dealer Hino Indonesia | Harga & Promo Truk Hino Terbaru 2025" />
     <meta name="twitter:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino dengan harga terbaik dan promo terbaru 2025." />
-    <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
+    <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -123,7 +123,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
         "@type": "AutoDealer",
         "name": "Dealer Hino Indonesia",
         "alternateName": "Dealer Hino Resmi Jakarta",
-        "image": "https://dealerhinoindonesia.com/images/promohino1.jpg",
+        "image": "https://dealerhinoindonesia.com/images/promohino1.webp",
         "@id": "https://dealerhinoindonesia.com/",
         "url": "https://dealerhinoindonesia.com/",
         "telephone": "+62-859-7528-7684",
@@ -170,7 +170,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
       <div class="container header-content navbar">
         <div class="header-title">
           <a href="https://dealerhinoindonesia.com">
-            <img src="images/logo3.png" alt="Logo Hino" loading="lazy" style="height: 60px" />
+            <img src="images/logo3.webp" alt="Logo Hino" loading="lazy" style="height: 60px" />
           </a>
         </div>
         <div class="hamburger-menu">&#9776;</div>
@@ -188,9 +188,9 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     <!-- Hero -->
     <section class="hero">
       <div class="slider">
-        <img src="images/Euro 4 Hino 300.jpeg" class="slide active" alt="Hino 300 Series" loading="lazy"/>
-        <img src="images/Euro 4 Hino 500.jpeg" class="slide" alt="Hino 500 Series" loading="lazy"/>
-        <img src="images/Euro 4 Hino Bus.jpeg" class="slide" alt="Hino Bus Series" loading="lazy"/>
+        <img src="images/Euro 4 Hino 300.webp" class="slide active" alt="Hino 300 Series" loading="lazy"/>
+        <img src="images/Euro 4 Hino 500.webp" class="slide" alt="Hino 500 Series" loading="lazy"/>
+        <img src="images/Euro 4 Hino Bus.webp" class="slide" alt="Hino Bus Series" loading="lazy"/>
       </div>
       <div class="container">
         <h2>Dealer Resmi Hino Indonesia – Pilihan Tepat untuk Bisnis Anda</h2>
@@ -221,7 +221,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
               </div>
             </div>
             <div class="image-gallery">
-              <img src="images/promohino.jpeg" alt="Promo Hino" />
+              <img src="images/promohino.webp" alt="Promo Hino" />
             </div>
             </div>
           </div>
@@ -232,17 +232,17 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
         <h2 class="section-title">Produk Truk Hino Unggulan</h2>
         <div class="products">
           <div class="product">
-            <img src="images/Euro 4 Hino 300.jpeg" alt="Hino 300 Dutro" loading="lazy"/>
+            <img src="images/Euro 4 Hino 300.webp" alt="Hino 300 Dutro" loading="lazy"/>
             <h3><a href="https://dealerhinoindonesia.com/hino300.php" target="_blank" rel="noopener noreferrer">Hino 300 Series (Dutro)</a></h3>
             <p>Truk ringan dan tangguh, cocok untuk usaha kecil dan menengah.</p>
           </div>
           <div class="product">
-            <img src="images/Euro 4 Hino 500.jpeg" alt="Hino 500 Ranger" loading="lazy"/>
+            <img src="images/Euro 4 Hino 500.webp" alt="Hino 500 Ranger" loading="lazy"/>
             <h3><a href="https://dealerhinoindonesia.com/hino500.php" target="_blank" rel="noopener noreferrer">Hino 500 Series (Ranger)</a></h3>
             <p>Performa handal untuk pengangkutan berat dan jarak jauh.</p>
           </div>
           <div class="product">
-            <img src="images/Euro 4 Hino Bus.jpeg" alt="Hino Bus Series" loading="lazy"/>
+            <img src="images/Euro 4 Hino Bus.webp" alt="Hino Bus Series" loading="lazy"/>
             <h3><a href="https://dealerhinoindonesia.com/hinobus.php" target="_blank" rel="noopener noreferrer">Hino Bus Series</a></h3>
             <p>Solusi transportasi penumpang dengan kenyamanan terbaik.</p>
           </div>
@@ -264,7 +264,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
             <a href="https://wa.me/6285975287684" class="btn-primary" target="_blank" rel="noopener noreferrer">Konsultasi Pembelian</a>
           </div>
         </div>
-        <img src="images/hino.png" alt="Truk Hino Hijau" loading="lazy" class="promo-main-image"/>
+        <img src="images/hino.webp" alt="Truk Hino Hijau" loading="lazy" class="promo-main-image"/>
       </section>
       
       <!-- Fitur -->

@@ -87,8 +87,8 @@ while ($row = $res_spec->fetch_assoc()) {
   <meta name="author" content="Nathan Hino" />
   <title>Hino 500 Series | Harga & Promo Truk Hino Terbaru 2025</title>
 
-  <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32" />
-  <link rel="apple-touch-icon" href="images/favicon.png" />
+  <link rel="icon" type="image/png" href="images/favicon.webp" sizes="32x32" />
+  <link rel="apple-touch-icon" href="images/favicon.webp" />
   <link rel="canonical" href="https://dealerhinoindonesia.com/hino500.php" />
 
   <!-- Google tag (gtag.js) -->
@@ -131,7 +131,7 @@ while ($row = $res_spec->fetch_assoc()) {
   <!-- Open Graph -->
   <meta property="og:title" content="Dealer Hino Indonesia | Harga & Promo Truk Hino Terbaru 2025" />
   <meta property="og:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan." />
-  <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
+  <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
   <meta property="og:url" content="https://dealerhinoindonesia.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Dealer Hino Indonesia" />
@@ -140,14 +140,14 @@ while ($row = $res_spec->fetch_assoc()) {
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Dealer Resmi Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025" />
   <meta name="twitter:description" content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino dengan harga terbaik dan promo terbaru 2025." />
-  <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.jpg" />
+  <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
 
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "AutoDealer",
       "name": "Dealer Hino Indonesia",
-      "image": "https://dealerhinoindonesia.com/images/promohino1.jpg",
+      "image": "https://dealerhinoindonesia.com/images/promohino1.webp",
       "@id": "https://dealerhinoindonesia.com/",
       "url": "https://dealerhinoindonesia.com/",
       "telephone": "+62-859-7528-7684",
@@ -193,7 +193,7 @@ while ($row = $res_spec->fetch_assoc()) {
     <div class="container header-content navbar">
       <div class="header-title">
         <a href="https://dealerhinoindonesia.com">
-          <img src="images/logo3.png" alt="Logo Hino" loading="lazy" style="height: 60px" />
+          <img src="images/logo3.webp" alt="Logo Hino" loading="lazy" style="height: 60px" />
         </a>
       </div>
       <div class="hamburger-menu">&#9776;</div>
@@ -210,14 +210,14 @@ while ($row = $res_spec->fetch_assoc()) {
 
   <!-- Hero Product — Gambar Penuh -->
   <section class="hero-product">
-    <img src="images/Euro 4 Hino 500.jpeg" alt="Hino 500 Series" class="hero-product-img" />
+    <img src="images/Euro 4 Hino 500.webp" alt="Hino 500 Series" class="hero-product-img" />
   </section>
 
   <!-- Produk Pilihan -->
   <div class="kategori-section">
     <div class="kategori">
       <h1>Hino 500 Series</h1>
-      <img src="images/euro4.png" alt="Euro4 Logo" />
+      <img src="images/euro4.webp" alt="Euro4 Logo" />
     </div>
 
     <div class="produk-controls">
@@ -258,7 +258,7 @@ while ($row = $res_spec->fetch_assoc()) {
           <div class="karoseri-grid">
             <?php foreach ($karoseri as $k): ?>
               <div class="karoseri-item">
-                <img src="admin/uploads/karoseri/<?= htmlspecialchars($k['slug']) ?>.png"
+                <img src="admin/uploads/karoseri/<?= htmlspecialchars($k['slug']) ?>.webp"
                      alt="<?= htmlspecialchars($k['nama']) ?>" />
                 <p><?= htmlspecialchars($k['nama']) ?></p>
               </div>

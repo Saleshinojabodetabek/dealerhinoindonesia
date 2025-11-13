@@ -29,7 +29,7 @@ body { font-family:"Segoe UI",sans-serif; background:#f8f9fa; }
 <body>
 <div class="sidebar">
   <div class="text-center mb-4">
-    <img src="../images/logo3.png" alt="Logo Hino">
+    <img src="../images/logo3.webp" alt="Logo Hino">
   </div>
   <a href="index.php">Dashboard</a>
   <a href="artikel.php" class="active">Artikel</a>

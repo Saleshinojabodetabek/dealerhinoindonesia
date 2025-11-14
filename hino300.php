@@ -35,8 +35,8 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
 
     <title>Hino 300 Series | Harga & Promo Hino Terbaru 2025</title>
 
-    <link rel="icon" type="image/png" href="images/favicon.webp" sizes="32x32" />
-    <link rel="apple-touch-icon" href="images/favicon.webp" />
+    <link rel="icon" href="https://dealerhinoindonesia.com/images/favicon.png" type="image/png" sizes="32x32"/>
+    <link rel="apple-touch-icon" href="images/favicon.png" />
     <link rel="canonical" href="https://dealerhinoindonesia.com/hino300.php" />
 
     <!-- Google tag (gtag.js) -->

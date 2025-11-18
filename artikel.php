@@ -56,14 +56,14 @@ if ($selectedKategori !== '') $baseUrl .= "kategori=" . urlencode($selectedKateg
     <title>Blog & Artikel Resmi Dealer Hino Jakarta | Harga & Promo Truk Hino Terbaru 2025</title>
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PRC34ZMTC4">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17738682772">
     </script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    gtag('config', 'G-PRC34ZMTC4');
+        gtag('config', 'AW-17738682772');
     </script>
 
     <!-- Favicon -->

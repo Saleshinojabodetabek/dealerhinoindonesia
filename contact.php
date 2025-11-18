@@ -38,14 +38,14 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     <link rel="canonical" href="https://www.dealerhinoindonesia.com/contact.php" />
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PRC34ZMTC4">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17738682772">
     </script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-PRC34ZMTC4');
+      gtag('config', 'AW-17738682772');
     </script>
 
     <!-- CSS -->

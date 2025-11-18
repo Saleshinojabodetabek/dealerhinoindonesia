@@ -89,13 +89,15 @@ while ($row = $res_spec->fetch_assoc()) {
   <link rel="apple-touch-icon" href="images/favicon.png" />
   <link rel="canonical" href="https://dealerhinoindonesia.com/hinobus.php" />
 
-  <!-- Google Tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EC6CVWN4SB"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PRC34ZMTC4">
+  </script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-EC6CVWN4SB');
+
+    gtag('config', 'G-PRC34ZMTC4');
   </script>
 
   <!-- CSS -->

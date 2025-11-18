@@ -65,7 +65,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
     />
     <meta
       name="keywords"
-      content="Dealer Hino, Dealer Hino Jakarta, Promo Truk Hino 2025, Harga Truk Hino Dutro, Hino Ranger 500 Series, Kredit Truk Hino Jakarta, Cicilan Truk Hino, Dealer Resmi Hino Indonesia, Jual Truk Hino Jakarta, Hino Euro 4 Terbaru, Harga Truk Hino Jabodetabek, Dealer Hino Tangerang, Bekasi, Depok, Bogor, Bandung, Truk Hino untuk Bisnis, Truk Hino Angkut Barang, Sales Hino Resmi Jakarta, Leasing Truk Hino, Hino Dump Truck, Truk Hino Termurah, Bengkel & Servis Hino Resmi"
+      content="Dealer Hino Resmi, Dealer Hino Jakarta, Dealer Hino Jabodetabek, Dealer Hino, Jual Truk Hino, Harga Truk Hino Terbaru, Promo Truk Hino, Kredit Truk Hino, Cicilan Truk Hino, Leasing Truk Hino, Sales Hino Resmi, Harga Hino Dutro Terbaru, Hino Dutro Series, Harga Hino Ranger 500 Series, Hino Dump Truck, Truk Hino Angkut Barang, Truk Hino untuk Bisnis, Truk Hino Termurah, Hino Euro 4 Terbaru, Dealer Hino Jakarta Barat, Dealer Hino Jakarta Timur, Dealer Hino Jakarta Utara, Dealer Hino Jakarta Selatan, Dealer Hino Tangerang, Dealer Hino Bekasi, Dealer Hino Depok, Dealer Hino Bogor, Dealer Hino Bandung, Harga Truk Hino Jabodetabek, Promo Hino Jawa Barat"
     />
     <meta name="author" content="Nathan Hino" />
 

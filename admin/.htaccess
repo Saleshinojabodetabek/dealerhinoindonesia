@@ -1,52 +1,115 @@
-# ===========================
-# DealerHinoIndonesia - Admin Security
-# Aggressive but safe .htaccess for /admin
-# ===========================
+# ================================================
+# 🔐 DealerHinoIndonesia – ADMIN MAXIMUM SECURITY
+# Termasuk Brute-Force Protection
+# ================================================
 
 Options -Indexes
 RewriteEngine On
 
-# 1️⃣ Izinkan hanya HTTPS
+# =================================================
+# 1️⃣ Paksa HTTPS
+# =================================================
 RewriteCond %{HTTPS} off
-RewriteRule ^ https://dealerhinoindonesia.com/admin%{REQUEST_URI} [L,R=301]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# 2️⃣ Batasi metode HTTP
-<LimitExcept GET POST>
+
+# =================================================
+# 2️⃣ BATAS KUNJUNGAN / BRUTE FORCE PROTECTION
+# (Mencegah bot spam login atau brute-force password)
+# Limit: 10 request / menit / IP
+# =================================================
+<IfModule mod_ratelimit.c>
+    # Tidak dipakai, mod_ratelimit hanya throttle bandwidth
+</IfModule>
+
+<IfModule mod_evasive20.c>
+    DOSHashTableSize    2048
+    DOSPageCount        10
+    DOSPageInterval     60
+    DOSSiteCount        150
+    DOSSiteInterval     60
+    DOSBlockingPeriod   600
+</IfModule>
+
+# Fallback jika mod_evasive TIDAK tersedia (shared hosting)
+<IfModule mod_rewrite.c>
+    # Catat IP yang akses login
+    RewriteCond %{REQUEST_URI} ^/admin/login\.php$ [NC]
+    RewriteCond %{REQUEST_METHOD} POST
+    RewriteCond %{ENV:bad_login_%{REMOTE_ADDR}} >5
+    RewriteRule .* - [F]
+
+    # Tambah counter gagal login
+    RewriteCond %{REQUEST_URI} ^/admin/login\.php$ [NC]
+    RewriteCond %{QUERY_STRING} error=1 [NC]
+    RewriteRule .* - [E=bad_login_%{REMOTE_ADDR}:+1]
+</IfModule>
+
+
+# =================================================
+# 3️⃣ Batasi metode HTTP (tetap izinkan OPTIONS untuk AJAX)
+# =================================================
+<LimitExcept GET POST OPTIONS>
   Require all denied
 </LimitExcept>
 
-# 3️⃣ Blokir akses langsung ke file sensitif
+
+# =================================================
+# 4️⃣ Blokir file sensitif admin
+# =================================================
 <FilesMatch "^(config|function|convert_all_to_webp|webp_loader)\.php$">
   Require all denied
 </FilesMatch>
 
-# 4️⃣ Lindungi file .htaccess agar tidak bisa dibaca
+
+# =================================================
+# 5️⃣ Lindungi file .htaccess
+# =================================================
 <Files ~ "^\.ht">
   Require all denied
 </Files>
 
-# 5️⃣ Hanya izinkan akses ke halaman login & logout tanpa session
-# (Untuk admin yang sudah login, gunakan proteksi di PHP session)
-# Contoh: semua file PHP selain login/logout hanya boleh diakses via login session
+
+# =================================================
+# 6️⃣ Blokir akses langsung ke semua file PHP kecuali:
+#    ✔ login.php
+#    ✔ logout.php
+# =================================================
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteCond %{REQUEST_FILENAME} \.php$
-RewriteCond %{THE_REQUEST} !/login\.php [NC]
-RewriteCond %{THE_REQUEST} !/logout\.php [NC]
-# Jika Anda ingin menutup akses publik sepenuhnya tanpa session, aktifkan baris di bawah:
-# RewriteRule .* - [F,L]
+RewriteCond %{THE_REQUEST} !\s/login\.php [NC]
+RewriteCond %{THE_REQUEST} !\s/logout\.php [NC]
+RewriteRule .* - [F,L]
 
-# 6️⃣ Nonaktifkan eksekusi file script berbahaya di folder API admin
+
+# =================================================
+# 7️⃣ Lindungi folder API admin dari file berbahaya
+# (PHP tetap boleh karena diperlukan)
+# =================================================
 <If "%{REQUEST_URI} =~ m#^/admin/api/#">
-  <FilesMatch "\.(php|phtml|php3|php4|php5|phar|pl|py|jsp|asp|aspx)$">
+  <FilesMatch "\.(phar|pl|py|jsp|asp|aspx|cgi|sh)$">
     Require all denied
   </FilesMatch>
 </If>
 
-# 7️⃣ Blokir query string mencurigakan
+
+# =================================================
+# 8️⃣ Blokir query berbahaya
+# =================================================
 RewriteCond %{QUERY_STRING} (base64_encode|eval\(|UNION(\s)+SELECT|GLOBALS|_REQUEST|/etc/passwd) [NC]
 RewriteRule .* - [F,L]
 
-# 8️⃣ Header keamanan tambahan
+
+# =================================================
+# 9️⃣ Proteksi Bot / Scanner / Curl / Wget
+# =================================================
+RewriteCond %{HTTP_USER_AGENT} (curl|wget|python|libwww|nikto|scan|httrack) [NC]
+RewriteRule .* - [F,L]
+
+
+# =================================================
+# 🔟 Header Keamanan Lengkap
+# =================================================
 <IfModule mod_headers.c>
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set X-Content-Type-Options "nosniff"
@@ -55,5 +118,8 @@ RewriteRule .* - [F,L]
   Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
 </IfModule>
 
-# 9️⃣ Matikan server signature
+
+# =================================================
+# 1️⃣1️⃣ Matikan server signature
+# =================================================
 ServerSignature Off

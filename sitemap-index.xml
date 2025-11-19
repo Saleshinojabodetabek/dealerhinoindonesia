@@ -1,15 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?php
+header("Content-Type: application/xml; charset=utf-8");
+
+function lastmod($file) {
+    return file_exists($file)
+        ? date("Y-m-d", filemtime($file))
+        : date("Y-m-d");
+}
+
+echo '<?xml version="1.0" encoding="UTF-8"?>';
+?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <sitemap>
     <loc>https://dealerhinoindonesia.com/sitemap-pages.xml</loc>
-    <lastmod>2025-10-08</lastmod>
+    <lastmod><?= lastmod("sitemap-pages.xml") ?></lastmod>
   </sitemap>
+
   <sitemap>
     <loc>https://dealerhinoindonesia.com/sitemap-produk.php</loc>
-    <lastmod>2025-10-08</lastmod>
+    <lastmod><?= lastmod("sitemap-produk.php") ?></lastmod>
   </sitemap>
+
   <sitemap>
     <loc>https://dealerhinoindonesia.com/sitemap-artikel.php</loc>
-    <lastmod>2025-10-08</lastmod>
+    <lastmod><?= lastmod("sitemap-artikel.php") ?></lastmod>
   </sitemap>
+
 </sitemapindex>

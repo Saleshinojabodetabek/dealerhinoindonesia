@@ -1,9 +1,9 @@
 # robots.txt for dealerhinoindonesia.com
-# Last updated: 19 October 2025
+# Updated: 19 November 2025
 
 User-agent: *
-# --- ALLOW: Halaman utama dan publik ---
-Allow: /$
+# --- ALLOW: Halaman publik ---
+Allow: /
 Allow: /hino300.php
 Allow: /hino500.php
 Allow: /hinobus.php
@@ -14,22 +14,23 @@ Allow: /product-detail-hino300.php
 Allow: /product-detail-hino500.php
 Allow: /product-detail-hinobus.php
 
-# --- DISALLOW: Folder sensitif dan file backend ---
+# --- DISALLOW: Folder sensitif / backend ---
 Disallow: /admin/
-Disallow: /js/
-Disallow: /css/
-Disallow: /images/
-Disallow: /footer.php
-Disallow: /sitemap-artikel.php
-Disallow: /sitemap-produk.php
-Disallow: /sitemap-pages.xml
-Disallow: /sitemap-index.xml
 Disallow: /config.php
+Disallow: /database/
+Disallow: /backup/
+Disallow: /private/
+Disallow: /composer.json
+Disallow: /composer.lock
 
-# --- Sitemap: bantu Google menemukan semua halaman ---
+# --- IMPORTANT ---
+# Jangan blokir /css/, /js/, /images/
+# Google MEMBUTUHKAN folder tersebut untuk render halaman dengan baik.
+
+# --- SITEMAPS ---
 Sitemap: https://dealerhinoindonesia.com/sitemap-index.xml
 Sitemap: https://dealerhinoindonesia.com/sitemap-pages.xml
 Sitemap: https://dealerhinoindonesia.com/sitemap-artikel.php
 Sitemap: https://dealerhinoindonesia.com/sitemap-produk.php
 
-# --- End of file ---
+# End of file

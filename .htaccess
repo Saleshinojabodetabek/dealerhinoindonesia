@@ -1,176 +1,172 @@
-# =====================================
-# 🔒 SECURITY CONFIG FOR SALES HINO SITE (FINAL CLEAN & OPTIMIZED)
-# =====================================
+# =========================================
+# 🔒 DealerHinoIndonesia - SECURITY CONFIG (FINAL)
+# =========================================
 
-# 1️⃣ Nonaktifkan directory listing
+# 1) Basic
 Options -Indexes
-
-# 2️⃣ Aktifkan Rewrite Engine dan paksa HTTPS
 RewriteEngine On
 
-# Paksa HTTPS kecuali di localhost (untuk pengembangan)
+# 2) Force HTTPS (except localhost for dev)
 RewriteCond %{HTTP_HOST} !^localhost [NC]
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# 3️⃣ Blokir akses ke file sensitif
-<FilesMatch "(^\.|config\.php|koneksi\.php)">
+# =========================================
+# ✔ Allow essential static files (bypass rewrites/blocks)
+# =========================================
+# Allow favicon regardless of Referer
+RewriteRule (^|/)favicon\.(ico|png|gif|jpg|jpeg|webp)$ - [L,NC]
+# Allow PWA / manifests
+RewriteRule ^(manifest\.json|site\.webmanifest)$ - [L,NC]
+# Allow sitemap & robots
+RewriteRule ^(sitemap\.xml|robots\.txt)$ - [L,NC]
+
+# =========================================
+# 🔥 ANTI-HOTLINK GAMBAR (LOGIKA BENAR: cek referer ada AND bukan domain kita)
+# =========================================
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_URI} \.(?:jpe?g|png|gif|webp)$ [NC]
+RewriteCond %{HTTP_REFERER} !^$                       [AND]
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?dealerhinoindonesia\.com [NC]
+RewriteRule \.(?:jpe?g|png|gif|webp)$ - [F,NC,L]
+
+# =========================================
+# Block access to sensitive files (modern syntax)
+# =========================================
+<IfModule mod_authz_core.c>
+  <FilesMatch "(^\.|config\.php|koneksi\.php|composer\.json|composer\.lock|package\.json|yarn\.lock|\.env|\.git|\.htpasswd)$">
+      Require all denied
+  </FilesMatch>
+</IfModule>
+
+# If mod_authz_core not present, fallback (compat)
+<IfModule !mod_authz_core.c>
+  <FilesMatch "(^\.|config\.php|koneksi\.php|composer\.json|composer\.lock|package\.json|yarn\.lock|\.env|\.git|\.htpasswd)$">
+      Order allow,deny
+      Deny from all
+  </FilesMatch>
+</IfModule>
+
+# =========================================
+# Prevent execution of PHP/etc inside admin uploads (but allow static images)
+# Use <If> to match URI since <Directory> isn't allowed in .htaccess
+# =========================================
+<If "%{REQUEST_URI} =~ m#^/admin/api/uploads/#">
+  <FilesMatch "\.(php|php3|php4|php5|phtml|phps|pl|py|jsp|asp|aspx|sh|exe)$">
     Require all denied
-</FilesMatch>
+  </FilesMatch>
+</If>
 
-# Izinkan file login & proses login
-<FilesMatch "(cek.*login\.php|proses_login\.php|hapus.*\.php|edit_.*\.php|tambah_.*\.php)">
-    Require all granted
-</FilesMatch>
+# =========================================
+# Block dangerous uploaded filetypes everywhere
+# =========================================
+<IfModule mod_authz_core.c>
+  <FilesMatch "\.(phps|php5|phtml|exe|sh|bat|pl|py|jsp|asp)$">
+      Require all denied
+  </FilesMatch>
+</IfModule>
 
-# 4️⃣ Cegah eksekusi PHP di folder upload
-<DirectoryMatch "(?i)admin/api/uploads">
-    <FilesMatch "\.(php|php3|php4|php5|phtml|phps|html|htm)$">
-        Require all denied
-    </FilesMatch>
-</DirectoryMatch>
-
-# 5️⃣ Lindungi file konfigurasi & sistem
-<FilesMatch "(composer\.json|composer\.lock|package\.json|yarn\.lock|\.env|\.git|\.htpasswd)">
-    Require all denied
-</FilesMatch>
-
-# 6️⃣ Cegah file berbahaya di-upload
-<FilesMatch "\.(phps|php5|phtml|exe|sh|bat|pl|py|jsp|asp)$">
-    Require all denied
-</FilesMatch>
-
-# 7️⃣ Lindungi file .htaccess
-<Files ".htaccess">
-    Require all denied
-</Files>
-
-# 8️⃣ Blokir query mencurigakan (LFI, RFI, Command Injection)
-RewriteCond %{QUERY_STRING} (\.\./|\.\.\\|/etc/passwd|/bin/bash|base64_encode|eval\(|system\(|shell_exec\() [NC]
+# =========================================
+# Block suspicious query strings (LFI/RFI/injection patterns)
+# =========================================
+RewriteCond %{QUERY_STRING} (?:\.\./|\.\.\\|/etc/passwd|/bin/bash|base64_encode|eval\(|system\(|shell_exec\(|UNION(?:\s)+SELECT|GLOBALS|_REQUEST) [NC]
 RewriteRule .* - [F,L]
 
-# 9️⃣ Blok referer spam & user-agent bot scanner
+# NOTE: removed "single-letter query" blocking because many apps use ?id=123
+
+# =========================================
+# Protect .htaccess itself
+# =========================================
+<Files ".htaccess">
+  Require all denied
+</Files>
+
+# =========================================
+# Block known bad referers & scanners (but allow major crawlers)
+# =========================================
 SetEnvIfNoCase Referer "semalt\.com" bad_ref=1
 SetEnvIfNoCase Referer "buttons\-for\-website" bad_ref=1
 SetEnvIfNoCase Referer "darodar\.com" bad_ref=1
-SetEnvIfNoCase Referer "crawler" bad_ref=1
-SetEnvIfNoCase Referer "scan" bad_ref=1
-SetEnvIfNoCase User-Agent "curl" bad_bot
-SetEnvIfNoCase User-Agent "wget" bad_bot
-SetEnvIfNoCase User-Agent "python" bad_bot
+
 SetEnvIfNoCase User-Agent "nikto" bad_bot
-SetEnvIfNoCase User-Agent "fimap" bad_bot
 SetEnvIfNoCase User-Agent "sqlmap" bad_bot
+SetEnvIfNoCase User-Agent "fimap" bad_bot
+SetEnvIfNoCase User-Agent "fuzzer" bad_bot
 
 <RequireAll>
-    Require all granted
-    Require not env bad_ref
-    Require not env bad_bot
+  Require all granted
+  Require not env bad_ref
+  Require not env bad_bot
 </RequireAll>
 
-# 🔟 Blok IP mencurigakan (bisa ditambah)
+# =========================================
+# Optional: Block specific suspicious IP ranges (edit as needed)
+# =========================================
 <RequireAll>
-    Require all granted
-    Require not ip 45.146.165.0/24
-    Require not ip 185.220.100.0/22
-    Require not ip 91.240.118.0/23
+  Require all granted
+  Require not ip 45.146.165.0/24
+  Require not ip 185.220.100.0/22
+  Require not ip 91.240.118.0/23
 </RequireAll>
 
-# 11️⃣ Header keamanan tambahan
+# =========================================
+# Security headers (HSTS, CSP, XSS protections)
+# Adjust CSP sources to match third-party services you use (GTM, GA, fonts)
+# =========================================
 <IfModule mod_headers.c>
-    Header always set X-Content-Type-Options "nosniff"
-    Header always set X-Frame-Options "SAMEORIGIN"
-    Header always set X-XSS-Protection "1; mode=block"
-    Header always set Referrer-Policy "strict-origin-when-cross-origin"
-    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-    Header unset X-Powered-By
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+  Header unset X-Powered-By
+
+  # Minimal CSP (allow GTM, GA, Google Fonts). Modify if you add other third-party scripts.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com; img-src 'self' data: https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"
 </IfModule>
 
-# 13️⃣ Cache control (untuk kecepatan)
+# =========================================
+# Expires / Cache control (performance)
+# =========================================
 <IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresByType image/jpg "access plus 1 month"
-    ExpiresByType image/jpeg "access plus 1 month"
-    ExpiresByType image/png "access plus 1 month"
-    ExpiresByType image/gif "access plus 1 month"
-    ExpiresByType text/css "access plus 1 week"
-    ExpiresByType application/javascript "access plus 1 week"
-    ExpiresDefault "access plus 3 days"
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresDefault "access plus 3 days"
 </IfModule>
 
-# 14️⃣ Non-cache untuk file PHP & HTML
+# Do not cache PHP/HTML (dynamic)
 <FilesMatch "\.(php|html)$">
-    Header set Cache-Control "no-store, no-cache, must-revalidate"
+  <IfModule mod_headers.c>
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  </IfModule>
 </FilesMatch>
 
-# 15️⃣ Matikan Server Signature
-ServerSignature Off
+# =========================================
+# Prevent TRACE requests
+# =========================================
+RewriteCond %{REQUEST_METHOD} ^TRACE
+RewriteRule .* - [F]
 
-# =============================
-# 🔒 Proteksi robots.txt (opsional)
-# =============================
-<Files "robots.txt">
-    <IfModule mod_setenvif.c>
-        SetEnvIfNoCase User-Agent "Googlebot" allowed_bot
-        SetEnvIfNoCase User-Agent "Googlebot-Image" allowed_bot
-        SetEnvIfNoCase User-Agent "Bingbot" allowed_bot
-        SetEnvIfNoCase User-Agent "YandexBot" allowed_bot
-        SetEnvIfNoCase User-Agent "DuckDuckBot" allowed_bot
-    </IfModule>
-    <RequireAll>
-        Require env allowed_bot
-    </RequireAll>
-    ErrorDocument 403 /robots.txt
-</Files>
-
-# ============================================
-# 🚫 BLOKIR LINK MALWARE & REQUEST MENCURIGAKAN
-# ============================================
-
-# 1️⃣ Blok URL dengan parameter acak seperti ?w=xxxx
-RewriteCond %{QUERY_STRING} (^|&)w=[0-9]+ [NC,OR]
-RewriteCond %{THE_REQUEST} \?w=[0-9]+ [NC,OR]
-RewriteCond %{REQUEST_URI} ^/index\.php$ [NC]
-RewriteRule .* - [F,L]
-
-# 2️⃣ Blok URL dengan ekstensi palsu .shtml di root
-RewriteCond %{THE_REQUEST} \.shtml [NC]
-RewriteRule .* - [F,L]
-
-# 3️⃣ Blok URL dengan parameter mencurigakan (id random, base64, eval, shell, dll)
-RewriteCond %{QUERY_STRING} (base64_encode|eval\(|assert\(|cmd|shell|GLOBALS|\_REQUEST|UNION._SELECT) [NC]
-RewriteRule .* - [F,L]
-
-# 4️⃣ Blok URL hasil injeksi /?detail/xxx
-RewriteCond %{THE_REQUEST} \?detail/ [NC,OR]
-RewriteCond %{QUERY_STRING} detail/ [NC,OR]
-RewriteCond %{REQUEST_URI} index\.php\?detail/ [NC,OR]
-RewriteCond %{REQUEST_URI} /detail/ [NC]
-RewriteRule .* - [F,L]
-
-# 5️⃣ Blok query 1 huruf mencurigakan (?x=123)
-RewriteCond %{QUERY_STRING} ^[a-zA-Z]=[0-9]+$ [NC]
-RewriteRule .* - [F,L]
-
-# 6️⃣ Tambahan proteksi karakter injeksi
-RewriteCond %{THE_REQUEST} "(\;|\||\`|\\|\<|\>)" [NC]
-RewriteRule .* - [F,L]
-
-# ============================================
-# 🌐 CLEAN URL TANPA .PHP (FINAL)
-# ============================================
-
-# Redirect URL .php ke versi tanpa ekstensi (SEO friendly)
-RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+# =========================================
+# CLEAN URL (remove .php) - keep admin intact
+# =========================================
+# Redirect requests for .php to no-extension (for SEO)
+RewriteCond %{THE_REQUEST} \s/([^\s]+)\.php[\s?] [NC]
 RewriteCond %{REQUEST_URI} !^/admin
 RewriteRule ^ %1 [R=301,L]
 
-# Buka halaman tanpa .php di frontend
+# Serve file.php when user requests /file (frontend only, not /admin)
 RewriteCond %{REQUEST_URI} !^/admin
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^([^/]+)/?$ $1.php [L,QSA]
 
-# =====================================
-# ✅ END OF SECURITY CONFIG
-# =====================================
+# =========================================
+# End
+# =========================================

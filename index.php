@@ -328,9 +328,42 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
       </section>
     </main>
 
-    <!-- WhatsApp Chat -->
-    <script src="https://static.elfsight.com/platform/platform.js" async></script>
-    <div class="elfsight-app-1c150e27-6597-4113-becd-79df393b9756" data-elfsight-app-lazy></div>
+    <!-- WhatsApp Floating Chat -->
+    <div id="wa-widget">
+      <div id="wa-button">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+      </div>
+
+      <div id="wa-box">
+        <div class="wa-header">
+          <img src="https://dealerhinoindonesia.com/images/logo3.webp" alt="Hino" />
+          <div>
+            <h4>Nathan Hino</h4>
+            <p>Online • Siap membantu</p>
+          </div>
+        </div>
+
+        <div class="wa-body">
+          <p>Halo! Ada yang bisa saya bantu mengenai produk Hino?</p>
+        </div>
+
+        <a
+          href="https://wa.me/6285975287684?text=Halo%20kak%20Nathan.%20Saya%20ingin%20bertanya%20tentang%20produk%20Hino."
+          target="_blank"
+          class="wa-send"
+        >
+          Chat via WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <script>
+      // Toggle open/close
+      document.getElementById("wa-button").onclick = function () {
+        document.getElementById("wa-box").classList.toggle("show");
+      };
+    </script>
+
 
     <?php include 'footer.php'; ?>
 

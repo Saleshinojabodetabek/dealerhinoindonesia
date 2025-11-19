@@ -36,3 +36,96 @@ main > section {
   margin: 0 auto 3rem;
   padding: 0 1rem;
 }
+
+/* WhatsApp Widget */
+#wa-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999999;
+  font-family: "Poppins", sans-serif;
+}
+
+#wa-button img {
+  width: 58px;
+  height: 58px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#wa-box {
+  width: 280px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  display: none;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
+}
+
+#wa-box.show {
+  display: block;
+}
+
+.wa-header {
+  background: #0dbf51;
+  color: white;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wa-header img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: white;
+  padding: 3px;
+}
+
+.wa-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.wa-header p {
+  margin: 2px 0 0;
+  font-size: 12px;
+}
+
+.wa-body {
+  padding: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.wa-send {
+  background: #0dbf51;
+  display: block;
+  padding: 12px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.wa-send:hover {
+  background: #0ca548;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

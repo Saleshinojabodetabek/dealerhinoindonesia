@@ -329,41 +329,62 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
       </section>
     </main>
 
-    <!-- WhatsApp Floating Chat -->
-    <div id="wa-widget">
-      <div id="wa-button">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+    <!-- WhatsApp Floating Widget -->
+    <div id="wa-widget-container">
+
+      <!-- Floating Button -->
+      <div id="wa-floating-btn">
+        <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="wa" />
+        <span>WhatsApp</span>
       </div>
 
-      <div id="wa-box">
+      <!-- Chat Box -->
+      <div id="wa-chatbox">
         <div class="wa-header">
-          <img src="https://dealerhinoindonesia.com/images/logo3.webp" alt="Hino" />
+          <img src="https://dealerhinoindonesia.com/images/NT.jpeg" class="wa-avatar" />
           <div>
             <h4>Nathan Hino</h4>
-            <p>Online • Siap membantu</p>
+            <p>Online <span class="wa-dot"></span></p>
           </div>
+          <div class="wa-close" onclick="toggleWA()">✕</div>
         </div>
 
         <div class="wa-body">
-          <p>Halo! Ada yang bisa saya bantu mengenai produk Hino?</p>
+          <div class="wa-message">
+            <p>Halo 👋</p>
+            <p>Saya siap membantu untuk info produk Hino.<br>
+            Silakan tanya apa saja 😊</p>
+          </div>
         </div>
 
         <a
-          href="https://wa.me/6285975287684?text=Halo%20kak%20Nathan.%20Saya%20ingin%20bertanya%20tentang%20produk%20Hino."
+          href="https://wa.me/6285975287684?text=Halo%20kak%20Nathan.%20Saya%20mau%20bertanya%20tentang%20produk%20Hino."
+          class="wa-button"
           target="_blank"
-          class="wa-send"
         >
-          Chat via WhatsApp
+          Chat on WhatsApp
         </a>
       </div>
     </div>
 
     <script>
-      // Toggle open/close
-      document.getElementById("wa-button").onclick = function () {
-        document.getElementById("wa-box").classList.toggle("show");
-      };
+      const waBox = document.getElementById("wa-chatbox");
+      const waBtn = document.getElementById("wa-floating-btn");
+
+      waBtn.onclick = toggleWA;
+
+      function toggleWA() {
+        waBox.classList.toggle("show");
+      }
     </script>
+
+
+        <script>
+          // Toggle open/close
+          document.getElementById("wa-button").onclick = function () {
+            document.getElementById("wa-box").classList.toggle("show");
+          };
+        </script>
 
 
     <?php include 'footer.php'; ?>

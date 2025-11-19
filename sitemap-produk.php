@@ -1,23 +1,30 @@
 <?php
-// MATIKAN semua output yang tidak kita kendalikan
-while (ob_get_level()) { ob_end_clean(); }
+// ======================================
+//  FIX HOSTINGER 500 ERROR
+//  SAFE XML SITEMAP GENERATOR
+// ======================================
 
+// Hapus output buffer bila ada (hostinger yang aman)
+if (function_exists('ob_end_clean')) { @ob_end_clean(); }
+
+// Header XML
 header("Content-Type: application/xml; charset=UTF-8");
-header("X-Robots-Tag: noindex");
 
-// Koneksi database
+// Database
 $host = "localhost";
 $user = "u166903321_dealerhinoidn";
 $pass = "NatanaelH1no0504@@";
 $db   = "u166903321_dealerhinoidn";
 
-$conn = @new mysqli($host, $user, $pass, $db);
+// Koneksi aman (tanpa strict mode, tanpa mysqli_report)
+$conn = new mysqli($host, $user, $pass, $db);
 
+// Base URL
 $base = "https://dealerhinoindonesia.com";
 $today = date('Y-m-d');
 
-// Gunakan buffer manual (tidak pakai echo)
-$xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+// Mulai XML
+$xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
 // Halaman statis
@@ -40,29 +47,32 @@ foreach ($static as $p) {
 }
 
 // Produk dinamis
-if ($conn && !$conn->connect_error) {
+if (!$conn->connect_error) {
+
     $check = $conn->query("SHOW TABLES LIKE 'produk'");
-    if ($check && $check->num_rows) {
+
+    if ($check && $check->num_rows > 0) {
         $q = $conn->query("SELECT slug, updated_at FROM produk ORDER BY id DESC");
-        while ($r = $q->fetch_assoc()) {
 
-            $slug = htmlspecialchars($r['slug'], ENT_XML1);
-            $last = $r['updated_at'] ? date("Y-m-d", strtotime($r['updated_at'])) : $today;
+        if ($q) {
+            while ($r = $q->fetch_assoc()) {
+                $slug = htmlspecialchars($r['slug'], ENT_XML1);
+                $last = !empty($r['updated_at']) ? date("Y-m-d", strtotime($r['updated_at'])) : $today;
 
-            $xml .= "  <url>\n";
-            $xml .= "    <loc>$base/produk/$slug</loc>\n";
-            $xml .= "    <lastmod>$last</lastmod>\n";
-            $xml .= "    <changefreq>weekly</changefreq>\n";
-            $xml .= "    <priority>0.8</priority>\n";
-            $xml .= "  </url>\n";
+                $xml .= "  <url>\n";
+                $xml .= "    <loc>$base/produk/$slug</loc>\n";
+                $xml .= "    <lastmod>$last</lastmod>\n";
+                $xml .= "    <changefreq>weekly</changefreq>\n";
+                $xml .= "    <priority>0.8</priority>\n";
+                $xml .= "  </url>\n";
+            }
         }
     }
 }
 
 $xml .= "</urlset>";
 
-// KIRIM RAW XML langsung
+// Output XML
 echo $xml;
 
-// STOP eksekusi untuk mencegah Hostinger menambah HTML
 exit;

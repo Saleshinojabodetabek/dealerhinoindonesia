@@ -86,11 +86,6 @@ SetEnvIfNoCase User-Agent "sqlmap" bad_bot
     Header unset X-Powered-By
 </IfModule>
 
-# 12️⃣ Cegah hotlink gambar
-RewriteCond %{HTTP_REFERER} !^$
-RewriteCond %{HTTP_REFERER} !^https://(www\.)?dealerhinoindonesia\.com [NC]
-RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F,L]
-
 # 13️⃣ Cache control (untuk kecepatan)
 <IfModule mod_expires.c>
     ExpiresActive On

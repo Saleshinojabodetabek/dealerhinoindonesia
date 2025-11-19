@@ -83,7 +83,7 @@ while ($row = $res_spec->fetch_assoc()) {
   <meta name="description" content="Dealer Resmi Hino Indonesia - Jual Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan untuk seluruh Indonesia, khususnya Jabodetabek dan Jawa Barat. Hubungi Nathan Hino sekarang juga! 0859-7528-7684" />
   <meta name="keywords" content="Dealer Hino, Dealer Hino Jakarta, Promo Hino 2025, Harga Hino Dutro, Hino Ranger 500 Series, Kredit Truk Hino Jakarta, Cicilan Hino, Dealer Resmi Hino Indonesia, Jual Hino Jakarta, Hino Euro 4 Terbaru, Harga Hino Jabodetabek, Dealer Hino Tangerang, Bekasi, Depok, Bogor, Bandung, Hino untuk Bisnis, Hino Angkut Barang, Sales Hino Resmi Jakarta, Leasing Hino, Hino Dump Truck, Hino Termurah, Bengkel & Servis Hino Resmi" />
   <meta name="author" content="Nathan Hino" />
-  <title><?= htmlspecialchars($produk['nama_produk']) ?> - Dealer Hino Indonesia</title>
+  <title><?= htmlspecialchars($produk['nama_produk']) ?> | Dealer Hino Indonesia</title>
 
   <link rel="icon" href="https://dealerhinoindonesia.com/images/favicon.png" type="image/png" sizes="32x32"/>
   <link rel="apple-touch-icon" href="images/favicon.png" />

@@ -1,35 +1,27 @@
 <?php
-// Hindari BOM dan output lain
-header("Content-Type: application/xml; charset=UTF-8");
-error_reporting(0);
+// MATIKAN semua output yang tidak kita kendalikan
+while (ob_get_level()) { ob_end_clean(); }
 
-// Koneksi
+header("Content-Type: application/xml; charset=UTF-8");
+header("X-Robots-Tag: noindex");
+
+// Koneksi database
 $host = "localhost";
 $user = "u166903321_dealerhinoidn";
 $pass = "NatanaelH1no0504@@";
 $db   = "u166903321_dealerhinoidn";
 
-$conn = new mysqli($host, $user, $pass, $db);
+$conn = @new mysqli($host, $user, $pass, $db);
 
-$base_url = "https://dealerhinoindonesia.com";
+$base = "https://dealerhinoindonesia.com";
+$today = date('Y-m-d');
 
-echo '<?xml version="1.0" encoding="UTF-8"?>';
-echo "\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
-
-// Fungsi cetak
-function printUrl($loc, $lastmod, $changefreq = "weekly", $priority = "0.8") {
-    echo "  <url>\n";
-    echo "    <loc>" . htmlspecialchars($loc, ENT_XML1) . "</loc>\n";
-    echo "    <lastmod>$lastmod</lastmod>\n";
-    echo "    <changefreq>$changefreq</changefreq>\n";
-    echo "    <priority>$priority</priority>\n";
-    echo "  </url>\n";
-}
-
-$today = date("Y-m-d");
+// Gunakan buffer manual (tidak pakai echo)
+$xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
 // Halaman statis
-$pages = [
+$static = [
     "/hino300.php",
     "/hino500.php",
     "/hinobus.php",
@@ -38,25 +30,39 @@ $pages = [
     "/product-detail-hinobus.php"
 ];
 
-foreach ($pages as $p) {
-    printUrl("$base_url$p", $today, "weekly", "0.9");
+foreach ($static as $p) {
+    $xml .= "  <url>\n";
+    $xml .= "    <loc>$base$p</loc>\n";
+    $xml .= "    <lastmod>$today</lastmod>\n";
+    $xml .= "    <changefreq>weekly</changefreq>\n";
+    $xml .= "    <priority>0.9</priority>\n";
+    $xml .= "  </url>\n";
 }
 
 // Produk dinamis
-$res = $conn->query("SHOW TABLES LIKE 'produk'");
-if ($res && $res->num_rows > 0) {
-    $q = $conn->query("SELECT slug, updated_at FROM produk ORDER BY id DESC");
-    if ($q) {
-        while ($row = $q->fetch_assoc()) {
-            $slug = $row['slug'];
-            $lastmod = !empty($row['updated_at'])
-                ? date("Y-m-d", strtotime($row["updated_at"]))
-                : $today;
+if ($conn && !$conn->connect_error) {
+    $check = $conn->query("SHOW TABLES LIKE 'produk'");
+    if ($check && $check->num_rows) {
+        $q = $conn->query("SELECT slug, updated_at FROM produk ORDER BY id DESC");
+        while ($r = $q->fetch_assoc()) {
 
-            printUrl("$base_url/produk/$slug", $lastmod);
+            $slug = htmlspecialchars($r['slug'], ENT_XML1);
+            $last = $r['updated_at'] ? date("Y-m-d", strtotime($r['updated_at'])) : $today;
+
+            $xml .= "  <url>\n";
+            $xml .= "    <loc>$base/produk/$slug</loc>\n";
+            $xml .= "    <lastmod>$last</lastmod>\n";
+            $xml .= "    <changefreq>weekly</changefreq>\n";
+            $xml .= "    <priority>0.8</priority>\n";
+            $xml .= "  </url>\n";
         }
     }
 }
 
-echo "</urlset>";
-$conn->close();
+$xml .= "</urlset>";
+
+// KIRIM RAW XML langsung
+echo $xml;
+
+// STOP eksekusi untuk mencegah Hostinger menambah HTML
+exit;

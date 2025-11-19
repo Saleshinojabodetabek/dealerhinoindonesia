@@ -293,7 +293,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
 
     <!-- Floating Button -->
     <div id="wa-floating-btn">
-      <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="wa" />
+      <img src="https://dealerhinoindonesia.com/images/wa.png" alt="wa" />
       <span>WhatsApp</span>
     </div>
 

@@ -1,7 +1,9 @@
 <?php
+// Pastikan tidak ada spasi sebelum tag PHP pertama
+ini_set('display_errors', 0);
 error_reporting(0);
-ob_clean();
-header("Content-Type: application/xml; charset=utf-8");
+
+header("Content-Type: application/xml; charset=UTF-8");
 
 $host = "localhost";
 $user = "u166903321_dealerhinoidn";
@@ -9,13 +11,15 @@ $pass = "NatanaelH1no0504@@";
 $db   = "u166903321_dealerhinoidn";
 
 $conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) exit();
 
 $base_url = "https://dealerhinoindonesia.com";
 
-echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+// Tidak pakai ob_clean() lagi karena merusak XML
 
+echo '<?xml version="1.0" encoding="UTF-8"?>';
+echo "\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+
+// Function aman untuk mencetak URL XML
 function printUrl($loc, $lastmod, $changefreq = "weekly", $priority = "0.8") {
     echo "  <url>\n";
     echo "    <loc>" . htmlspecialchars($loc, ENT_XML1) . "</loc>\n";
@@ -29,7 +33,7 @@ $today = date('Y-m-d');
 
 
 // =======================================================
-// 1️⃣ Halaman produk statis (tetap muncul meski DB error)
+// 1️⃣ Halaman Produk Statis
 // =======================================================
 $pages = [
     "/hino300.php",
@@ -46,20 +50,23 @@ foreach ($pages as $p) {
 
 
 // =======================================================
-// 2️⃣ Produk Dinamis dari Database (jika tabel ada)
+// 2️⃣ Produk Dinamis
 // =======================================================
 $res = $conn->query("SHOW TABLES LIKE 'produk'");
 
 if ($res && $res->num_rows > 0) {
+
     $q = $conn->query("SELECT slug, updated_at FROM produk ORDER BY id DESC");
+
     if ($q) {
         while ($row = $q->fetch_assoc()) {
+
             $slug = $row['slug'];
             $lastmod = !empty($row['updated_at'])
                 ? date('Y-m-d', strtotime($row['updated_at']))
                 : $today;
 
-            printUrl("$base_url/produk/$slug", $lastmod, "weekly", "0.8");
+            printUrl("$base_url/produk/$slug", $lastmod);
         }
     }
 }
@@ -67,5 +74,4 @@ if ($res && $res->num_rows > 0) {
 echo "</urlset>";
 
 $conn->close();
-ob_end_flush();
 ?>

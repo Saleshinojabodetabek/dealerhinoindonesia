@@ -182,6 +182,15 @@ while ($row = $res_spec->fetch_assoc()) {
       ]
     }
   </script>
+
+  <!-- Event snippet for Pembelian conversion page -->
+  <script>
+  gtag('event', 'conversion', {
+      'send_to': 'AW-17738682772/7zEXCMGP3sIbEJSju4pC',
+      'transaction_id': ''
+  });
+  </script>
+
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->

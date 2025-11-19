@@ -159,6 +159,15 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
         ]
       }
     </script>
+    
+    <!-- Event snippet for Pembelian conversion page -->
+    <script>
+    gtag('event', 'conversion', {
+        'send_to': 'AW-17738682772/7zEXCMGP3sIbEJSju4pC',
+        'transaction_id': ''
+    });
+    </script>
+
   </head>
 
   <body>

@@ -52,6 +52,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/whatsapp.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/product/hero.css" />
     <link rel="stylesheet" href="css/product/kategori.css" />
@@ -310,12 +311,62 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
       });
     </script>
 
-    <!-- WhatsApp Chat -->
-    <script src="https://static.elfsight.com/platform/platform.js" async></script>
-    <div
-      class="elfsight-app-1c150e27-6597-4113-becd-79df393b9756"
-      data-elfsight-app-lazy
-    ></div>
+  <!-- WhatsApp Floating Widget -->
+  <div id="wa-widget-container">
+
+    <!-- Floating Button -->
+    <div id="wa-floating-btn">
+      <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="wa" />
+      <span>WhatsApp</span>
+    </div>
+
+    <!-- Chat Box -->
+    <div id="wa-chatbox">
+      <div class="wa-header">
+        <img src="https://dealerhinoindonesia.com/images/NT.jpeg" class="wa-avatar" />
+        <div>
+          <h4>Nathan Hino</h4>
+          <p>Online <span class="wa-dot"></span></p>
+        </div>
+        <div class="wa-close" onclick="toggleWA()">✕</div>
+      </div>
+
+      <div class="wa-body">
+        <div class="wa-message">
+          <p>Halo 👋</p>
+          <p>Saya siap membantu untuk info produk Hino.<br>
+          Silakan tanya apa saja 😊</p>
+        </div>
+      </div>
+
+      <a
+        href="https://wa.me/6285975287684?text=Halo%20kak%20Nathan.%20Saya%20mau%20bertanya%20tentang%20produk%20Hino."
+        class="wa-button"
+        target="_blank"
+      >
+        Chat on WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const waBox = document.getElementById("wa-chatbox");
+    const waBtn = document.getElementById("wa-floating-btn");
+
+    waBtn.onclick = toggleWA;
+
+    function toggleWA() {
+      waBox.classList.toggle("show");
+    }
+  </script>
+
+
+      <script>
+        // Toggle open/close
+        document.getElementById("wa-button").onclick = function () {
+          document.getElementById("wa-box").classList.toggle("show");
+        };
+      </script>
 
     <?php include 'footer.php'; ?>
   </body>

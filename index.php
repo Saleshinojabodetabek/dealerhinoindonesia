@@ -88,7 +88,7 @@ ob_start('convertImgToWebp'); // aktifkan output buffering
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/wa.css" />
+    <link rel="stylesheet" href="css/whatsapp.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/home/hero.css" />
     <link rel="stylesheet" href="css/home/promoutama.css" />

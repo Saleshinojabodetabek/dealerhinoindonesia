@@ -1,36 +1,48 @@
+# =========================================================
 # robots.txt for dealerhinoindonesia.com
-# Updated: 19 November 2025
+# FINAL CLEAN & OPTIMIZED
+# =========================================================
 
 User-agent: *
-# --- ALLOW: Halaman publik ---
-Allow: /
-Allow: /hino300.php
-Allow: /hino500.php
-Allow: /hinobus.php
-Allow: /artikel.php
-Allow: /detail_artikel.php
-Allow: /contact.php
-Allow: /product-detail-hino300.php
-Allow: /product-detail-hino500.php
-Allow: /product-detail-hinobus.php
 
-# --- DISALLOW: Folder sensitif / backend ---
+# --- ALLOW: Static files ---
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /uploads/
+Allow: /favicon.png
+Allow: /favicon.ico
+Allow: /manifest.json$
+Allow: /site.webmanifest$
+
+# --- BLOCK: Sensitive directories ---
 Disallow: /admin/
-Disallow: /config.php
-Disallow: /database/
 Disallow: /backup/
+Disallow: /database/
 Disallow: /private/
+Disallow: /vendor/
+Disallow: /config.php
 Disallow: /composer.json
 Disallow: /composer.lock
 
-# --- IMPORTANT ---
-# Jangan blokir /css/, /js/, /images/
-# Google MEMBUTUHKAN folder tersebut untuk render halaman dengan baik.
+# --- BLOCK all PHP by default ---
+Disallow: /*.php$
 
-# --- SITEMAPS ---
+# --- ALLOW important public PHP pages ---
+Allow: /index.php$
+Allow: /artikel.php$
+Allow: /detail_artikel.php$
+Allow: /hino300.php$
+Allow: /hino500.php$
+Allow: /hinobus.php$
+Allow: /product-detail-hino300.php$
+Allow: /product-detail-hino500.php$
+Allow: /product-detail-hinobus.php$
+Allow: /contact.php$
+
+# --- Sitemap ---
 Sitemap: https://dealerhinoindonesia.com/sitemap-index.xml
-Sitemap: https://dealerhinoindonesia.com/sitemap-pages.xml
-Sitemap: https://dealerhinoindonesia.com/sitemap-artikel.php
-Sitemap: https://dealerhinoindonesia.com/sitemap-produk.php
 
-# End of file
+# =========================================================
+# END OF FILE
+# =========================================================

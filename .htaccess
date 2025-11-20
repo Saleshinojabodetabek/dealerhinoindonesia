@@ -1,97 +1,67 @@
-# =========================================
-# 🔒 DealerHinoIndonesia - SECURITY CONFIG (FINAL)
-# =========================================
+###############################################
 
-# 1) Basic
+# 🌐 FRONTEND SECURITY + SEO + PERFORMANCE
+
+###############################################
+
 Options -Indexes
 RewriteEngine On
 
-# 2) Force HTTPS (except localhost for dev)
+###############################################
+
+# 1) FORCE HTTPS (kecuali localhost)
+
+###############################################
 RewriteCond %{HTTP_HOST} !^localhost [NC]
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# =========================================
-# ✔ Allow essential static files (bypass rewrites/blocks)
-# =========================================
-# Allow favicon regardless of Referer
-RewriteRule (^|/)favicon\.(ico|png|gif|jpg|jpeg|webp)$ - [L,NC]
-# Allow PWA / manifests
+###############################################
+
+# 2) ALLOW FAVICON & STATIC SEO FILES
+
+###############################################
+RewriteRule (^|/)favicon\.(ico|png|gif|jpg|jpeg|webp|svg)$ - [L,NC]
 RewriteRule ^(manifest\.json|site\.webmanifest)$ - [L,NC]
-# Allow sitemap & robots
-RewriteRule ^(sitemap\.xml|robots\.txt)$ - [L,NC]
+RewriteRule ^(robots\.txt|sitemap.\*)$ - [L,NC]
 
-# =========================================
-# 🔥 ANTI-HOTLINK GAMBAR (LOGIKA BENAR: cek referer ada AND bukan domain kita)
-# =========================================
+###############################################
+
+# 3) ANTI-HOTLINK GAMBAR
+
+###############################################
 RewriteCond %{REQUEST_FILENAME} -f
-RewriteCond %{REQUEST_URI} \.(?:jpe?g|png|gif|webp)$ [NC]
-RewriteCond %{HTTP_REFERER} !^$                       [AND]
+RewriteCond %{REQUEST_URI} \.(jpe?g|png|gif|svg|webp)$ [NC]
+RewriteCond %{HTTP_REFERER} !^$ [AND]
 RewriteCond %{HTTP_REFERER} !^https?://(www\.)?dealerhinoindonesia\.com [NC]
-RewriteRule \.(?:jpe?g|png|gif|webp)$ - [F,NC,L]
+RewriteRule \.(jpe?g|png|gif|svg|webp)$ - [F,NC,L]
 
-# =========================================
-# Block access to sensitive files (modern syntax)
-# =========================================
-<IfModule mod_authz_core.c>
-  <FilesMatch "(^\.|config\.php|koneksi\.php|composer\.json|composer\.lock|package\.json|yarn\.lock|\.env|\.git|\.htpasswd)$">
-      Require all denied
-  </FilesMatch>
-</IfModule>
+###############################################
 
-# If mod_authz_core not present, fallback (compat)
-<IfModule !mod_authz_core.c>
-  <FilesMatch "(^\.|config\.php|koneksi\.php|composer\.json|composer\.lock|package\.json|yarn\.lock|\.env|\.git|\.htpasswd)$">
-      Order allow,deny
-      Deny from all
-  </FilesMatch>
-</IfModule>
+# 4) BLOCK SENSITIVE DEV FILES
 
-# =========================================
-# Prevent execution of PHP/etc inside admin uploads (but allow static images)
-# Use <If> to match URI since <Directory> isn't allowed in .htaccess
-# =========================================
-<If "%{REQUEST_URI} =~ m#^/admin/api/uploads/#">
-  <FilesMatch "\.(php|php3|php4|php5|phtml|phps|pl|py|jsp|asp|aspx|sh|exe)$">
-    Require all denied
-  </FilesMatch>
-</If>
+###############################################
+<FilesMatch "(^\.|composer\.json|composer\.lock|package\.json|yarn\.lock|\.env|\.git|\.htpasswd)$">
+Require all denied
+</FilesMatch>
 
-# =========================================
-# Block dangerous uploaded filetypes everywhere
-# =========================================
-<IfModule mod_authz_core.c>
-  <FilesMatch "\.(phps|php5|phtml|exe|sh|bat|pl|py|jsp|asp)$">
-      Require all denied
-  </FilesMatch>
-</IfModule>
+###############################################
 
-# =========================================
-# Block suspicious query strings (LFI/RFI/injection patterns)
-# =========================================
-RewriteCond %{QUERY_STRING} (?:\.\./|\.\.\\|/etc/passwd|/bin/bash|base64_encode|eval\(|system\(|shell_exec\(|UNION(?:\s)+SELECT|GLOBALS|_REQUEST) [NC]
-RewriteRule .* - [F,L]
+# 5) BLOCK BAD QUERY STRINGS
 
-# NOTE: removed "single-letter query" blocking because many apps use ?id=123
+###############################################
+RewriteCond %{QUERY_STRING} (\.\./|/etc/passwd|base64|eval\(|system\(|UNION._SELECT|GLOBALS|\_REQUEST) [NC]
+RewriteRule ._ - [F,L]
 
-# =========================================
-# Protect .htaccess itself
-# =========================================
-<Files ".htaccess">
-  Require all denied
-</Files>
+###############################################
 
-# =========================================
-# Block known bad referers & scanners (but allow major crawlers)
-# =========================================
-SetEnvIfNoCase Referer "semalt\.com" bad_ref=1
-SetEnvIfNoCase Referer "buttons\-for\-website" bad_ref=1
-SetEnvIfNoCase Referer "darodar\.com" bad_ref=1
+# 6) BLOCK BOTS / REFERRERS
 
+###############################################
+SetEnvIfNoCase Referer "semalt" bad_ref
+SetEnvIfNoCase Referer "darodar" bad_ref
 SetEnvIfNoCase User-Agent "nikto" bad_bot
 SetEnvIfNoCase User-Agent "sqlmap" bad_bot
-SetEnvIfNoCase User-Agent "fimap" bad_bot
-SetEnvIfNoCase User-Agent "fuzzer" bad_bot
 
 <RequireAll>
   Require all granted
@@ -99,74 +69,90 @@ SetEnvIfNoCase User-Agent "fuzzer" bad_bot
   Require not env bad_bot
 </RequireAll>
 
-# =========================================
-# Optional: Block specific suspicious IP ranges (edit as needed)
-# =========================================
+###############################################
+
+# 7) BLOCK AED / RUSSIAN MALICIOUS IP RANGES
+
+###############################################
 <RequireAll>
-  Require all granted
-  Require not ip 45.146.165.0/24
-  Require not ip 185.220.100.0/22
-  Require not ip 91.240.118.0/23
+Require all granted
+Require not ip 45.146.165.0/24
+Require not ip 185.220.100.0/22
+Require not ip 91.240.118.0/23
 </RequireAll>
 
-# =========================================
-# Security headers (HSTS, CSP, XSS protections)
-# Adjust CSP sources to match third-party services you use (GTM, GA, fonts)
-# =========================================
+###############################################
+
+# 8) SECURITY & SEO HEADERS + FEATHER FIX
+
+###############################################
 <IfModule mod_headers.c>
-  Header always set X-Content-Type-Options "nosniff"
-  Header always set X-Frame-Options "SAMEORIGIN"
-  Header always set X-XSS-Protection "1; mode=block"
-  Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
-  Header unset X-Powered-By
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set X-XSS-Protection "1; mode=block"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+Header unset X-Powered-By
 
-  # Minimal CSP (allow GTM, GA, Google Fonts). Modify if you add other third-party scripts.
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com; img-src 'self' data: https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"
+# ✔ FEATHER ICON FIX:
+
+# butuh inline script & svg inline
+
+# tidak berbahaya selama dibatasi hanya di frontend sendiri
+
+Header always set Content-Security-Policy "
+default-src 'self';
+img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://\*.dealerhinoindonesia.com;
+script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+font-src 'self' https://fonts.gstatic.com;
+object-src 'none';
+base-uri 'self';
+form-action 'self';
+frame-ancestors 'self';
+"
 </IfModule>
 
-# =========================================
-# Expires / Cache control (performance)
-# =========================================
+###############################################
+
+# 9) CACHE + PERFORMANCE BOOST
+
+###############################################
 <IfModule mod_expires.c>
-  ExpiresActive On
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/gif "access plus 1 year"
-  ExpiresByType text/css "access plus 1 month"
-  ExpiresByType application/javascript "access plus 1 month"
-  ExpiresDefault "access plus 3 days"
+ExpiresActive On
+ExpiresByType image/webp "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/gif "access plus 1 year"
+ExpiresByType image/svg+xml "access plus 1 year"
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/javascript "access plus 1 month"
+ExpiresDefault "access plus 3 days"
 </IfModule>
 
-# Do not cache PHP/HTML (dynamic)
+# PHP/HTML no cache
+
 <FilesMatch "\.(php|html)$">
-  <IfModule mod_headers.c>
-    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
-  </IfModule>
+Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
 </FilesMatch>
 
-# =========================================
-# Prevent TRACE requests
-# =========================================
-RewriteCond %{REQUEST_METHOD} ^TRACE
-RewriteRule .* - [F]
+###############################################
 
-# =========================================
-# CLEAN URL (remove .php) - keep admin intact
-# =========================================
-# Redirect requests for .php to no-extension (for SEO)
+# 10) CLEAN URL SEO FRIENDLY (tidak ganggu admin)
+
+###############################################
 RewriteCond %{THE_REQUEST} \s/([^\s]+)\.php[\s?] [NC]
 RewriteCond %{REQUEST_URI} !^/admin
 RewriteRule ^ %1 [R=301,L]
 
-# Serve file.php when user requests /file (frontend only, not /admin)
 RewriteCond %{REQUEST_URI} !^/admin
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^([^/]+)/?$ $1.php [L,QSA]
 
-# =========================================
-# End
-# =========================================
+###############################################
+
+# 🔚 END
+
+###############################################

@@ -86,13 +86,23 @@ while ($row = $res_spec->fetch_assoc()) {
     />
     <meta
       name="keywords"
-      content="Dealer Hino, Dealer Hino Jakarta, Promo Hino 2025, Harga Hino Dutro, Hino Ranger 500 Series, Kredit Hino Jakarta, Cicilan Hino, Dealer Resmi Hino Indonesia, Jual Hino Jakarta, Hino Euro 4 Terbaru, Harga Hino Jabodetabek, Dealer Hino Tangerang, Bekasi, Depok, Bogor, Bandung, Hino untuk Bisnis, Hino Angkut Barang, Sales Hino Resmi Jakarta, Leasing Hino, Hino Dump Truck, Hino Termurah, Bengkel & Servis Hino Resmi"
+      content="harga hino dutro terbaru, hino dutro series, hino 300 series, harga hino chassis, truk hino angkut barang, truk hino untuk bisnis, truk hino termurah, brosur truk hino, spesifikasi truk hino, truk hino euro 4"
     />
     <meta name="author" content="Nathan Hino" />
     <title><?= htmlspecialchars($produk['nama_produk']) ?> | Dealer Hino Indonesia</title>
 
-    <link rel="icon" href="https://dealerhinoindonesia.com/images/favicon.png" type="image/png" sizes="32x32"/>
-    <link rel="apple-touch-icon" href="images/favicon.png" />
+    <!-- Favicon untuk semua browser modern -->
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon_512.png">
+    
+    <!-- Favicon untuk browser lama -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Apple Touch Icon (iPhone/iPad) -->
+    <link rel="apple-touch-icon" href="/favicon_512.png">
+    
+    <!-- Google Lighthouse Recommendation -->
+    <meta name="theme-color" content="#ffffff">
+
     <link rel="canonical" href="https://dealerhinoindonesia.com/hino300.php" />
 
   <!-- Google tag (gtag.js) -->
@@ -146,12 +156,13 @@ while ($row = $res_spec->fetch_assoc()) {
     </style>
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Dealer Hino Indonesia | Harga & Promo Hino Terbaru 2025" />
-    <meta property="og:description" content="Dealer Resmi Hino Jakarta - Jual Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan." />
-    <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
-    <meta property="og:url" content="https://dealerhinoindonesia.com/" />
-    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<?= htmlspecialchars($produk['nama_produk']) ?> | Hino Dutro 300" />
+    <meta property="og:description" content="<?= htmlspecialchars(mb_strimwidth(strip_tags($produk['deskripsi']), 0, 160, '...')) ?>" />
+    <meta property="og:image" content="https://dealerhinoindonesia.com/admin/uploads/<?= $produk['gambar'] ?>" />
+    <meta property="og:url" content="https://dealerhinoindonesia.com/produk/<?= $produk['slug'] ?>" />
+    <meta property="og:type" content="product" />
     <meta property="og:site_name" content="Dealer Hino Indonesia" />
+
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -159,6 +170,16 @@ while ($row = $res_spec->fetch_assoc()) {
     <meta name="twitter:description" content="Dealer Resmi Hino Jakarta - Jual Hino Dutro, Ranger, dan Bus Hino dengan harga terbaik dan promo terbaru 2025." />
     <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
 
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Dealer Hino Indonesia",
+      "url": "https://dealerhinoindonesia.com"
+    }
+    </script>
+    
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",

@@ -59,7 +59,7 @@ try {
     $check = $conn->query("SHOW TABLES LIKE 'produk'");
     if ($check && $check->num_rows > 0) {
 
-      $q = $conn->query("SELECT slug, updated_at FROM produk ORDER BY id DESC");
+      $q = $conn->query("SELECT slug FROM produk ORDER BY id DESC");
 
       if ($q) {
         while ($r = $q->fetch_assoc()) {
@@ -72,8 +72,8 @@ try {
           $slug = htmlspecialchars($slug_raw, ENT_XML1 | ENT_QUOTES, 'UTF-8');
 
           // Validasi tanggal
-          $dt = strtotime($r['updated_at']);
-          $lastmod = $dt ? date("Y-m-d", $dt) : $today;
+          $lastmod = $today;
+
 
           // Append dynamic URL
           $xml .= "  <url>\n";

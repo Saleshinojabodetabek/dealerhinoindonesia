@@ -40,7 +40,7 @@ if ($slug !== '' && is_array($data)) {
     />
     <meta
       name="keywords"
-      content="Dealer Hino, Dealer Hino Jakarta, Promo Truk Hino 2025, Harga Truk Hino Dutro, Hino Ranger 500 Series, Kredit Truk Hino Jakarta, Cicilan Truk Hino, Dealer Resmi Hino Indonesia, Jual Truk Hino Jakarta, Hino Euro 4 Terbaru, Harga Truk Hino Jabodetabek, Dealer Hino Tangerang, Bekasi, Depok, Bogor, Bandung, Truk Hino untuk Bisnis, Truk Hino Angkut Barang, Sales Hino Resmi Jakarta, Leasing Truk Hino, Hino Dump Truck, Truk Hino Termurah, Bengkel & Servis Hino Resmi"
+      content="harga truk hino terbaru, tips memilih truk hino, perbandingan hino dutro dan ranger, review truk hino, update harga hino 2025, berita hino terbaru, artikel hino indonesia, promo hino terbaru, panduan kredit truk hino, cara memilih truk bisnis"
     />
     <meta name="author" content="Nathan Hino" />
     <link
@@ -60,9 +60,18 @@ if ($slug !== '' && is_array($data)) {
       gtag('config', 'AW-17738682772');
     </script>
 
-    <!-- Favicon -->
-    <link rel="icon" href="https://dealerhinoindonesia.com/images/favicon.png" type="image/png" sizes="32x32"/>
-    <link rel="apple-touch-icon" href="images/favicon.png" />
+    <!-- Favicon untuk semua browser modern -->
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon_512.png">
+    
+    <!-- Favicon untuk browser lama -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Apple Touch Icon (iPhone/iPad) -->
+    <link rel="apple-touch-icon" href="/favicon_512.png">
+    
+    <!-- Google Lighthouse Recommendation -->
+    <meta name="theme-color" content="#ffffff">
+
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css" />
@@ -81,15 +90,13 @@ if ($slug !== '' && is_array($data)) {
     <script src="js/script.js"></script>
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Dealer Hino Indonesia | Harga & Promo Truk Hino Terbaru 2025" />
-    <meta
-      property="og:description"
-      content="Dealer Resmi Hino Jakarta - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan."
-    />
-    <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
-    <meta property="og:url" content="https://dealerhinoindonesia.com/" />
-    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<?= htmlspecialchars($artikel['judul']) ?> | Artikel Hino" />
+    <meta property="og:description" content="<?= htmlspecialchars(mb_strimwidth(strip_tags($artikel['isi']), 0, 150, '...')) ?>" />
+    <meta property="og:image" content="https://dealerhinoindonesia.com/images/artikel/<?= $artikel['gambar'] ?>" />
+    <meta property="og:url" content="https://dealerhinoindonesia.com/artikel/<?= $artikel['slug'] ?>" />
+    <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Dealer Hino Indonesia" />
+
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -100,38 +107,63 @@ if ($slug !== '' && is_array($data)) {
     />
     <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
 
-    <!-- Schema.org -->
+    <!-- Schema.org JSON-LD untuk SEO Dealer Hino -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "AutoDealer",
-        "name": "Dealer Hino Indonesia",
-        "image": "https://dealerhinoindonesia.com/images/promohino1.webp",
-        "@id": "https://dealerhinoindonesia.com/",
-        "url": "https://dealerhinoindonesia.com/",
-        "telephone": "+62-859-7528-7684",
-        "priceRange": "$$$",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Golf Lake Ruko Venice, Jl. Lkr. Luar Barat No.78 Blok B, RT.9/RW.14",
-          "addressLocality": "Jakarta Barat",
-          "addressRegion": "DKI Jakarta",
-          "postalCode": "11730",
-          "addressCountry": "ID"
-        },
-        "geo": { "@type": "GeoCoordinates", "latitude": -6.1305504, "longitude": 106.7279824 },
-        "openingHoursSpecification": [{
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Dealer Hino Indonesia",
+      "url": "https://dealerhinoindonesia.com"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoDealer",
+      "@id": "https://dealerhinoindonesia.com/#dealer",
+      "name": "Dealer Hino Indonesia",
+      "alternateName": "Dealer Resmi Hino Jakarta",
+      "url": "https://dealerhinoindonesia.com/",
+      "image": "https://dealerhinoindonesia.com/images/promohino1.webp",
+      "logo": "https://dealerhinoindonesia.com/favicon_512.png",
+      "description": "Dealer Resmi Hino Jakarta Barat - Jual Truk Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan untuk seluruh Indonesia, khususnya Jabodetabek dan Jawa Barat. Hubungi Nathan Hino sekarang juga!.",
+      "telephone": "+62-859-7528-7684",
+      "priceRange": "$$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Jl. Tj. Pura.9-10, RT.2/RW.2, Pegadungan, Kec. Kalideres",
+        "addressLocality": "Jakarta Barat",
+        "addressRegion": "DKI Jakarta",
+        "postalCode": "11830",
+        "addressCountry": "ID"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -6.1567,
+        "longitude": 106.6901
+      },
+      "openingHoursSpecification": [
+        {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
           "opens": "08:00",
           "closes": "17:00"
-        }],
-        "sameAs": [
-          "https://www.facebook.com/profile.php?id=61573843992250",
-          "https://www.instagram.com/saleshinojabodetabek",
-          "https://www.tiktok.com/@saleshinoindonesia"
-        ]
-      }
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61573843992250",
+        "https://www.instagram.com/saleshinojabodetabek",
+        "https://www.tiktok.com/@saleshinoindonesia"
+      ]
+    }
     </script>
     
     <!-- Event snippet for Pembelian conversion page -->

@@ -81,12 +81,22 @@ while ($row = $res_spec->fetch_assoc()) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Dealer Resmi Hino Indonesia - Jual Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan untuk seluruh Indonesia, khususnya Jabodetabek dan Jawa Barat. Hubungi Nathan Hino sekarang juga! 0859-7528-7684" />
-  <meta name="keywords" content="Dealer Hino, Dealer Hino Jakarta, Promo Hino 2025, Harga Hino Dutro, Hino Ranger 500 Series, Kredit Truk Hino Jakarta, Cicilan Hino, Dealer Resmi Hino Indonesia, Jual Hino Jakarta, Hino Euro 4 Terbaru, Harga Hino Jabodetabek, Dealer Hino Tangerang, Bekasi, Depok, Bogor, Bandung, Hino untuk Bisnis, Hino Angkut Barang, Sales Hino Resmi Jakarta, Leasing Hino, Hino Dump Truck, Hino Termurah, Bengkel & Servis Hino Resmi" />
+  <meta name="keywords" content="harga hino bus terbaru, hino bus series, spesifikasi hino bus, hino bus euro 4, harga chassis hino bus, brosur hino bus, hino microbus, hino bus pariwisata" />
   <meta name="author" content="Nathan Hino" />
   <title><?= htmlspecialchars($produk['nama_produk']) ?> | Dealer Hino Indonesia</title>
 
-  <link rel="icon" href="https://dealerhinoindonesia.com/images/favicon.png" type="image/png" sizes="32x32"/>
-  <link rel="apple-touch-icon" href="images/favicon.png" />
+  <!-- Favicon untuk semua browser modern -->
+   <link rel="icon" type="image/png" sizes="512x512" href="/favicon_512.png">
+    
+    <!-- Favicon untuk browser lama (Internet Explorer, Safari lama, dll) -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Apple Touch Icon (iPhone/iPad) - gunakan PNG besar -->
+    <link rel="apple-touch-icon" href="/favicon_512.png">
+    
+    <!-- Optional tetapi disarankan oleh Google Lighthouse -->
+    <meta name="theme-color" content="#ffffff">
+
   <link rel="canonical" href="https://dealerhinoindonesia.com/hinobus.php" />
 
   <!-- Google tag (gtag.js) -->
@@ -130,12 +140,13 @@ while ($row = $res_spec->fetch_assoc()) {
   </style>
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Dealer Hino Indonesia | Harga & Promo Hino Terbaru 2025" />
-  <meta property="og:description" content="Dealer Resmi Hino Jakarta - Jual Hino Dutro, Ranger, dan Bus Hino. Dapatkan harga terbaik, promo terbaru 2025, serta layanan kredit dan cicilan." />
-  <meta property="og:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
-  <meta property="og:url" content="https://dealerhinoindonesia.com/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Dealer Hino Indonesia">
+    <meta property="og:title" content="<?= htmlspecialchars($produk['nama_produk']) ?> | Hino Bus Series" />
+    <meta property="og:description" content="<?= htmlspecialchars(mb_strimwidth(strip_tags($produk['deskripsi']), 0, 160, '...')) ?>" />
+    <meta property="og:image" content="https://dealerhinoindonesia.com/admin/uploads/<?= $produk['gambar'] ?>" />
+    <meta property="og:url" content="https://dealerhinoindonesia.com/produk/<?= $produk['slug'] ?>" />
+    <meta property="og:type" content="product" />
+    <meta property="og:site_name" content="Dealer Hino Indonesia" />
+
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -144,6 +155,15 @@ while ($row = $res_spec->fetch_assoc()) {
   <meta name="twitter:image" content="https://dealerhinoindonesia.com/images/promohino1.webp" />
 
   <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Dealer Hino Indonesia",
+      "url": "https://dealerhinoindonesia.com"
+    }
+    </script>
+  
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
